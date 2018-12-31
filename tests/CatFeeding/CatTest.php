@@ -7,8 +7,12 @@ use PHPUnit\Framework\TestCase;
 
 class CatTest extends TestCase {
 
-    public function testCanCreate() {
-        new Cat();
+    public function testCanCreateNamedCat() {
+        $expectedName = 'Mruczek';
+        $cat = new Cat($expectedName);
+
+        $this->assertNotNull($cat);
+        $this->assertEquals($expectedName, $cat->name());
     }
 
 }
