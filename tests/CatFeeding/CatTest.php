@@ -9,7 +9,7 @@ class CatTest extends TestCase {
 
     public function testCanCreateNamedCat() {
         $expectedName = 'Mruczek';
-        $cat = new Cat($expectedName);
+        $cat = Cat::create($expectedName);
 
         $this->assertNotNull($cat);
         $this->assertEquals($expectedName, $cat->name());
