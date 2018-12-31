@@ -17,4 +17,13 @@ class CatTest extends TestCase {
         $this->assertEquals($expectedName, $cat->name());
     }
 
+    public function testUnnamedCatIsAFailure() {
+        $result = Cat::create(null);
+
+        $cat = $result->value();
+        $this->assertNull($cat);
+        $this->assertTrue($result->failure());
+        $this->assertFalse($result->success());
+        $this->assertEquals('Kot musi mieć imię.', $result->error());
+    }
 }
