@@ -12,7 +12,7 @@ class Cat {
     public static function create($name) {
         $result = new \Assistant\Shared\Result();
 
-        if($name == null) {
+        if(!$name instanceof \Assistant\Shared\Name) {
             $result->fail('Kot musi mieć imię.');
             return $result;
         }

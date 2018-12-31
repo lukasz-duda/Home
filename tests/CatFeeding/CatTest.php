@@ -9,12 +9,13 @@ class CatTest extends TestCase {
 
     public function testCanCreateNamedCat() {
         $expectedName = 'Mruczek';
+        $nameResult = \Assistant\Shared\Name::create($expectedName);
 
-        $result = Cat::create($expectedName);
+        $result = Cat::create($nameResult->value());
 
         $cat = $result->value();
         $this->assertNotNull($cat);
-        $this->assertEquals($expectedName, $cat->name());
+        $this->assertEquals($expectedName, $cat->name()->value());
     }
 
     public function testUnnamedCatIsAFailure() {
