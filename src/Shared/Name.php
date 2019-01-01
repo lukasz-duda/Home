@@ -14,7 +14,7 @@ class Name {
         
         $regex = '/^\w+([- ]{1}\w+)*$/';
         if(!preg_match($regex, $name)) {
-            $result->fail('Nazwa nie może być pusta.');
+            $result->fail('Niepoprawna nazwa.');
             return $result;
         }
         
