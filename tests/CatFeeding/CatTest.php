@@ -3,10 +3,10 @@ namespace Assistant\CatFeeding;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
-use PHPUnit\Framework\TestCase;
+use Assistant\Shared\Test;
 use Assistant\Shared\Name;
 
-class CatTest extends TestCase {
+class CatTest extends Test {
 
     public function testCanCreateNamedCat() {
         $expectedName = 'Mruczek';
@@ -22,10 +22,12 @@ class CatTest extends TestCase {
     public function testUnnamedCatIsAFailure() {
         $result = Cat::create(null);
 
-        $cat = $result->value();
-        $this->assertNull($cat);
-        $this->assertTrue($result->failure());
-        $this->assertFalse($result->success());
-        $this->assertEquals('Kot musi mieć imię.', $result->error());
+        $this->assertFailure($result);
+    }
+    
+    public function testCantCreateCatWithStringAsName() {
+        $result = Cat::create('any string');
+
+        $this->assertFailure($result);
     }
 }
