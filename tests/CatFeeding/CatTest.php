@@ -25,7 +25,7 @@ class CatTest extends Test {
         $this->assertFailure($result);
     }
     
-    public function testCannotCreateCatWithStringInsteadOfName() {
+    public function testCantUseStringInsteadOfName() {
         $result = Cat::create('any string');
 
         $this->assertFailure($result);
