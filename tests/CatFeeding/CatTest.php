@@ -4,12 +4,13 @@ namespace Assistant\CatFeeding;
 require __DIR__ . '/../../vendor/autoload.php';
 
 use PHPUnit\Framework\TestCase;
+use Assistant\Shared\Name;
 
 class CatTest extends TestCase {
 
     public function testCanCreateNamedCat() {
         $expectedName = 'Mruczek';
-        $nameResult = \Assistant\Shared\Name::create($expectedName);
+        $nameResult = Name::create($expectedName);
 
         $result = Cat::create($nameResult->value());
 

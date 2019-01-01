@@ -11,6 +11,12 @@ class Name {
 
     public static function create($name) {
         $result = new Result();
+        
+        if($name == '') {
+            $result->fail('Nazwa nie może być pusta.');
+            return $result;
+        }
+        
         $newName = new Name($name);
         $result->ok($newName);
         return $result;

@@ -1,6 +1,9 @@
 <?php
 namespace Assistant\CatFeeding;
 
+use Assistant\Shared\Result;
+use Assistant\Shared\Name;
+
 class Cat {
 
     private $name;
@@ -10,9 +13,9 @@ class Cat {
     }
 
     public static function create($name) {
-        $result = new \Assistant\Shared\Result();
+        $result = new Result();
 
-        if(!$name instanceof \Assistant\Shared\Name) {
+        if(!$name instanceof Name) {
             $result->fail('Kot musi mieć imię.');
             return $result;
         }
