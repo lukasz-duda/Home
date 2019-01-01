@@ -13,4 +13,11 @@ class Test extends TestCase {
         $this->assertFalse($result->success());
         $this->assertNull($result->value());
     }
+    
+    public function assertSuccess($result) {
+        $this->assertTrue($result->success());
+        $this->assertFalse($result->failure());
+        $this->assertNull($result->error());
+        $this->assertNotNull($result->value());
+    }
 }

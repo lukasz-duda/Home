@@ -12,7 +12,8 @@ class Name {
     public static function create($name) {
         $result = new Result();
         
-        if($name == '') {
+        $regex = '/^\w+$/';
+        if(!preg_match($regex, $name)) {
             $result->fail('Nazwa nie może być pusta.');
             return $result;
         }

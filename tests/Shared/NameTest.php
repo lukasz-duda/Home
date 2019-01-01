@@ -4,10 +4,30 @@ namespace Assistant\Shared;
 require __DIR__ . '/../../vendor/autoload.php';
 
 class NameTest extends Test {
+    
+    public function testNullIsNotAName() {
+        $result = Name::create(null);
+        
+        $this->assertFailure($result);
+    }
 
-    public function testEmptyNameIsAFailure() {
+    public function testEmptyStringIsNotAName() {
         $result = Name::create('');
         
         $this->assertFailure($result);
+    }
+    
+    public function testWhiteSpaceIsNotAName() {
+        $result = Name::create('\t\r\n');
+        
+        $this->assertFailure($result);
+    }
+    
+    public function testWordIsAName() {
+        $expectedName = 'Word';
+        $result = Name::create($expectedName);
+        
+        $this->assertSuccess($result);
+        $this->assertEquals($expectedName, $result->value()->value());
     }
 }
