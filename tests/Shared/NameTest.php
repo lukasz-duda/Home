@@ -45,7 +45,7 @@ class NameTest extends Test {
         $this->assertFailure($result);
     }
     
-    public function testTwoSeparatorsNotAllowed() {
+    public function testDoubleSeparatorNotAllowed() {
         $result = Name::create('Word -word');
         
         $this->assertFailure($result);
