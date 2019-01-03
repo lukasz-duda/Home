@@ -13,9 +13,9 @@ class CatRepositoryTest extends Test {
     private $pdo;
     
     public function setUp() {
-        $dsn = 'mysql:dbname=cat_feeding;host=localhost';
-        $user = 'root';
-        $password = null;
+        $dsn = 'mysql:dbname=assistant_test;host=localhost';
+        $user = 'assistant';
+        $password = 'assistant';
         $this->pdo = new \PDO($dsn, $user, $password);
         $this->pdo->beginTransaction();
         $this->sut = new CatRepository($this->pdo);
