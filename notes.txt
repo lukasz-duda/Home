@@ -1,0 +1,39 @@
+Use cases:
+Register food
+Update food
+Show daily summary
+Start meal
+End meal
+Pee
+Poop
+
+Cat entity:
+- catId
+- name
++ startMeal(FoodId, Weight, TimeStamp)
++ pee(TimeStamp)
++ poop(TimeStamp)
+
+Food entity:
+- foodId
+- name
+- description
++ dailyDemand(CatId, Weight, TimeStamp)
+
+Meal entity:
++ start(CatId, FoodId, Weight, TimeStamp)
++ end(Weight, TimeStamp)
+
+ValueObjects:
+* Weight
+* CatId
+* FoodId
+* TimeStamp
+
+Daily summary view:
+* Previous day button
+* Today - date
+* Daily demand - delivered percentage
+* Next day button
+* List of started meals, each with button to end meal
+* List of today poop/pee event timestamp
