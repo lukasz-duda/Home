@@ -6,6 +6,7 @@ Start meal
 End meal
 Pee
 Poop
+Observe - notes describing observation with timestamp
 
 Cat entity:
 - catId
