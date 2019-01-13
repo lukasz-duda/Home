@@ -22,13 +22,14 @@ class CatRepositoryTest extends Test {
         $this->sut = new CatRepository($this->pdo);
     }
     
-    public function testAssignsId() {
-        $name = Name::create('CatName')->value();
+    public function testGetByName() {
+        $name = Name::create('Mruczek')->value();
         $cat = Cat::create($name)->value();
-        
+
         $this->sut->save($cat);
+        $returnedCat = $this->sut->getByName($cat->name()->value());
         
-        $this->assertNotEmpty($this->pdo->lastInsertId());
+        $this->assertEquals($name, $returnedCat->name());
     }
     
     public function tearDown() {
