@@ -1,10 +1,11 @@
 <?php
-namespace Assistant\CatFeeding;
+namespace Assistant\Tests\CatFeeding;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
-use Assistant\Shared\Test;
+use Assistant\Tests\Shared\Test;
 use Assistant\Shared\Name;
+use Assistant\CatFeeding\Cat;
 
 class CatTest extends Test {
 

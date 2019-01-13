@@ -1,7 +1,9 @@
 <?php
-namespace Assistant\Shared;
+namespace Assistant\Tests\Shared;
 
 require __DIR__ . '/../../vendor/autoload.php';
+
+use Assistant\Shared\Name;
 
 class NameTest extends Test {
     

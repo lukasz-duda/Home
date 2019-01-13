@@ -1,11 +1,11 @@
 <?php
-namespace Assistant\Shared;
+namespace Assistant\Tests\Shared;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
 use PHPUnit\Framework\TestCase;
 
-class Test extends TestCase {
+abstract class Test extends TestCase {
     
     public function assertFailure($result) {
         $this->assertTrue($result->failure());
