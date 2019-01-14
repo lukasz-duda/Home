@@ -11,7 +11,10 @@ class CatController extends Test {
     function testCanCall() {
         $client = new \GuzzleHttp\Client();
         
-        $response = $client->request('GET', 'http://localhost/assistant/src/CatFeeding/CatController.php');
+        $response = $client->request('POST', 'http://localhost/assistant/src/CatFeeding/CatController.php');
+        
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertNotEmpty($response->getBody());
     }
     
 }
