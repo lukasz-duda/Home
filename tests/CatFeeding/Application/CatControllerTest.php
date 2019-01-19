@@ -20,7 +20,7 @@ class CatController extends Test {
         $this->assertEquals(200, $response->getStatusCode());
         $json = $response->getBody()->getContents();
         $this->assertJsonStringEqualsJsonString(
-            file_get_contents(__DIR__ . '\empty-cat-name.json'), $json);
+            file_get_contents(__DIR__ . '/empty-cat-name.json'), $json);
     }
     
     function testAddCatWithCorrectNameReturnsSuccess() {
@@ -35,7 +35,7 @@ class CatController extends Test {
         $this->assertEquals(200, $response->getStatusCode());
         $json = $response->getBody()->getContents();
         $this->assertJsonStringEqualsJsonString(
-            file_get_contents(__DIR__ . '\add-cat-success.json'), $json);
+            file_get_contents(__DIR__ . '/add-cat-success.json'), $json);
     }
     
     function testAddCatWithCorrectNameAddsCat() {
