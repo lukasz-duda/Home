@@ -1,3 +1,14 @@
+Refactor:
+* CatMother
+* Cat -> Model
+* Repository
+* DomainRegistry
+* Mock pdo to simulate connection error
+* Extract AddCatUseCase with AddCatResponse
+* Rename CatController to AddCatController
+* Extract base Controller
+* Remove dupplication from CatControllerTest
+
 Use cases:
 Register food
 Update food
