@@ -1,6 +1,6 @@
 Refactor:
-* CatMother
 * Cat -> Model
+* Cat->name() string?
 * Repository
 * DomainRegistry
 * Mock pdo to simulate connection error

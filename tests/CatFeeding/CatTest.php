@@ -6,18 +6,18 @@ require __DIR__ . '/../../vendor/autoload.php';
 use Assistant\Tests\Shared\Test;
 use Assistant\Shared\Name;
 use Assistant\CatFeeding\Cat;
+use Assistant\Tests\Shared\Model\NameMother;
 
 class CatTest extends Test {
 
     public function testCanCreateNamedCat() {
-        $expectedName = 'Mruczek';
-        $nameResult = Name::create($expectedName);
+        $name = NameMother::createName();
 
-        $result = Cat::create($nameResult->value());
+        $result = Cat::create($name);
 
         $cat = $result->value();
         $this->assertNotNull($cat);
-        $this->assertEquals($expectedName, $cat->name()->value());
+        $this->assertEquals($name, $cat->name());
     }
 
     public function testUnnamedCatIsAFailure() {

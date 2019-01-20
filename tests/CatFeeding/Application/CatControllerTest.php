@@ -3,8 +3,9 @@ namespace Assistant\Tests\CatFeeding;
 
 require __DIR__ . '/../../../vendor/autoload.php';
 
-use Assistant\Tests\Shared\Test;
 use Goutte\Client;
+use Assistant\Tests\Shared\Test;
+use Assistant\Tests\Shared\Model\Names;
 
 class CatController extends Test {
     
@@ -13,7 +14,7 @@ class CatController extends Test {
         
         $response = $client->request('POST', 'http://localhost/assistant/src/CatFeeding/Application/CatController.php', [
             'json' => [
-                'catName' => ''
+                'catName' => Names::INVALID
             ]
         ]);
         
@@ -28,7 +29,7 @@ class CatController extends Test {
         
         $response = $client->request('POST', 'http://localhost/assistant/src/CatFeeding/Application/CatController.php', [
             'json' => [
-                'catName' => 'TestCat1'
+                'catName' => Names::VALID
             ]
         ]);
         
@@ -43,7 +44,7 @@ class CatController extends Test {
         
         $response = $client->request('POST', 'http://localhost/assistant/src/CatFeeding/Application/CatController.php', [
             'json' => [
-                'catName' => 'TestCat1'
+                'catName' => Names::VALID
             ]
         ]);
 
@@ -51,8 +52,9 @@ class CatController extends Test {
         $user = 'assistant';
         $password = 'assistant';
         $pdo = new \PDO($dsn, $user, $password);
+        $testName = Names::VALID;
         
-        $savedCats = $pdo->query("SELECT COUNT(1) FROM cats WHERE name = 'TestCat1'");
+        $savedCats = $pdo->query("SELECT * FROM cats WHERE name = '$testName'");
         $this->assertEquals(1, $savedCats->rowCount());
     }
     
@@ -61,8 +63,8 @@ class CatController extends Test {
         $user = 'assistant';
         $password = 'assistant';
         $pdo = new \PDO($dsn, $user, $password);
-        
-        $pdo->exec("DELETE FROM cats WHERE name = 'TestCat1'");
+        $testName = Names::VALID;
+        $pdo->exec("DELETE FROM cats WHERE name = '$testName'");
     }
     
 }
