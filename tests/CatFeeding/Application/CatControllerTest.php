@@ -1,5 +1,5 @@
 <?php
-namespace Assistant\Tests\CatFeeding;
+namespace Assistant\Tests\CatFeeding\Application;
 
 require __DIR__ . '/../../../vendor/autoload.php';
 

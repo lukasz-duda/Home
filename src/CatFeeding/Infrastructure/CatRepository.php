@@ -4,7 +4,7 @@ namespace Assistant\CatFeeding\Infrastructure;
 require __DIR__ . '/../../../vendor/autoload.php';
 
 use Assistant\Shared\Name;
-use Assistant\CatFeeding\Cat;
+use Assistant\CatFeeding\Model\Cat;
 
 class CatRepository {
     

@@ -1,5 +1,5 @@
 <?php
-namespace Assistant\CatFeeding;
+namespace Assistant\CatFeeding\Model;
 
 use Assistant\Shared\Result;
 use Assistant\Shared\Name;
