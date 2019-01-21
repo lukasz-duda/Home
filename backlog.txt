@@ -1,5 +1,5 @@
 Refactor:
-* Repository
+* Repository - pdo error
 * DomainRegistry
 * Mock pdo to simulate connection error
 * Extract AddCatUseCase with AddCatRequest and AddCatResponse
