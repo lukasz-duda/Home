@@ -4,6 +4,7 @@ namespace Assistant\CatFeeding\Infrastructure;
 require __DIR__ . '/../../../vendor/autoload.php';
 
 use Assistant\Shared\Name;
+use Assistant\Shared\Result;
 use Assistant\CatFeeding\Model\Cat;
 
 class CatRepository {
@@ -20,11 +21,17 @@ class CatRepository {
     }
     
     public function getByName($name) {
-        $statement = $this->pdo->prepare('SELECT * FROM cats WHERE name = ?');
-        $statement->execute([$name]);
-        $row = $statement->fetch();
-        $nameResult = Name::create($row['name']);
-        $catResult = Cat::create($nameResult->value());
-        return $catResult->value();
+        try {
+            $statement = $this->pdo->prepare('SELECT * FROM cats WHERE name = ?');
+            $statement->execute([$name]);
+            $row = $statement->fetch();
+            $nameResult = Name::create($row['name']);
+            $catResult = Cat::create($nameResult->value());
+            return $catResult->value();
+        } catch (\Exception $e) {
+            $result = new Result();
+            $result->fail('Błąd podczas komunikacji z bazą danych.');
+            return $result;
+        }
     }
 }

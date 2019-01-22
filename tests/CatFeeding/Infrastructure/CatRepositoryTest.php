@@ -4,6 +4,7 @@ namespace Assistant\Tests\CatFeeding\Infrastructure;
 require __DIR__ . '/../../../vendor/autoload.php';
 
 use Assistant\Tests\Shared\Infrastructure\RepositoryTest;
+use Assistant\Tests\Shared\Infrastructure\ErrorPdo;
 use Assistant\Tests\CatFeeding\Model\CatMother;
 use Assistant\Tests\Shared\Model\NameMother;
 use Assistant\Shared\Name;
@@ -27,6 +28,15 @@ class CatRepositoryTest extends RepositoryTest {
         $returnedCat = $this->sut->getByName($catName);
         
         $this->assertEquals($cat->name(), $returnedCat->name());
+    }
+
+    public function testGetByNameWithDatabaseErrorReturnsFailure() {
+        $errorPdo = new ErrorPdo();
+        $this->sut = new CatRepository($errorPdo);
+
+        $result = $this->sut->getByName('');
+
+        $this->assertTrue($result->failure());
     }
 
 }
