@@ -1,4 +1,5 @@
 Refactor:
+* Remove duplication from repository and it's test
 * DomainRegistry
 * Extract AddCatUseCase with AddCatRequest and AddCatResponse
 * Rename CatController to AddCatController
