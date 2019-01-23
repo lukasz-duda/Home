@@ -39,4 +39,15 @@ class CatRepositoryTest extends RepositoryTest {
         $this->assertTrue($result->failure());
     }
 
+    public function testSaveWithDatabaseErrorReturnsFailure() {
+        $errorPdo = new ErrorPdo();
+        $this->sut = new CatRepository($errorPdo);
+
+        $cat = CatMother::createCat();
+
+        $result = $this->sut->save($cat);
+
+        $this->assertTrue($result->failure());
+    }
+
 }

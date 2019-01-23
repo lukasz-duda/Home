@@ -16,8 +16,14 @@ class CatRepository {
     }
     
     public function save($cat) {
-        $statement = $this->pdo->prepare('INSERT INTO cats (name) VALUES (?)');
-        $statement->execute([$cat->name()->value()]);
+        try {
+            $statement = $this->pdo->prepare('INSERT INTO cats (name) VALUES (?)');
+            $statement->execute([$cat->name()->value()]);
+        } catch (\Exception $e) {
+            $result = new Result();
+            $result->fail('Błąd podczas komunikacji z bazą danych.');
+            return $result;
+         }
     }
     
     public function getByName($name) {
