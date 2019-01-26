@@ -20,10 +20,14 @@ class CatRepository {
             $statement = $this->pdo->prepare('INSERT INTO cats (name) VALUES (?)');
             $statement->execute([$cat->name()->value()]);
         } catch (\Exception $e) {
-            $result = new Result();
-            $result->fail('Błąd podczas komunikacji z bazą danych.');
-            return $result;
-         }
+            return $this->databaseFailure(); 
+        }
+    }
+
+    private function databaseFailure() {
+        $result = new Result();
+        $result->fail('Błąd podczas komunikacji z bazą danych.');
+        return $result;
     }
     
     public function getByName($name) {
@@ -35,9 +39,7 @@ class CatRepository {
             $catResult = Cat::create($nameResult->value());
             return $catResult->value();
         } catch (\Exception $e) {
-            $result = new Result();
-            $result->fail('Błąd podczas komunikacji z bazą danych.');
-            return $result;
+            return $this->databaseFailure(); 
         }
     }
 }

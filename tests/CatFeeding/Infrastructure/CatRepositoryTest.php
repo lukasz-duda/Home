@@ -14,40 +14,43 @@ use Assistant\CatFeeding\Infrastructure\CatRepository;
 class CatRepositoryTest extends RepositoryTest {
     
     private $sut;
+    private $cat;
     
     public function setUp() {
         parent::setUp();
         $this->sut = new CatRepository($this->pdo);
+
+        $this->cat = CatMother::createCat();
     }
     
     public function testGetByName() {
-        $cat = CatMother::createCat();
-        $catName = $cat->name()->value();
-        $this->sut->save($cat);
+        $catName = $this->cat->name()->value();
+        $this->sut->save($this->cat);
 
         $returnedCat = $this->sut->getByName($catName);
         
-        $this->assertEquals($cat->name(), $returnedCat->name());
+        $this->assertEquals($this->cat->name(), $returnedCat->name());
     }
 
     public function testGetByNameWithDatabaseErrorReturnsFailure() {
-        $errorPdo = new ErrorPdo();
-        $this->sut = new CatRepository($errorPdo);
+        $this->setUpDatabaseError();
 
         $result = $this->sut->getByName('');
 
-        $this->assertTrue($result->failure());
+        $this->assertFailure($result);
+    }
+
+    private function setUpDatabaseError() {
+        $errorPdo = new ErrorPdo();
+        $this->sut = new CatRepository($errorPdo);
     }
 
     public function testSaveWithDatabaseErrorReturnsFailure() {
-        $errorPdo = new ErrorPdo();
-        $this->sut = new CatRepository($errorPdo);
+        $this->setUpDatabaseError();
 
-        $cat = CatMother::createCat();
+        $result = $this->sut->save($this->cat);
 
-        $result = $this->sut->save($cat);
-
-        $this->assertTrue($result->failure());
+        $this->assertFailure($result);
     }
 
 }
