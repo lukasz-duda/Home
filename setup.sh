@@ -1,6 +1,11 @@
 #!/bin/bash
+# PHP
+sudo apt-get install php-xml php-json php-mbstring php-mysql
+
+# Composer
 curl -sS https://getcomposer.org/installer | php
-#php composer.phar require guzzlehttp/guzzle:~6.0
-#php composer.phar require fabpot/goutte
-#sudo apt-get install php7.2-xml php7.2-json php7.2-mbstring php7.2-mysql
-#php composer.phar require --dev phpunit/phpunit ^7
+php composer.phar install
+
+# Apache
+sudo apt install libapache2-mod-php
+sudo ln -s /home/lukasz/Pulpit/CatFeedingAssistant /var/www/html/assistant
