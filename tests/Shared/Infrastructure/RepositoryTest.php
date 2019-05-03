@@ -1,15 +1,25 @@
 <?php
+
 namespace Assistant\Tests\Shared\Infrastructure;
 
 require __DIR__ . '/../../../vendor/autoload.php';
 
 use Assistant\Tests\Shared\Test;
 
-abstract class RepositoryTest extends Test {
+abstract class RepositoryTest extends Test
+{
 
     protected $pdo;
 
-    public function setUp() {
+    public static function setUpBeforeClass()
+    {
+        $executeSqlCmd = 'mysql --login-path=local --database=assistant_test < ';
+        $createDatabaseSql = __DIR__ . '/../../../database.sql';
+        exec($executeSqlCmd . $createDatabaseSql);
+    }
+
+    public function setUp()
+    {
         $dsn = 'mysql:dbname=assistant_test;host=localhost';
         $user = 'assistant';
         $password = 'assistant';
@@ -17,7 +27,8 @@ abstract class RepositoryTest extends Test {
         $this->pdo->beginTransaction();
     }
 
-    public function tearDown() {
+    public function tearDown()
+    {
         $this->pdo->rollBack();
     }
 

@@ -4,7 +4,6 @@ Refactor:
 * Rename CatController to AddCatController
 * Extract base Controller
 * Remove dupplication from CatControllerTest
-* Automate database creation and reset
 * swagger.io?
 
 Use cases:
