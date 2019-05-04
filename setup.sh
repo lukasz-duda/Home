@@ -8,7 +8,7 @@ php composer.phar install
 
 # Apache
 sudo apt install libapache2-mod-php
-sudo ln -s /home/lukasz/Pulpit/CatFeedingAssistant /var/www/html/assistant
+sudo ln -s `pwd` /var/www/html/assistant
 
 # MySQL
 mysql_config_editor set --login-path=local --host=localhost --user=assistant --password
