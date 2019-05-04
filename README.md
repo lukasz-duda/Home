@@ -1,1 +1,1 @@
-# Cat Feeding Assistant
+# Cat Feeding
