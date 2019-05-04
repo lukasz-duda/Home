@@ -1,6 +1,8 @@
 <?php
 namespace Assistant\Shared\Application;
 
+use Assistant\Shared\Result;
+
 require __DIR__ . '/../../../vendor/autoload.php';
 
 class Response {
@@ -9,7 +11,11 @@ class Response {
     public $error;
     public $success;
 
-    public function fromResult($result) {
+    /**
+     * @param $result Result
+     * @return Response
+     */
+    public static function fromResult($result) {
         $response = new Response();
         $response->error = $result->error();
         $response->success = $result->success();
