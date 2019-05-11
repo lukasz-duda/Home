@@ -45,4 +45,4 @@ Daily summary view:
 * Daily demand - delivered percentage
 * Next day button
 * List of started meals, each with button to end meal
-* List of today poop/pee event timestamp
+* List of today poop/pee event timestamps
