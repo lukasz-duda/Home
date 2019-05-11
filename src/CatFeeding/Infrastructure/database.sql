@@ -33,7 +33,7 @@ create table meal
     cat_id  int unsigned not null,
     start   timestamp    not null,
     food_id int unsigned not null,
-    end     timestamp    not null
+    end     timestamp    null
 );
 
 drop table if exists poop;
