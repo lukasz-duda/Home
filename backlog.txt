@@ -3,7 +3,7 @@ Refactor:
 * Extract AddCatUseCase with AddCatRequest and AddCatResponse
 * Rename CatController to AddCatController
 * Extract base Controller
-* Remove dupplication from CatControllerTest
+* Remove duplication from CatControllerTest
 * swagger.io?
 
 Use cases:
