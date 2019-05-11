@@ -14,7 +14,7 @@ abstract class RepositoryTest extends Test
     public static function setUpBeforeClass()
     {
         $executeSqlCmd = 'mysql --login-path=local --database=assistant_test < ';
-        $createDatabaseSql = __DIR__ . '/../../../database.sql';
+        $createDatabaseSql = __DIR__ . '/../../../src/CatFeeding/Infrastructure/database.sql';
         exec($executeSqlCmd . $createDatabaseSql);
     }
 
