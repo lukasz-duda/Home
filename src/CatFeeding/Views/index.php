@@ -16,8 +16,20 @@ $catName = $cat['name'];
 <body class="container">
 <h1><?= $catName ?></h1>
 <h2>Dodaj pokarm</h2>
-<form>
-
+<form action="../Application/AddFoodController.php" method="post">
+    <div class="form-group">
+        <label for="FoodName">Nazwa</label>
+        <input class="form-control" id="FoodName" name="FoodName"/>
+    </div>
+    <div class="form-group">
+        <label for="FoodDescription">Opis</label>
+        <textarea id="FoodDescription" name="FoodDescription" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="Weight">Zapotrzebowanie dzienne [g]</label>
+        <input id="Weight" name="Weight" class="form-control" type="number" step="1" min="0" max="1000"/>
+    </div>
+    <button type="submit" class="btn btn-primary">Zapisz</button>
 </form>
 <h2>Popraw pokarm</h2>
 <h2>Podsumowanie dnia</h2>
