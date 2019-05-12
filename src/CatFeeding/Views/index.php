@@ -3,7 +3,11 @@ include "../../Shared/Views/View.php";
 $catId = 1;
 $cat = get('SELECT name FROM cats WHERE id = ?', [$catId]);
 $catName = $cat['name'];
-$foods = getAll('SELECT id, name, description FROM food order by name', []);
+$foods = getAll('SELECT f.id, f.name, f.description, d.weight
+FROM food f
+join daily_demand d on d.food_id = f.id
+where d.cat_id = ?
+order by name', [$catId]);
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -50,7 +54,8 @@ $foods = getAll('SELECT id, name, description FROM food order by name', []);
     </div>
     <div class="form-group">
         <label for="Weight">Zapotrzebowanie dzienne [g]</label>
-        <input id="Weight" name="Weight" class="form-control" type="number" step="1" min="0" max="1000"/>
+        <input id="Weight" name="Weight" class="form-control" type="number" step="1" min="0" max="1000"
+               data-bind="value: weight"/>
     </div>
     <button type="submit" class="btn btn-primary">Zapisz</button>
 </form>
@@ -66,6 +71,7 @@ $foods = getAll('SELECT id, name, description FROM food order by name', []);
         var me = this;
         me.foodName = ko.observable(null);
         me.foodDescription = ko.observable(null);
+        me.weight = ko.observable(null);
         me.foods = <?= json_encode($foods);  ?>;
         me.foodId = ko.observable(null);
         me.foodId.subscribe(function () {
@@ -76,6 +82,7 @@ $foods = getAll('SELECT id, name, description FROM food order by name', []);
             });
             me.foodName(selectedFood.name);
             me.foodDescription(selectedFood.description);
+            me.weight(selectedFood.weight);
         });
     }
 
