@@ -66,11 +66,11 @@ order by name', [$catId]);
     <button type="submit" class="btn btn-primary">Zapisz</button>
 </form>
 <h2>Podsumowanie dnia</h2>
-<h2>Rozpocznij posiłek</h2>
-<h2>Zakończ posiłek</h2>
-<h2>Kupa</h2>
-<h2>Siku</h2>
-<h2>Obserwuj</h2>
+<h3>Rozpocznij posiłek</h3>
+<h3>Zakończ posiłek</h3>
+<h3>Kupa</h3>
+<h3>Siku</h3>
+<h3>Obserwuj</h3>
 <script src="../../Shared/Views/knockout-min.js"></script>
 <script>
     function ViewModel() {

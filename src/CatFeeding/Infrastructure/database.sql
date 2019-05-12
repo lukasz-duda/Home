@@ -59,5 +59,6 @@ drop table if exists observation;
 create table observation
 (
     cat_id    int unsigned not null,
-    timestamp timestamp    not null
+    timestamp timestamp    not null,
+    notes     varchar(250) not null
 );
