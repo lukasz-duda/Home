@@ -3,10 +3,16 @@ include "../../Shared/Views/View.php";
 $catId = 1;
 $cat = get('SELECT name FROM cats WHERE id = ?', [$catId]);
 $catName = $cat['name'];
-$foods = getAll('SELECT f.id, f.name, f.description, d.weight
+$foods = getAll('SELECT f.id, f.name, f.description,
+(
+    select d.weight
+    from daily_demand d
+    where d.food_id = f.id
+      and d.cat_id = ?
+    order by d.timestamp desc 
+    limit 1
+) as weight
 FROM food f
-join daily_demand d on d.food_id = f.id
-where d.cat_id = ?
 order by name', [$catId]);
 ?>
 <!DOCTYPE html>

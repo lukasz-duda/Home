@@ -14,12 +14,12 @@ $foodSaved = $saveFood->execute([$name, $description, $foodId]);
 
 if ($foodSaved) {
     echo 'Pokarm poprawiony. ';
-    $addDailyDemand = $pdo->prepare('UPDATE daily_demand SET weight = ? where cat_id = ? and food_id = ?');
-    $dailyDemandUpdated = $addDailyDemand->execute([$weight, $catId, $foodId]);
+    $addDailyDemand = $pdo->prepare('INSERT INTO daily_demand (cat_id, food_id, weight) VALUES (?, ?, ?)');
+    $dailyDemandUpdated = $addDailyDemand->execute([$catId, $foodId, $weight]);
     if ($dailyDemandUpdated) {
-        echo 'Dzienne zapotrzebowanie poprawione. ';
+        echo 'Dzienne zapotrzebowanie dodane. ';
     } else {
-        echo 'Nie udało się poprawione dziennego zapotrzebowania. ';
+        echo 'Nie udało się dodanie dziennego zapotrzebowania. ';
     }
 } else {
     echo 'Nie udało się poprawić pokarmu! ';
