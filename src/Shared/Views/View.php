@@ -1,9 +1,7 @@
 <?php
 include __DIR__ . '/../../Configuration.php';
 
-$pdo = new PDO($dsn, $user, $password);
-$pdo->query('SET NAMES utf8');
-$pdo->query('SET CHARACTER_SET utf8_unicode_ci');
+$pdo = newPdo();
 
 function get($query, $params)
 {
@@ -22,5 +20,3 @@ function getAll($query, $params)
     $rows = $statement->fetchAll();
     return $rows;
 }
-
-?>

@@ -12,7 +12,7 @@ class CatController extends Test {
     function testAddCatWithEmptyNameReturnsWarning() {
         $client = new \GuzzleHttp\Client();
         
-        $response = $client->request('POST', 'http://localhost/assistant/src/CatFeeding/Application/CatController.php', [
+        $response = $client->request('POST', 'http://localhost/HomeAssistant/src/CatFeeding/Application/CatController.php', [
             'json' => [
                 'catName' => Names::INVALID
             ]
@@ -27,7 +27,7 @@ class CatController extends Test {
     function testAddCatWithCorrectNameReturnsSuccess() {
         $client = new \GuzzleHttp\Client();
         
-        $response = $client->request('POST', 'http://localhost/assistant/src/CatFeeding/Application/CatController.php', [
+        $response = $client->request('POST', 'http://localhost/HomeAssistant/src/CatFeeding/Application/CatController.php', [
             'json' => [
                 'catName' => Names::VALID
             ]
@@ -42,7 +42,7 @@ class CatController extends Test {
     function testAddCatWithCorrectNameAddsCat() {
         $client = new \GuzzleHttp\Client();
         
-        $response = $client->request('POST', 'http://localhost/assistant/src/CatFeeding/Application/CatController.php', [
+        $response = $client->request('POST', 'http://localhost/HomeAssistant/src/CatFeeding/Application/CatController.php', [
             'json' => [
                 'catName' => Names::VALID
             ]
