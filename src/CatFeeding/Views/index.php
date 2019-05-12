@@ -26,6 +26,24 @@ order by name', [$catId]);
 </head>
 <body class="container">
 <h1><?= $catName ?></h1>
+<h2>Podsumowanie dnia</h2>
+<h3>Rozpocznij posiłek</h3>
+<form action="../Application/StartMealController.php" method="post">
+    <div class="form-group">
+        <label for="MealFoodId">Pokarm</label>
+        <select class="form-control" id="MealFoodId" name="FoodId"
+                data-bind="options: foods, optionsText: 'name', optionsValue: 'id', value: foodId"> </select>
+    </div>
+    <div class="form-group">
+        <label for="MealWeight">Waga przed posiłkiem [g]</label>
+        <input id="MealWeight" name="Weight" class="form-control" type="number" step="1" min="0" max="1000"/>
+    </div>
+    <button class="btn btn-primary">Rozpocznij</button>
+</form>
+<h3>Zakończ posiłek</h3>
+<h3>Kupa</h3>
+<h3>Siku</h3>
+<h3>Obserwuj</h3>
 <h2>Dodaj pokarm</h2>
 <form action="../Application/AddFoodController.php" method="post">
     <div class="form-group">
@@ -65,12 +83,6 @@ order by name', [$catId]);
     </div>
     <button type="submit" class="btn btn-primary">Zapisz</button>
 </form>
-<h2>Podsumowanie dnia</h2>
-<h3>Rozpocznij posiłek</h3>
-<h3>Zakończ posiłek</h3>
-<h3>Kupa</h3>
-<h3>Siku</h3>
-<h3>Obserwuj</h3>
 <script src="../../Shared/Views/knockout-min.js"></script>
 <script>
     function ViewModel() {
