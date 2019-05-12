@@ -1,5 +1,5 @@
 <?php
-include "../Shared/Views/View.php";
+include "../../Shared/Views/View.php";
 $carId = 1;
 $car = get('SELECT name, mileage FROM cars WHERE id = ?', [$carId]);
 $carName = $car['name'];
@@ -73,7 +73,7 @@ Eksploatacja: <?= intval(($total - $carValue - $fuelValue) / $days * 30) ?> zł<
     ?>
 </ul>
 <h2>Dodaj zakup</h2>
-<form action="Application/AddCarExpenseController.php" method="post">
+<form action="../Application/AddCarExpenseController.php" method="post">
     <div class="form-group">
         <label for="Date">Data</label>
         <input class="form-control" id="Date" name="Date" type="date" value="<?= $today ?>"/>
@@ -113,7 +113,7 @@ Eksploatacja: <?= intval(($total - $carValue - $fuelValue) / $days * 30) ?> zł<
         <input class="form-control" id="Mileage" name="Mileage" type="number" step="1" value="<?= $carMileage ?>"/>
     </div>
     <button class="btn btn-primary" type="submit">Zapisz</button>
-    <script src="../Shared/Views/knockout-min.js"></script>
+    <script src="../../Shared/Views/knockout-min.js"></script>
     <script>
         function ViewModel() {
             var me = this;

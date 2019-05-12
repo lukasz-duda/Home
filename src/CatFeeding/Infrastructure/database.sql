@@ -29,11 +29,13 @@ drop table if exists meal;
 
 create table meal
 (
-    id      int unsigned not null primary key auto_increment,
-    cat_id  int unsigned not null,
-    start   timestamp    not null,
-    food_id int unsigned not null,
-    end     timestamp    null
+    id           int unsigned not null primary key auto_increment,
+    cat_id       int unsigned not null,
+    food_id      int unsigned not null,
+    start        timestamp    not null,
+    start_weight int unsigned not null,
+    end          timestamp    null,
+    end_weight   int unsigned null
 );
 
 drop table if exists poop;
@@ -47,6 +49,14 @@ create table poop
 drop table if exists pee;
 
 create table pee
+(
+    cat_id    int unsigned not null,
+    timestamp timestamp    not null
+);
+
+drop table if exists observation;
+
+create table observation
 (
     cat_id    int unsigned not null,
     timestamp timestamp    not null
