@@ -19,23 +19,23 @@ drop table if exists daily_demand;
 
 create table daily_demand
 (
-    timestamp timestamp    not null,
-    cat_id    int unsigned not null,
-    food_id   int unsigned not null,
-    weight    int unsigned not null
+    timestamp timestamp        not null,
+    cat_id    int unsigned     not null,
+    food_id   int unsigned     not null,
+    weight    tinyint unsigned not null
 );
 
 drop table if exists meal;
 
 create table meal
 (
-    id           int unsigned not null primary key auto_increment,
-    cat_id       int unsigned not null,
-    food_id      int unsigned not null,
-    start        timestamp    not null,
-    start_weight int unsigned not null,
-    end          timestamp    null,
-    end_weight   int unsigned null
+    id           int unsigned     not null primary key auto_increment,
+    cat_id       int unsigned     not null,
+    food_id      int unsigned     not null,
+    start        timestamp        not null,
+    start_weight tinyint unsigned not null,
+    end          timestamp        null,
+    end_weight   tinyint unsigned null
 );
 
 drop table if exists poop;
