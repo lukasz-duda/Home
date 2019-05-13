@@ -19,7 +19,7 @@ drop table if exists daily_demand;
 
 create table daily_demand
 (
-    timestamp timestamp        not null,
+    timestamp datetime         not null,
     cat_id    int unsigned     not null,
     food_id   int unsigned     not null,
     weight    tinyint unsigned not null
@@ -32,9 +32,9 @@ create table meal
     id           int unsigned     not null primary key auto_increment,
     cat_id       int unsigned     not null,
     food_id      int unsigned     not null,
-    start        timestamp        not null,
+    start        datetime         not null,
     start_weight tinyint unsigned not null,
-    end          timestamp        null,
+    end          datetime         null,
     end_weight   tinyint unsigned null
 );
 
@@ -43,7 +43,7 @@ drop table if exists poop;
 create table poop
 (
     cat_id    int unsigned not null,
-    timestamp timestamp    not null
+    timestamp datetime     not null
 );
 
 drop table if exists pee;
@@ -51,7 +51,7 @@ drop table if exists pee;
 create table pee
 (
     cat_id    int unsigned not null,
-    timestamp timestamp    not null
+    timestamp datetime     not null
 );
 
 drop table if exists observation;
@@ -59,6 +59,6 @@ drop table if exists observation;
 create table observation
 (
     cat_id    int unsigned not null,
-    timestamp timestamp    not null,
+    timestamp datetime     not null,
     notes     varchar(250) not null
 );

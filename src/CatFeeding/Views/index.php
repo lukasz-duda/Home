@@ -14,6 +14,11 @@ $foods = getAll('SELECT f.id, f.name, f.description,
 ) as weight
 FROM food f
 order by name', [$catId]);
+$meals = getAll('select m.id, f.name
+from meal m
+    join food f on f.id = m.food_id
+where m.end is null
+  and m.cat_id = ?', [$catId]);
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -41,6 +46,24 @@ order by name', [$catId]);
     <button class="btn btn-primary">Rozpocznij</button>
 </form>
 <h3>Zakończ posiłek</h3>
+<div class="list-group">
+    <?php foreach ($meals as $meal) {
+        ?>
+        <form action="../Application/EndMealController.php" method="post">
+            <input type="hidden" name="MealId" value="<?= $meal['id'] ?>"/>
+            <div class="form-group">
+                <label for="Meal<?= $meal['id'] ?>Weight">Waga <?= $meal['name'] ?> po posiłku [g]</label>
+                <input id="Meal<?= $meal['id'] ?>Weight" name="Weight" class="form-control" type="number" step="1"
+                       min="0" max="1000"/>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Zakończ</button>
+            </div>
+        </form>
+        <?php
+    }
+    ?>
+</div>
 <h3>Kupa</h3>
 <h3>Siku</h3>
 <h3>Obserwuj</h3>
