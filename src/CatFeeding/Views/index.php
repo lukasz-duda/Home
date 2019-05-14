@@ -64,9 +64,27 @@ where m.end is null
     }
     ?>
 </div>
-<h3>Kupa</h3>
-<h3>Siku</h3>
-<h3>Obserwuj</h3>
+<h3>Toaleta</h3>
+<form action="../Application/AddPoopController.php" method="post">
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Kupa</button>
+    </div>
+</form>
+<form action="../Application/AddPeeController.php" method="post">
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Kupa</button>
+    </div>
+</form>
+<h3>Obserwacja</h3>
+<form action="../Application/AddObservationController.php" method="post">
+    <div class="form-group">
+        <label for="ObservationNotes">Opis</label>
+        <textarea id="ObservationNotes" name="notes" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Dodaj</button>
+    </div>
+</form>
 <h2>Dodaj pokarm</h2>
 <form action="../Application/AddFoodController.php" method="post">
     <div class="form-group">
