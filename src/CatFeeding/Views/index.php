@@ -30,7 +30,39 @@ $lastPee = get('select p.timestamp
 from pee p
 where p.cat_id = ?
 order by p.timestamp desc
-limit 1', [$catId])
+limit 1', [$catId]);
+$dailyDemand = get('select
+       round(
+           100 *
+           sum(m.end_weight - m.start_weight) /
+           (
+               select d.weight
+               from daily_demand d
+               where d.food_id = m.food_id
+                 and d.cat_id = ?
+               order by d.timestamp desc limit 1
+           )
+       ) as total
+from meal m
+where m.cat_id = ?
+and datediff(m.start, ?) = 0
+group by m.id', [$catId, $catId, date('Y-m-d', $now)]);
+$yesterdayDemand = get('select
+       round(
+           100 *
+           sum(m.end_weight - m.start_weight) /
+           (
+               select d.weight
+               from daily_demand d
+               where d.food_id = m.food_id
+                 and d.cat_id = ?
+               order by d.timestamp desc limit 1
+           )
+       ) as total
+from meal m
+where m.cat_id = ?
+and datediff(m.start, ?) = 0
+group by m.id', [$catId, $catId, date('Y-m-d', strtotime('-1 days'))]);
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -47,6 +79,8 @@ limit 1', [$catId])
 <?= date('Y-m-d', $now); ?>
 <p>Ostatnia kupa: <?= $lastPoop['timestamp'] ?></p>
 <p>Ostatnie siku: <?= $lastPee['timestamp'] ?></p>
+<p>Zapotrzebowanie dzisiaj: <?= $dailyDemand['total'] ?> %</p>
+<p>Zapotrzebowanie wczoraj: <?= $yesterdayDemand['total'] ?> %</p>
 <h3>Rozpocznij posiłek</h3>
 <form action="../Application/StartMealController.php" method="post">
     <div class="form-group">
