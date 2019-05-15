@@ -19,6 +19,18 @@ from meal m
     join food f on f.id = m.food_id
 where m.end is null
   and m.cat_id = ?', [$catId]);
+
+$now = time();
+$lastPoop = get('select p.timestamp
+from poop p
+where p.cat_id = ?
+order by p.timestamp desc
+limit 1', [$catId]);
+$lastPee = get('select p.timestamp
+from pee p
+where p.cat_id = ?
+order by p.timestamp desc
+limit 1', [$catId])
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -32,6 +44,9 @@ where m.end is null
 <body class="container">
 <h1><?= $catName ?></h1>
 <h2>Podsumowanie dnia</h2>
+<?= date('Y-m-d', $now); ?>
+<p>Ostatnia kupa: <?= $lastPoop['timestamp'] ?></p>
+<p>Ostatnie siku: <?= $lastPee['timestamp'] ?></p>
 <h3>Rozpocznij posiłek</h3>
 <form action="../Application/StartMealController.php" method="post">
     <div class="form-group">
