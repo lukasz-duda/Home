@@ -22,7 +22,7 @@ create table daily_demand
     timestamp datetime         not null,
     cat_id    int unsigned     not null,
     food_id   int unsigned     not null,
-    weight    tinyint unsigned not null
+    weight    smallint unsigned not null
 );
 
 drop table if exists meal;
@@ -33,9 +33,9 @@ create table meal
     cat_id       int unsigned     not null,
     food_id      int unsigned     not null,
     start        datetime         not null,
-    start_weight tinyint unsigned not null,
+    start_weight smallint unsigned not null,
     end          datetime         null,
-    end_weight   tinyint unsigned null
+    end_weight   smallint unsigned null
 );
 
 drop table if exists poop;
