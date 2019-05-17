@@ -14,8 +14,8 @@ $foodSaved = $saveFood->execute([$name, $description, $foodId]);
 
 if ($foodSaved) {
     echo 'Pokarm poprawiony. ';
-    $addDailyDemand = $pdo->prepare('INSERT INTO daily_demand (cat_id, food_id, weight) VALUES (?, ?, ?)');
-    $dailyDemandUpdated = $addDailyDemand->execute([$catId, $foodId, $weight]);
+    $addDailyDemand = $pdo->prepare('INSERT INTO daily_demand (cat_id, food_id, weight, timestamp) VALUES (?, ?, ?, ?)');
+    $dailyDemandUpdated = $addDailyDemand->execute([$catId, $foodId, $weight, date('Y-m-d H:i:s')]);
     if ($dailyDemandUpdated) {
         echo 'Dzienne zapotrzebowanie dodane. ';
     } else {
