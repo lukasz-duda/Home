@@ -14,7 +14,7 @@ $foods = getAll('SELECT f.id, f.name, f.description,
 ) as weight
 FROM food f
 order by name', [$catId]);
-$meals = getAll('select m.id, f.name
+$meals = getAll('select m.id, f.name, m.start
 from meal m
     join food f on f.id = m.food_id
 where m.end is null
@@ -32,37 +32,33 @@ where p.cat_id = ?
 order by p.timestamp desc
 limit 1', [$catId]);
 $dailyDemand = get('select
-       round(
-           100 *
-           sum(m.end_weight - m.start_weight) /
-           (
-               select d.weight
-               from daily_demand d
-               where d.food_id = m.food_id
-                 and d.cat_id = ?
-               order by d.timestamp desc limit 1
-           )
-       ) as total
+100 * sum(round(m.start_weight - m.end_weight))
+/
+(
+   select d.weight
+   from daily_demand d
+   where d.food_id = m.food_id
+	 and d.cat_id = ?
+   order by d.timestamp desc limit 1
+) as total
 from meal m
 where m.cat_id = ?
 and datediff(m.start, ?) = 0
-group by m.id', [$catId, $catId, date('Y-m-d', $now)]);
+group by m.food_id', [$catId, $catId, date('Y-m-d', $now)]);
 $yesterdayDemand = get('select
-       round(
-           100 *
-           sum(m.end_weight - m.start_weight) /
-           (
-               select d.weight
-               from daily_demand d
-               where d.food_id = m.food_id
-                 and d.cat_id = ?
-               order by d.timestamp desc limit 1
-           )
-       ) as total
+100 * sum(round(m.start_weight - m.end_weight))
+/
+(
+   select d.weight
+   from daily_demand d
+   where d.food_id = m.food_id
+	 and d.cat_id = ?
+   order by d.timestamp desc limit 1
+) as total
 from meal m
 where m.cat_id = ?
 and datediff(m.start, ?) = 0
-group by m.id', [$catId, $catId, date('Y-m-d', strtotime('-1 days'))]);
+group by m.food_id', [$catId, $catId, date('Y-m-d', strtotime('-1 days'))]);
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -101,7 +97,7 @@ group by m.id', [$catId, $catId, date('Y-m-d', strtotime('-1 days'))]);
         <form action="../Application/EndMealController.php" method="post">
             <input type="hidden" name="MealId" value="<?= $meal['id'] ?>"/>
             <div class="form-group">
-                <label for="Meal<?= $meal['id'] ?>Weight">Waga <?= $meal['name'] ?> po posiłku [g]</label>
+                <label for="Meal<?= $meal['id'] ?>Weight">Waga <?= $meal['name'] ?> po posiłku z <?= $meal['start'] ?> [g]</label>
                 <input id="Meal<?= $meal['id'] ?>Weight" name="Weight" class="form-control" type="number" step="1"
                        min="0" max="1000"/>
             </div>
@@ -188,6 +184,11 @@ group by m.id', [$catId, $catId, date('Y-m-d', strtotime('-1 days'))]);
                     return food;
                 }
             });
+
+            if (selectedFood == null) {
+                return;
+            }
+
             me.foodName(selectedFood.name);
             me.foodDescription(selectedFood.description);
             me.weight(selectedFood.weight);
