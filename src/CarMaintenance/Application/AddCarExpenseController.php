@@ -9,9 +9,6 @@ $value = floatval($_REQUEST['Value']);
 $fuelQuantity = floatval($_REQUEST['FuelQuantity']);
 $mileage = intval($_REQUEST['Mileage']);
 
-$pdo = new PDO($dsn, $user, $password);
-$pdo->query('SET NAMES utf8');
-$pdo->query('SET CHARACTER_SET utf8_unicode_ci');
 $saveCarExpenseStatement = $pdo->prepare('INSERT INTO car_expenses (car_id, name, company_id, value, date, mileage, fuel_quantity) values (?, ?, ?, ?, ?, ?, ?) ');
 $carExpenseSaved = $saveCarExpenseStatement->execute([$carId, $name, $companyId, $value, $date, $mileage, $fuelQuantity]);
 

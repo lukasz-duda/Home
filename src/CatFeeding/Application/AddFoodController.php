@@ -6,7 +6,6 @@ $catId = 1;
 $name = $_REQUEST['FoodName'];
 $description = $_REQUEST['FoodDescription'];
 $weight = intval($_REQUEST['Weight']);
-$pdo = newPdo();
 
 $saveFood = $pdo->prepare('INSERT INTO food (name, description) VALUES (?, ?)');
 $foodSaved = $saveFood->execute([$name, $description]);

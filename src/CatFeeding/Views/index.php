@@ -76,7 +76,7 @@ group by m.id', [$catId, $catId, date('Y-m-d', strtotime('-1 days'))]);
 <body class="container">
 <h1><?= $catName ?></h1>
 <h2>Podsumowanie dnia</h2>
-<?= date('Y-m-d', $now); ?>
+<?= date('Y-m-d H:i:s', $now); ?>
 <p>Ostatnia kupa: <?= $lastPoop['timestamp'] ?></p>
 <p>Ostatnie siku: <?= $lastPee['timestamp'] ?></p>
 <p>Zapotrzebowanie dzisiaj: <?= $dailyDemand['total'] ?> %</p>
@@ -121,7 +121,7 @@ group by m.id', [$catId, $catId, date('Y-m-d', strtotime('-1 days'))]);
 </form>
 <form action="../Application/AddPeeController.php" method="post">
     <div class="form-group">
-        <button type="submit" class="btn btn-primary">Kupa</button>
+        <button type="submit" class="btn btn-primary">Siku</button>
     </div>
 </form>
 <h3>Obserwacja</h3>
