@@ -44,7 +44,7 @@ $dailyDemand = get('select
 from meal m
 where m.cat_id = ?
 and datediff(m.start, ?) = 0
-group by m.food_id', [$catId, $catId, date('Y-m-d', $now)]);
+group by m.cat_id', [$catId, $catId, date('Y-m-d', $now)]);
 $yesterdayDemand = get('select
 100 * sum(round(m.start_weight - m.end_weight))
 /
@@ -58,7 +58,7 @@ $yesterdayDemand = get('select
 from meal m
 where m.cat_id = ?
 and datediff(m.start, ?) = 0
-group by m.food_id', [$catId, $catId, date('Y-m-d', strtotime('-1 days'))]);
+group by m.cat_id', [$catId, $catId, date('Y-m-d', strtotime('-1 days'))]);
 ?>
 <!DOCTYPE html>
 <html lang="pl">
