@@ -35,7 +35,8 @@ create table meal
     start        datetime         not null,
     start_weight smallint unsigned not null,
     end          datetime         null,
-    end_weight   smallint unsigned null
+    end_weight   smallint unsigned null,
+    food_name varchar(30) not null
 );
 
 drop table if exists poop;
@@ -61,4 +62,13 @@ create table observation
     cat_id    int unsigned not null,
     timestamp datetime     not null,
     notes     varchar(250) not null
+);
+
+drop table if exists weight;
+
+create table weight
+(
+    cat_id int unsigned not null,
+    timestamp date not null,
+    weight decimal(2, 1) not null
 );
