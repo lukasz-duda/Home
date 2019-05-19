@@ -35,8 +35,7 @@ create table meal
     start        datetime         not null,
     start_weight smallint unsigned not null,
     end          datetime         null,
-    end_weight   smallint unsigned null,
-    food_name varchar(30) not null
+    end_weight   smallint unsigned null
 );
 
 drop table if exists poop;
