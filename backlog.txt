@@ -1,4 +1,5 @@
 Refactor:
+* Daily demand - assume day ends at 1 am
 * DomainRegistry
 * Extract AddCatUseCase with AddCatRequest and AddCatResponse
 * Rename CatController to AddCatController

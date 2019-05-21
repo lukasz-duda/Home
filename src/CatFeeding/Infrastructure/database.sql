@@ -62,3 +62,12 @@ create table observation
     timestamp datetime     not null,
     notes     varchar(250) not null
 );
+
+drop table if exists weight;
+
+create table weight
+(
+    cat_id int unsigned not null,
+    timestamp date not null,
+    weight decimal(2, 1) not null
+);
