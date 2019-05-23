@@ -4,7 +4,7 @@ $carId = 1;
 $car = get('SELECT name, mileage FROM cars WHERE id = ?', [$carId]);
 $carName = $car['name'];
 $carMileage = $car['mileage'];
-$companies = getAll('SELECT id, name FROM companies order by name', []);
+$categories = getAll('SELECT id, name FROM companies order by name', []);
 $today = date("Y-m-d");
 $tasks = getAll('SELECT name
 FROM car_tasks
@@ -83,7 +83,7 @@ Eksploatacja: <?= intval(($total - $carValue - $fuelValue) / $days * 30) ?> zł<
         <select class="form-control" id="CompanyId" name="CompanyId">
             <option value="-1">Nieokreślona</option>
             <?php
-            foreach ($companies as $company) {
+            foreach ($categories as $company) {
                 ?>
                 <option value="<?= $company['id'] ?>"><?= $company['name'] ?></option>
                 <?php
