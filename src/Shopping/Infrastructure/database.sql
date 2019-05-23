@@ -16,3 +16,12 @@ create table expense_categories
     id   int unsigned not null primary key auto_increment,
     name varchar(50)  not null
 );
+
+drop table if exists refund_plan;
+
+create table refund_plan
+(
+    expense_id    int unsigned not null,
+    for_me        bool         not null,
+    transfer_date datetime     null
+);

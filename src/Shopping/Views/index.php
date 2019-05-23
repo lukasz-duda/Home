@@ -17,8 +17,28 @@ $categories = getAll('select id, name from expense_categories', []);
 <h2>Dodaj</h2>
 <form action="../Application/AddExpenseController.php" method="post">
     <div class="form-group">
-        <label for="Value">Wartość</label>
+        <label for="Value">Wartość zakupu</label>
         <input class="form-control" id="Value" name="Value" type="number" step="0.01" data-bind="value: value"/>
+    </div>
+    <div class="form-group">
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="Refund" id="NoRefund" value="NoRefund" checked>
+            <label class="form-check-label" for="NoRefund">
+                Zwykły zakup
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="Refund" id="RefundToMe" value="RefundToMe">
+            <label class="form-check-label" for="RefundToMe">
+                Zwróć połowę mnie
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="Refund" id="RefundToIlona" value="RefundToIlona">
+            <label class="form-check-label" for="RefundToIlona">
+                Zwróć połowę Ilonie
+            </label>
+        </div>
     </div>
     <div class="form-group">
         <div class="form-group">
