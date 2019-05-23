@@ -1,6 +1,22 @@
 <?php
 include "../../Shared/Views/View.php";
 
+$toRefund = get('select
+       (
+           select sum(e.value) as total
+           from refund_plan r
+                    join expenses e on e.id = r.expense_id
+           where r.for_me = 0
+             and r.transfer_date is null
+       )
+           -
+       (
+           select sum(e.value) as total
+           from refund_plan r
+               join expenses e on e.id = r.expense_id
+           where r.for_me = 1
+             and r.transfer_date is null
+       ) as value', []);
 $categories = getAll('select id, name from expense_categories', []);
 ?>
 <!DOCTYPE html>
@@ -14,6 +30,8 @@ $categories = getAll('select id, name from expense_categories', []);
 </head>
 <body class="container">
 <h1>Zakupy</h1>
+<h2>Rozliczenie</h2>
+Kwota do rozliczenia: <?= $toRefund['value'] ?>
 <h2>Dodaj</h2>
 <form action="../Application/AddExpenseController.php" method="post">
     <div class="form-group">
