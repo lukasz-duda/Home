@@ -1,22 +1,16 @@
 <?php
 include "../../Shared/Views/View.php";
 
-$toRefund = get('select
-       (
-           select sum(e.value) as total
+$forIlona = get('select sum(e.value) as value
            from refund_plan r
                     join expenses e on e.id = r.expense_id
            where r.for_me = 0
-             and r.transfer_date is null
-       )
-           -
-       (
-           select sum(e.value) as total
+             and r.transfer_date is null', []);
+$forMe = get('select sum(e.value) as value
            from refund_plan r
                join expenses e on e.id = r.expense_id
            where r.for_me = 1
-             and r.transfer_date is null
-       ) as value', []);
+             and r.transfer_date is null', []);
 $categories = getAll('select id, name from expense_categories', []);
 ?>
 <!DOCTYPE html>
@@ -31,7 +25,9 @@ $categories = getAll('select id, name from expense_categories', []);
 <body class="container">
 <h1>Zakupy</h1>
 <h2>Rozliczenie</h2>
-Kwota do rozliczenia: <?= $toRefund['value'] ?>
+Do zwrotu dla Ilony: <?= $forIlona['value'] ?><br/>
+Do zwrotu dla mnie: <?= $forMe['value'] ?><br/>
+Kwota do rozliczenia: <?= $forIlona['value'] - $forMe['value'] ?>
 <form action="../Application/RefundController.php" method="post">
     <div class="form-group">
         <button class="btn btn-primary">Rozlicz</button>
