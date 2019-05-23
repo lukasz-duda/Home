@@ -32,6 +32,11 @@ $categories = getAll('select id, name from expense_categories', []);
 <h1>Zakupy</h1>
 <h2>Rozliczenie</h2>
 Kwota do rozliczenia: <?= $toRefund['value'] ?>
+<form action="../Application/RefundController.php" method="post">
+    <div class="form-group">
+        <button class="btn btn-primary">Rozlicz</button>
+    </div>
+</form>
 <h2>Dodaj</h2>
 <form action="../Application/AddExpenseController.php" method="post">
     <div class="form-group">
