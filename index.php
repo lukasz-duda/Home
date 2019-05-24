@@ -19,5 +19,6 @@ $car = get('SELECT name FROM cars WHERE id = ?', [$carId]);
 <h1><a href="src/CatFeeding/Views"><?= $cat['name'] ?></a></h1>
 <h1><a href="src/CarMaintenance/Views"><?= $car['name'] ?></a></h1>
 <h1><a href="src/Shopping/Views">Zakupy</a></h1>
+<h1><a href="src/Flat/Views">Mieszkanie</a></h1>
 </body>
 </html>
