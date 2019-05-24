@@ -19,7 +19,7 @@ $last = getAll('select timestamp, person, name, value from flat_expense order by
 <h2>Podsumowanie</h2>
 Łukasz zapłacił: <?= $lukasz['value'] ?><br/>
 Ilona zapłaciła: <?= $ilona['value'] ?><br/>
-Ilona zwróci jeszcze: <?= $lukasz['value'] - $ilona['value'] ?>
+Ilona zwróci jeszcze: <?= round(($lukasz['value'] - $ilona['value']) / 2, 2); ?>
 <h2>Nowa wpłata</h2>
 <form action="../Application/AddFlatExpenseController.php" method="post">
     <div class="form-group">
