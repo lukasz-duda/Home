@@ -21,6 +21,15 @@ create table car_expenses
     fuel_quantity float unsigned
 );
 
+drop table if exists mileage;
+
+create table mileage
+(
+    car_id int unsigned not null,
+    date date not null,
+    mileage mediumint unsigned not null
+);
+
 drop table if exists companies;
 
 create table companies
