@@ -3,7 +3,7 @@ include "../../Shared/Views/View.php";
 
 $ilona = get('select sum(e.value) as value from flat_expense e where e.person = ?', ['Ilona']);
 $lukasz = get('select sum(e.value) as value from flat_expense e where e.person = ?', ['Łukasz']);
-$last = getAll('select timestamp, person, name, value from flat_expense', []);
+$last = getAll('select timestamp, person, name, value from flat_expense order by timestamp desc limit 100', []);
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -51,5 +51,14 @@ Ilona zwróci jeszcze: <?= $lukasz['value'] - $ilona['value'] ?>
         <button class="btn btn-primary">Dodaj</button>
     </div>
 </form>
+<h2>Ostatnie wpłaty:</h2>
+
+<?php
+foreach ($last as $expense) {
+    ?>
+    <?= $expense['timestamp'] ?> <?= $expense['person'] ?> <?= $expense['name'] ?> <?= $expense['value'] ?><br/>
+    <?php
+}
+?>
 </body>
 </html>
