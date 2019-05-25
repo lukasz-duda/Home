@@ -7,8 +7,8 @@ $name = $_REQUEST['FoodName'];
 $description = $_REQUEST['FoodDescription'];
 $weight = intval($_REQUEST['Weight']);
 
-$saveFood = $pdo->prepare('INSERT INTO food (name, description) VALUES (?, ?)');
-$foodSaved = $saveFood->execute([$name, $description]);
+$saveFood = $pdo->prepare('INSERT INTO food (name, description, visible) VALUES (?, ?, ?)');
+$foodSaved = $saveFood->execute([$name, $description, 1]);
 $foodId = $pdo->lastInsertId();
 
 if ($foodSaved) {

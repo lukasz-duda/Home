@@ -6,9 +6,10 @@ $foodId = intval($_REQUEST['FoodId']);
 $name = $_REQUEST['FoodName'];
 $description = $_REQUEST['FoodDescription'];
 $weight = intval($_REQUEST['Weight']);
+$visible = intval($_REQUEST['Visible']);
 
-$saveFood = $pdo->prepare('UPDATE food SET name = ?, description = ? where id = ?');
-$foodSaved = $saveFood->execute([$name, $description, $foodId]);
+$saveFood = $pdo->prepare('UPDATE food SET name = ?, description = ?, visible = ? where id = ?');
+$foodSaved = $saveFood->execute([$name, $description, $visible, $foodId]);
 
 if ($foodSaved) {
     showInfo('Pokarm poprawiony.');

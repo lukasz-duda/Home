@@ -12,16 +12,17 @@ create table food
 (
     id          int unsigned not null primary key auto_increment,
     name        varchar(30)  not null,
-    description varchar(250) not null
+    description varchar(250) not null,
+    visible     bool         not null
 );
 
 drop table if exists daily_demand;
 
 create table daily_demand
 (
-    timestamp datetime         not null,
-    cat_id    int unsigned     not null,
-    food_id   int unsigned     not null,
+    timestamp datetime          not null,
+    cat_id    int unsigned      not null,
+    food_id   int unsigned      not null,
     weight    smallint unsigned not null
 );
 
@@ -29,12 +30,12 @@ drop table if exists meal;
 
 create table meal
 (
-    id           int unsigned     not null primary key auto_increment,
-    cat_id       int unsigned     not null,
-    food_id      int unsigned     not null,
-    start        datetime         not null,
+    id           int unsigned      not null primary key auto_increment,
+    cat_id       int unsigned      not null,
+    food_id      int unsigned      not null,
+    start        datetime          not null,
     start_weight smallint unsigned not null,
-    end          datetime         null,
+    end          datetime          null,
     end_weight   smallint unsigned null
 );
 
@@ -67,7 +68,7 @@ drop table if exists weight;
 
 create table weight
 (
-    cat_id int unsigned not null,
-    timestamp date not null,
-    weight decimal(2, 1) not null
+    cat_id    int unsigned  not null,
+    timestamp date          not null,
+    weight    decimal(2, 1) not null
 );

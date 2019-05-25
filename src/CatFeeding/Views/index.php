@@ -3,7 +3,7 @@ include "../../Shared/Views/View.php";
 $catId = 1;
 $cat = get('SELECT name FROM cats WHERE id = ?', [$catId]);
 $catName = $cat['name'];
-$foods = getAll('SELECT f.id, f.name, f.description,
+$foods = getAll('SELECT f.id, f.name, f.description, f.visible,
 (
     select d.weight
     from daily_demand d
@@ -87,7 +87,7 @@ group by m.cat_id', [$catId, $catId, date('Y-m-d', strtotime('-1 days'))]);
                 <div class="form-group">
                     <label for="MealFoodId">Pokarm</label>
                     <select class="form-control" id="MealFoodId" name="FoodId"
-                            data-bind="options: foods, optionsText: 'name', optionsValue: 'id', value: foodId"> </select>
+                            data-bind="options: visibleFoods, optionsText: 'name', optionsValue: 'id', value: foodId"> </select>
                 </div>
                 <div class="form-group">
                     <label for="MealWeight">Waga przed posiłkiem [g]</label>
@@ -201,6 +201,15 @@ group by m.cat_id', [$catId, $catId, date('Y-m-d', strtotime('-1 days'))]);
                     <input id="Weight" name="Weight" class="form-control" type="number" step="1" min="0" max="1000"
                            data-bind="value: weight"/>
                 </div>
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="1" id="Visible" name="Visible"
+                               data-bind="checked: visible">
+                        <label class="form-check-label" for="Visible">
+                            Widoczny na liście wyboru
+                        </label>
+                    </div>
+                </div>
                 <button type="submit" class="btn btn-primary">Zapisz</button>
             </form>
         </div>
@@ -234,6 +243,7 @@ group by m.cat_id', [$catId, $catId, date('Y-m-d', strtotime('-1 days'))]);
             me.foodName = ko.observable(null);
             me.foodDescription = ko.observable(null);
             me.weight = ko.observable(null);
+            me.visible = ko.observable(null);
             me.foods = <?= json_encode($foods);  ?>;
             me.foodId = ko.observable(null);
             me.foodId.subscribe(function () {
@@ -250,6 +260,10 @@ group by m.cat_id', [$catId, $catId, date('Y-m-d', strtotime('-1 days'))]);
                 me.foodName(selectedFood.name);
                 me.foodDescription(selectedFood.description);
                 me.weight(selectedFood.weight);
+                me.visible(selectedFood.visible === '1');
+            });
+            me.visibleFoods = ko.utils.arrayFilter(me.foods, function (food) {
+                return food.visible === '1';
             });
         }
 
