@@ -14,7 +14,7 @@ $foods = getAll('SELECT f.id, f.name, f.description,
 ) as weight
 FROM food f
 order by name', [$catId]);
-$meals = getAll('select m.id, f.name, m.start
+$meals = getAll('select m.id, f.name, m.start, m.start_weight
 from meal m
     join food f on f.id = m.food_id
 where m.end is null
@@ -61,105 +61,144 @@ and datediff(m.start, ?) = 0
 group by m.cat_id', [$catId, $catId, date('Y-m-d', strtotime('-1 days'))]);
 ?>
     <h1><?= $catName ?></h1>
-    <h2>Podsumowanie dnia</h2>
-<?= date('Y-m-d H:i:s', $now); ?>
-    <p>Ostatnia kupa: <?= $lastPoop['timestamp'] ?></p>
-    <p>Ostatnie siku: <?= $lastPee['timestamp'] ?></p>
-    <p>Zapotrzebowanie dzisiaj: <?= $dailyDemand['total'] ?> %</p>
-    <p>Zapotrzebowanie wczoraj: <?= $yesterdayDemand['total'] ?> %</p>
-    <h3>Rozpocznij posiłek</h3>
-    <form action="../Application/StartMealController.php" method="post">
-        <div class="form-group">
-            <label for="MealFoodId">Pokarm</label>
-            <select class="form-control" id="MealFoodId" name="FoodId"
-                    data-bind="options: foods, optionsText: 'name', optionsValue: 'id', value: foodId"> </select>
+
+    <div class="card mb-3">
+        <div class="card-header">Podsumowanie dnia</div>
+        <div class="card-body">
+            Teraz: <?= date('Y-m-d H:i:s', $now); ?><br/>
+            Ostatnia kupa: <?= $lastPoop['timestamp'] ?><br/>
+            Ostatnie siku: <?= $lastPee['timestamp'] ?><br/>
+            Zapotrzebowanie dzisiaj: <?= showInt($dailyDemand['total']); ?> %<br/>
+            Zapotrzebowanie wczoraj: <?= showInt($yesterdayDemand['total']); ?> %<br/>
         </div>
-        <div class="form-group">
-            <label for="MealWeight">Waga przed posiłkiem [g]</label>
-            <input id="MealWeight" name="Weight" class="form-control" type="number" step="1" min="0" max="1000"/>
-        </div>
-        <button class="btn btn-primary">Rozpocznij</button>
-    </form>
-    <h3>Zakończ posiłek</h3>
-    <div class="list-group">
-        <?php foreach ($meals as $meal) {
-            ?>
-            <form action="../Application/EndMealController.php" method="post">
-                <input type="hidden" name="MealId" value="<?= $meal['id'] ?>"/>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">Rozpocznij posiłek</div>
+        <div class="card-body">
+            <form action="../Application/StartMealController.php" method="post">
                 <div class="form-group">
-                    <label for="Meal<?= $meal['id'] ?>Weight">Waga <?= $meal['name'] ?> po posiłku
-                        z <?= $meal['start'] ?> [g]</label>
-                    <input id="Meal<?= $meal['id'] ?>Weight" name="Weight" class="form-control" type="number" step="1"
-                           min="0" max="1000"/>
+                    <label for="MealFoodId">Pokarm</label>
+                    <select class="form-control" id="MealFoodId" name="FoodId"
+                            data-bind="options: foods, optionsText: 'name', optionsValue: 'id', value: foodId"> </select>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Zakończ</button>
+                    <label for="MealWeight">Waga przed posiłkiem [g]</label>
+                    <input id="MealWeight" name="Weight" class="form-control" type="number" step="1" min="0"
+                           max="1000"/>
+                </div>
+                <button class="btn btn-primary">Rozpocznij</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">Zakończ posiłek</div>
+        <div class="card-body">
+            <div class="list-group">
+                <?php foreach ($meals as $meal) {
+                    ?>
+                    <form action="../Application/EndMealController.php" method="post">
+                        <input type="hidden" name="MealId" value="<?= $meal['id'] ?>"/>
+                        <div class="form-group">
+                            <label for="Meal<?= $meal['id'] ?>Weight">Waga <?= $meal['name'] ?> po
+                                posiłku <?= $meal['start_weight'] ?> g
+                                rozpoczętym <?= $meal['start'] ?> [g]</label>
+                            <input id="Meal<?= $meal['id'] ?>Weight" name="Weight" class="form-control" type="number"
+                                   step="1"
+                                   min="0" max="1000"/>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Zakończ</button>
+                        </div>
+                    </form>
+                    <?php
+                }
+                ?>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">Toaleta</div>
+        <div class="card-body">
+            <form action="../Application/AddPoopController.php" method="post">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Kupa</button>
                 </div>
             </form>
-            <?php
-        }
-        ?>
+            <form action="../Application/AddPeeController.php" method="post">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Siku</button>
+                </div>
+            </form>
+        </div>
     </div>
-    <h3>Toaleta</h3>
-    <form action="../Application/AddPoopController.php" method="post">
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary">Kupa</button>
+
+    <div class="card mb-3">
+        <div class="card-header">Obserwacja</div>
+        <div class="card-body">
+            <form action="../Application/AddObservationController.php" method="post">
+                <div class="form-group">
+                    <label for="ObservationNotes">Opis</label>
+                    <textarea id="ObservationNotes" name="notes" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Dodaj</button>
+                </div>
+            </form>
         </div>
-    </form>
-    <form action="../Application/AddPeeController.php" method="post">
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary">Siku</button>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">Dodaj pokarm</div>
+        <div class="card-body">
+            <form action="../Application/AddFoodController.php" method="post">
+                <div class="form-group">
+                    <label for="NewFoodName">Nazwa</label>
+                    <input class="form-control" id="NewFoodName" name="FoodName"/>
+                </div>
+                <div class="form-group">
+                    <label for="NewFoodDescription">Opis</label>
+                    <textarea id="NewFoodDescription" name="FoodDescription" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="NewWeight">Zapotrzebowanie dzienne [g]</label>
+                    <input id="NewWeight" name="Weight" class="form-control" type="number" step="1" min="0" max="1000"/>
+                </div>
+                <button type="submit" class="btn btn-primary">Zapisz</button>
+            </form>
         </div>
-    </form>
-    <h3>Obserwacja</h3>
-    <form action="../Application/AddObservationController.php" method="post">
-        <div class="form-group">
-            <label for="ObservationNotes">Opis</label>
-            <textarea id="ObservationNotes" name="notes" class="form-control"></textarea>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">Popraw pokarm</div>
+        <div class="card-body">
+            <form action="../Application/CorrectFoodController.php" method="post">
+                <div class="form-group">
+                    <label for="FoodId">Pokarm</label>
+                    <select class="form-control" id="FoodId" name="FoodId"
+                            data-bind="options: foods, optionsText: 'name', optionsValue: 'id', value: foodId"> </select>
+                </div>
+                <div class="form-group">
+                    <label for="FoodName">Nowa nazwa</label>
+                    <input class="form-control" id="FoodName" name="FoodName" data-bind="value: foodName"/>
+                </div>
+                <div class="form-group">
+                    <label for="FoodDescription">Nowy opis</label>
+                    <textarea id="FoodDescription" name="FoodDescription" class="form-control"
+                              data-bind="value: foodDescription"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="Weight">Zapotrzebowanie dzienne [g]</label>
+                    <input id="Weight" name="Weight" class="form-control" type="number" step="1" min="0" max="1000"
+                           data-bind="value: weight"/>
+                </div>
+                <button type="submit" class="btn btn-primary">Zapisz</button>
+            </form>
         </div>
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary">Dodaj</button>
-        </div>
-    </form>
-    <h2>Dodaj pokarm</h2>
-    <form action="../Application/AddFoodController.php" method="post">
-        <div class="form-group">
-            <label for="NewFoodName">Nazwa</label>
-            <input class="form-control" id="NewFoodName" name="FoodName"/>
-        </div>
-        <div class="form-group">
-            <label for="NewFoodDescription">Opis</label>
-            <textarea id="NewFoodDescription" name="FoodDescription" class="form-control"></textarea>
-        </div>
-        <div class="form-group">
-            <label for="NewWeight">Zapotrzebowanie dzienne [g]</label>
-            <input id="NewWeight" name="Weight" class="form-control" type="number" step="1" min="0" max="1000"/>
-        </div>
-        <button type="submit" class="btn btn-primary">Zapisz</button>
-    </form>
-    <h2>Popraw pokarm</h2>
-    <form action="../Application/CorrectFoodController.php" method="post">
-        <div class="form-group">
-            <label for="FoodId">Pokarm</label>
-            <select class="form-control" id="FoodId" name="FoodId"
-                    data-bind="options: foods, optionsText: 'name', optionsValue: 'id', value: foodId"> </select>
-        </div>
-        <div class="form-group">
-            <label for="FoodName">Nowa nazwa</label>
-            <input class="form-control" id="FoodName" name="FoodName" data-bind="value: foodName"/>
-        </div>
-        <div class="form-group">
-            <label for="FoodDescription">Nowy opis</label>
-            <textarea id="FoodDescription" name="FoodDescription" class="form-control"
-                      data-bind="value: foodDescription"></textarea>
-        </div>
-        <div class="form-group">
-            <label for="Weight">Zapotrzebowanie dzienne [g]</label>
-            <input id="Weight" name="Weight" class="form-control" type="number" step="1" min="0" max="1000"
-                   data-bind="value: weight"/>
-        </div>
-        <button type="submit" class="btn btn-primary">Zapisz</button>
-    </form>
+    </div>
+
     <script src="../../Shared/Views/knockout-min.js"></script>
     <script>
         function ViewModel() {

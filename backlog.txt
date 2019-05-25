@@ -1,6 +1,7 @@
 Refactor:
 * Show last 5 meals
 * Show info/warning
+* Filter visible foods
 * Daily demand - assume day ends at 1 am
 * DomainRegistry
 * Extract AddCatUseCase with AddCatRequest and AddCatResponse

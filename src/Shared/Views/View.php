@@ -1,5 +1,6 @@
 <?php
 include __DIR__ . '/../../Configuration.php';
+include __DIR__ . '/ViewUtils.php';
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -23,13 +24,13 @@ include __DIR__ . '/../../Configuration.php';
                 <a class="nav-link" href="<?= $baseUrl ?>/src/CatFeeding/Views">Szyszka</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<?= $baseUrl ?>/src/CarMaintenance/Views">Golf</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="<?= $baseUrl ?>/src/Shopping/Views">Zakupy</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<?= $baseUrl ?>/src/Flat/Views">Mieszkanie</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<?= $baseUrl ?>/src/CarMaintenance/Views">Golf</a>
             </li>
         </ul>
     </div>
