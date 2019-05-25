@@ -27,10 +27,12 @@ limit 1', [$catId, $foodId]);
     if ($dailyDemandUpdated) {
         showInfo('Dzienne zapotrzebowanie dodane.');
     } else {
-        showInfo('Nie udało się dodanie dziennego zapotrzebowania.');
+        showError('Nie udało się dodanie dziennego zapotrzebowania.');
+        showStatementError($addDailyDemand);
     }
 } else {
-    showInfo('Nie udało się poprawić pokarmu!');
+    showError('Nie udało się poprawić pokarmu!');
+    showStatementError($saveFood);
 }
 
 include '../../Shared/Views/Footer.php';

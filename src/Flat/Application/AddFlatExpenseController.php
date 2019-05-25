@@ -16,7 +16,8 @@ $expenseSaved = $saveExpenseStatement->execute([date('Y-m-d H:i:s', time()), $va
 if ($expenseSaved) {
     showInfo('Wydatek dodany.');
 } else {
-    showInfo('Nie udało się zapisać zakupu!');
+    showError('Nie udało się zapisać zakupu!');
+    showStatementError($saveExpenseStatement);
 }
 
 include '../../Shared/Views/Footer.php';

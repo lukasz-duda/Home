@@ -16,7 +16,8 @@ $mealSaved = $saveMeal->execute([$catId, $foodId, date('Y-m-d H:i:s'), $weight])
 if ($mealSaved) {
     showInfo('Posiłek rozpoczęty.');
 } else {
-    showInfo('Nie udało się rozpocząć posiłku!');
+    showError('Nie udało się rozpocząć posiłku!');
+    showStatementError($saveMeal);
 }
 
 include '../../Shared/Views/Footer.php';

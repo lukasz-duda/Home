@@ -8,7 +8,8 @@ if ($refundSaved) {
     showInfo('Zwrot przelewem rozliczony.');
 
 } else {
-    showInfo('Nie udało się rozliczyć!');
+    showError('Nie udało się rozliczyć!');
+    showStatementError($refundStatement);
 }
 
 include '../../Shared/Views/Footer.php';

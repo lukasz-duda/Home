@@ -10,7 +10,8 @@ $mealSaved = $saveMeal->execute([date('Y-m-d H:i:s'), $weight, $mealId]);
 if ($mealSaved) {
     showInfo('Posiłek zakończony.');
 } else {
-    showInfo('Nie udało się zakończyć posiłku!');
+    showError('Nie udało się zakończyć posiłku!');
+    showStatementError($saveMeal);
 }
 
 include '../../Shared/Views/Footer.php';

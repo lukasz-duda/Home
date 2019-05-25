@@ -9,7 +9,8 @@ $saved = $save->execute([$catId, date('Y-m-d H:i:s')]);
 if ($saved) {
     showInfo('Kupa dodana.');
 } else {
-    showInfo('Nie udało się dodać kupy!');
+    showError('Nie udało się dodać kupy!');
+    showStatementError($save);
 }
 
 include '../../Shared/Views/Footer.php';

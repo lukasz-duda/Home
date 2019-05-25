@@ -26,14 +26,15 @@ if ($expenseSaved) {
     $refundSaved = $refundStatement->execute([$expenseId, $forMe]);
 
     if (!$refundSaved) {
-        showInfo('Nie udało się zaplanować zwrotu.');
-        var_dump($refundStatement->errorInfo());
+        showError('Nie udało się zaplanować zwrotu.');
+        showStatementError($refundStatement);
     } else {
         showInfo('Zwrot zaplanowany.');
     }
 
 } else {
-    showInfo('Nie udało się zapisać zakupu!');
+    showError('Nie udało się zapisać zakupu!');
+    showStatementError($saveExpenseStatement);
 }
 
 include '../../Shared/Views/Footer.php';

@@ -9,7 +9,8 @@ $saved = $save->execute([$catId, date('Y-m-d H:i:s')]);
 if ($saved) {
     showInfo('Siku dodane.');
 } else {
-    showInfo('Nie udało się dodać siku!');
+    showError('Nie udało się dodać siku!');
+    showStatementError($save);
 }
 
 include '../../Shared/Views/Footer.php';

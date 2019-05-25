@@ -18,10 +18,12 @@ if ($foodSaved) {
     if ($dailyDemandUpdated) {
         showInfo('Dzienne zapotrzebowanie dodane.');
     } else {
-        showInfo('Nie udało się dodać dziennego zapotrzebowania.');
+        showError('Nie udało się dodać dziennego zapotrzebowania.');
+        showStatementError($addDailyDemand);
     }
 } else {
-    showInfo('Nie udało się zapisać pokarmu!');
+    showError('Nie udało się zapisać pokarmu!');
+    showStatementError($saveFood);
 }
 
 include '../../Shared/Views/Footer.php';

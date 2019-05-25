@@ -10,7 +10,8 @@ $saved = $save->execute([$catId, date('Y-m-d H:i:s'), $notes]);
 if ($saved) {
     showInfo('Obserwacja dodana.');
 } else {
-    showInfo('Nie udało się dodać obserwacji!');
+    showError('Nie udało się dodać obserwacji!');
+    showStatementError($save);
 }
 
 include '../../Shared/Views/Footer.php';
