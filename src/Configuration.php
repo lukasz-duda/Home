@@ -7,6 +7,7 @@ $password = 'assistant';
 date_default_timezone_set('Europe/Warsaw');
 
 $pdo = newPdo();
+$baseUrl = 'http://localhost/HomeAssistant';
 
 function newPdo()
 {
@@ -33,4 +34,9 @@ function getAll($query, $params)
     $statement->execute($params);
     $rows = $statement->fetchAll();
     return $rows;
+}
+
+function showMessage($text)
+{
+    printf('<div class="alert alert-info" role="alert">%s</div>', $text);
 }

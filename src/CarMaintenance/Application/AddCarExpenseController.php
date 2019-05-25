@@ -1,5 +1,5 @@
 <?php
-include __DIR__ . '/../../Configuration.php';
+include '../../Shared/Views/View.php';
 
 $carId = 1;
 $date = $_REQUEST['Date'];
@@ -13,14 +13,16 @@ $saveCarExpenseStatement = $pdo->prepare('INSERT INTO car_expenses (car_id, name
 $carExpenseSaved = $saveCarExpenseStatement->execute([$carId, $name, $companyId, $value, $date, $mileage, $fuelQuantity]);
 
 if ($carExpenseSaved) {
-    echo 'Zakup dodany. ';
+    showMessage('Zakup dodany.');
     $updateMileage = $pdo->prepare('UPDATE cars SET mileage = ? WHERE id = ?');
     $mileageUpdated = $updateMileage->execute([$mileage, $carId]);
     if ($mileageUpdated) {
-        echo 'Przebieg zaktualizowany. ';
+        showMessage('Przebieg zaktualizowany.');
     } else {
-        echo 'Nie udało się zaktualizować przebiegu. ';
+        showMessage('Nie udało się zaktualizować przebiegu.');
     }
 } else {
-    echo 'Nie udało się zapisać zakupu! ';
+    showMessage('Nie udało się zapisać zakupu!');
 }
+
+include '../../Shared/Views/Footer.php';

@@ -1,5 +1,5 @@
 <?php
-include __DIR__ . '/../../Configuration.php';
+include '../../Shared/Views/View.php';
 
 $categoryId = $_REQUEST['CategoryId'] == '-1' ? null : intval($_REQUEST['CategoryId']);
 $name = $_REQUEST['Name'];
@@ -14,7 +14,7 @@ $expenseSaved = $saveExpenseStatement->execute([date('Y-m-d H:i:s', time()), $va
 $expenseId = $pdo->lastInsertId();
 
 if ($expenseSaved) {
-    echo 'Zakup dodany. ';
+    showMessage('Zakup dodany.');
 
     if ($noRefund) {
         return;
@@ -26,12 +26,14 @@ if ($expenseSaved) {
     $refundSaved = $refundStatement->execute([$expenseId, $forMe]);
 
     if (!$refundSaved) {
-        echo 'Nie udało się zaplanować zwrotu.';
+        showMessage('Nie udało się zaplanować zwrotu.');
         var_dump($refundStatement->errorInfo());
     } else {
-        echo 'Zwrot zaplanowany.';
+        showMessage('Zwrot zaplanowany.');
     }
 
 } else {
-    echo 'Nie udało się zapisać zakupu! ';
+    showMessage('Nie udało się zapisać zakupu!');
 }
+
+include '../../Shared/Views/Footer.php';
