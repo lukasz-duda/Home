@@ -14,7 +14,7 @@ $expenseSaved = $saveExpenseStatement->execute([date('Y-m-d H:i:s', time()), $va
 $expenseId = $pdo->lastInsertId();
 
 if ($expenseSaved) {
-    showMessage('Zakup dodany.');
+    showInfo('Zakup dodany.');
 
     if ($noRefund) {
         return;
@@ -26,14 +26,14 @@ if ($expenseSaved) {
     $refundSaved = $refundStatement->execute([$expenseId, $forMe]);
 
     if (!$refundSaved) {
-        showMessage('Nie udało się zaplanować zwrotu.');
+        showInfo('Nie udało się zaplanować zwrotu.');
         var_dump($refundStatement->errorInfo());
     } else {
-        showMessage('Zwrot zaplanowany.');
+        showInfo('Zwrot zaplanowany.');
     }
 
 } else {
-    showMessage('Nie udało się zapisać zakupu!');
+    showInfo('Nie udało się zapisać zakupu!');
 }
 
 include '../../Shared/Views/Footer.php';

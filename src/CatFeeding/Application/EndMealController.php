@@ -8,9 +8,9 @@ $saveMeal = $pdo->prepare('UPDATE meal SET end = ?, end_weight = ? where id = ?'
 $mealSaved = $saveMeal->execute([date('Y-m-d H:i:s'), $weight, $mealId]);
 
 if ($mealSaved) {
-    showMessage('Posiłek zakończony.');
+    showInfo('Posiłek zakończony.');
 } else {
-    showMessage('Nie udało się zakończyć posiłku!');
+    showInfo('Nie udało się zakończyć posiłku!');
 }
 
 include '../../Shared/Views/Footer.php';

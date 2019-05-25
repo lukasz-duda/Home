@@ -5,10 +5,10 @@ $refundStatement = $pdo->prepare('update refund_plan set transfer_date = ? where
 $refundSaved = $refundStatement->execute([date('Y-m-d H:i:s', time())]);
 
 if ($refundSaved) {
-    showMessage('Zwrot przelewem rozliczony.');
+    showInfo('Zwrot przelewem rozliczony.');
 
 } else {
-    showMessage('Nie udało się rozliczyć!');
+    showInfo('Nie udało się rozliczyć!');
 }
 
 include '../../Shared/Views/Footer.php';

@@ -7,9 +7,9 @@ $save = $pdo->prepare('INSERT INTO pee (cat_id, timestamp) VALUES (?, ?)');
 $saved = $save->execute([$catId, date('Y-m-d H:i:s')]);
 
 if ($saved) {
-    showMessage('Siku dodane.');
+    showInfo('Siku dodane.');
 } else {
-    showMessage('Nie udało się dodać siku!');
+    showInfo('Nie udało się dodać siku!');
 }
 
 include '../../Shared/Views/Footer.php';

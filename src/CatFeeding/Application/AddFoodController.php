@@ -12,16 +12,16 @@ $foodSaved = $saveFood->execute([$name, $description]);
 $foodId = $pdo->lastInsertId();
 
 if ($foodSaved) {
-    showMessage('Pokarm dodany.');
+    showInfo('Pokarm dodany.');
     $addDailyDemand = $pdo->prepare('INSERT INTO daily_demand (cat_id, food_id, weight, timestamp) VALUES (?, ?, ?, ?)');
     $dailyDemandUpdated = $addDailyDemand->execute([$catId, $foodId, $weight, date('Y-m-d H:i:s')]);
     if ($dailyDemandUpdated) {
-        showMessage('Dzienne zapotrzebowanie dodane.');
+        showInfo('Dzienne zapotrzebowanie dodane.');
     } else {
-        showMessage('Nie udało się dodać dziennego zapotrzebowania.');
+        showInfo('Nie udało się dodać dziennego zapotrzebowania.');
     }
 } else {
-    showMessage('Nie udało się zapisać pokarmu!');
+    showInfo('Nie udało się zapisać pokarmu!');
 }
 
 include '../../Shared/Views/Footer.php';

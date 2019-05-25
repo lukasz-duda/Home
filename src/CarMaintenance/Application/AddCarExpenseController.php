@@ -13,16 +13,18 @@ $saveCarExpenseStatement = $pdo->prepare('INSERT INTO car_expenses (car_id, name
 $carExpenseSaved = $saveCarExpenseStatement->execute([$carId, $name, $companyId, $value, $date, $mileage, $fuelQuantity]);
 
 if ($carExpenseSaved) {
-    showMessage('Zakup dodany.');
+    showInfo('Zakup dodany.');
     $updateMileage = $pdo->prepare('UPDATE cars SET mileage = ? WHERE id = ?');
     $mileageUpdated = $updateMileage->execute([$mileage, $carId]);
     if ($mileageUpdated) {
-        showMessage('Przebieg zaktualizowany.');
+        showInfo('Przebieg zaktualizowany.');
     } else {
-        showMessage('Nie udało się zaktualizować przebiegu.');
+        showError('Nie udało się zaktualizować przebiegu.');
+        showStatementError($updateMileage);
     }
 } else {
-    showMessage('Nie udało się zapisać zakupu!');
+    showError('Nie udało się zapisać zakupu!');
+    showStatementError($saveCarExpenseStatement);
 }
 
 include '../../Shared/Views/Footer.php';

@@ -30,9 +30,28 @@ function getAll($query, $params)
     return $rows;
 }
 
-function showMessage($text)
+function showInfo($text)
 {
     printf('<div class="alert alert-info" role="alert">%s</div>', $text);
+}
+
+function showWarning($text)
+{
+    printf('<div class="alert alert-warning" role="alert">%s</div>', $text);
+}
+
+function showError($text)
+{
+    printf('<div class="alert alert-danger" role="alert">%s</div>', $text);
+}
+
+
+/**
+ * @param $statement PDOStatement
+ */
+function showStatementError($statement)
+{
+    printf('<div class="alert alert-danger" role="alert">%s</div>', $statement->errorInfo()[2]);
 }
 
 function showInt($value)
