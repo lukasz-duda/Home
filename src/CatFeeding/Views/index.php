@@ -87,7 +87,7 @@ group by m.cat_id', [$catId, $catId, date('Y-m-d', strtotime('-1 days'))]);
                 <div class="form-group">
                     <label for="MealFoodId">Pokarm</label>
                     <select class="form-control" id="MealFoodId" name="FoodId"
-                            data-bind="options: visibleFoods, optionsText: 'name', optionsValue: 'id', value: foodId"> </select>
+                            data-bind="options: visibleFoods, optionsText: 'name', optionsValue: 'id', value: startMealfoodId"> </select>
                 </div>
                 <div class="form-group">
                     <label for="MealWeight">Waga przed posiłkiem [g]</label>
@@ -240,6 +240,7 @@ group by m.cat_id', [$catId, $catId, date('Y-m-d', strtotime('-1 days'))]);
     <script>
         function ViewModel() {
             var me = this;
+            me.startMealfoodId = ko.observable(null);
             me.foodName = ko.observable(null);
             me.foodDescription = ko.observable(null);
             me.weight = ko.observable(null);
