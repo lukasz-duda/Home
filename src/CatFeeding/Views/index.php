@@ -20,6 +20,13 @@ from meal m
 where m.end is null
   and m.cat_id = ?', [$catId]);
 
+$lastMeals = getAll('select m.id, f.name, m.start, m.start_weight, m.end, m.end_weight
+from meal m
+    join food f on f.id = m.food_id
+where m.end is not null
+  and m.cat_id = ?
+order by m.start desc 
+  limit 3', [$catId]);
 $now = time();
 $lastPoop = get('select p.timestamp
 from poop p
@@ -196,6 +203,27 @@ group by m.cat_id', [$catId, $catId, date('Y-m-d', strtotime('-1 days'))]);
                 </div>
                 <button type="submit" class="btn btn-primary">Zapisz</button>
             </form>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">Ostatnie posiłki</div>
+        <div class="card-body">
+            <?php
+            foreach ($lastMeals as $lastMeal) {
+                ?>
+
+                <a href="#" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1"><?= $lastMeal['name'] ?></h5>
+                    </div>
+                    <p class="mb-1"><?= $lastMeal['start_weight'] ?> g - <?= $lastMeal['end_weight'] ?> g</p>
+                    <small><?= $lastMeal['start'] ?> - <?= $lastMeal['end'] ?></small>
+                </a>
+
+                <?php
+            }
+            ?>
         </div>
     </div>
 
