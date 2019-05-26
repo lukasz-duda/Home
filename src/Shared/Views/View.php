@@ -30,6 +30,9 @@ include __DIR__ . '/ViewUtils.php';
                 <a class="nav-link" href="<?= $baseUrl ?>/src/Shopping/Views">Zakupy</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="<?= $baseUrl ?>/src/Coffee/Views">Kawa</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="<?= $baseUrl ?>/src/Flat/Views">Mieszkanie</a>
             </li>
             <li class="nav-item">
