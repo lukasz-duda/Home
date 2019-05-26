@@ -12,7 +12,11 @@ $forMe = get('select sum(e.value) as value
            where r.for_me = 1
              and r.transfer_date is null', []);
 $categories = getAll('select id, name from expense_categories', []);
-$lastExpenses = getAll('select e.timestamp, e.name, e.value, c.name as category_name from expenses e join expense_categories c on c.id = e.category_id order by e.timestamp desc limit 3', [])
+$lastExpenses = getAll('select e.timestamp, e.name, e.value, c.name as category_name, r.for_me
+from expenses e
+   left join expense_categories c on c.id = e.category_id
+left join refund_plan r on r.expense_id = e.id
+order by e.timestamp desc limit 3', [])
 ?>
     <h1>Zakupy</h1>
 
@@ -94,6 +98,11 @@ $lastExpenses = getAll('select e.timestamp, e.name, e.value, c.name as category_
             <div class="list-group">
                 <?php
                 foreach ($lastExpenses as $expense) {
+                    if ($expense['for_me'] == null) {
+                        $person = '';
+                    } else {
+                        $person = ($expense['for_me']) ? 'Łukasz' : 'Ilona';
+                    }
                     ?>
 
                     <a href="#" class="list-group-item list-group-item-action">
@@ -101,8 +110,8 @@ $lastExpenses = getAll('select e.timestamp, e.name, e.value, c.name as category_
                             <h5 class="mb-1"><?= showMoney($expense['value']); ?></h5>
                             <small><?= $expense['timestamp'] ?></small>
                         </div>
-                        <p class="mb-1"><?= $expense['name'] ?></p>
-                        <small><?= $expense['category_name'] ?></small>
+                        <p class="mb-1"><?= $expense['name'] ?> - <?= $expense['category_name'] ?></p>
+                        <small><?= $person ?></small>
                     </a>
                     <?php
                 }
