@@ -2,15 +2,17 @@
 include '../../Shared/Views/View.php';
 
 $carId = 1;
-$date = $_REQUEST['Date'];
 $companyId = $_REQUEST['CompanyId'] == '-1' ? null : intval($_REQUEST['CompanyId']);
 $name = $_REQUEST['Name'];
 $value = floatval($_REQUEST['Value']);
 $fuelQuantity = floatval($_REQUEST['FuelQuantity']);
 $mileage = intval($_REQUEST['Mileage']);
 
-$saveCarExpenseStatement = $pdo->prepare('INSERT INTO car_expenses (car_id, name, company_id, value, date, mileage, fuel_quantity) values (?, ?, ?, ?, ?, ?, ?) ');
-$carExpenseSaved = $saveCarExpenseStatement->execute([$carId, $name, $companyId, $value, $date, $mileage, $fuelQuantity]);
+if ($fuelQuantity == 0)
+    $fuelQuantity = null;
+
+$saveCarExpenseStatement = $pdo->prepare('INSERT INTO car_expenses (car_id, name, company_id, value, timestamp, mileage, fuel_quantity) values (?, ?, ?, ?, ?, ?, ?) ');
+$carExpenseSaved = $saveCarExpenseStatement->execute([$carId, $name, $companyId, $value, date('Y-m-d H:i:s', time()), $mileage, $fuelQuantity]);
 
 if ($carExpenseSaved) {
     showInfo('Zakup dodany.');

@@ -17,7 +17,7 @@ create table car_expenses
     name          varchar(100)   not null,
     company_id    int unsigned,
     value         float unsigned not null,
-    date          date           not null,
+    timestamp     datetime       not null,
     fuel_quantity float unsigned
 );
 
@@ -25,8 +25,8 @@ drop table if exists mileage;
 
 create table mileage
 (
-    car_id int unsigned not null,
-    date date not null,
+    car_id  int unsigned       not null,
+    date    date               not null,
     mileage mediumint unsigned not null
 );
 

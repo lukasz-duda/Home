@@ -9,6 +9,7 @@ include __DIR__ . '/ViewUtils.php';
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Asystentka domowa</title>
     <link rel="stylesheet" href="<?= $baseUrl ?>/src/Shared/Views/bootstrap.min.css">
+    <script src="<?= $baseUrl ?>/src/Shared/Views/knockout-min.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-expand-sm navbar-light bg-light mb-3">

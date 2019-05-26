@@ -53,7 +53,7 @@ $last = getAll('select timestamp, person, name, value from flat_expense order by
     </div>
 
     <div class="card mb-3">
-        <div class="card-header">Ostatnie wpłaty:</div>
+        <div class="card-header">Ostatnie wpłaty</div>
         <div class="card-body">
             <div class="list-group">
                 <?php

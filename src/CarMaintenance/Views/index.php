@@ -39,7 +39,8 @@ $carValue = intval(get('SELECT sum(e.value) as value FROM car_expenses e WHERE c
 $carValue = intval(get('SELECT sum(e.value) as value FROM car_expenses e WHERE car_id = ? and name = ?', [$carId, 'Samochód'])['value']);
 $fuelValue = intval(get('SELECT sum(e.value) as value FROM car_expenses e WHERE car_id = ? and name = ?', [$carId, 'Olej napędowy'])['value']);
 $otherValue = intval($total - $carValue - $fuelValue);
-$days = intval(get('select DATEDIFF(max(e.date), min(e.date)) as days from car_expenses e where car_id = ?', [$carId])['days']);
+$days = intval(get('select DATEDIFF(max(e.timestamp), min(e.timestamp)) as days from car_expenses e where car_id = ?', [$carId])['days']);
+$lastExpenses = getAll('select e.name, e.value, e.timestamp, e.fuel_quantity from car_expenses e where e.car_id = ? order by e.timestamp desc limit 3', [$carId]);
 ?>
     <h1><?= $carName ?></h1>
 
@@ -83,10 +84,6 @@ $days = intval(get('select DATEDIFF(max(e.date), min(e.date)) as days from car_e
         <div class="card-body">
             <form action="../Application/AddCarExpenseController.php" method="post">
                 <div class="form-group">
-                    <label for="Date">Data</label>
-                    <input class="form-control" id="Date" name="Date" type="date" value="<?= $today ?>"/>
-                </div>
-                <div class="form-group">
                     <label for="CompanyId">Firma</label>
                     <select class="form-control" id="CompanyId" name="CompanyId">
                         <option value="-1">Nieokreślona</option>
@@ -100,12 +97,12 @@ $days = intval(get('select DATEDIFF(max(e.date), min(e.date)) as days from car_e
                     </select>
                 </div>
                 <div class="form-group"><label for="Name">Nazwa</label>
-                    <input class="form-control" id="Name" name="Name" value="Olej napędowy"/>
+                    <input class="form-control" id="Name" name="Name" value="Olej napędowy" required/>
                 </div>
                 <div class="form-group">
                     <label for="Value">Wartość</label>
                     <input class="form-control" id="Value" name="Value" type="number" step="0.01"
-                           data-bind="value: value"/>
+                           data-bind="value: value" required/>
                 </div>
                 <div class="form-group">
                     <label for="FuelQuantity">Ilość paliwa</label>
@@ -124,6 +121,33 @@ $days = intval(get('select DATEDIFF(max(e.date), min(e.date)) as days from car_e
                 </div>
                 <button class="btn btn-primary" type="submit">Zapisz</button>
             </form>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">Ostatnie zakupy</div>
+        <div class="card-body">
+            <div class="list-group">
+                <?php
+                foreach ($lastExpenses as $expense) {
+                    $fuelPrice = $expense['fuel_quantity'] != null ?
+                        sprintf('%s l = %s/l', showInt($expense['fuel_quantity']), showMoney($expense['value'] / $expense['fuel_quantity'])) :
+                        '';
+                    ?>
+
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1"><?= showMoney($expense['value']); ?></h5>
+                            <small><?= $expense['timestamp'] ?></small>
+                        </div>
+                        <p class="mb-1"><?= $expense['name'] ?></p>
+                        <small><?= $fuelPrice ?></small>
+                    </a>
+                    <?php
+                }
+                ?>
+
+            </div>
         </div>
     </div>
 
