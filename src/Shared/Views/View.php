@@ -13,7 +13,9 @@ include __DIR__ . '/ViewUtils.php';
 </head>
 <body>
 <nav class="navbar navbar-expand-sm navbar-light bg-light mb-3">
-    <a class="navbar-brand" href="<?= $baseUrl ?>">Asystentka domowa</a>
+    <a class="navbar-brand" href="<?= $baseUrl ?>">
+        <img src="<?= $baseUrl ?>/src/Shared/Views/icon.png" alt="Asystentka domowa"/>
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
