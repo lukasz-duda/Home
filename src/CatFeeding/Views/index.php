@@ -26,7 +26,7 @@ from meal m
 where m.end is not null
   and m.cat_id = ?
 order by m.start desc 
-  limit 3', [$catId]);
+  limit 10', [$catId]);
 $now = time();
 $lastPoop = get('select p.timestamp
 from poop p

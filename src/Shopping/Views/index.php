@@ -16,7 +16,7 @@ $lastExpenses = getAll('select e.timestamp, e.name, e.value, c.name as category_
 from expenses e
    left join expense_categories c on c.id = e.category_id
 left join refund_plan r on r.expense_id = e.id
-order by e.timestamp desc limit 3', [])
+order by e.timestamp desc limit 10', [])
 ?>
     <h1>Zakupy</h1>
 

@@ -40,7 +40,7 @@ $carValue = intval(get('SELECT sum(e.value) as value FROM car_expenses e WHERE c
 $fuelValue = intval(get('SELECT sum(e.value) as value FROM car_expenses e WHERE car_id = ? and name = ?', [$carId, 'Olej napędowy'])['value']);
 $otherValue = intval($total - $carValue - $fuelValue);
 $days = intval(get('select DATEDIFF(max(e.timestamp), min(e.timestamp)) as days from car_expenses e where car_id = ?', [$carId])['days']);
-$lastExpenses = getAll('select e.name, e.value, e.timestamp, e.fuel_quantity from car_expenses e where e.car_id = ? order by e.timestamp desc limit 3', [$carId]);
+$lastExpenses = getAll('select e.name, e.value, e.timestamp, e.fuel_quantity from car_expenses e where e.car_id = ? order by e.timestamp desc limit 10', [$carId]);
 ?>
     <h1><?= $carName ?></h1>
 

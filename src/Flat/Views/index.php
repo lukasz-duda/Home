@@ -3,7 +3,7 @@ include '../../Shared/Views/View.php';
 
 $ilona = get('select sum(e.value) as value from flat_expense e where e.person = ?', ['Ilona']);
 $lukasz = get('select sum(e.value) as value from flat_expense e where e.person = ?', ['Łukasz']);
-$last = getAll('select timestamp, person, name, value from flat_expense order by timestamp desc limit 3', []);
+$last = getAll('select timestamp, person, name, value from flat_expense order by timestamp desc limit 10', []);
 ?>
     <h1>Mieszkanie</h1>
 
