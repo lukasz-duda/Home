@@ -12,6 +12,7 @@ $forMe = get('select sum(e.value) as value
            where r.for_me = 1
              and r.transfer_date is null', []);
 $categories = getAll('select id, name from expense_categories', []);
+$lastExpenses = getAll('select e.timestamp, e.name, e.value, c.name as category_name from expenses e join expense_categories c on c.id = e.category_id order by e.timestamp desc limit 3', [])
 ?>
     <h1>Zakupy</h1>
 
@@ -84,6 +85,30 @@ $categories = getAll('select id, name from expense_categories', []);
                     <button class="btn btn-primary">Zapisz</button>
                 </div>
             </form>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">Ostatnie zakupy</div>
+        <div class="card-body">
+            <div class="list-group">
+                <?php
+                foreach ($lastExpenses as $expense) {
+                    ?>
+
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1"><?= showMoney($expense['value']); ?></h5>
+                            <small><?= $expense['timestamp'] ?></small>
+                        </div>
+                        <p class="mb-1"><?= $expense['name'] ?></p>
+                        <small><?= $expense['category_name'] ?></small>
+                    </a>
+                    <?php
+                }
+                ?>
+
+            </div>
         </div>
     </div>
 <?php
