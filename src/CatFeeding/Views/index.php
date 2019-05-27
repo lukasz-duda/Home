@@ -226,7 +226,8 @@ group by m.cat_id', [$catId, $catId, date('Y-m-d', strtotime('-1 days'))]);
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1"><?= $lastMeal['name'] ?></h5>
                     </div>
-                    <p class="mb-1"><?= $lastMeal['start_weight'] ?> g - <?= $lastMeal['end_weight'] ?> g</p>
+                    <p class="mb-1"><?= $lastMeal['start_weight'] ?> - <?= $lastMeal['end_weight'] ?>
+                        = <?= showInt($lastMeal['start_weight'] - $lastMeal['end_weight']) ?> g</p>
                     <small><?= $lastMeal['start'] ?> - <?= $lastMeal['end'] ?></small>
                 </a>
 
