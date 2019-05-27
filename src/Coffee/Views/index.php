@@ -18,9 +18,9 @@ if ($coffeesUntilCleaning < 0) {
             <button class="btn btn-primary" type="submit">Zrób kawę</button>
         </div>
     </form>
-    <form>
+    <form action="../Application/CleanUpController.php" method="post">
         <div class="form-group">
-            <button class="btn btn-primary" type="submit" disabled>Umyj ekspres</button>
+            <button class="btn btn-primary" type="submit">Umyj ekspres</button>
         </div>
     </form>
 
