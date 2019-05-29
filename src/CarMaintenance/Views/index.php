@@ -66,17 +66,15 @@ $lastExpenses = getAll('select e.name, e.value, e.timestamp, e.fuel_quantity fro
 
     <div class="card mb-3">
         <div class="card-header">Zadania</div>
-        <div class="card-body">
-            <ul class="list-group">
-                <?php
-                foreach ($tasks as $task) {
-                    ?>
-                    <li class="list-group-item"><?= $task['name'] ?></li>
-                    <?php
-                }
+        <ul class="list-group list-group-flush">
+            <?php
+            foreach ($tasks as $task) {
                 ?>
-            </ul>
-        </div>
+                <li class="list-group-item"><?= $task['name'] ?></li>
+                <?php
+            }
+            ?>
+        </ul>
     </div>
 
     <div class="card mb-3">
