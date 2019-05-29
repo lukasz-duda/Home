@@ -12,7 +12,7 @@ create table food
 (
     id          int unsigned not null primary key auto_increment,
     name        varchar(30)  not null,
-    description varchar(250) not null,
+    description varchar(1000) not null,
     visible     bool         not null
 );
 

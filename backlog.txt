@@ -1,5 +1,6 @@
 Refactor:
 * Required fields HTML 5.
+* Field length limits HTML.
 * Daily demand - assume day ends at 1 am
 * DomainRegistry
 * Extract AddCatUseCase with AddCatRequest and AddCatResponse
