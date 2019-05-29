@@ -25,3 +25,11 @@ create table refund_plan
     for_me        bool         not null,
     transfer_date datetime     null
 );
+
+drop table if exists shopping_list;
+
+create table shopping_list
+(
+    name varchar(50) not null,
+    done boolean     not null default 0
+);

@@ -21,6 +21,18 @@ order by e.timestamp desc limit 10', [])
     <h1>Zakupy</h1>
 
     <div class="card mb-3">
+        <div class="card-header">Planowanie</div>
+        <div class="card-body">
+            <button class="btn-primary btn mb-3" data-bind="click: addShoppingItem">Dodaj</button>
+            <div data-bind="foreach: shoppingList">
+                <div class="form-group">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-3">
         <div class="card-header">Rozliczenie</div>
         <div class="card-body">
             <p>
@@ -42,8 +54,7 @@ order by e.timestamp desc limit 10', [])
             <form action="../Application/AddExpenseController.php" method="post">
                 <div class="form-group">
                     <label for="Value">Wartość zakupu</label>
-                    <input class="form-control" id="Value" name="Value" type="number" step="0.01"
-                           data-bind="value: value"/>
+                    <input class="form-control" id="Value" name="Value" type="number" step="0.01"/>
                 </div>
                 <div class="form-group">
                     <div class="form-check">
@@ -120,5 +131,17 @@ order by e.timestamp desc limit 10', [])
             </div>
         </div>
     </div>
+    <script>
+        function ViewModel() {
+            var me = this;
+            me.shoppingList = ko.observableArray([]);
+            me.addShoppingItem = function () {
+                me.shoppingList.push({name: ko.observable(null), done: ko.observable(false)});
+            };
+        }
+
+        var viewModel = new ViewModel();
+        ko.applyBindings(viewModel);
+    </script>
 <?php
 include '../../Shared/Views/Footer.php';
