@@ -1,3 +1,8 @@
+Backlog:
+* Provide possibility to sum a few atomic shopping expenses.
+* Optimise menu.
+* Make 2 coffees.
+
 Refactor:
 * Required fields HTML 5.
 * Field length limits HTML.
