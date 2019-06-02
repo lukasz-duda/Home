@@ -69,76 +69,87 @@ group by m.cat_id', [$catId, $catId, date('Y-m-d', strtotime('-1 days'))]);
 ?>
     <h1><?= $catName ?></h1>
 
-    <div class="card mb-3">
-        <div class="card-header">Podsumowanie dnia</div>
-        <div class="card-body">
-            Teraz: <?= date('Y-m-d H:i:s', $now); ?><br/>
-            Ostatnia kupa: <?= $lastPoop['timestamp'] ?><br/>
-            Ostatnie siku: <?= $lastPee['timestamp'] ?><br/>
-            Zapotrzebowanie dzisiaj: <?= showInt($dailyDemand['total']); ?> %<br/>
-            Zapotrzebowanie wczoraj: <?= showInt($yesterdayDemand['total']); ?> %<br/>
-        </div>
-    </div>
-
-    <div class="card mb-3">
-        <div class="card-header">Rozpocznij posiłek</div>
-        <div class="card-body">
-            <form action="../Application/StartMealController.php" method="post">
-                <div class="form-group">
-                    <label for="MealFoodId">Pokarm</label>
-                    <select class="form-control" id="MealFoodId" name="FoodId"
-                            data-bind="options: visibleFoods, optionsText: 'name', optionsValue: 'id', value: startMealfoodId"> </select>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-3">
+                <div class="card-header">Podsumowanie dnia</div>
+                <div class="card-body">
+                    Teraz: <?= date('Y-m-d H:i:s', $now); ?><br/>
+                    Ostatnia kupa: <?= $lastPoop['timestamp'] ?><br/>
+                    Ostatnie siku: <?= $lastPee['timestamp'] ?><br/>
+                    Zapotrzebowanie dzisiaj: <?= showInt($dailyDemand['total']); ?> %<br/>
+                    Zapotrzebowanie wczoraj: <?= showInt($yesterdayDemand['total']); ?> %<br/>
                 </div>
-                <div class="form-group">
-                    <label for="MealWeight">Waga przed posiłkiem [g]</label>
-                    <input id="MealWeight" name="Weight" class="form-control" type="number" step="1" min="0"
-                           max="1000"/>
-                </div>
-                <button class="btn btn-primary">Rozpocznij</button>
-            </form>
+            </div>
         </div>
-    </div>
-
-    <div class="card mb-3">
-        <div class="card-header">Zakończ posiłek</div>
-        <div class="card-body">
-            <div class="list-group">
-                <?php foreach ($meals as $meal) {
-                    ?>
-                    <form action="../Application/EndMealController.php" method="post">
-                        <input type="hidden" name="MealId" value="<?= $meal['id'] ?>"/>
+        <div class="col-md-6">
+            <div class="card mb-3">
+                <div class="card-header">Toaleta</div>
+                <div class="card-body">
+                    <form action="../Application/AddPoopController.php" method="post">
                         <div class="form-group">
-                            <label for="Meal<?= $meal['id'] ?>Weight">Waga <?= $meal['name'] ?> po
-                                posiłku <?= $meal['start_weight'] ?> g
-                                rozpoczętym <?= $meal['start'] ?> [g]</label>
-                            <input id="Meal<?= $meal['id'] ?>Weight" name="Weight" class="form-control" type="number"
-                                   step="1"
-                                   min="0" max="1000"/>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Zakończ</button>
+                            <button type="submit" class="btn btn-primary">Kupa</button>
                         </div>
                     </form>
-                    <?php
-                }
-                ?>
+                    <form action="../Application/AddPeeController.php" method="post">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Siku</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="card mb-3">
-        <div class="card-header">Toaleta</div>
-        <div class="card-body">
-            <form action="../Application/AddPoopController.php" method="post">
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Kupa</button>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-3">
+                <div class="card-header">Rozpocznij posiłek</div>
+                <div class="card-body">
+                    <form action="../Application/StartMealController.php" method="post">
+                        <div class="form-group">
+                            <label for="MealFoodId">Pokarm</label>
+                            <select class="form-control" id="MealFoodId" name="FoodId"
+                                    data-bind="options: visibleFoods, optionsText: 'name', optionsValue: 'id', value: startMealfoodId"> </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="MealWeight">Waga przed posiłkiem [g]</label>
+                            <input id="MealWeight" name="Weight" class="form-control" type="number" step="1" min="0"
+                                   max="1000"/>
+                        </div>
+                        <button class="btn btn-primary">Rozpocznij</button>
+                    </form>
                 </div>
-            </form>
-            <form action="../Application/AddPeeController.php" method="post">
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Siku</button>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card mb-3">
+                <div class="card-header">Zakończ posiłek</div>
+                <div class="card-body">
+                    <div class="list-group">
+                        <?php foreach ($meals as $meal) {
+                            ?>
+                            <form action="../Application/EndMealController.php" method="post">
+                                <input type="hidden" name="MealId" value="<?= $meal['id'] ?>"/>
+                                <div class="form-group">
+                                    <label for="Meal<?= $meal['id'] ?>Weight">Waga <?= $meal['name'] ?> po
+                                        posiłku <?= $meal['start_weight'] ?> g
+                                        rozpoczętym <?= $meal['start'] ?> [g]</label>
+                                    <input id="Meal<?= $meal['id'] ?>Weight" name="Weight" class="form-control"
+                                           type="number"
+                                           step="1"
+                                           min="0" max="1000"/>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">Zakończ</button>
+                                </div>
+                            </form>
+                            <?php
+                        }
+                        ?>
+                    </div>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 
