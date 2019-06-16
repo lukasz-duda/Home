@@ -16,7 +16,8 @@ $lastExpenses = getAll('select e.timestamp, e.name, e.value, c.name as category_
 from expenses e
    left join expense_categories c on c.id = e.category_id
 left join refund_plan r on r.expense_id = e.id
-order by e.timestamp desc limit 10', [])
+order by e.timestamp desc limit 10', []);
+$shoppingList = get('select s.json from shopping_list s', []);
 ?>
     <h1>Zakupy</h1>
 
@@ -26,8 +27,22 @@ order by e.timestamp desc limit 10', [])
             <button class="btn-primary btn mb-3" data-bind="click: addShoppingItem">Dodaj</button>
             <div data-bind="foreach: shoppingList">
                 <div class="form-group">
-
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Nazwa pozycji do listy zakupów"
+                               data-bind="value: name">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" data-bind="click: $parent.remove">Usuń</button>
+                        </div>
+                    </div>
                 </div>
+            </div>
+            <div class="form-group">
+                <form action="../Application/SaveShoppingListController.php" method="post">
+                    <div class="form-group">
+                        <input type="hidden" name="ShoppingList" data-bind="value: jsonShoppingList"/>
+                        <button class="btn btn-primary">Zapisz</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -134,10 +149,20 @@ order by e.timestamp desc limit 10', [])
     <script>
         function ViewModel() {
             var me = this;
-            me.shoppingList = ko.observableArray([]);
+
+            me.last = <?= json_encode($shoppingList['json']);  ?>;
+            me.shoppingList = ko.observableArray(JSON.parse(me.last));
             me.addShoppingItem = function () {
-                me.shoppingList.push({name: ko.observable(null), done: ko.observable(false)});
+                me.shoppingList.push({name: ko.observable(null)});
             };
+
+            me.remove = function (item) {
+                me.shoppingList.remove(item);
+            };
+
+            me.jsonShoppingList = ko.computed(function () {
+                return ko.toJSON(me.shoppingList);
+            });
         }
 
         var viewModel = new ViewModel();

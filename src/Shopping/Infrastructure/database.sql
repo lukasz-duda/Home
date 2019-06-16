@@ -30,5 +30,5 @@ drop table if exists shopping_list;
 
 create table shopping_list
 (
-    name varchar(50) not null
+    json varchar(4000) not null
 );
