@@ -30,6 +30,5 @@ drop table if exists shopping_list;
 
 create table shopping_list
 (
-    name varchar(50) not null,
-    done boolean     not null default 0
+    name varchar(50) not null
 );
