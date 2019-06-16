@@ -168,61 +168,69 @@ group by m.cat_id', [$catId, $catId, date('Y-m-d', strtotime('-1 days'))]);
         </div>
     </div>
 
-    <div class="card mb-3">
-        <div class="card-header">Dodaj pokarm</div>
-        <div class="card-body">
-            <form action="../Application/AddFoodController.php" method="post">
-                <div class="form-group">
-                    <label for="NewFoodName">Nazwa</label>
-                    <input class="form-control" id="NewFoodName" name="FoodName"/>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-3">
+                <div class="card-header">Popraw pokarm</div>
+                <div class="card-body">
+                    <form action="../Application/CorrectFoodController.php" method="post">
+                        <div class="form-group">
+                            <label for="FoodId">Pokarm</label>
+                            <select class="form-control" id="FoodId" name="FoodId"
+                                    data-bind="options: foods, optionsText: 'name', optionsValue: 'id', value: foodId"> </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="FoodName">Nowa nazwa</label>
+                            <input class="form-control" id="FoodName" name="FoodName" data-bind="value: foodName"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="FoodDescription">Nowy opis</label>
+                            <textarea id="FoodDescription" name="FoodDescription" class="form-control"
+                                      data-bind="value: foodDescription"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="Weight">Zapotrzebowanie dzienne [g]</label>
+                            <input id="Weight" name="Weight" class="form-control" type="number" step="1" min="0"
+                                   max="1000"
+                                   data-bind="value: weight"/>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="1" id="Visible" name="Visible"
+                                       data-bind="checked: visible">
+                                <label class="form-check-label" for="Visible">
+                                    Widoczny na liście wyboru
+                                </label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Zapisz</button>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <label for="NewFoodDescription">Opis</label>
-                    <textarea id="NewFoodDescription" name="FoodDescription" class="form-control"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="NewWeight">Zapotrzebowanie dzienne [g]</label>
-                    <input id="NewWeight" name="Weight" class="form-control" type="number" step="1" min="0" max="1000"/>
-                </div>
-                <button type="submit" class="btn btn-primary">Zapisz</button>
-            </form>
+            </div>
         </div>
-    </div>
 
-    <div class="card mb-3">
-        <div class="card-header">Popraw pokarm</div>
-        <div class="card-body">
-            <form action="../Application/CorrectFoodController.php" method="post">
-                <div class="form-group">
-                    <label for="FoodId">Pokarm</label>
-                    <select class="form-control" id="FoodId" name="FoodId"
-                            data-bind="options: foods, optionsText: 'name', optionsValue: 'id', value: foodId"> </select>
+        <div class="col-md-6">
+            <div class="card mb-3">
+                <div class="card-header">Dodaj pokarm</div>
+                <div class="card-body">
+                    <form action="../Application/AddFoodController.php" method="post">
+                        <div class="form-group">
+                            <label for="NewFoodName">Nazwa</label>
+                            <input class="form-control" id="NewFoodName" name="FoodName"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="NewFoodDescription">Opis</label>
+                            <textarea id="NewFoodDescription" name="FoodDescription" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="NewWeight">Zapotrzebowanie dzienne [g]</label>
+                            <input id="NewWeight" name="Weight" class="form-control" type="number" step="1" min="0"
+                                   max="1000"/>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Zapisz</button>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <label for="FoodName">Nowa nazwa</label>
-                    <input class="form-control" id="FoodName" name="FoodName" data-bind="value: foodName"/>
-                </div>
-                <div class="form-group">
-                    <label for="FoodDescription">Nowy opis</label>
-                    <textarea id="FoodDescription" name="FoodDescription" class="form-control"
-                              data-bind="value: foodDescription"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="Weight">Zapotrzebowanie dzienne [g]</label>
-                    <input id="Weight" name="Weight" class="form-control" type="number" step="1" min="0" max="1000"
-                           data-bind="value: weight"/>
-                </div>
-                <div class="form-group">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="1" id="Visible" name="Visible"
-                               data-bind="checked: visible">
-                        <label class="form-check-label" for="Visible">
-                            Widoczny na liście wyboru
-                        </label>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary">Zapisz</button>
-            </form>
+            </div>
         </div>
     </div>
 
