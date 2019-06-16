@@ -37,8 +37,8 @@ order by e.timestamp desc limit 10', [])
         <div class="card-body">
             <p>
                 Do zwrotu dla Ilony: <?= showMoney($forIlona['value']); ?><br/>
-                Do zwrotu dla mnie: <?= showMoney($forMe['value']); ?><br/>
-                Kwota do rozliczenia: <?= showMoney($forIlona['value'] - $forMe['value']); ?>
+                Do zwrotu dla Łukasza: <?= showMoney($forMe['value']); ?><br/>
+                Kwota do rozliczenia przez Łukasza: <?= showMoney($forIlona['value'] - $forMe['value']); ?>
             </p>
             <form action="../Application/RefundController.php" method="post">
                 <div class="form-group">
@@ -67,7 +67,7 @@ order by e.timestamp desc limit 10', [])
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="Refund" id="RefundToMe" value="RefundToMe">
                         <label class="form-check-label" for="RefundToMe">
-                            Zwróć połowę mnie
+                            Zwróć połowę Łukaszowi
                         </label>
                     </div>
                     <div class="form-check">
