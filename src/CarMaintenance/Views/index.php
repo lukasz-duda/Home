@@ -1,7 +1,10 @@
 <?php
 include '../../Shared/Views/View.php';
 $carId = 1;
-$car = get('SELECT name, mileage FROM cars WHERE id = ?', [$carId]);
+$car = get('SELECT c.name, max(m.mileage) as mileage
+FROM cars c
+join mileage m on m.car_id = c.id
+WHERE id = ?', [$carId]);
 $carName = $car['name'];
 $carMileage = $car['mileage'];
 $categories = getAll('SELECT id, name FROM companies order by name', []);
@@ -14,7 +17,7 @@ AND
 	(
 		(last_mileage + mileage_interval) <= 
 		(
-			SELECT mileage FROM cars WHERE id = ?
+			SELECT max(m.mileage) FROM mileage m WHERE m.car_id = ?
 		)
 		OR
         (

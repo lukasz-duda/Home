@@ -11,13 +11,21 @@ $mileage = intval($_REQUEST['Mileage']);
 if ($fuelQuantity == 0)
     $fuelQuantity = null;
 
-$saveCarExpenseStatement = $pdo->prepare('INSERT INTO car_expenses (car_id, name, company_id, value, timestamp, mileage, fuel_quantity) values (?, ?, ?, ?, ?, ?, ?) ');
-$carExpenseSaved = $saveCarExpenseStatement->execute([$carId, $name, $companyId, $value, date('Y-m-d H:i:s', time()), $mileage, $fuelQuantity]);
+$saveCarExpenseStatement = $pdo->prepare('INSERT INTO car_expenses (car_id, name, company_id, value, timestamp, fuel_quantity) values (?, ?, ?, ?, ?, ?) ');
+$carExpenseSaved = $saveCarExpenseStatement->execute([$carId, $name, $companyId, $value, date('Y-m-d H:i:s'), $fuelQuantity]);
 
 if ($carExpenseSaved) {
     showInfo('Zakup dodany.');
-    $updateMileage = $pdo->prepare('UPDATE cars SET mileage = ? WHERE id = ?');
-    $mileageUpdated = $updateMileage->execute([$mileage, $carId]);
+
+    $currentMileageRow = get('SELECT MAX(m.mileage) as mileage FROM mileage m where m.car_id = ?', [$carId]);
+
+    if ($mileage == 0 || $mileage == $currentMileageRow['mileage']) {
+        showInfo('Przebieg niezmieniony.');
+        return;
+    }
+
+    $updateMileage = $pdo->prepare('INSERT INTO mileage (car_id, date, mileage) values (?, ?, ?)');
+    $mileageUpdated = $updateMileage->execute([$carId, date('Y-m-d'), $mileage]);
     if ($mileageUpdated) {
         showInfo('Przebieg zaktualizowany.');
     } else {

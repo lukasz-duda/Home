@@ -2,6 +2,8 @@ Backlog:
 * Required fields HTML 5.
 * Date and time of expense.
 * Field length limits HTML.
+* Shopping list.
+* Show today observation.
 * Provide possibility to sum a few atomic shopping expenses.
 * Optimise menu.
 * Make 2 coffees.
