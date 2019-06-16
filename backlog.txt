@@ -1,5 +1,4 @@
 Backlog:
-* Shopping list.
 * Required fields HTML 5.
 * Date and time of expense.
 * Field length limits HTML.
