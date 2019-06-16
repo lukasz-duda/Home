@@ -23,7 +23,7 @@ create table refund_plan
 (
     expense_id    int unsigned not null,
     for_me        bool         not null,
-    transfer_date datetime     null
+    transfer_date datetime     not null
 );
 
 drop table if exists shopping_list;
