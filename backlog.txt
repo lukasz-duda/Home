@@ -1,4 +1,5 @@
 Backlog:
+* Change expense date and time.
 * Show today observations on summary.
 * Last month expenses summary.
 * Last expenses, last meals, last flat expenses, last car expenses presented as bootstrap list group flush.
