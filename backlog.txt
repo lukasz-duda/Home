@@ -1,4 +1,5 @@
 Backlog:
+* Average expenses by type.
 * Change expense date and time.
 * Show today observations on summary.
 * Last month expenses summary.
