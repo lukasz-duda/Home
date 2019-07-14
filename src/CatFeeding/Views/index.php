@@ -20,13 +20,30 @@ from meal m
 where m.end is null
   and m.cat_id = ?', [$catId]);
 
-$lastMeals = getAll('select m.id, f.name, m.start, m.start_weight, m.end, m.end_weight
-from meal m
-    join food f on f.id = m.food_id
-where m.end is not null
-  and m.cat_id = ?
-order by m.start desc 
-  limit 10', [$catId]);
+$lastMeals = getAll('select meals.*,
+       (meals.start_weight - meals.end_weight) / meals.daily_demand_weight * 100 as daily_demand_percentage
+from (
+         select m.id,
+                f.name,
+                m.start,
+                m.start_weight,
+                m.end,
+                m.end_weight,
+                (
+                    select d.weight
+                    from daily_demand d
+                    where d.cat_id = m.cat_id
+                      and d.food_id = m.food_id
+                    order by d.timestamp desc
+                    limit 1
+                ) as daily_demand_weight
+         from meal m
+                  join food f on f.id = m.food_id
+         where m.end is not null
+           and m.cat_id = ?
+         order by m.start desc
+         limit 10
+     ) meals', [$catId]);
 $now = time();
 $lastPoop = get('select p.timestamp
 from poop p
@@ -38,34 +55,44 @@ from pee p
 where p.cat_id = ?
 order by p.timestamp desc
 limit 1', [$catId]);
-$dailyDemand = get('select
-100 * sum(round(m.start_weight - m.end_weight))
-/
-(
-   select d.weight
-   from daily_demand d
-   where d.food_id = m.food_id
-	 and d.cat_id = ?
-   order by d.timestamp desc limit 1
-) as total
-from meal m
-where m.cat_id = ?
-and datediff(m.start, ?) = 0
-group by m.cat_id', [$catId, $catId, date('Y-m-d', $now)]);
-$yesterdayDemand = get('select
-100 * sum(round(m.start_weight - m.end_weight))
-/
-(
-   select d.weight
-   from daily_demand d
-   where d.food_id = m.food_id
-	 and d.cat_id = ?
-   order by d.timestamp desc limit 1
-) as total
-from meal m
-where m.cat_id = ?
-and datediff(m.start, ?) = 0
-group by m.cat_id', [$catId, $catId, date('Y-m-d', strtotime('-1 days'))]);
+$dailyDemand = get('select sum(meals.meal_weight / meals.daily_demand_weight * 100) as total
+from (
+         select f.name,
+                m.start_weight,
+                m.end_weight,
+                m.start_weight - m.end_weight as meal_weight,
+                (
+                    select d.weight
+                    from daily_demand d
+                    where d.cat_id = m.cat_id
+                      and d.food_id = m.food_id
+                    order by d.timestamp desc 
+                    limit 1
+                )                             as daily_demand_weight
+         from meal m
+                  join food f on m.food_id = f.id
+         where m.cat_id = ?
+           and datediff(m.start, ?) = 0
+     ) meals', [$catId, date('Y-m-d', $now)]);
+$yesterdayDemand = get('select sum(meals.meal_weight / meals.daily_demand_weight * 100) as total
+from (
+         select f.name,
+                m.start_weight,
+                m.end_weight,
+                m.start_weight - m.end_weight as meal_weight,
+                (
+                    select d.weight
+                    from daily_demand d
+                    where d.cat_id = m.cat_id
+                      and d.food_id = m.food_id
+                    order by d.timestamp desc
+                    limit 1
+                )                             as daily_demand_weight
+         from meal m
+                  join food f on m.food_id = f.id
+         where m.cat_id = ?
+           and datediff(m.start, ?) = 0
+     ) meals', [$catId, date('Y-m-d', strtotime('-1 days'))]);
 ?>
     <h1><?= $catName ?></h1>
 
@@ -246,7 +273,8 @@ group by m.cat_id', [$catId, $catId, date('Y-m-d', strtotime('-1 days'))]);
                         <h5 class="mb-1"><?= $lastMeal['name'] ?></h5>
                     </div>
                     <p class="mb-1"><?= $lastMeal['start_weight'] ?> - <?= $lastMeal['end_weight'] ?>
-                        = <?= showInt($lastMeal['start_weight'] - $lastMeal['end_weight']) ?> g</p>
+                        = <?= showInt($lastMeal['start_weight'] - $lastMeal['end_weight']) ?> g
+                        = <?= showInt($lastMeal['daily_demand_percentage']) ?> %</p>
                     <small><?= $lastMeal['start'] ?> - <?= $lastMeal['end'] ?></small>
                 </a>
 
