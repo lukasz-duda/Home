@@ -142,7 +142,7 @@ from (
                         <div class="form-group">
                             <label for="MealWeight">Waga przed posiłkiem [g]</label>
                             <input id="MealWeight" name="Weight" class="form-control" type="number" step="1" min="0"
-                                   max="1000"/>
+                                   max="1000" required/>
                         </div>
                         <button class="btn btn-primary">Rozpocznij</button>
                     </form>
@@ -165,7 +165,7 @@ from (
                                     <input id="Meal<?= $meal['id'] ?>Weight" name="Weight" class="form-control"
                                            type="number"
                                            step="1"
-                                           min="0" max="1000"/>
+                                           min="0" max="1000" required/>
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary">Zakończ</button>
@@ -186,7 +186,7 @@ from (
             <form action="../Application/AddObservationController.php" method="post">
                 <div class="form-group">
                     <label for="ObservationNotes">Opis</label>
-                    <textarea id="ObservationNotes" name="notes" class="form-control"></textarea>
+                    <textarea id="ObservationNotes" name="notes" class="form-control" required></textarea>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Dodaj</button>
@@ -208,7 +208,7 @@ from (
                         </div>
                         <div class="form-group">
                             <label for="FoodName">Nowa nazwa</label>
-                            <input class="form-control" id="FoodName" name="FoodName" data-bind="value: foodName"/>
+                            <input class="form-control" id="FoodName" name="FoodName" data-bind="value: foodName" required/>
                         </div>
                         <div class="form-group">
                             <label for="FoodDescription">Nowy opis</label>
@@ -219,7 +219,7 @@ from (
                             <label for="Weight">Zapotrzebowanie dzienne [g]</label>
                             <input id="Weight" name="Weight" class="form-control" type="number" step="1" min="0"
                                    max="1000"
-                                   data-bind="value: weight"/>
+                                   data-bind="value: weight" required/>
                         </div>
                         <div class="form-group">
                             <div class="form-check">
@@ -243,7 +243,7 @@ from (
                     <form action="../Application/AddFoodController.php" method="post">
                         <div class="form-group">
                             <label for="NewFoodName">Nazwa</label>
-                            <input class="form-control" id="NewFoodName" name="FoodName"/>
+                            <input class="form-control" id="NewFoodName" name="FoodName" required/>
                         </div>
                         <div class="form-group">
                             <label for="NewFoodDescription">Opis</label>
@@ -252,7 +252,7 @@ from (
                         <div class="form-group">
                             <label for="NewWeight">Zapotrzebowanie dzienne [g]</label>
                             <input id="NewWeight" name="Weight" class="form-control" type="number" step="1" min="0"
-                                   max="1000"/>
+                                   max="1000" required/>
                         </div>
                         <button type="submit" class="btn btn-primary">Zapisz</button>
                     </form>

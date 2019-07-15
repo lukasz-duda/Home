@@ -4,7 +4,6 @@ Backlog:
 * Show today observations on summary.
 * Last month expenses summary.
 * Last expenses, last meals, last flat expenses, last car expenses presented as bootstrap list group flush.
-* Required fields HTML 5.
 * Date and time of expense.
 * Field length limits HTML.
 * Last observation, last weight.
@@ -12,6 +11,7 @@ Backlog:
 * Car expense adds also an expense.
 * Optimise menu.
 * Make 2 coffees.
+* New expense full refund types.
 
 Refactor:
 * DomainRegistry

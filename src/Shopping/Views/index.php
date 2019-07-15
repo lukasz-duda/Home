@@ -69,7 +69,7 @@ $shoppingList = get('select s.json from shopping_list s', []);
             <form action="../Application/AddExpenseController.php" method="post">
                 <div class="form-group">
                     <label for="Value">Wartość zakupu</label>
-                    <input class="form-control" id="Value" name="Value" type="number" step="0.01"/>
+                    <input class="form-control" id="Value" name="Value" type="number" step="0.01" required/>
                 </div>
                 <div class="form-group">
                     <div class="form-check">
@@ -96,7 +96,7 @@ $shoppingList = get('select s.json from shopping_list s', []);
                 <div class="form-group">
                     <div class="form-group">
                         <label for="Name">Nazwa</label>
-                        <input class="form-control" id="Name" name="Name"/>
+                        <input class="form-control" id="Name" name="Name" required/>
                     </div>
                 </div>
                 <div class="form-group">

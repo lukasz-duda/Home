@@ -27,7 +27,7 @@ $last = getAll('select timestamp, person, name, value from flat_expense order by
                 </div>
                 <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="Person" id="Ilona" value="Ilona">
+                        <input class="form-check-input" type="radio" name="Person" id="Ilona" value="Ilona" checked>
                         <label class="form-check-label" for="Ilona">
                             Wpłaca Ilona
                         </label>
