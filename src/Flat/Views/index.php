@@ -22,7 +22,8 @@ $last = getAll('select timestamp, person, name, value from flat_expense order by
             <form action="../Application/AddFlatExpenseController.php" method="post">
                 <div class="form-group">
                     <label for="Value">Wartość</label>
-                    <input class="form-control" id="Value" name="Value" required type="number" step="0.01"
+                    <input class="form-control" id="Value" name="Value" required type="number" step="0.01" min="5"
+                           max="500000"
                            data-bind="value: value"/>
                 </div>
                 <div class="form-group">
@@ -42,7 +43,7 @@ $last = getAll('select timestamp, person, name, value from flat_expense order by
                 <div class="form-group">
                     <div class="form-group">
                         <label for="Name">Nazwa</label>
-                        <input class="form-control" id="Name" name="Name" required/>
+                        <input class="form-control" id="Name" name="Name" required minlength="5" maxlength="80"/>
                     </div>
                 </div>
                 <div class="form-group">

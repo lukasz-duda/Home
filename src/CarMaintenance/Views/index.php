@@ -102,16 +102,18 @@ order by e.timestamp desc limit 10", [$carId]);
                     </select>
                 </div>
                 <div class="form-group"><label for="Name">Nazwa</label>
-                    <input class="form-control" id="Name" name="Name" value="Olej napędowy" required/>
+                    <input class="form-control" id="Name" name="Name" value="Olej napędowy" required minlength="5"
+                           maxlength="100"/>
                 </div>
                 <div class="form-group">
                     <label for="Value">Wartość</label>
-                    <input class="form-control" id="Value" name="Value" type="number" step="0.01"
+                    <input class="form-control" id="Value" name="Value" type="number" step="0.01" min="1" max="10000"
                            data-bind="value: value" required/>
                 </div>
                 <div class="form-group">
                     <label for="FuelQuantity">Ilość paliwa</label>
-                    <input class="form-control" id="FuelQuantity" name="FuelQuantity" type="number" step="0.001"
+                    <input class="form-control" id="FuelQuantity" name="FuelQuantity" type="number" step="0.001" min="5"
+                           max="70"
                            data-bind="value: fuelQuantity"/>
                 </div>
                 <div class="form-group">
@@ -121,7 +123,8 @@ order by e.timestamp desc limit 10", [$carId]);
                 </div>
                 <div class="form-group">
                     <label for="Mileage">Przebieg</label>
-                    <input class="form-control" id="Mileage" name="Mileage" type="number" step="1"
+                    <input class="form-control" id="Mileage" name="Mileage" type="number" step="1" min="250000"
+                           max="999999"
                            value="<?= $carMileage ?>"/>
                 </div>
                 <button class="btn btn-primary" type="submit">Zapisz</button>

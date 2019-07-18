@@ -28,8 +28,9 @@ $shoppingList = get('select s.json from shopping_list s', []);
             <div data-bind="foreach: shoppingList">
                 <div class="form-group">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Nazwa pozycji listy zakupów"
-                               data-bind="value: name">
+                        <input type="text" class="form-control" placeholder="Nazwa pozycji listy zakupów" required
+                               minlength="3" maxlength="250"
+                               data-bind="value: name, attr: { id: 'Item-' + $index() }">
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary" data-bind="click: $parent.remove">Usuń</button>
                         </div>
@@ -69,7 +70,8 @@ $shoppingList = get('select s.json from shopping_list s', []);
             <form action="../Application/AddExpenseController.php" method="post">
                 <div class="form-group">
                     <label for="Value">Wartość zakupu</label>
-                    <input class="form-control" id="Value" name="Value" type="number" step="0.01" required/>
+                    <input class="form-control" id="Value" name="Value" type="number" step="0.01" min="1" max="500000"
+                           required/>
                 </div>
                 <div class="form-group">
                     <div class="form-check">
@@ -96,7 +98,7 @@ $shoppingList = get('select s.json from shopping_list s', []);
                 <div class="form-group">
                     <div class="form-group">
                         <label for="Name">Nazwa</label>
-                        <input class="form-control" id="Name" name="Name" required/>
+                        <input class="form-control" id="Name" name="Name" minlength="3" maxlength="50" required/>
                     </div>
                 </div>
                 <div class="form-group">
