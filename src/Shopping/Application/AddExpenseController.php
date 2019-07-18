@@ -16,7 +16,7 @@ $expenseId = $pdo->lastInsertId();
 if ($expenseSaved) {
     showInfo('Zakup dodany.');
 
-    if (!$noRefund) {
+    if ($noRefund) {
         include '../../Shared/Views/Footer.php';
         return;
     }
