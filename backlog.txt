@@ -1,62 +1,19 @@
-Backlog:
-* Average expenses by type.
-* Change expense date and time.
-* Show today observations on summary.
-* Last month expenses summary.
+* Make 2 coffees.
 * Last expenses, last meals, last flat expenses, last car expenses presented as bootstrap list group flush.
+* Fix bug - unobserved shopping item name change.
 * Date and time of expense.
-* Last observation, last weight.
+* Change expense date and time.
+* New expense full refund types.
 * Provide possibility to sum a few atomic shopping expenses.
 * Car expense adds also an expense.
+* Average expenses by type.
+* Last observation, last weight.
+* Show today observations on summary.
+* Last month expenses summary.
 * Optimise menu.
-* Make 2 coffees.
-* New expense full refund types.
-
-Refactor:
 * DomainRegistry
 * Extract AddCatUseCase with AddCatRequest and AddCatResponse
 * Rename CatController to AddCatController
 * Extract base Controller
 * Remove duplication from CatControllerTest
-* swagger.io?
-
-Use cases:
-Register food
-Update food
-Show daily summary
-Start meal
-End meal
-Pee
-Poop
-Observe - notes describing observation with timestamp
-
-Cat entity:
-- catId
-- name
-+ startMeal(FoodId, Weight, TimeStamp)
-+ pee(TimeStamp)
-+ poop(TimeStamp)
-
-Food entity:
-- foodId
-- name
-- description
-+ dailyDemand(CatId, Weight, TimeStamp)
-
-Meal entity:
-+ start(CatId, FoodId, Weight, TimeStamp)
-+ end(Weight, TimeStamp)
-
-ValueObjects:
-* Weight
-* CatId
-* FoodId
-* TimeStamp
-
-Daily summary view:
-* Previous day button
-* Today - date
-* Daily demand - delivered percentage
-* Next day button
-* List of started meals, each with button to end meal
-* List of today poop/pee event timestamps
+* swagger.io
