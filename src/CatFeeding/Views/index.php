@@ -210,7 +210,7 @@ from (
                         <div class="form-group">
                             <label for="FoodName">Nowa nazwa</label>
                             <input class="form-control" id="FoodName" name="FoodName" data-bind="value: foodName"
-                                   required minlength="5" maxlength="30"/>
+                                   required minlength="2" maxlength="30"/>
                         </div>
                         <div class="form-group">
                             <label for="FoodDescription">Nowy opis</label>
@@ -245,7 +245,7 @@ from (
                     <form action="../Application/AddFoodController.php" method="post">
                         <div class="form-group">
                             <label for="NewFoodName">Nazwa</label>
-                            <input class="form-control" id="NewFoodName" name="FoodName" required minlength="3"
+                            <input class="form-control" id="NewFoodName" name="FoodName" required minlength="2"
                                    maxlength="30"/>
                         </div>
                         <div class="form-group">
