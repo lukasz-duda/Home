@@ -152,8 +152,7 @@ $shoppingList = get('select s.json from shopping_list s', []);
         function ViewModel() {
             var me = this;
 
-            me.last = <?= json_encode($shoppingList['json']);  ?>;
-            me.shoppingList = ko.observableArray(JSON.parse(me.last));
+            me.shoppingList = ko.mapping.fromJSON(<?= json_encode($shoppingList['json']);?>);
             me.addShoppingItem = function () {
                 me.shoppingList.push({name: ko.observable(null)});
             };

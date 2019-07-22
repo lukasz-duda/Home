@@ -10,6 +10,7 @@ include __DIR__ . '/ViewUtils.php';
     <title>Asystentka domowa</title>
     <link rel="stylesheet" href="<?= $baseUrl ?>/src/Shared/Views/bootstrap.min.css">
     <script src="<?= $baseUrl ?>/src/Shared/Views/knockout-min.js"></script>
+    <script src="<?= $baseUrl ?>/src/Shared/Views/knockout.mapping.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-expand-sm navbar-light bg-light mb-3">

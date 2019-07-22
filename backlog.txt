@@ -1,6 +1,5 @@
 * Make 2 coffees.
 * Last expenses, last meals, last flat expenses, last car expenses presented as bootstrap list group flush.
-* Fix bug - unobserved shopping item name change.
 * Date and time of expense.
 * Change expense date and time.
 * New expense full refund types.
