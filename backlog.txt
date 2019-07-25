@@ -14,3 +14,4 @@
 * Extract base Controller
 * Remove duplication from CatControllerTest
 * swagger.io
+* Icons instead of menu item names.
