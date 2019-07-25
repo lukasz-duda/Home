@@ -1,7 +1,6 @@
 * Last expenses, last meals, last flat expenses, last car expenses presented as bootstrap list group flush.
 * Date and time of expense.
 * Change expense date and time.
-* New expense full refund types.
 * Provide possibility to sum a few atomic shopping expenses.
 * Car expense adds also an expense.
 * Average expenses by type.

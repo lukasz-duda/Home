@@ -94,6 +94,19 @@ $shoppingList = get('select s.json from shopping_list s', []);
                             Zwróć połowę Ilonie
                         </label>
                     </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="Refund" id="FullRefundToMe" value="FullRefundToMe">
+                        <label class="form-check-label" for="FullRefundToMe">
+                            Zwróć całość Łukaszowi
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="Refund" id="FullRefundToIlona"
+                               value="FullRefundToIlona">
+                        <label class="form-check-label" for="FullRefundToIlona">
+                            Zwróć całość Ilonie
+                        </label>
+                    </div>
                 </div>
                 <div class="form-group">
                     <div class="form-group">
