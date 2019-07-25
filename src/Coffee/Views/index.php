@@ -14,8 +14,15 @@ if ($coffeesUntilCleaning < 0) {
 ?>
 
     <form action="../Application/MakeCoffeeController.php" method="post">
+        <input type="hidden" name="CoffesCount" value="1">
         <div class="form-group">
             <button class="btn btn-primary" type="submit">Zrób kawę</button>
+        </div>
+    </form>
+    <form action="../Application/MakeCoffeeController.php" method="post">
+        <input type="hidden" name="CoffesCount" value="2">
+        <div class="form-group">
+            <button class="btn btn-primary" type="submit">Zrób dwie kawę</button>
         </div>
     </form>
     <form action="../Application/CleanUpController.php" method="post">

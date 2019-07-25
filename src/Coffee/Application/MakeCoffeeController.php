@@ -1,8 +1,10 @@
 <?php
 include '../../Shared/Views/View.php';
 
-$statement = $pdo->prepare('update coffees set current = current + 1');
-$updated = $statement->execute([]);
+$coffeesCount = intval($_REQUEST['CoffesCount']);
+
+$statement = $pdo->prepare('update coffees set current = current + ?');
+$updated = $statement->execute([$coffeesCount]);
 
 if ($updated) {
     showInfo('Kawa zrobiona.');
