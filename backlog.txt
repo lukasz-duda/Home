@@ -1,4 +1,3 @@
-* Show 100 expenses.
 * Last expenses, last meals, last flat expenses, last car expenses presented as bootstrap list group flush.
 * Date and time of expense.
 * Change expense date and time.

@@ -41,9 +41,9 @@ from (
                   join food f on f.id = m.food_id
          where m.end is not null
            and m.cat_id = ?
+           and m.start >= ?
          order by m.start desc
-         limit 10
-     ) meals', [$catId]);
+     ) meals', [$catId, date('Y-m-d', strtotime('-2 days'))]);
 $now = time();
 $lastPoop = get('select p.timestamp
 from poop p

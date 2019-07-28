@@ -16,7 +16,8 @@ $lastExpenses = getAll('select e.timestamp, e.name, e.value, c.name as category_
 from expenses e
    left join expense_categories c on c.id = e.category_id
 left join refund_plan r on r.expense_id = e.id
-order by e.timestamp desc limit 10', []);
+where e.timestamp >= ?
+order by e.timestamp desc', [date('Y-m-d', strtotime('-21 days'))]);
 $shoppingList = get('select s.json from shopping_list s', []);
 ?>
     <h1>Zakupy</h1>
