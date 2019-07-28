@@ -95,7 +95,8 @@ $shoppingList = get('select s.json from shopping_list s', []);
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="Refund" id="FullRefundToMe" value="FullRefundToMe">
+                        <input class="form-check-input" type="radio" name="Refund" id="FullRefundToMe"
+                               value="FullRefundToMe">
                         <label class="form-check-label" for="FullRefundToMe">
                             Zwróć całość Łukaszowi
                         </label>
@@ -167,7 +168,9 @@ $shoppingList = get('select s.json from shopping_list s', []);
 
             me.shoppingList = ko.mapping.fromJSON(<?= json_encode($shoppingList['json']);?>);
             me.addShoppingItem = function () {
-                me.shoppingList.push({name: ko.observable(null)});
+                var current = me.shoppingList();
+                var newShoppingList = [{name: ko.observable(null)}].concat(current);
+                me.shoppingList(newShoppingList);
             };
 
             me.remove = function (item) {
