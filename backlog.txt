@@ -1,3 +1,4 @@
+* Icons instead of menu item names.
 * Car expense name without company.
 * Last expenses, last meals, last flat expenses, last car expenses presented as bootstrap list group flush.
 * Date and time of expense.
@@ -15,4 +16,3 @@
 * Extract base Controller
 * Remove duplication from CatControllerTest
 * swagger.io
-* Icons instead of menu item names.
