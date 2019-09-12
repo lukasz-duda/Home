@@ -1,3 +1,4 @@
+* Sort expense type. Correct label.
 * Icons instead of menu item names.
 * Car expense name without company.
 * Last expenses, last meals, last flat expenses, last car expenses presented as bootstrap list group flush.
