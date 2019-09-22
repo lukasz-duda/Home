@@ -1,3 +1,4 @@
+* Validate required shopping list.
 * Sort expense type. Correct label.
 * Icons instead of menu item names.
 * Car expense name without company.
