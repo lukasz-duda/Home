@@ -1,3 +1,4 @@
+* To do, drag&drop ordered list.
 * Medicine applied flag.
 * Sort expense type. Correct label.
 * Icons instead of menu item names.
