@@ -22,9 +22,9 @@ if ($nameResult->failure()) {
 
 $catResult = Cat::create($nameResult->value());
 
-$dsn = 'mysql:dbname=assistant;host=localhost';
-$user = 'assistant';
-$password = 'assistant';
+$dsn = 'mysql:dbname=home;host=localhost';
+$user = 'home';
+$password = 'home';
 $pdo = new PDO($dsn, $user, $password);
 $repository = new CatRepository($pdo);
 

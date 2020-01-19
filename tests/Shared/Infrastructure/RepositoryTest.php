@@ -5,25 +5,21 @@ namespace Assistant\Tests\Shared\Infrastructure;
 require __DIR__ . '/../../../vendor/autoload.php';
 
 use Assistant\Tests\Shared\Test;
+use PDO as PDO;
 
 abstract class RepositoryTest extends Test
 {
-
+    /**
+     * @var PDO
+     */
     protected $pdo;
-
-    public static function setUpBeforeClass()
-    {
-        $executeSqlCmd = 'mysql --login-path=local --database=assistant_test < ';
-        $createDatabaseSql = __DIR__ . '/../../../src/CatFeeding/Infrastructure/database.sql';
-        exec($executeSqlCmd . $createDatabaseSql);
-    }
 
     public function setUp()
     {
-        $dsn = 'mysql:dbname=assistant_test;host=localhost';
-        $user = 'assistant';
-        $password = 'assistant';
-        $this->pdo = new \PDO($dsn, $user, $password);
+        $dsn = 'mysql:dbname=home_test;host=localhost';
+        $user = 'home_test';
+        $password = 'home_test';
+        $this->pdo = new PDO($dsn, $user, $password);
         $this->pdo->beginTransaction();
     }
 
