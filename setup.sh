@@ -1,19 +1,26 @@
 #!/bin/bash
-echo 'Installing PHP packages'
-sudo apt-get install php-xml php-json php-mbstring php-mysql
-echo -n
+TITLE_END='\n-------------------------------------\n'
+TITLE_START="\n\n$TITLE_END"
+echo -e "${TITLE_START}Installing PHP packages${TITLE_END}"
+sudo apt install php-xml php-json php-mbstring php-mysql
 
-echo 'Installing local Composer'
+echo -e "${TITLE_START}Installing local Composer${TITLE_END}"
 curl -sS https://getcomposer.org/installer | php
 php composer.phar install
-echo -n
 
-echo 'Installing PHP package for Apache 2'
+echo -e "${TITLE_START}Installing PHP package for Apache 2${TITLE_END}"
 sudo apt install libapache2-mod-php
-sudo ln -s `pwd` /var/www/html/HomeAssistant
-echo -n
 
-echo 'Seting up home_test MySQL database'
+echo -e "${TITLE_START}Install web page${TITLE_END}"
+APP_DIR=/var/www/html/Home
+if test -d $APP_DIR;
+then
+	echo 'Already installed'
+else
+	sudo ln -s `pwd` $APP_DIR
+fi
+
+echo -e "${TITLE_START}Seting up home_test MySQL database${TITLE_END}"
 echo 'Type password: home_test'
 mysql_config_editor set --login-path=local --host=localhost --user=home_test --password
 mysql_config_editor print --all
