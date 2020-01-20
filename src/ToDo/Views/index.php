@@ -6,36 +6,37 @@ $toDoList = get("select s.json from to_do_list s where s.name = ?", [$listName])
 ?>
     <h1>Zadania</h1>
     <div class="card mb-3">
-    <div class="card-header" data-bind="click: unselect">Planowanie</div>
-    <div class="card-body">
+        <div class="card-header" data-bind="click: unselect">Planowanie</div>
+        <div class="card-body">
 
-        <button class="btn-primary btn mb-3" data-bind="click: addTask">Dodaj</button>
+            <button class="btn-primary btn mb-3" data-bind="click: addTask">Dodaj</button>
 
-        <div class="list-group" data-bind="sortable: tasks">
-            <div class="list-group-item"
-            ">
-            <div data-bind="visible: !$root.isSelectedTask($data), html: formatted, click: $root.selectedTask"></div>
-            <div class="form-group m-0" data-bind="visibleAndSelected: $root.isSelectedTask($data)">
-                <div class="input-group">
+            <div class="list-group" data-bind="sortable: tasks">
+                <div class="list-group-item">
+                    <div data-bind="visible: !$root.isSelectedTask($data), html: formatted, click: $root.selectedTask"></div>
+                    <div class="form-group m-0" data-bind="visibleAndSelected: $root.isSelectedTask($data)">
+                        <div class="input-group">
                     <textarea class="form-control" rows="3" minlength="2" maxlength="4000" required
                               data-bind="value: text"></textarea>
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" data-bind="click: $parent.remove">Usuń
-                        </button>
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" data-bind="click: $parent.remove">Usuń
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <div class="form-group mt-3">
-        <form action="../Application/SaveToDoListController.php" method="post">
-            <div class="form-group">
-                <input type="hidden" name="Name" value="<?= $listName ?>"/>
-                <input type="hidden" name="ToDoList" data-bind="value: jsonToDoList"/>
-                <button class="btn-primary btn">Zapisz</button>
+            <div class="form-group mt-3">
+                <form action="../Application/SaveToDoListController.php" method="post">
+                    <div class="form-group">
+                        <input type="hidden" name="Name" value="<?= $listName ?>"/>
+                        <input type="hidden" name="ToDoList" data-bind="value: jsonToDoList"/>
+                        <button class="btn-primary btn">Zapisz</button>
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
     </div>
 
     <script>
