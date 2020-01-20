@@ -32,3 +32,6 @@ create table shopping_list
 (
     json varchar(4000) not null
 );
+
+insert into shopping_list (json)
+values ('[]');

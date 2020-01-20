@@ -8,9 +8,17 @@ include __DIR__ . '/ViewUtils.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Asystentka domowa</title>
+    <link rel="shortcut icon" href="<?= $baseUrl ?>/src/Shared/Views/favicon.ico">
+    <link rel="stylesheet" href="<?= $baseUrl ?>/src/Shared/Views/jquery-ui.min.css">
     <link rel="stylesheet" href="<?= $baseUrl ?>/src/Shared/Views/bootstrap.min.css">
+    <link rel="stylesheet" href="<?= $baseUrl ?>/src/Shared/Views/bootstrap.min.css">
+    <script src="<?= $baseUrl ?>/src/Shared/Views/jquery-3.4.1.min.js"></script>
+    <script src="<?= $baseUrl ?>/src/Shared/Views/jquery-ui.min.js"></script>
     <script src="<?= $baseUrl ?>/src/Shared/Views/knockout-min.js"></script>
     <script src="<?= $baseUrl ?>/src/Shared/Views/knockout.mapping.js"></script>
+    <script src="<?= $baseUrl ?>/src/Shared/Views/knockout-sortable.min.js"></script>
+    <script src="<?= $baseUrl ?>/src/Shared/Views/jquery.ui.touch-punch.min.js"></script>
+    <script src="<?= $baseUrl ?>/src/Shared/Views/remarkable.min.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-expand-sm navbar-light bg-light mb-3">
@@ -38,6 +46,12 @@ include __DIR__ . '/ViewUtils.php';
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<?= $baseUrl ?>/src/CarMaintenance/Views">Golf</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<?= $baseUrl ?>/src/ToDo/Views?name=lukasz">Zadania Łukasza</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<?= $baseUrl ?>/src/ToDo/Views?name=ilona">Zadania Ilony</a>
             </li>
         </ul>
     </div>

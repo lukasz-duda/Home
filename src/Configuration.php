@@ -4,4 +4,4 @@ $dsn = 'mysql:dbname=home;host=localhost';
 $user = 'home';
 $password = 'home';
 
-$baseUrl = 'http://localhost/HomeAssistant';
+$baseUrl = 'http://localhost/Home';
