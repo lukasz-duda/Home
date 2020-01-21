@@ -24,15 +24,11 @@ $toDoList = get("select s.json from to_do_list s where s.name = ?", [$listName])
                 <div class="list-group-item" data-bind="click: edit">
                     <div data-bind="visible: !editing(), html: formatted"></div>
                     <div class="form-group m-0" data-bind="visible: editing">
-                        <div class="input-group">
-                            <textarea class="form-control" rows="3" minlength="2" maxlength="4000" required
+                            <textarea class="form-control" rows="3" minlength="2" maxlength="4000"
+                                      placeholder="Opis zadania" required
                                       data-bind="value: text, hasFocus: editing"></textarea>
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" data-bind="click: $parent.remove">Usuń
-                                </button>
-                            </div>
-                        </div>
                     </div>
+                    <button class="btn btn-outline-secondary mt-3" data-bind="click: $parent.removeTask">Usuń</button>
                 </div>
             </div>
 
@@ -76,7 +72,7 @@ $toDoList = get("select s.json from to_do_list s where s.name = ?", [$listName])
             me.tasks = ko.observableArray(me.initialTasks);
 
             me.addTask = function () {
-                var newTask = new Task('Nowe zadanie');
+                var newTask = new Task('');
                 var current = me.tasks();
                 var newTasks = [newTask].concat(current);
                 me.tasks(newTasks);
@@ -84,7 +80,7 @@ $toDoList = get("select s.json from to_do_list s where s.name = ?", [$listName])
                 newTask.edit();
             };
 
-            me.remove = function (task) {
+            me.removeTask = function (task) {
                 me.tasks.remove(task);
             };
 
