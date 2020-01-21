@@ -17,7 +17,12 @@ include __DIR__ . '/ViewUtils.php';
     <script src="<?= $baseUrl ?>/src/Shared/Views/knockout-min.js"></script>
     <script src="<?= $baseUrl ?>/src/Shared/Views/knockout.mapping.js"></script>
     <script src="<?= $baseUrl ?>/src/Shared/Views/knockout-sortable.min.js"></script>
-    <script src="<?= $baseUrl ?>/src/Shared/Views/jquery.ui.touch-punch.min.js"></script>
+    <?php
+    $touchScript = "<script src=\"$baseUrl/src/Shared/Views/jquery.ui.touch-punch.min.js\"></script>";
+    if ($_GET['touch'] == 'true') {
+        echo $touchScript;
+    }
+    ?>
     <script src="<?= $baseUrl ?>/src/Shared/Views/remarkable.min.js"></script>
 </head>
 <body>

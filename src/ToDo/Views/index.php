@@ -6,18 +6,27 @@ $toDoList = get("select s.json from to_do_list s where s.name = ?", [$listName])
 ?>
     <h1>Zadania</h1>
     <div class="card mb-3">
-        <div class="card-header" data-bind="click: unselect">Planowanie</div>
+        <div class="card-header">Planowanie</div>
         <div class="card-body">
 
             <button class="btn-primary btn mb-3" data-bind="click: addTask">Dodaj</button>
+            <?php
+            if ($_GET['touch'] == 'true') {
+                $disableTouchButton = '<button class="btn-primary btn mb-3" data-bind="click: disableTouch">Edytuj dotykowo</button>';
+                echo $disableTouchButton;
+            } else {
+                $enableTouchButton = '<button class="btn-primary btn mb-3" data-bind="click: enableTouch">Sortuj dotykowo</button>';
+                echo $enableTouchButton;
+            }
+            ?>
 
             <div class="list-group" data-bind="sortable: tasks">
-                <div class="list-group-item">
-                    <div data-bind="visible: !$root.isSelectedTask($data), html: formatted, click: $root.selectedTask"></div>
-                    <div class="form-group m-0" data-bind="visibleAndSelected: $root.isSelectedTask($data)">
+                <div class="list-group-item" data-bind="click: edit">
+                    <div data-bind="visible: !editing(), html: formatted"></div>
+                    <div class="form-group m-0" data-bind="visible: editing">
                         <div class="input-group">
-                    <textarea class="form-control" rows="3" minlength="2" maxlength="4000" required
-                              data-bind="value: text"></textarea>
+                            <textarea class="form-control" rows="3" minlength="2" maxlength="4000" required
+                                      data-bind="value: text, hasFocus: editing"></textarea>
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" data-bind="click: $parent.remove">Usuń
                                 </button>
@@ -42,14 +51,20 @@ $toDoList = get("select s.json from to_do_list s where s.name = ?", [$listName])
     <script>
         var remarkable = new Remarkable();
 
-        function Task(markdown) {
+        function Task(initialText) {
             var me = this;
 
-            me.text = ko.observable(markdown);
+            me.text = ko.observable(initialText);
 
             me.formatted = ko.computed(function () {
                 return remarkable.render(me.text());
             });
+
+            me.editing = ko.observable(false);
+
+            me.edit = function () {
+                me.editing(true);
+            }
         }
 
         function ViewModel() {
@@ -61,21 +76,16 @@ $toDoList = get("select s.json from to_do_list s where s.name = ?", [$listName])
             me.tasks = ko.observableArray(me.initialTasks);
 
             me.addTask = function () {
-                me.tasks.push(new Task('Nowe zadanie'));
+                var newTask = new Task('Nowe zadanie');
+                var current = me.tasks();
+                var newTasks = [newTask].concat(current);
+                me.tasks(newTasks);
+
+                newTask.edit();
             };
 
-            me.selectedTask = ko.observable(null);
-
-            me.unselect = function () {
-                me.selectedTask(null);
-            };
-
-            me.remove = function (data) {
-                me.tasks.remove(data);
-            };
-
-            me.isSelectedTask = function (task) {
-                return task === me.selectedTask();
+            me.remove = function (task) {
+                me.tasks.remove(task);
             };
 
             me.jsonToDoList = ko.computed(function () {
@@ -85,20 +95,18 @@ $toDoList = get("select s.json from to_do_list s where s.name = ?", [$listName])
                 });
                 return ko.toJSON(tasksData);
             });
+
+            me.enableTouch = function () {
+                window.location = window.location + '&touch=true';
+            };
+
+            me.disableTouch = function () {
+                var url = window.location.href;
+                window.location = url.replace('&touch=true', '');
+            }
         }
 
         var viewModel = new ViewModel();
-
-        ko.bindingHandlers.visibleAndSelected = {
-            update: function (element, valueAccessor) {
-                ko.bindingHandlers.visible.update(element, valueAccessor);
-                if (valueAccessor()) {
-                    setTimeout(function () {
-                        $(element).find("textarea").focus().select();
-                    }, 0);
-                }
-            }
-        };
 
         ko.applyBindings(viewModel);
     </script>
