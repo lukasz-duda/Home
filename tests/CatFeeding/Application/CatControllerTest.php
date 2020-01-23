@@ -16,7 +16,7 @@ class CatController extends Test
     {
         $client = new HttpClient();
 
-        $response = $client->request('POST', 'http://localhost/HomeAssistant/src/CatFeeding/Application/CatController.php', [
+        $response = $client->request('POST', 'http://localhost/Home/src/CatFeeding/Application/CatController.php', [
             'json' => [
                 'catName' => Names::INVALID
             ]
@@ -31,7 +31,7 @@ class CatController extends Test
     {
         $client = new HttpClient();
 
-        $response = $client->request('POST', 'http://localhost/HomeAssistant/src/CatFeeding/Application/CatController.php', [
+        $response = $client->request('POST', 'http://localhost/Home/src/CatFeeding/Application/CatController.php', [
             'json' => [
                 'catName' => Names::VALID
             ]
@@ -47,7 +47,7 @@ class CatController extends Test
     {
         $client = new HttpClient();
 
-        $client->request('POST', 'http://localhost/HomeAssistant/src/CatFeeding/Application/CatController.php', [
+        $client->request('POST', 'http://localhost/Home/src/CatFeeding/Application/CatController.php', [
             'json' => [
                 'catName' => Names::VALID
             ]
