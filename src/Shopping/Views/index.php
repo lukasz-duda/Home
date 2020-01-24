@@ -11,7 +11,7 @@ $forMe = get('select sum(e.value) as value
                join expenses e on e.id = r.expense_id
            where r.for_me = 1
              and r.transfer_date is null', []);
-$categories = getAll('select id, name from expense_categories', []);
+$categories = getAll('select id, name from expense_categories order by name', []);
 $lastExpenses = getAll('select e.timestamp, e.name, e.value, c.name as category_name, r.for_me
 from expenses e
    left join expense_categories c on c.id = e.category_id
@@ -117,7 +117,7 @@ $shoppingList = get('select s.json from shopping_list s', []);
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="CategoryId">Firma</label>
+                    <label for="CategoryId">Kategoria</label>
                     <select class="form-control" id="CategoryId" name="CategoryId">
                         <?php
                         foreach ($categories as $category) {

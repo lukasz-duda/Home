@@ -20,12 +20,18 @@ else
 	sudo ln -s `pwd` $APP_DIR
 fi
 
-echo -e "${TITLE_START}Seting up home_test MySQL database${TITLE_END}"
-echo 'Type password: home_test'
-mysql_config_editor set --login-path=local --host=localhost --user=home_test --password
+echo -e "${TITLE_START}Seting up MySQL databases${TITLE_END}"
+echo 'Type password: home'
+mysql_config_editor set --login-path=local --host=localhost --user=home --password
 mysql_config_editor print --all
 mysql --login-path=local --database=home_test < src/CarMaintenance/Infrastructure/database.sql
 mysql --login-path=local --database=home_test < src/CatFeeding/Infrastructure/database.sql
 mysql --login-path=local --database=home_test < src/Coffee/Infrastructure/database.sql
 mysql --login-path=local --database=home_test < src/Flat/Infrastructure/database.sql
 mysql --login-path=local --database=home_test < src/Shopping/Infrastructure/database.sql
+
+mysql --login-path=local --database=home < src/CarMaintenance/Infrastructure/database.sql
+mysql --login-path=local --database=home < src/CatFeeding/Infrastructure/database.sql
+mysql --login-path=local --database=home < src/Coffee/Infrastructure/database.sql
+mysql --login-path=local --database=home < src/Flat/Infrastructure/database.sql
+mysql --login-path=local --database=home < src/Shopping/Infrastructure/database.sql

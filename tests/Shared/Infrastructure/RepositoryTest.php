@@ -17,8 +17,8 @@ abstract class RepositoryTest extends Test
     public function setUp()
     {
         $dsn = 'mysql:dbname=home_test;host=localhost';
-        $user = 'home_test';
-        $password = 'home_test';
+        $user = 'home';
+        $password = 'home';
         $this->pdo = new PDO($dsn, $user, $password);
         $this->pdo->beginTransaction();
     }
