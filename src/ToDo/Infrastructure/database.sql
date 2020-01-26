@@ -7,7 +7,7 @@ create table to_do_list
 );
 
 insert into to_do_list (name, json)
-values ('lukasz', '[]');
+values ('Łukasz', '[]');
 
 insert into to_do_list (name, json)
-values ('ilona', '[]');
+values ('Ilona', '[]');

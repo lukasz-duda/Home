@@ -4,25 +4,17 @@ include '../../Shared/Views/View.php';
 $listName = $_GET['name'];
 $toDoList = get("select s.json from to_do_list s where s.name = ?", [$listName]);
 ?>
-    <h1>Zadania</h1>
+    <h1>Zadania - <?= $listName ?></h1>
     <div class="card mb-3">
-        <div class="card-header">Planowanie</div>
+        <div class="card-header">Edytowanie</div>
         <div class="card-body">
 
             <div class="form-group mb-3">
                 <form action="../Application/SaveToDoListController.php" method="post">
                     <div class="form-group">
-
                         <button class="btn-primary btn mb-1" data-bind="click: addTask">Dodaj</button>
-                        <?php
-                        if ($_GET['touch'] == 'true') {
-                            $disableTouchButton = '<button class="btn-primary btn mb-1" data-bind="click: disableTouch">Edytuj dotykowo</button>';
-                            echo $disableTouchButton;
-                        } else {
-                            $enableTouchButton = '<button class="btn-primary btn mb-1" data-bind="click: enableTouch">Sortuj dotykowo</button>';
-                            echo $enableTouchButton;
-                        }
-                        ?>
+
+                        <button class="btn-primary btn mb-1" data-bind="click: sort">Sortuj</button>
 
                         <input type="hidden" name="Name" value="<?= $listName ?>"/>
                         <input type="hidden" name="ToDoList" data-bind="value: jsonToDoList"/>
@@ -31,9 +23,9 @@ $toDoList = get("select s.json from to_do_list s where s.name = ?", [$listName])
                 </form>
             </div>
 
-            <div class="list-group" data-bind="sortable: tasks">
+            <div class="list-group" data-bind="foreach: tasks">
                 <div class="list-group-item" data-bind="click: edit">
-                    <div data-bind="visible: !editing(), html: formatted"></div>
+                      <div data-bind="visible: !editing(), html: formatted"></div>
                     <div class="form-group m-0" data-bind="visible: editing">
                             <textarea class="form-control" rows="3" minlength="2" maxlength="4000"
                                       placeholder="Opis zadania" required
@@ -93,14 +85,9 @@ $toDoList = get("select s.json from to_do_list s where s.name = ?", [$listName])
                 return ko.toJSON(tasksData);
             });
 
-            me.enableTouch = function () {
-                window.location = window.location + '&touch=true';
+            me.sort = function () {
+                window.location = '<?= $baseUrl ?>/src/ToDo/Views/sort.php?name=<?= $listName ?>';
             };
-
-            me.disableTouch = function () {
-                var url = window.location.href;
-                window.location = url.replace('&touch=true', '');
-            }
         }
 
         var viewModel = new ViewModel();

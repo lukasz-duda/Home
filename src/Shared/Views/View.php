@@ -18,12 +18,7 @@ include __DIR__ . '/ViewUtils.php';
     <script src="<?= $baseUrl ?>/src/Shared/Views/knockout-min.js"></script>
     <script src="<?= $baseUrl ?>/src/Shared/Views/knockout.mapping.js"></script>
     <script src="<?= $baseUrl ?>/src/Shared/Views/knockout-sortable.min.js"></script>
-    <?php
-    $touchScript = "<script src=\"$baseUrl/src/Shared/Views/jquery.ui.touch-punch.min.js\"></script>";
-    if ($_GET['touch'] == 'true') {
-        echo $touchScript;
-    }
-    ?>
+    <script src="<?= $baseUrl ?>/src/Shared/Views/jquery.ui.touch-punch.min.js"></script>
     <script src="<?= $baseUrl ?>/src/Shared/Views/remarkable.min.js"></script>
 </head>
 <body>
@@ -56,11 +51,11 @@ include __DIR__ . '/ViewUtils.php';
                             class="material-icons-outlined">directions_car</i></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" title="Zadania Łukasz" href="<?= $baseUrl ?>/src/ToDo/Views?name=lukasz"><i
+                <a class="nav-link" title="Zadania Łukasz" href="<?= $baseUrl ?>/src/ToDo/Views/edit.php?name=Łukasz"><i
                             class="material-icons-outlined">playlist_add</i></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" title="Zadania Ilona" href="<?= $baseUrl ?>/src/ToDo/Views?name=ilona"><i
+                <a class="nav-link" title="Zadania Ilona" href="<?= $baseUrl ?>/src/ToDo/Views/edit.php?name=Ilona"><i
                             class="material-icons-outlined">playlist_add_check</i></a>
             </li>
         </ul>
