@@ -1,15 +1,14 @@
-* Medicine applied flag.
+* Provide possibility to sum a few atomic shopping expenses.
 * Car expense name without company.
 * Last expenses, last meals, last flat expenses, last car expenses presented as bootstrap list group flush.
-* Date and time of expense.
-* Change expense date and time.
-* Provide possibility to sum a few atomic shopping expenses.
-* Car expense adds also an expense.
-* Average expenses by type.
+
 * Last observation, last weight.
+* Medicine applied flag.
 * Show today observations on summary.
+
+* Average expenses by type.
 * Last month expenses summary.
-* Optimise menu.
+
 * DomainRegistry
 * Extract AddCatUseCase with AddCatRequest and AddCatResponse
 * Rename CatController to AddCatController
