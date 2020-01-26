@@ -13,20 +13,20 @@ $toDoList = get("select s.json from to_do_list s where s.name = ?", [$listName])
                 <form action="../Application/SaveToDoListController.php" method="post">
                     <div class="form-group">
 
-                        <button class="btn-primary btn" data-bind="click: addTask">Dodaj</button>
+                        <button class="btn-primary btn mb-1" data-bind="click: addTask">Dodaj</button>
                         <?php
                         if ($_GET['touch'] == 'true') {
-                            $disableTouchButton = '<button class="btn-primary btn" data-bind="click: disableTouch">Edytuj dotykowo</button>';
+                            $disableTouchButton = '<button class="btn-primary btn mb-1" data-bind="click: disableTouch">Edytuj dotykowo</button>';
                             echo $disableTouchButton;
                         } else {
-                            $enableTouchButton = '<button class="btn-primary btn" data-bind="click: enableTouch">Sortuj dotykowo</button>';
+                            $enableTouchButton = '<button class="btn-primary btn mb-1" data-bind="click: enableTouch">Sortuj dotykowo</button>';
                             echo $enableTouchButton;
                         }
                         ?>
 
                         <input type="hidden" name="Name" value="<?= $listName ?>"/>
                         <input type="hidden" name="ToDoList" data-bind="value: jsonToDoList"/>
-                        <button class="btn-primary btn">Zapisz</button>
+                        <button class="btn-primary btn mb-1">Zapisz</button>
                     </div>
                 </form>
             </div>
