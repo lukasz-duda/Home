@@ -1,9 +1,9 @@
-* Provide possibility to sum a few atomic shopping expenses.
+* Medicine applied flag.
+
 * Car expense name without company.
 * Last expenses, last meals, last flat expenses, last car expenses presented as bootstrap list group flush.
 
 * Last observation, last weight.
-* Medicine applied flag.
 * Show today observations on summary.
 
 * Average expenses by type.

@@ -7,8 +7,8 @@ include __DIR__ . '/ViewUtils.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Asystentka domowa</title>
-    <link rel="shortcut icon" href="<?= $baseUrl ?>/src/Shared/Views/favicon.ico">
+    <title>Dom</title>
+    <link rel="shortcut icon" href="<?= $baseUrl ?>/src/Shared/Views/favicon.png">
     <link rel="stylesheet" href="<?= $baseUrl ?>/src/Shared/Views/jquery-ui.min.css">
     <link rel="stylesheet" href="<?= $baseUrl ?>/src/Shared/Views/bootstrap.min.css">
     <link rel="stylesheet" href="<?= $baseUrl ?>/src/Shared/Views/bootstrap.min.css">

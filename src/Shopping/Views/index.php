@@ -72,7 +72,19 @@ $shoppingList = get('select s.json from shopping_list s', []);
                 <div class="form-group">
                     <label for="Value">Wartość zakupu</label>
                     <input class="form-control" id="Value" name="Value" type="number" step="0.01" min="1" max="500000"
-                           required/>
+                           required data-bind="value: expenseValue"/>
+                </div>
+                <div class="form-group">
+                    <label for="Calculation">Oblicz wartość zakupu</label>
+                    <div class="input-group mb-3">
+                        <input class="form-control" id="Calculation" name="Calculation" placeholder="2+2"
+                               data-bind="value: expenseValueCalculation"/>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button"
+                                    data-bind="click: calculateExpenseValue">Oblicz
+                            </button>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <div class="form-check">
@@ -122,7 +134,8 @@ $shoppingList = get('select s.json from shopping_list s', []);
                         <?php
                         foreach ($categories as $category) {
                             ?>
-                            <option value="<?= $category['id'] ?>"><?= $category['name'] ?></option>
+                            <option <?= $category['name'] == 'Jedzenie' ? 'selected' : '' ?>
+                                    value="<?= $category['id'] ?>"><?= $category['name'] ?></option>
                             <?php
                         }
                         ?>
@@ -181,6 +194,23 @@ $shoppingList = get('select s.json from shopping_list s', []);
             me.jsonShoppingList = ko.computed(function () {
                 return ko.toJSON(me.shoppingList);
             });
+
+            me.expenseValue = ko.observable(null);
+
+            me.expenseValueCalculation = ko.observable(null);
+
+            me.calculateExpenseValue = function () {
+                var expression = me.expenseValueCalculation().split(',').join('.');
+
+                var calculationRegExp = /^[0-9+-.]*$/;
+                if (calculationRegExp.test(expression) === false) {
+                    return;
+                }
+
+                var result = eval(expression);
+                var currency = isNaN(result) ? 0 : Math.round(result * 100) / 100;
+                me.expenseValue(currency);
+            };
         }
 
         var viewModel = new ViewModel();
