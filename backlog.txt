@@ -1,4 +1,3 @@
-* Medicine applied flag.
 * Favicon - android shortuct
 
 * Car expense name without company.
