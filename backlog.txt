@@ -1,5 +1,3 @@
-* Favicon - android shortuct
-
 * Car expense name without company.
 * Last expenses, last meals, last flat expenses, last car expenses presented as bootstrap list group flush.
 

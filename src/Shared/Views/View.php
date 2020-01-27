@@ -33,23 +33,23 @@ include __DIR__ . '/ViewUtils.php';
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" title="Szyszka" href="<?= $baseUrl ?>/src/CatFeeding/Views"><i
+                <a class="nav-link" title="Szyszka" href="<?= $baseUrl ?>/src/CatFeeding/Views/index.php"><i
                             class="material-icons-outlined">pets</i></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" title="Zakupy" href="<?= $baseUrl ?>/src/Shopping/Views"><i
+                <a class="nav-link" title="Zakupy" href="<?= $baseUrl ?>/src/Shopping/Views/index.php"><i
                             class="material-icons-outlined">local_grocery_store</i></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" title="Kawa" href="<?= $baseUrl ?>/src/Coffee/Views"><i
+                <a class="nav-link" title="Kawa" href="<?= $baseUrl ?>/src/Coffee/Views/index.php"><i
                             class="material-icons-outlined">local_cafe</i></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" title="Mieszkanie" href="<?= $baseUrl ?>/src/Flat/Views"><i
+                <a class="nav-link" title="Mieszkanie" href="<?= $baseUrl ?>/src/Flat/Views/index.php"><i
                             class="material-icons-outlined">home</i></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" title="Golf" href="<?= $baseUrl ?>/src/CarMaintenance/Views"><i
+                <a class="nav-link" title="Golf" href="<?= $baseUrl ?>/src/CarMaintenance/Views/index.php"><i
                             class="material-icons-outlined">directions_car</i></a>
             </li>
             <li class="nav-item">
@@ -63,4 +63,11 @@ include __DIR__ . '/ViewUtils.php';
         </ul>
     </div>
 </nav>
+<script>
+    $('.nav-link').each(function (index, menuItem) {
+        if (menuItem.href === location.href) {
+            menuItem.classList.add('active');
+        }
+    });
+</script>
 <div class="container">
