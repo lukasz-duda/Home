@@ -4,7 +4,7 @@ include '../../../Shared/Views/View.php';
 $startDate = date('Y-m', time()) . '-01';
 
 $fuel = getAll("select y.year,
-       sum(round(e.value)) as sum
+       round(sum(round(e.value, 2))) as sum
 from car_expenses e
          join (
     select distinct year(ie.timestamp) as year
@@ -15,7 +15,7 @@ where e.name = 'Olej napędowy'
 group by y.year", []);
 
 $other = getAll("select y.year,
-       sum(round(e.value)) as sum
+       round(sum(round(e.value, 2))) as sum
 from car_expenses e
          join (
     select distinct year(ie.timestamp) as year
@@ -55,11 +55,6 @@ $otherValues = join(',', array_column($other, 'sum'));
                 line: {
                     tension: 0.000001
                 }
-            },
-            scales: {
-                yAxes: [{
-                    stacked: true
-                }]
             }
         };
 
