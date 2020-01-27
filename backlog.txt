@@ -1,3 +1,4 @@
+* Correct app title
 * DomainRegistry
 * Extract AddCatUseCase with AddCatRequest and AddCatResponse
 * Rename CatController to AddCatController
