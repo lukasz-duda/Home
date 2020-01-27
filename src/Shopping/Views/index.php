@@ -24,8 +24,10 @@ $shoppingList = get('select s.json from shopping_list s', []);
 
     <div class="card mb-3">
         <div class="card-header">Planowanie</div>
+        <div class="list-group list-group-flush">
+            <a class="list-group-item list-group-item-action" href="reports.php">Raporty zakupów</a>
+        </div>
         <div class="card-body">
-            <p><a href="reports.php">Raporty zakupów</a></p>
             <button class="btn-primary btn mb-3" data-bind="click: addShoppingItem">Dodaj</button>
             <div data-bind="foreach: shoppingList">
                 <div class="form-group">

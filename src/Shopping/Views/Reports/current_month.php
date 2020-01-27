@@ -15,7 +15,8 @@ $labels = "'" . join("', '", array_column($expenses, 'name')) . "'";
 $values = join(',', array_column($expenses, 'sum'));
 ?>
 
-    <h1>Zakupy w bieżącym miesiącu</h1>
+    <h1 hidden>Zakupy w bieżącym miesiącu</h1>
+    <h4>Zakupy w bieżącym miesiącu</h4>
 
     <canvas id="Chart" width="400" height="400"></canvas>
     <script>

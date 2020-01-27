@@ -6,8 +6,9 @@ include '../../Shared/Views/View.php';
 
     <div class="card mb-3">
         <div class="card-header">Raporty zakupów</div>
-        <div class="card-body">
-            <a href="Reports/current_month.php">Zakupy w bieżącym miesiącu</a>
+        <div class="list-group list-group-flush">
+            <a class="list-group-item list-group-item-action" href="Reports/current_month.php">Zakupy w bieżącym
+                miesiącu</a>
         </div>
     </div>
 
