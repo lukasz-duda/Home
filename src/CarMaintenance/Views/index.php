@@ -52,7 +52,10 @@ order by e.timestamp desc limit 10", [$carId]);
     <h1><?= $carName ?></h1>
 
     <div class="card mb-3">
-        <div class="card-header"> Wydatki</div>
+        <div class="card-header">Wydatki</div>
+        <div class="list-group list-group-flush">
+            <a class="list-group-item list-group-item-action" href="reports.php">Raporty samochodu</a>
+        </div>
         <div class="card-body">
             Wszystkie: <?= showMoney($total); ?><br/>
             Samochód: <?= showMoney($carValue); ?><br/>
