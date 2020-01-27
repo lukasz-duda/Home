@@ -1,6 +1,3 @@
-* Last observation, last weight.
-* Show today observations on summary.
-
 * Average expenses by type.
 * Last month expenses summary.
 

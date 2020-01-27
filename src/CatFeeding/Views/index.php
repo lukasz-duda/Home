@@ -98,6 +98,16 @@ $medicineApplied = get('select exists(
                  and date = ?
            )
            as medicine_applied', [$catId, date('Y-m-d', $now)])[0] == 1;
+$lastObservation = get('select timestamp, notes
+from observation
+where cat_id = ?
+order by timestamp desc
+limit 1', [$catId]);
+$lastWeight = get('select date, weight
+from weight
+where cat_id = ?
+order by date desc
+limit 1', [$catId]);
 ?>
     <h1><?= $catName ?></h1>
 
@@ -118,6 +128,19 @@ $medicineApplied = get('select exists(
                             Lek podany
                         </label>
                     </div>
+                    <br/>
+                    <?php
+                    if ($lastWeight) {
+                        $lastWeightDate = $lastWeight['date'];
+                        $lastWeightValue = showDecimal($lastWeight['weight'], 1);
+                        echo "Ostatnia waga $lastWeightDate: $lastWeightValue<br/>";
+                    }
+                    if ($lastObservation) {
+                        $lastObservationTime = $lastObservation['timestamp'];
+                        $lastObservationNotes = $lastObservation['notes'];
+                        echo "Ostatnia obserwacja $lastObservationTime:<br />$lastObservationNotes<br/>";
+                    }
+                    ?>
                 </div>
             </div>
         </div>

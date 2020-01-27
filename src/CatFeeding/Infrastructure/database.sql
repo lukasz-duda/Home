@@ -68,9 +68,9 @@ drop table if exists weight;
 
 create table weight
 (
-    cat_id    int unsigned  not null,
-    timestamp date          not null,
-    weight    decimal(2, 1) not null
+    cat_id int unsigned  not null,
+    date   date          not null,
+    weight decimal(2, 1) not null
 );
 
 drop table if exists medicine;

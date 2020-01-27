@@ -61,5 +61,10 @@ function showInt($value)
 
 function showMoney($value)
 {
-    return number_format($value, 2, ',', ' ') . ' zł';
+    return showDecimal($value, 2) . ' zł';
+}
+
+function showDecimal($value, $decimals)
+{
+    return number_format($value, $decimals, ',', ' ');
 }
