@@ -57,8 +57,7 @@ order by p.timestamp desc
 limit 1', [$catId]);
 $dailyDemand = get('select sum(meals.meal_weight / meals.daily_demand_weight * 100) as total
 from (
-         select f.name,
-                m.start_weight,
+         select m.start_weight,
                 m.end_weight,
                 m.start_weight - m.end_weight as meal_weight,
                 (
@@ -76,8 +75,7 @@ from (
      ) meals', [$catId, date('Y-m-d', $now)]);
 $yesterdayDemand = get('select sum(meals.meal_weight / meals.daily_demand_weight * 100) as total
 from (
-         select f.name,
-                m.start_weight,
+         select m.start_weight,
                 m.end_weight,
                 m.start_weight - m.end_weight as meal_weight,
                 (
@@ -93,6 +91,13 @@ from (
          where m.cat_id = ?
            and datediff(m.start, ?) = 0
      ) meals', [$catId, date('Y-m-d', strtotime('-1 days'))]);
+$medicineApplied = get('select exists(
+               select 1
+               from medicine
+               where cat_id = ?
+                 and date = ?
+           )
+           as medicine_applied', [$catId, date('Y-m-d', $now)])[0] == 1;
 ?>
     <h1><?= $catName ?></h1>
 
@@ -106,6 +111,13 @@ from (
                     Ostatnie siku: <?= $lastPee['timestamp'] ?><br/>
                     Zapotrzebowanie dzisiaj: <?= showInt($dailyDemand['total']); ?> %<br/>
                     Zapotrzebowanie wczoraj: <?= showInt($yesterdayDemand['total']); ?> %<br/>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox"
+                               disabled <?= $medicineApplied ? 'checked' : '' ?> id="MedicineAppliedStatus">
+                        <label class="form-check-label" for="MedicineAppliedStatus">
+                            Lek podany
+                        </label>
+                    </div>
                 </div>
             </div>
         </div>
@@ -144,7 +156,13 @@ from (
                             <input id="MealWeight" name="Weight" class="form-control" type="number" step="1" min="2"
                                    max="500" required/>
                         </div>
-                        <button class="btn btn-primary">Rozpocznij</button>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="MedicineApplied" name="MedicineApplied">
+                            <label class="form-check-label" for="MedicineApplied">
+                                Dodany lek do posiłku
+                            </label>
+                        </div>
+                        <button class="btn btn-primary mt-3">Rozpocznij</button>
                     </form>
                 </div>
             </div>

@@ -10,10 +10,10 @@ drop table if exists food;
 
 create table food
 (
-    id          int unsigned not null primary key auto_increment,
-    name        varchar(30)  not null,
+    id          int unsigned  not null primary key auto_increment,
+    name        varchar(30)   not null,
     description varchar(1000) not null,
-    visible     bool         not null
+    visible     bool          not null
 );
 
 drop table if exists daily_demand;
@@ -71,4 +71,12 @@ create table weight
     cat_id    int unsigned  not null,
     timestamp date          not null,
     weight    decimal(2, 1) not null
+);
+
+drop table if exists medicine;
+
+create table medicine
+(
+    cat_id int unsigned not null,
+    date   date         not null
 );
