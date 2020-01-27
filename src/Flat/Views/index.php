@@ -55,26 +55,24 @@ $last = getAll('select timestamp, person, name, value from flat_expense order by
 
     <div class="card mb-3">
         <div class="card-header">Ostatnie wpłaty</div>
-        <div class="card-body">
-            <div class="list-group">
-                <?php
-                foreach ($last as $expense) {
-                    ?>
-
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1"><?= showMoney($expense['value']); ?></h5>
-                            <small><?= $expense['timestamp'] ?></small>
-                        </div>
-                        <p class="mb-1"><?= $expense['name'] ?></p>
-                        <small><?= $expense['person'] ?>  </small>
-                    </a>
-
-                    <?php
-                }
+        <div class="list-group list-group-flush">
+            <?php
+            foreach ($last as $expense) {
                 ?>
 
-            </div>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1"><?= showMoney($expense['value']); ?></h5>
+                        <small><?= $expense['timestamp'] ?></small>
+                    </div>
+                    <p class="mb-1"><?= $expense['name'] ?></p>
+                    <small><?= $expense['person'] ?>  </small>
+                </a>
+
+                <?php
+            }
+            ?>
+
         </div>
     </div>
 

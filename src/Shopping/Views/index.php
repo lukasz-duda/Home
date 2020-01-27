@@ -150,30 +150,28 @@ $shoppingList = get('select s.json from shopping_list s', []);
 
     <div class="card mb-3">
         <div class="card-header">Ostatnie zakupy</div>
-        <div class="card-body">
-            <div class="list-group">
-                <?php
-                foreach ($lastExpenses as $expense) {
-                    if ($expense['for_me'] == null) {
-                        $person = '';
-                    } else {
-                        $person = ($expense['for_me']) ? 'Łukasz' : 'Ilona';
-                    }
-                    ?>
-
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1"><?= showMoney($expense['value']); ?></h5>
-                            <small><?= $expense['timestamp'] ?></small>
-                        </div>
-                        <p class="mb-1"><?= $expense['name'] ?> - <?= $expense['category_name'] ?></p>
-                        <small><?= $person ?></small>
-                    </a>
-                    <?php
+        <div class="list-group list-group-flush">
+            <?php
+            foreach ($lastExpenses as $expense) {
+                if ($expense['for_me'] == null) {
+                    $person = '';
+                } else {
+                    $person = ($expense['for_me']) ? 'Łukasz' : 'Ilona';
                 }
                 ?>
 
-            </div>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1"><?= showMoney($expense['value']); ?></h5>
+                        <small><?= $expense['timestamp'] ?></small>
+                    </div>
+                    <p class="mb-1"><?= $expense['name'] ?> - <?= $expense['category_name'] ?></p>
+                    <small><?= $person ?></small>
+                </a>
+                <?php
+            }
+            ?>
+
         </div>
     </div>
     <script>

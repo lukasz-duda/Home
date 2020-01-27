@@ -134,28 +134,26 @@ order by e.timestamp desc limit 10", [$carId]);
 
     <div class="card mb-3">
         <div class="card-header">Ostatnie zakupy</div>
-        <div class="card-body">
-            <div class="list-group">
-                <?php
-                foreach ($lastExpenses as $expense) {
-                    $fuelPrice = $expense['fuel_quantity'] != null ?
-                        sprintf('%s l = %s/l', showInt($expense['fuel_quantity']), showMoney($expense['value'] / $expense['fuel_quantity'])) :
-                        '';
-                    ?>
-
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1"><?= showMoney($expense['value']); ?></h5>
-                            <small><?= $expense['timestamp'] ?></small>
-                        </div>
-                        <p class="mb-1"><?= $expense['name'] ?></p>
-                        <small><?= $fuelPrice ?></small>
-                    </a>
-                    <?php
-                }
+        <div class="list-group list-group-flush">
+            <?php
+            foreach ($lastExpenses as $expense) {
+                $fuelPrice = $expense['fuel_quantity'] != null ?
+                    sprintf('%s l = %s/l', showInt($expense['fuel_quantity']), showMoney($expense['value'] / $expense['fuel_quantity'])) :
+                    '';
                 ?>
 
-            </div>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1"><?= showMoney($expense['value']); ?></h5>
+                        <small><?= $expense['timestamp'] ?></small>
+                    </div>
+                    <p class="mb-1"><?= $expense['name'] ?></p>
+                    <small><?= $fuelPrice ?></small>
+                </a>
+                <?php
+            }
+            ?>
+
         </div>
     </div>
 

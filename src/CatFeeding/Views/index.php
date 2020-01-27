@@ -285,7 +285,7 @@ $medicineApplied = get('select exists(
 
     <div class="card mb-3">
         <div class="card-header">Ostatnie posiłki</div>
-        <div class="card-body">
+        <div class="list-group list-group-flush">
             <?php
             foreach ($lastMeals as $lastMeal) {
                 ?>
