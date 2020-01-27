@@ -7,7 +7,7 @@ include '../../Shared/Views/View.php';
     <div class="card mb-3">
         <div class="card-header">Raporty wydatków na samochód</div>
         <div class="list-group list-group-flush">
-            <a class="list-group-item list-group-item-action" href="Reports/annual.php">Średnie wydatki roczne na
+            <a class="list-group-item list-group-item-action" href="Reports/annual.php">Roczne wydatki na
                 samochód</a>
         </div>
     </div>
