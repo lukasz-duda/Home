@@ -43,7 +43,7 @@ $carValue = intval(get('SELECT sum(e.value) as value FROM car_expenses e WHERE c
 $fuelValue = intval(get('SELECT sum(e.value) as value FROM car_expenses e WHERE car_id = ? and name = ?', [$carId, 'Olej napędowy'])['value']);
 $otherValue = intval($total - $carValue - $fuelValue);
 $days = intval(get('select DATEDIFF(max(e.timestamp), min(e.timestamp)) as days from car_expenses e where car_id = ?', [$carId])['days']);
-$lastExpenses = getAll("select CONCAT(e.name, ' - ', c.name) as name, e.value, e.timestamp, e.fuel_quantity
+$lastExpenses = getAll("select concat(e.name, ifnull(concat(' - ', c.name), '')) as name, e.value, e.timestamp, e.fuel_quantity
 from car_expenses e
 left outer join companies c on c.id = e.company_id
 where e.car_id = ?
