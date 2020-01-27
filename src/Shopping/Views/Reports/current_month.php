@@ -13,6 +13,7 @@ order by c.name', [$startDate]);
 
 $labels = "'" . join("', '", array_column($expenses, 'name')) . "'";
 $values = join(',', array_column($expenses, 'sum'));
+$total = array_sum(array_column($expenses, 'sum'));
 ?>
 
     <h1 hidden>Zakupy w bieżącym miesiącu</h1>
@@ -26,7 +27,7 @@ $values = join(',', array_column($expenses, 'sum'));
             data: {
                 labels: [<?= $labels ?>],
                 datasets: [{
-                    label: 'Suma zł',
+                    label: '<?= showMoney($total) ?>',
                     data: [<?= $values ?>],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
