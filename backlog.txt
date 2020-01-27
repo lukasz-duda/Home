@@ -1,6 +1,3 @@
-* Average expenses by type.
-* Last month expenses summary.
-
 * DomainRegistry
 * Extract AddCatUseCase with AddCatRequest and AddCatResponse
 * Rename CatController to AddCatController
