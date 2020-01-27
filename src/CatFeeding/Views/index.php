@@ -132,13 +132,13 @@ limit 1', [$catId]);
                     <?php
                     if ($lastWeight) {
                         $lastWeightDate = $lastWeight['date'];
-                        $lastWeightValue = showDecimal($lastWeight['weight'], 1);
-                        echo "Ostatnia waga $lastWeightDate: $lastWeightValue<br/>";
+                        $lastWeightValue = showDecimal($lastWeight['weight'], 1) . ' kg';
+                        echo "Ostatnia waga $lastWeightValue z dnia $lastWeightDate<br/>";
                     }
                     if ($lastObservation) {
                         $lastObservationTime = $lastObservation['timestamp'];
                         $lastObservationNotes = $lastObservation['notes'];
-                        echo "Ostatnia obserwacja $lastObservationTime:<br />$lastObservationNotes<br/>";
+                        echo "Ostatnia obserwacja $lastObservationTime: $lastObservationNotes<br/>";
                     }
                     ?>
                 </div>
