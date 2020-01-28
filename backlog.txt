@@ -1,5 +1,4 @@
 * Expense reports
-* Manifest - show icon, hide URL
 * DomainRegistry
 * Extract AddCatUseCase with AddCatRequest and AddCatResponse
 * Rename CatController to AddCatController
