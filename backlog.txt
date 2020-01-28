@@ -1,4 +1,5 @@
 * Expense reports
+* Let's encrypt
 * DomainRegistry
 * Extract AddCatUseCase with AddCatRequest and AddCatResponse
 * Rename CatController to AddCatController

@@ -10,7 +10,7 @@ include __DIR__ . '/ViewUtils.php';
     <title>Dom</title>
     <meta name="theme-color" content="#4285f4">
     <link rel="shortcut icon" sizes="192x192" href="<?= $baseUrl ?>/src/Shared/Views/Icon/home_192.png">
-    <link rel="manifest" href="<?= $baseUrl ?>/manifest.json">
+    <link rel="manifest" href="https://raw.githubusercontent.com/lukasz-duda/Home/master/manifest.json">
     <link rel="stylesheet" href="<?= $baseUrl ?>/src/Shared/Views/jquery-ui.min.css">
     <link rel="stylesheet" href="<?= $baseUrl ?>/src/Shared/Views/bootstrap.min.css">
     <link rel="stylesheet" href="<?= $baseUrl ?>/src/Shared/Views/Chart.min.css">
