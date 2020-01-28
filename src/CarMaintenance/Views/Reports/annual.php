@@ -33,7 +33,7 @@ $otherValues = join(',', array_column($other, 'sum'));
     <h1 hidden>Roczne wydatki na samochód</h1>
     <h4>Roczne wydatki na samochód</h4>
 
-    <canvas id="Chart" width="400" height="400"></canvas>
+    <canvas id="Chart" height="200"></canvas>
     <script>
         var chartColors = {
             red: 'rgb(255, 99, 132)',

@@ -24,7 +24,7 @@ $total = array_sum(array_column($expenses, 'sum'));
         ?>
     </p>
 
-    <canvas id="Chart" width="400" height="400"></canvas>
+    <canvas id="Chart" height="200"></canvas>
     <script>
         var colors = {
             red: 'rgb(255, 99, 132)',
