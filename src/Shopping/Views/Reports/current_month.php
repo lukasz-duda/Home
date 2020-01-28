@@ -9,7 +9,7 @@ from expense_categories c
 left outer join expenses e on e.category_id = c.id
 where e.timestamp >= ?
 group by c.name
-order by c.name', [$startDate]);
+order by sum(e.value) desc  ', [$startDate]);
 
 $labels = "'" . join("', '", array_column($expenses, 'name')) . "'";
 $values = join(',', array_column($expenses, 'sum'));
