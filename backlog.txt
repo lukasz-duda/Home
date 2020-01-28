@@ -1,4 +1,5 @@
 * Expense reports
+* Expense categories in separate datasets
 * Let's encrypt
 * DomainRegistry
 * Extract AddCatUseCase with AddCatRequest and AddCatResponse
