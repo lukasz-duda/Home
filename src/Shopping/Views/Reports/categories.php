@@ -1,23 +1,24 @@
 <?php
 include '../../../Shared/Views/View.php';
 
-$startDate = date('Y-m', time()) . '-01';
+$startDate = $_REQUEST['StartDate'];
+$endDate = $_REQUEST['EndDate'];
 
 $expenses = getAll('select c.name,
        sum(e.value) as sum
 from expense_categories c
 left outer join expenses e on e.category_id = c.id
-where e.timestamp >= ?
+where e.timestamp >= ? and e.timestamp <= ?
 group by c.name
-order by sum(e.value) desc  ', [$startDate]);
+order by sum(e.value) desc  ', [$startDate, $endDate]);
 
 $labels = "'" . join("', '", array_column($expenses, 'name')) . "'";
 $values = join(',', array_column($expenses, 'sum'));
 $total = array_sum(array_column($expenses, 'sum'));
 ?>
 
-    <h1 hidden>Zakupy w bieżącym miesiącu</h1>
-    <h4>Zakupy w bieżącym miesiącu</h4>
+    <h1 hidden>Kategorie zakupów</h1>
+    <h4>Kategorie zakupów</h4>
     <p>
         <?php
         echo 'Razem: ' . showMoney($total);
