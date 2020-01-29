@@ -36,7 +36,7 @@ $items = getAll('select i.id, i.header, i.keywords from knowledge_items i', []);
             });
 
             me.showItem = function (item) {
-                window.location.replace('item.php?Id=' + item.id)
+                window.location = 'item.php?Id=' + item.id;
             }
         }
 
