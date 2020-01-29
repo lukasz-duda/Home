@@ -1,5 +1,6 @@
 * Expense reports
 * Expense categories in separate datasets
+* Knowledge items UI
 * Let's encrypt
 * DomainRegistry
 * Extract AddCatUseCase with AddCatRequest and AddCatResponse
