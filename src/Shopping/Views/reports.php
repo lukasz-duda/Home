@@ -23,7 +23,7 @@ $previousMonthEndDate = date("Y-m-t", strtotime($previousMonthStartDate)) . 'T23
                href="Reports/categories.php?StartDate=2000-01-01&EndDate=3000-01-01">Podsumowanie
                 kategorii</a>
             <a class="list-group-item list-group-item-action"
-               href="Reports/categories_annual.php">Roczne wydatki wg kategorii</a>
+               href="Reports/categories_annual_avg.php">Średnie miesięczne wydatki w roku według kategorii</a>
         </div>
     </div>
 
