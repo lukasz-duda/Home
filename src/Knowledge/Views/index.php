@@ -27,7 +27,7 @@ $items = getAll('select i.id, i.header, i.keywords from knowledge_items i', []);
 
             me.items = ko.observableArray(<?= json_encode($items) ?>);
 
-            me.query = ko.observable(null);
+            me.query = ko.observable('');
 
             me.matchingItems = ko.computed(function () {
                 return jQuery.grep(me.items(), function (item) {
