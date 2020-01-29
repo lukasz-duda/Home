@@ -1,6 +1,7 @@
 * Expenses in month - previous/next month button
 * Category colors
 * Knowledge items UI
+* Favicon firefox shortcut image
 * Let's encrypt
 * DomainRegistry
 * Extract AddCatUseCase with AddCatRequest and AddCatResponse
