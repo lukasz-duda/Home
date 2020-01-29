@@ -1,6 +1,7 @@
 <?php
 include '../../../Shared/Views/View.php';
 
+get('SET SESSION SQL_BIG_SELECTS=1', []);
 $expenses = getAll('select years.year, c.id, c.name, round(sum(round(ifnull(e.value, 0), 2))) as sum
 from (
          select distinct year(ie.timestamp) as year
