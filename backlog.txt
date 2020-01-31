@@ -2,6 +2,7 @@
 * Category colors
 * Knowledge items UI
 * Favicon firefox shortcut image
+* Search menu index page
 * Let's encrypt
 * DomainRegistry
 * Extract AddCatUseCase with AddCatRequest and AddCatResponse

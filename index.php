@@ -2,9 +2,9 @@
 include __DIR__ . '/src/Shared/Views/View.php';
 ?>
 
-    <h1 hidden>Dom</h1>
+    <h1>Dom</h1>
     <div class="card mb-3">
-        <div class="card-header">Dom</div>
+        <div class="card-header">Szukaj w menu</div>
         <div class="list-group list-group-flush">
             <a class="list-group-item list-group-item-action" href="src/CatFeeding/Views/index.php">Szyszka</a>
             <a class="list-group-item list-group-item-action" href="src/Shopping/Views/index.php">Zakupy</a>
