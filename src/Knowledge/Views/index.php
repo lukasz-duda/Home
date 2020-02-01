@@ -6,6 +6,9 @@ $items = getAll('select i.id, i.header, i.keywords from knowledge_items i', []);
     <h1>Baza wiedzy</h1>
 
     <div class="form-group">
+        <a href="item.php" class="btn btn-primary">Dodaj</a>
+    </div>
+    <div class="form-group">
         <label for="Search">Szukaj w bazie wiedzy</label>
         <div class="input-group mb-3">
             <input type="search" class="form-control" id="Search" data-bind="value: query"

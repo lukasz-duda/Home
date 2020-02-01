@@ -1,34 +1,47 @@
 <?php
 include '../../Shared/Views/View.php';
 $itemId = $_REQUEST['Id'];
-$item = get('select i.* from knowledge_items i where i.id = ?', [$itemId]);
+$newItem = $itemId == null;
+$item = $newItem ?
+    array('header' => '', 'keywords' => '', 'content' => '') :
+    get('select i.header, i.keywords, i.content from knowledge_items i where i.id = ?', [$itemId]);
 ?>
 
-    <h1 data-bind="visible: !editingHeader(), text: header, click: editHeader"></h1>
+    <h1 data-bind="visible: !editing(), text: header"></h1>
     <form method="post" action="../Application/SaveKnowledgeItem.php">
-        <div class="form-group" data-bind="visible: editingHeader">
+        <div class="form-group" data-bind="visible: editing">
             <label for="Header">Nagłówek</label>
-            <input name="Header" id="Header" class="form-control" data-bind="value: header, hasFocus: editingHeader"/>
+            <input name="Header" id="Header" class="form-control" minlength="2" required maxlength="250"
+                   data-bind="value: header"/>
         </div>
 
-        <div data-bind="visible: !editingContent(), html: contentFormatted, click: editContent"></div>
-        <div class="form-group m-0" data-bind="visible: editingContent">
-        <textarea class="form-control" rows="15" minlength="2" maxlength="4000"
-                  name="Content" placeholder="Treść" required
-                  data-bind="value: content, hasFocus: editingContent"></textarea>
+        <div data-bind="visible: !editing(), html: contentFormatted"></div>
+        <div class="form-group" data-bind="visible: editing">
+            <label for="Content">Treść</label>
+            <textarea class="form-control" rows="15" minlength="2" maxlength="4000"
+                      name="Content" required id="Content"
+                      data-bind="value: content"></textarea>
         </div>
 
-        <div class="form-group">
+        <p data-bind="visible: !editing(), text: keywords"></p>
+        <div class="form-group" data-bind="visible: editing">
             <label for="Keywords">Słowa kluczowe</label>
-            <input name="Keywords" id="Keywords" class="form-control" value="<?= $item['keywords'] ?>"/>
+            <input name="Keywords" id="Keywords" class="form-control" minlength="2" required maxlength="250"
+                   data-bind="value: keywords"/>
         </div>
 
         <input type="hidden" name="Id" value="<?= $itemId ?>"/>
-        <button class="btn btn-primary mt-3">Zapisz</button>
+        <div class="form-group">
+            <button class="btn btn-primary">Zapisz</button>
+            <button class="btn btn-secondary" data-bind="visible: !editing(), click: toggleEdit">Edytuj</button>
+            <button class="btn btn-secondary" data-bind="visible: editing, click: toggleEdit">Podgląd</button>
+        </div>
     </form>
     <form method="post" action="../Application/DeleteKnowledgeItem.php">
-        <input type="hidden" name="Id" value="<?= $itemId ?>"/>
-        <button class="btn btn-secondary mt-3">Usuń</button>
+        <div class="form-group">
+            <input type="hidden" name="Id" value="<?= $itemId ?>"/>
+            <button class="btn btn-secondary">Usuń</button>
+        </div>
     </form>
 
     <script>
@@ -37,27 +50,23 @@ $item = get('select i.* from knowledge_items i where i.id = ?', [$itemId]);
         function ViewModel() {
             var me = this;
 
-            me.item = <?= json_encode($item) ?>;
+            me.initialItem = <?= json_encode($item) ?>;
 
-            me.content = ko.observable(me.item.content);
+            me.content = ko.observable(me.initialItem.content);
 
-            me.header = ko.observable(me.item.header);
+            me.header = ko.observable(me.initialItem.header);
 
-            me.editingHeader = ko.observable(false);
+            me.keywords = ko.observable(me.initialItem.keywords);
 
-            me.editHeader = function () {
-                me.editingHeader(true);
+            me.toggleEdit = function () {
+                me.editing(!me.editing());
             };
+
+            me.editing = ko.observable(<?= $newItem ?>);
 
             me.contentFormatted = ko.computed(function () {
                 return remarkable.render(me.content());
             });
-
-            me.editingContent = ko.observable(false);
-
-            me.editContent = function () {
-                me.editingContent(true);
-            }
         }
 
         var viewModel = new ViewModel();
