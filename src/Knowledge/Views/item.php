@@ -23,7 +23,7 @@ $item = $newItem ?
                       data-bind="value: content"></textarea>
         </div>
 
-        <p data-bind="visible: !editing(), text: keywords"></p>
+        <p data-bind="visible: !editing()">Słowa kluczowe: <span data-bind="text: keywords"></span></p>
         <div class="form-group" data-bind="visible: editing">
             <label for="Keywords">Słowa kluczowe</label>
             <input name="Keywords" id="Keywords" class="form-control" minlength="2" required maxlength="250"
