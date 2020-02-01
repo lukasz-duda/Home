@@ -53,7 +53,7 @@ order by e.timestamp desc limit 10", [$carId]);
     <div class="card mb-3">
         <div class="card-header">Wydatki</div>
         <div class="list-group list-group-flush">
-            <a class="list-group-item list-group-item-action" href="reports.php">Raporty samochodu</a>
+            <a class="list-group-item list-group-item-action" href="Reports/car_annual.php">Roczne wydatki na samochód</a>
         </div>
         <div class="card-body">
             Wszystkie: <?= showMoney($total); ?><br/>
