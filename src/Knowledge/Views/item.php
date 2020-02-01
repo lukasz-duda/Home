@@ -4,17 +4,32 @@ $itemId = $_REQUEST['Id'];
 $item = get('select i.* from knowledge_items i where i.id = ?', [$itemId]);
 ?>
 
-    <h1 data-bind="text: header"></h1>
+    <h1 data-bind="visible: !editingHeader(), text: header, click: editHeader"></h1>
+    <form method="post" action="../Application/SaveKnowledgeItem.php">
+        <div class="form-group" data-bind="visible: editingHeader">
+            <label for="Header">Nagłówek</label>
+            <input name="Header" id="Header" class="form-control" data-bind="value: header, hasFocus: editingHeader"/>
+        </div>
 
-    <div data-bind="visible: !editingContent(), html: contentFormatted, click: editContent"></div>
-    <div class="form-group m-0" data-bind="visible: editingContent">
-    <textarea class="form-control" rows="20" minlength="2" maxlength="4000"
-              placeholder="Treść" required
-              data-bind="value: content, hasFocus: editingContent"></textarea>
-    </div>
+        <div data-bind="visible: !editingContent(), html: contentFormatted, click: editContent"></div>
+        <div class="form-group m-0" data-bind="visible: editingContent">
+        <textarea class="form-control" rows="15" minlength="2" maxlength="4000"
+                  name="Content" placeholder="Treść" required
+                  data-bind="value: content, hasFocus: editingContent"></textarea>
+        </div>
 
-    <button class="btn btn-primary mt-3" data-bind="">Zapisz</button>
-    <button class="btn btn-secondary mt-3" data-bind="">Usuń</button>
+        <div class="form-group">
+            <label for="Keywords">Słowa kluczowe</label>
+            <input name="Keywords" id="Keywords" class="form-control" value="<?= $item['keywords'] ?>"/>
+        </div>
+
+        <input type="hidden" name="Id" value="<?= $itemId ?>"/>
+        <button class="btn btn-primary mt-3">Zapisz</button>
+    </form>
+    <form method="post" action="../Application/DeleteKnowledgeItem.php">
+        <input type="hidden" name="Id" value="<?= $itemId ?>"/>
+        <button class="btn btn-secondary mt-3">Usuń</button>
+    </form>
 
     <script>
         var remarkable = new Remarkable();
@@ -27,6 +42,12 @@ $item = get('select i.* from knowledge_items i where i.id = ?', [$itemId]);
             me.content = ko.observable(me.item.content);
 
             me.header = ko.observable(me.item.header);
+
+            me.editingHeader = ko.observable(false);
+
+            me.editHeader = function () {
+                me.editingHeader(true);
+            };
 
             me.contentFormatted = ko.computed(function () {
                 return remarkable.render(me.content());
