@@ -23,52 +23,6 @@ $shoppingList = get('select s.json from shopping_list s', []);
     <h1>Zakupy</h1>
 
     <div class="card mb-3">
-        <div class="card-header">Planowanie</div>
-        <div class="list-group list-group-flush">
-            <a class="list-group-item list-group-item-action" href="reports.php">Raporty zakupów</a>
-        </div>
-        <div class="card-body">
-            <button class="btn-primary btn mb-3" data-bind="click: addShoppingItem">Dodaj</button>
-            <div data-bind="foreach: shoppingList">
-                <div class="form-group">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Nazwa pozycji listy zakupów" required
-                               minlength="2" maxlength="250"
-                               data-bind="value: name">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" data-bind="click: $parent.remove">Usuń</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <form action="../Application/SaveShoppingListController.php" method="post">
-                    <div class="form-group">
-                        <input type="hidden" name="ShoppingList" data-bind="value: jsonShoppingList"/>
-                        <button class="btn btn-primary">Zapisz</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <div class="card mb-3">
-        <div class="card-header">Rozliczenie</div>
-        <div class="card-body">
-            <p>
-                Do zwrotu dla Ilony: <?= showMoney($forIlona['value']); ?><br/>
-                Do zwrotu dla Łukasza: <?= showMoney($forMe['value']); ?><br/>
-                Kwota do rozliczenia przez Łukasza: <?= showMoney($forIlona['value'] - $forMe['value']); ?>
-            </p>
-            <form action="../Application/RefundController.php" method="post">
-                <div class="form-group">
-                    <button class="btn btn-primary">Rozlicz</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div class="card mb-3">
         <div class="card-header">Dodaj</div>
         <div class="card-body">
             <form action="../Application/AddExpenseController.php" method="post">
@@ -146,6 +100,52 @@ $shoppingList = get('select s.json from shopping_list s', []);
                 </div>
                 <div class="form-group">
                     <button class="btn btn-primary">Zapisz</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">Planowanie</div>
+        <div class="list-group list-group-flush">
+            <a class="list-group-item list-group-item-action" href="reports.php">Raporty zakupów</a>
+        </div>
+        <div class="card-body">
+            <button class="btn-primary btn mb-3" data-bind="click: addShoppingItem">Dodaj</button>
+            <div data-bind="foreach: shoppingList">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Nazwa pozycji listy zakupów" required
+                               minlength="2" maxlength="250"
+                               data-bind="value: name">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" data-bind="click: $parent.remove">Usuń</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <form action="../Application/SaveShoppingListController.php" method="post">
+                    <div class="form-group">
+                        <input type="hidden" name="ShoppingList" data-bind="value: jsonShoppingList"/>
+                        <button class="btn btn-primary">Zapisz</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">Rozliczenie</div>
+        <div class="card-body">
+            <p>
+                Do zwrotu dla Ilony: <?= showMoney($forIlona['value']); ?><br/>
+                Do zwrotu dla Łukasza: <?= showMoney($forMe['value']); ?><br/>
+                Kwota do rozliczenia przez Łukasza: <?= showMoney($forIlona['value'] - $forMe['value']); ?>
+            </p>
+            <form action="../Application/RefundController.php" method="post">
+                <div class="form-group">
+                    <button class="btn btn-primary">Rozlicz</button>
                 </div>
             </form>
         </div>

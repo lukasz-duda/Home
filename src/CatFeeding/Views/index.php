@@ -114,58 +114,6 @@ limit 1', [$catId]);
     <div class="row">
         <div class="col-md-6">
             <div class="card mb-3">
-                <div class="card-header">Podsumowanie dnia</div>
-                <div class="card-body">
-                    Teraz: <?= date('Y-m-d H:i:s', $now); ?><br/>
-                    Ostatnia kupa: <?= $lastPoop['timestamp'] ?><br/>
-                    Ostatnie siku: <?= $lastPee['timestamp'] ?><br/>
-                    Zapotrzebowanie dzisiaj: <?= showInt($dailyDemand['total']); ?> %<br/>
-                    Zapotrzebowanie wczoraj: <?= showInt($yesterdayDemand['total']); ?> %<br/>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox"
-                               disabled <?= $medicineApplied ? 'checked' : '' ?> id="MedicineAppliedStatus">
-                        <label class="form-check-label" for="MedicineAppliedStatus">
-                            Lek podany
-                        </label>
-                    </div>
-                    <br/>
-                    <?php
-                    if ($lastWeight) {
-                        $lastWeightDate = $lastWeight['date'];
-                        $lastWeightValue = showDecimal($lastWeight['weight'], 1) . ' kg';
-                        echo "Ostatnia waga $lastWeightValue z dnia $lastWeightDate<br/>";
-                    }
-                    if ($lastObservation) {
-                        $lastObservationTime = $lastObservation['timestamp'];
-                        $lastObservationNotes = $lastObservation['notes'];
-                        echo "Ostatnia obserwacja $lastObservationTime: $lastObservationNotes<br/>";
-                    }
-                    ?>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card mb-3">
-                <div class="card-header">Toaleta</div>
-                <div class="card-body">
-                    <form action="../Application/AddPoopController.php" method="post">
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Kupa</button>
-                        </div>
-                    </form>
-                    <form action="../Application/AddPeeController.php" method="post">
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Siku</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card mb-3">
                 <div class="card-header">Rozpocznij posiłek</div>
                 <div class="card-body">
                     <form action="../Application/StartMealController.php" method="post">
@@ -216,6 +164,58 @@ limit 1', [$catId]);
                         }
                         ?>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-3">
+                <div class="card-header">Toaleta</div>
+                <div class="card-body">
+                    <form action="../Application/AddPoopController.php" method="post">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Kupa</button>
+                        </div>
+                    </form>
+                    <form action="../Application/AddPeeController.php" method="post">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Siku</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card mb-3">
+                <div class="card-header">Podsumowanie dnia</div>
+                <div class="card-body">
+                    Teraz: <?= date('Y-m-d H:i:s', $now); ?><br/>
+                    Ostatnia kupa: <?= $lastPoop['timestamp'] ?><br/>
+                    Ostatnie siku: <?= $lastPee['timestamp'] ?><br/>
+                    Zapotrzebowanie dzisiaj: <?= showInt($dailyDemand['total']); ?> %<br/>
+                    Zapotrzebowanie wczoraj: <?= showInt($yesterdayDemand['total']); ?> %<br/>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox"
+                               disabled <?= $medicineApplied ? 'checked' : '' ?> id="MedicineAppliedStatus">
+                        <label class="form-check-label" for="MedicineAppliedStatus">
+                            Lek podany
+                        </label>
+                    </div>
+                    <br/>
+                    <?php
+                    if ($lastWeight) {
+                        $lastWeightDate = $lastWeight['date'];
+                        $lastWeightValue = showDecimal($lastWeight['weight'], 1) . ' kg';
+                        echo "Ostatnia waga $lastWeightValue z dnia $lastWeightDate<br/>";
+                    }
+                    if ($lastObservation) {
+                        $lastObservationTime = $lastObservation['timestamp'];
+                        $lastObservationNotes = $lastObservation['notes'];
+                        echo "Ostatnia obserwacja $lastObservationTime: $lastObservationNotes<br/>";
+                    }
+                    ?>
                 </div>
             </div>
         </div>
