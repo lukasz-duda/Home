@@ -34,7 +34,8 @@ $items = getAll('select i.id, i.header, i.keywords from knowledge_items i', []);
 
             me.matchingItems = ko.computed(function () {
                 return jQuery.grep(me.items(), function (item) {
-                    return item.header.indexOf(me.query()) > -1 || item.keywords.indexOf(me.query()) > -1;
+                    return item.header.toLowerCase().indexOf(me.query().toLowerCase()) > -1
+                        || item.keywords.toLowerCase().indexOf(me.query().toLowerCase()) > -1;
                 });
             });
 
