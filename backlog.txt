@@ -1,3 +1,5 @@
+* Focus for knowledge search input
+* Allow links to knowledge search
 * Expenses in month - previous/next month button
 * Category colors
 * Knowledge items UI
