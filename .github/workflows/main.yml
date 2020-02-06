@@ -10,4 +10,4 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: deploy
-      run: curl -u 'deploy:4&2Fh*#1Fg5~%3E' https://greenit.site/deploy.php
+      run: curl -u 'deploy:4&2Fh*#1Fg5~%3E' https://greenit.site/deploy/deploy.php
