@@ -9,4 +9,4 @@ jobs:
 
     steps:
     - name: Deploy
-      run: curl -u 'deploy:4&2Fh*#1Fg5~%3E' https://greenit.site/deploy/deploy.php
+      run: curl -u "$DEPLOY_USER:$DEPLOY_PASSWORD" $DEPLOY_URL
