@@ -7,7 +7,9 @@ include __DIR__ . '/src/Shared/Views/View.php';
         <div class="card-header">Skróty</div>
         <div class="list-group list-group-flush">
             <a class="list-group-item list-group-item-action" href="src/Knowledge/Views/index.php">Baza wiedzy</a>
-        </div>
+            <a class="list-group-item list-group-item-action" href="src/Knowledge/Views/index.php?query=dieta">Dieta</a>
+             <a class="list-group-item list-group-item-action" href="src/Flat/Views/index.php">Mieszkanie</a>
+       </div>
     </div>
 <?php
 include __DIR__ . '/src/Shared/Views/Footer.php';

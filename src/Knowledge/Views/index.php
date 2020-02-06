@@ -11,7 +11,7 @@ $items = getAll('select i.id, i.header, i.keywords from knowledge_items i', []);
     <div class="form-group">
         <label for="Search">Szukaj w bazie wiedzy</label>
         <div class="input-group mb-3">
-            <input type="search" class="form-control" id="Search" data-bind="value: query"
+            <input type="search" class="form-control" id="Search" data-bind="value: query, hasFocus: true"
                    aria-describedby="Searchicon">
             <div class="input-group-append">
                 <span class="input-group-text" id="SearchIcon"><i class="material-icons-outlined"
@@ -30,7 +30,7 @@ $items = getAll('select i.id, i.header, i.keywords from knowledge_items i', []);
 
             me.items = ko.observableArray(<?= json_encode($items) ?>);
 
-            me.query = ko.observable('');
+            me.query = ko.observable('<?= $_REQUEST['query'] ?>');
 
             me.matchingItems = ko.computed(function () {
                 return jQuery.grep(me.items(), function (item) {

@@ -35,6 +35,10 @@ include __DIR__ . '/ViewUtils.php';
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
+                <a class="nav-link" title="Dom" href="<?= $baseUrl ?>/index.php"><i
+                            class="material-icons-outlined">home</i></a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" title="Szyszka" href="<?= $baseUrl ?>/src/CatFeeding/Views/index.php"><i
                             class="material-icons-outlined">pets</i></a>
             </li>
@@ -45,10 +49,6 @@ include __DIR__ . '/ViewUtils.php';
             <li class="nav-item">
                 <a class="nav-link" title="Kawa" href="<?= $baseUrl ?>/src/Coffee/Views/index.php"><i
                             class="material-icons-outlined">local_cafe</i></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" title="Mieszkanie" href="<?= $baseUrl ?>/src/Flat/Views/index.php"><i
-                            class="material-icons-outlined">home</i></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" title="Golf" href="<?= $baseUrl ?>/src/CarMaintenance/Views/index.php"><i

@@ -1,11 +1,7 @@
-* Focus for knowledge search input
-* Allow links to knowledge search
 * Expenses in month - previous/next month button
 * Category colors
-* Knowledge items UI
 * Favicon firefox shortcut image
 * Search menu index page
-* Let's encrypt
 * DomainRegistry
 * Extract AddCatUseCase with AddCatRequest and AddCatResponse
 * Rename CatController to AddCatController
