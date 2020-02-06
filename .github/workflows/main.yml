@@ -9,4 +9,8 @@ jobs:
 
     steps:
     - name: Deploy
+      env:
+        DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+        DEPLOY_PASSWORD: ${{ secrets.DEPLOY_PASSWORD }}
+        DEPLOY_URL: ${{ secrets.DEPLOY_URL }}
       run: curl -u "$DEPLOY_USER:$DEPLOY_PASSWORD" $DEPLOY_URL
