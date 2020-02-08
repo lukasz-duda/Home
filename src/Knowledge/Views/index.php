@@ -1,6 +1,6 @@
 <?php
 include '../../Shared/Views/View.php';
-$items = getAll('select i.id, i.header, i.keywords from knowledge_items i', []);
+$items = getAll('select i.id, i.header, i.keywords from knowledge_items i order by i.header', []);
 ?>
 
     <h1>Baza wiedzy</h1>

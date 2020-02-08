@@ -1,4 +1,5 @@
 * Knowledge items order by header
+* Separate view for shopping plan
 * CI log format
 * Expenses in month - previous/next month button
 * Category colors
