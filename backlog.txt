@@ -1,7 +1,6 @@
 * Separate view for shopping plan
 * Expenses in month - previous/next month button
 * Category colors
-* Favicon firefox shortcut image
 * Search menu index page
 * DomainRegistry
 * Extract AddCatUseCase with AddCatRequest and AddCatResponse
