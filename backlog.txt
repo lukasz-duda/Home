@@ -1,4 +1,3 @@
-* Separate view for shopping plan
 * Expenses in month - previous/next month button
 * Category colors
 * Search menu index page
