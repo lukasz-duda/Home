@@ -68,3 +68,8 @@ function showDecimal($value, $decimals)
 {
     return number_format($value, $decimals, ',', ' ');
 }
+
+function showDate($value)
+{
+    return date('Y-m-d', $value);
+}

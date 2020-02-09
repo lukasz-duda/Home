@@ -15,6 +15,11 @@ order by sum(e.value) desc  ', [$startDate, $endDate]);
 $labels = "'" . join("', '", array_column($expenses, 'name')) . "'";
 $values = join(',', array_column($expenses, 'sum'));
 $total = array_sum(array_column($expenses, 'sum'));
+
+$previousMonthStartDate = date('Y-m-d', strtotime($startDate . " -1 month")) . 'T00:00:00';
+$previousMonthEndDate = date('Y-m-t', strtotime($startDate . " -1 month")) . 'T23:59:59';
+$nextMonthStartDate = date('Y-m-d', strtotime($startDate . " +1 month")) . 'T00:00:00';
+$nextMonthEndDate = date('Y-m-t', strtotime($startDate . " +1 month")) . 'T23:59:59';
 ?>
 
     <h1 hidden>Kategorie zakupów</h1>
@@ -22,6 +27,7 @@ $total = array_sum(array_column($expenses, 'sum'));
     <p>
         <?php
         echo 'Razem: ' . showMoney($total);
+        echo '<br />od ' . showDate(strtotime($startDate)) . ' do ' . showDate(strtotime($endDate)) . '<br />';
         ?>
     </p>
 
@@ -60,6 +66,15 @@ $total = array_sum(array_column($expenses, 'sum'));
             }
         });
     </script>
+
+    <div class="btn-group">
+        <a class="btn btn-primary"
+           href="categories.php?StartDate=<?= $previousMonthStartDate ?>&EndDate=<?= $previousMonthEndDate ?>">Miesiąc
+            wcześniej</a>
+        <a class="btn btn-primary"
+           href="categories.php?StartDate=<?= $nextMonthStartDate ?>&EndDate=<?= $nextMonthEndDate ?>">Miesiąc
+            później</a>
+    </div>
 
 <?php
 include '../../../Shared/Views/Footer.php';
