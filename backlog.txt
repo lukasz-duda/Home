@@ -1,4 +1,3 @@
-* Brackets allowed for expense amount calculation.
 * Category colors
 * Search menu index page
 * DomainRegistry
