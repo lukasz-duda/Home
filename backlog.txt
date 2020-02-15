@@ -1,3 +1,4 @@
+* Title for result view without header
 * Category colors
 * Search menu index page
 * DomainRegistry
