@@ -1,3 +1,5 @@
+* Go back left arrow menu item
+* Result on The same view
 * Title for result view without header
 * Category colors
 * Search menu index page
