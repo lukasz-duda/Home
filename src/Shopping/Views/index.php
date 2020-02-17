@@ -29,7 +29,7 @@ $shoppingList = get('select s.json from shopping_list s', []);
                 <div class="form-group">
                     <label for="Value">Wartość zakupu</label>
                     <input class="form-control" id="Value" name="Value" type="number" step="0.01" min="1" max="500000"
-                           required data-bind="value: expenseValue"/>
+                           required data-bind="value: expenseValue, hasFocus: true"/>
                 </div>
                 <div class="form-group">
                     <label for="Calculation">Oblicz wartość zakupu</label>

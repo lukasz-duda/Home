@@ -1,6 +1,5 @@
-* Shopping focus on price field
 * Go back left arrow menu item
-* Result on The same view
+* Result on the same view
 * Title for result view without header
 * Category colors
 * Search menu index page
