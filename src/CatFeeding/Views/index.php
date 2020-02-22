@@ -43,7 +43,8 @@ from (
            and m.cat_id = ?
            and m.start >= ?
          order by m.start desc
-     ) meals', [$catId, date('Y-m-d', strtotime('-2 days'))]);
+     ) meals
+order by meals.start desc', [$catId, date('Y-m-d', strtotime('-2 days'))]);
 $now = time();
 $lastPoop = get('select p.timestamp
 from poop p
