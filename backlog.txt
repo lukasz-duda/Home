@@ -1,4 +1,3 @@
-* Page title from first header not all
 * Go back left arrow menu item
 * Result on the same view
 * Title for result view without header
