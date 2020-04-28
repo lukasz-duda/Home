@@ -158,7 +158,7 @@ $shoppingList = get('select s.json from shopping_list s', []);
             me.calculateExpenseValue = function () {
                 var expression = me.expenseValueCalculation().split(',').join('.');
 
-                var calculationRegExp = /^[0-9+-.()]*$/;
+                var calculationRegExp = /^[0-9+-.()*\/]*$/;
                 if (calculationRegExp.test(expression) === false) {
                     return;
                 }
