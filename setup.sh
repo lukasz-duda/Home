@@ -21,6 +21,7 @@ else
 fi
 
 echo -e "${TITLE_START}Seting up MySQL databases${TITLE_END}"
+sudo mysql < src/Shared/Infrastructure/database.sql
 echo 'Type password: home'
 mysql_config_editor set --login-path=local --host=localhost --user=home --password
 mysql_config_editor print --all
