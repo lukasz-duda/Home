@@ -1,7 +1,5 @@
-* Indexing, optimise performance
-* Validate end weight less than start weight
-* Result on the same view
 * Title for result view without header
+* Indexing, optimise performance
 * Category colors
 * Search menu index page
 * DomainRegistry
