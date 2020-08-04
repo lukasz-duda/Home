@@ -6,6 +6,7 @@ include_once __DIR__ . '/View.php';
     <script>
         document.title = $('h1').first().text();
     </script>
+    <a class="btn btn-light material-icons-outlined" href="<?= $_SERVER['HTTP_REFERER'] ?>">arrow_back</a>
 <?php
 
 echo '</div>

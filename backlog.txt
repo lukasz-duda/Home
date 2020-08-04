@@ -1,6 +1,5 @@
 * Indexing, optimise performance
 * Validate end weight less than start weight
-* Go back left arrow menu item
 * Result on the same view
 * Title for result view without header
 * Category colors
