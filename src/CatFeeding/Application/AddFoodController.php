@@ -2,7 +2,7 @@
 
 include '../../Shared/Views/View.php';
 
-$catId = 1;
+$catId = intval($_REQUEST['CatId']);
 $name = $_REQUEST['FoodName'];
 $description = $_REQUEST['FoodDescription'];
 $weight = intval($_REQUEST['Weight']);

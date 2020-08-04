@@ -1,7 +1,7 @@
 <?php
 include '../../Shared/Views/View.php';
 
-$catId = 1;
+$catId = intval($_REQUEST['CatId']);
 $notes = $_REQUEST['notes'];
 
 $save = $pdo->prepare('INSERT INTO observation (cat_id, timestamp, notes) VALUES (?, ?, ?)');

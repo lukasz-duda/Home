@@ -1,7 +1,7 @@
 <?php
 include '../../Shared/Views/View.php';
 
-$catId = 1;
+$catId = intval($_REQUEST['CatId']);
 
 $save = $pdo->prepare('INSERT INTO pee (cat_id, timestamp) VALUES (?, ?)');
 $saved = $save->execute([$catId, date('Y-m-d H:i:s')]);
