@@ -117,7 +117,7 @@ limit 1', [$catId]);
             <div class="card mb-3">
                 <div class="card-header">Rozpocznij posiłek</div>
                 <div class="card-body">
-                    <form action="../Application/StartMealController.php" method="post">
+                    <form action="../UseCases/StartMealController.php" method="post">
                         <input type="hidden" name="CatId" value="<?= $catId ?>">
                         <div class="form-group">
                             <label for="MealFoodId">Pokarm</label>
@@ -147,7 +147,7 @@ limit 1', [$catId]);
                     <div class="list-group">
                         <?php foreach ($meals as $meal) {
                             ?>
-                            <form action="../Application/EndMealController.php" method="post">
+                            <form action="../UseCases/EndMealController.php" method="post">
                                 <input type="hidden" name="MealId" value="<?= $meal['id'] ?>"/>
                                 <div class="form-group">
                                     <label for="Meal<?= $meal['id'] ?>Weight">Waga <?= $meal['name'] ?> po
@@ -176,13 +176,13 @@ limit 1', [$catId]);
             <div class="card mb-3">
                 <div class="card-header">Toaleta</div>
                 <div class="card-body">
-                    <form action="../Application/AddPoopController.php" method="post">
+                    <form action="../UseCases/AddPoopController.php" method="post">
                         <input type="hidden" name="CatId" value="<?= $catId ?>">
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Kupa</button>
                         </div>
                     </form>
-                    <form action="../Application/AddPeeController.php" method="post">
+                    <form action="../UseCases/AddPeeController.php" method="post">
                         <input type="hidden" name="CatId" value="<?= $catId ?>">
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Siku</button>
@@ -228,7 +228,7 @@ limit 1', [$catId]);
     <div class="card mb-3">
         <div class="card-header">Obserwacja</div>
         <div class="card-body">
-            <form action="../Application/AddObservationController.php" method="post">
+            <form action="../UseCases/AddObservationController.php" method="post">
                 <input type="hidden" name="CatId" value="<?= $catId ?>">
                 <div class="form-group">
                     <label for="ObservationNotes">Opis</label>
@@ -247,7 +247,7 @@ limit 1', [$catId]);
             <div class="card mb-3">
                 <div class="card-header">Popraw pokarm</div>
                 <div class="card-body">
-                    <form action="../Application/CorrectFoodController.php" method="post">
+                    <form action="../UseCases/CorrectFoodController.php" method="post">
                         <input type="hidden" name="CatId" value="<?= $catId ?>">
                         <div class="form-group">
                             <label for="FoodId">Pokarm</label>
@@ -289,7 +289,7 @@ limit 1', [$catId]);
             <div class="card mb-3">
                 <div class="card-header">Dodaj pokarm</div>
                 <div class="card-body">
-                    <form action="../Application/AddFoodController.php" method="post">
+                    <form action="../UseCases/AddFoodController.php" method="post">
                         <input type="hidden" name="CatId" value="<?= $catId ?>">
                         <div class="form-group">
                             <label for="NewFoodName">Nazwa</label>

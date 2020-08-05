@@ -89,7 +89,7 @@ order by e.timestamp desc limit 10", [$carId]);
     <div class="card mb-3">
         <div class="card-header">Dodaj zakup</div>
         <div class="card-body">
-            <form action="../Application/AddCarExpenseController.php" method="post">
+            <form action="../UseCases/AddCarExpenseController.php" method="post">
                 <div class="form-group">
                     <label for="CompanyId">Firma</label>
                     <select class="form-control" id="CompanyId" name="CompanyId">

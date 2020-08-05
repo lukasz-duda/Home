@@ -5,7 +5,7 @@ $coffees = get('select c.current, c.last_cleaning from coffees c', []);
 
 $coffeesUntilCleaning = $coffees['last_cleaning'] + 100 - $coffees['current'];
 
-if ($coffeesUntilCleaning < 0) {
+if ($coffeesUntilCleaning <= 0) {
     showWarning('Umyj ekspres.');
 } else {
     showInfo("Jeszcze $coffeesUntilCleaning kaw do mycia.");
@@ -13,19 +13,19 @@ if ($coffeesUntilCleaning < 0) {
 
 ?>
 
-    <form action="../Application/MakeCoffeeController.php" method="post">
+    <form action="../UseCases/MakeCoffeeController.php" method="post">
         <input type="hidden" name="CoffesCount" value="1">
         <div class="form-group">
             <button class="btn btn-primary" type="submit">Zrób kawę</button>
         </div>
     </form>
-    <form action="../Application/MakeCoffeeController.php" method="post">
+    <form action="../UseCases/MakeCoffeeController.php" method="post">
         <input type="hidden" name="CoffesCount" value="2">
         <div class="form-group">
             <button class="btn btn-primary" type="submit">Zrób dwie kawy</button>
         </div>
     </form>
-    <form action="../Application/CleanUpController.php" method="post">
+    <form action="../UseCases/CleanUpController.php" method="post">
         <div class="form-group">
             <button class="btn btn-primary" type="submit">Umyj ekspres</button>
         </div>

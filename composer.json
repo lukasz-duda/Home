@@ -5,17 +5,9 @@
     "ext-pdo": "*",
     "ext-json": "*"
   },
-  "require-dev": {
-    "phpunit/phpunit": "^7"
-  },
   "autoload": {
     "psr-4": {
       "Assistant\\": "src/"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Assistant\\Tests\\": "tests/"
     }
   }
 }

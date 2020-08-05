@@ -20,7 +20,7 @@ $items = getAll('select i.id, i.header, i.keywords from knowledge_items i order 
         </div>
     </div>
 
-    <ul class="list-group" data-bind="foreach: matchingItems">
+    <ul class="list-group mb-3" data-bind="foreach: matchingItems">
         <li class="list-group-item list-group-item-action" data-bind="text: header, click: $parent.showItem"></li>
     </ul>
 

@@ -25,7 +25,7 @@ $shoppingList = get('select s.json from shopping_list s', []);
                 </div>
             </div>
             <div class="form-group">
-                <form action="../Application/SaveShoppingListController.php" method="post">
+                <form action="../UseCases/SaveShoppingListController.php" method="post">
                     <div class="form-group">
                         <input type="hidden" name="ShoppingList" data-bind="value: jsonShoppingList"/>
                         <button class="btn btn-primary">Zapisz</button>
