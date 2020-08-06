@@ -149,27 +149,27 @@ $shoppingList = get('select s.json from shopping_list s', []);
     </div>
     <script>
         function ViewModel() {
-            var me = this;
+            const me = this;
 
             me.expenseValue = ko.observable(null);
 
             me.expenseValueCalculation = ko.observable(null);
 
             me.calculateExpenseValue = function () {
-                var expression = me.expenseValueCalculation().split(',').join('.');
+                const expression = me.expenseValueCalculation().split(',').join('.');
 
-                var calculationRegExp = /^[0-9+-.()*\/]*$/;
+                const calculationRegExp = /^[0-9+-.()*\/]*$/;
                 if (calculationRegExp.test(expression) === false) {
                     return;
                 }
 
-                var result = eval(expression);
-                var currency = isNaN(result) ? 0 : Math.round(result * 100) / 100;
+                const result = eval(expression);
+                const currency = isNaN(result) ? 0 : Math.round(result * 100) / 100;
                 me.expenseValue(currency);
             };
         }
 
-        var viewModel = new ViewModel();
+        const viewModel = new ViewModel();
         ko.applyBindings(viewModel);
     </script>
 <?php

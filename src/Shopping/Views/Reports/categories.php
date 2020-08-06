@@ -33,7 +33,7 @@ $nextMonthEndDate = date('Y-m-t', strtotime($startDate . " +1 month")) . 'T23:59
 
     <canvas id="Chart" height="200"></canvas>
     <script>
-        var colors = {
+        const colors = {
             red: 'rgb(255, 99, 132)',
             orange: 'rgb(255, 159, 64)',
             yellow: 'rgb(255, 205, 86)',
@@ -43,13 +43,13 @@ $nextMonthEndDate = date('Y-m-t', strtotime($startDate . " +1 month")) . 'T23:59
             grey: 'rgb(201, 203, 207)'
         };
 
-        var color = Chart.helpers.color;
-        var borderColors = [colors.red, colors.blue, colors.yellow, colors.green, colors.purple, colors.orange, colors.grey];
-        var backgroundColors = borderColors.map(x => color(x).alpha(0.5).rgbString());
+        const color = Chart.helpers.color;
+        const borderColors = [colors.red, colors.blue, colors.yellow, colors.green, colors.purple, colors.orange, colors.grey];
+        const backgroundColors = borderColors.map(x => color(x).alpha(0.5).rgbString());
 
-        var chartContainer = document.getElementById('Chart').getContext('2d');
+        const chartContainer = document.getElementById('Chart').getContext('2d');
 
-        var chart = new Chart(chartContainer, {
+        const chart = new Chart(chartContainer, {
             type: 'bar',
             data: {
                 labels: [<?= $labels ?>],

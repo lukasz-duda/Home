@@ -28,10 +28,10 @@ $toDoList = get("select s.json from to_do_list s where s.name = ?", [$listName])
     </div>
 
     <script>
-        var remarkable = new Remarkable();
+        const remarkable = new Remarkable();
 
         function Task(initialText) {
-            var me = this;
+            const me = this;
 
             me.text = ko.observable(initialText);
 
@@ -41,7 +41,7 @@ $toDoList = get("select s.json from to_do_list s where s.name = ?", [$listName])
         }
 
         function ViewModel() {
-            var me = this;
+            const me = this;
             me.initialTasksData = JSON.parse(<?= json_encode($toDoList['json']);?>);
             me.initialTasks = jQuery.map(me.initialTasksData, function (task) {
                 return new Task(task.text);
@@ -49,15 +49,15 @@ $toDoList = get("select s.json from to_do_list s where s.name = ?", [$listName])
             me.tasks = ko.observableArray(me.initialTasks);
 
             me.jsonToDoList = ko.computed(function () {
-                var tasks = ko.toJS(me.tasks);
-                var tasksData = jQuery.map(tasks, function (task) {
+                const tasks = ko.toJS(me.tasks);
+                const tasksData = jQuery.map(tasks, function (task) {
                     return {text: task.text};
                 });
                 return ko.toJSON(tasksData);
             });
         }
 
-        var viewModel = new ViewModel();
+        const viewModel = new ViewModel();
 
         ko.applyBindings(viewModel);
     </script>

@@ -161,18 +161,18 @@ order by e.timestamp desc limit 10", [$carId]);
 
     <script>
         function ViewModel() {
-            var me = this;
+            const me = this;
             me.value = ko.observable(null);
             me.fuelQuantity = ko.observable(null);
 
             me.unitPrice = ko.computed(function () {
-                var unitPrice = me.value() / me.fuelQuantity();
-                var invalid = isNaN(unitPrice) || unitPrice < 0 || !isFinite(unitPrice);
+                const unitPrice = me.value() / me.fuelQuantity();
+                const invalid = isNaN(unitPrice) || unitPrice < 0 || !isFinite(unitPrice);
                 return invalid ? '' : unitPrice.toFixed(2);
             });
         }
 
-        var viewModel = new ViewModel();
+        const viewModel = new ViewModel();
         ko.applyBindings(viewModel);
     </script>
 <?php

@@ -35,7 +35,7 @@ $otherValues = join(',', array_column($other, 'sum'));
 
     <canvas id="Chart" height="200"></canvas>
     <script>
-        var chartColors = {
+        const chartColors = {
             red: 'rgb(255, 99, 132)',
             orange: 'rgb(255, 159, 64)',
             yellow: 'rgb(255, 205, 86)',
@@ -45,11 +45,11 @@ $otherValues = join(',', array_column($other, 'sum'));
             grey: 'rgb(201, 203, 207)'
         };
 
-        var color = Chart.helpers.color;
-        var chartContainer = document.getElementById('Chart').getContext('2d');
+        const color = Chart.helpers.color;
+        const chartContainer = document.getElementById('Chart').getContext('2d');
 
 
-        var options = {
+        const options = {
             maintainAspectRatio: false,
             elements: {
                 line: {
@@ -58,7 +58,7 @@ $otherValues = join(',', array_column($other, 'sum'));
             }
         };
 
-        var chart = new Chart(chartContainer, {
+        const chart = new Chart(chartContainer, {
             type: 'line',
             data: {
                 labels: [<?= $labels ?>],

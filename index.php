@@ -28,21 +28,21 @@ $previousMonthEndDate = date("Y-m-t", strtotime($previousMonthStartDate)) . 'T23
 
     <script>
         function MenuItem(text, href) {
-            var me = this;
+            const me = this;
             me.text = text;
             me.href = href;
             me.isShortcut = false;
         }
 
         function Shortcut(text, href) {
-            var me = this;
+            const me = this;
             me.text = text;
             me.href = href;
             me.isShortcut = true;
         }
 
         function ViewModel() {
-            var me = this;
+            const me = this;
 
             me.showShortcuts = true;
 
@@ -67,7 +67,7 @@ $previousMonthEndDate = date("Y-m-t", strtotime($previousMonthStartDate)) . 'T23
             me.query = ko.observable(null);
 
             me.matchingItems = ko.computed(function () {
-                var matchingItems = jQuery.grep(me.items(), function (item) {
+                const matchingItems = jQuery.grep(me.items(), function (item) {
                     return me.showShortcuts && item.isShortcut
                         || me.query() != null && item.text.toLowerCase().indexOf(me.query().toLowerCase()) > -1;
                 });
@@ -81,7 +81,7 @@ $previousMonthEndDate = date("Y-m-t", strtotime($previousMonthStartDate)) . 'T23
             }
         }
 
-        var viewModel = new ViewModel();
+        const viewModel = new ViewModel();
         ko.applyBindings(viewModel);
     </script>
 

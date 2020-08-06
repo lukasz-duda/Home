@@ -37,12 +37,12 @@ $shoppingList = get('select s.json from shopping_list s', []);
 
     <script>
         function ViewModel() {
-            var me = this;
+            const me = this;
 
             me.shoppingList = ko.mapping.fromJSON(<?= json_encode($shoppingList['json']);?>);
             me.addShoppingItem = function () {
-                var current = me.shoppingList();
-                var newShoppingList = [{name: ko.observable(null)}].concat(current);
+                const current = me.shoppingList();
+                const newShoppingList = [{name: ko.observable(null)}].concat(current);
                 me.shoppingList(newShoppingList);
             };
 
@@ -55,7 +55,7 @@ $shoppingList = get('select s.json from shopping_list s', []);
             });
         }
 
-        var viewModel = new ViewModel();
+        const viewModel = new ViewModel();
         ko.applyBindings(viewModel);
     </script>
 <?php

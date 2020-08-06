@@ -45,10 +45,10 @@ $item = $newItem ?
     </form>
 
     <script>
-        var remarkable = new Remarkable();
+        const remarkable = new Remarkable();
 
         function ViewModel() {
-            var me = this;
+            const me = this;
 
             me.initialItem = <?= json_encode($item) ?>;
 
@@ -69,7 +69,7 @@ $item = $newItem ?
             });
         }
 
-        var viewModel = new ViewModel();
+        const viewModel = new ViewModel();
         ko.applyBindings(viewModel);
     </script>
 

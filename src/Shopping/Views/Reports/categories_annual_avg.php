@@ -21,7 +21,7 @@ $categories = array_unique(array_column($expenses, 'name'));
 
     <canvas id="Chart" height="200"></canvas>
     <script>
-        var colors = {
+        const colors = {
             red: 'rgb(255, 99, 132)',
             orange: 'rgb(255, 159, 64)',
             yellow: 'rgb(255, 205, 86)',
@@ -31,12 +31,11 @@ $categories = array_unique(array_column($expenses, 'name'));
             grey: 'rgb(201, 203, 207)'
         };
 
-        var color = Chart.helpers.color;
-        var borderColors = [colors.red, colors.blue, colors.yellow, colors.green, colors.purple, colors.orange, colors.grey];
+        const color = Chart.helpers.color;
 
-        var chartContainer = document.getElementById('Chart').getContext('2d');
+        const chartContainer = document.getElementById('Chart').getContext('2d');
 
-        var chart = new Chart(chartContainer, {
+        const chart = new Chart(chartContainer, {
             type: 'line',
             data: {
                 labels: [<?= $labels ?>],

@@ -26,7 +26,7 @@ $items = getAll('select i.id, i.header, i.keywords from knowledge_items i order 
 
     <script>
         function ViewModel() {
-            var me = this;
+            const me = this;
 
             me.items = ko.observableArray(<?= json_encode($items) ?>);
 
@@ -44,7 +44,7 @@ $items = getAll('select i.id, i.header, i.keywords from knowledge_items i order 
             }
         }
 
-        var viewModel = new ViewModel();
+        const viewModel = new ViewModel();
         ko.applyBindings(viewModel);
     </script>
 

@@ -343,7 +343,7 @@ limit 1', [$catId]);
     <script src="../../Shared/Views/knockout-min.js"></script>
     <script>
         function ViewModel() {
-            var me = this;
+            const me = this;
             me.startMealfoodId = ko.observable(null);
             me.foodName = ko.observable(null);
             me.foodDescription = ko.observable(null);
@@ -352,7 +352,7 @@ limit 1', [$catId]);
             me.foods = <?= json_encode($foods);  ?>;
             me.foodId = ko.observable(null);
             me.foodId.subscribe(function () {
-                var selectedFood = ko.utils.arrayFirst(me.foods, function (food) {
+                const selectedFood = ko.utils.arrayFirst(me.foods, function (food) {
                     if (food.id === me.foodId()) {
                         return food;
                     }
@@ -372,7 +372,7 @@ limit 1', [$catId]);
             });
         }
 
-        var viewModel = new ViewModel();
+        const viewModel = new ViewModel();
         ko.applyBindings(viewModel);
     </script>
 <?php
