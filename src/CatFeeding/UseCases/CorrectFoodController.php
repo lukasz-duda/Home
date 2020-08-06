@@ -8,7 +8,7 @@ $description = $_REQUEST['FoodDescription'];
 $weight = intval($_REQUEST['Weight']);
 $visible = intval($_REQUEST['Visible']);
 
-$saveFood = $pdo->prepare('UPDATE food SET name = ?, description = ?, visible = ? where id = ?');
+$saveFood = pdo()->prepare('UPDATE food SET name = ?, description = ?, visible = ? where id = ?');
 $foodSaved = $saveFood->execute([$name, $description, $visible, $foodId]);
 
 if ($foodSaved) {
@@ -23,7 +23,7 @@ limit 1', [$catId, $foodId]);
         showInfo('Dzienne zapotrzebowanie niezmienione.');
         return;
     }
-    $addDailyDemand = $pdo->prepare('INSERT INTO daily_demand (cat_id, food_id, weight, timestamp) VALUES (?, ?, ?, ?)');
+    $addDailyDemand = pdo()->prepare('INSERT INTO daily_demand (cat_id, food_id, weight, timestamp) VALUES (?, ?, ?, ?)');
     $dailyDemandUpdated = $addDailyDemand->execute([$catId, $foodId, $weight, date('Y-m-d H:i:s')]);
     if ($dailyDemandUpdated) {
         showInfo('Dzienne zapotrzebowanie dodane.');

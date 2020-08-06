@@ -7,13 +7,13 @@ $name = $_REQUEST['FoodName'];
 $description = $_REQUEST['FoodDescription'];
 $weight = intval($_REQUEST['Weight']);
 
-$saveFood = $pdo->prepare('INSERT INTO food (name, description, visible) VALUES (?, ?, ?)');
+$saveFood = pdo()->prepare('INSERT INTO food (name, description, visible) VALUES (?, ?, ?)');
 $foodSaved = $saveFood->execute([$name, $description, 1]);
-$foodId = $pdo->lastInsertId();
+$foodId = pdo()->lastInsertId();
 
 if ($foodSaved) {
     showInfo('Pokarm dodany.');
-    $addDailyDemand = $pdo->prepare('INSERT INTO daily_demand (cat_id, food_id, weight, timestamp) VALUES (?, ?, ?, ?)');
+    $addDailyDemand = pdo()->prepare('INSERT INTO daily_demand (cat_id, food_id, weight, timestamp) VALUES (?, ?, ?, ?)');
     $dailyDemandUpdated = $addDailyDemand->execute([$catId, $foodId, $weight, date('Y-m-d H:i:s')]);
     if ($dailyDemandUpdated) {
         showInfo('Dzienne zapotrzebowanie dodane.');

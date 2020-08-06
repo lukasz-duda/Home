@@ -11,7 +11,7 @@ $mileage = intval($_REQUEST['Mileage']);
 if ($fuelQuantity == 0)
     $fuelQuantity = null;
 
-$saveCarExpenseStatement = $pdo->prepare('INSERT INTO car_expenses (car_id, name, company_id, value, timestamp, fuel_quantity) values (?, ?, ?, ?, ?, ?) ');
+$saveCarExpenseStatement = pdo()->prepare('INSERT INTO car_expenses (car_id, name, company_id, value, timestamp, fuel_quantity) values (?, ?, ?, ?, ?, ?) ');
 $carExpenseSaved = $saveCarExpenseStatement->execute([$carId, $name, $companyId, $value, date('Y-m-d H:i:s'), $fuelQuantity]);
 
 if ($carExpenseSaved) {
@@ -24,7 +24,7 @@ if ($carExpenseSaved) {
         return;
     }
 
-    $updateMileage = $pdo->prepare('INSERT INTO mileage (car_id, date, mileage) values (?, ?, ?)');
+    $updateMileage = pdo()->prepare('INSERT INTO mileage (car_id, date, mileage) values (?, ?, ?)');
     $mileageUpdated = $updateMileage->execute([$carId, date('Y-m-d'), $mileage]);
     if ($mileageUpdated) {
         showInfo('Przebieg zaktualizowany.');

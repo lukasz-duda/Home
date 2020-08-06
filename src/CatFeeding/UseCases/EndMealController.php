@@ -10,7 +10,7 @@ $startWeight = $meal['start_weight'];
 if ($endWeight > $startWeight) {
     showWarning('Waga nie może być większa niż na początku posiłku.');
 } else {
-    $saveMeal = $pdo->prepare('UPDATE meal SET end = ?, end_weight = ? where id = ?');
+    $saveMeal = pdo()->prepare('UPDATE meal SET end = ?, end_weight = ? where id = ?');
     $mealSaved = $saveMeal->execute([date('Y-m-d H:i:s'), $endWeight, $mealId]);
 
     if ($mealSaved) {

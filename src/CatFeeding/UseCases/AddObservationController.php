@@ -4,7 +4,7 @@ include '../../Shared/Views/View.php';
 $catId = intval($_REQUEST['CatId']);
 $notes = $_REQUEST['notes'];
 
-$save = $pdo->prepare('INSERT INTO observation (cat_id, timestamp, notes) VALUES (?, ?, ?)');
+$save = pdo()->prepare('INSERT INTO observation (cat_id, timestamp, notes) VALUES (?, ?, ?)');
 $saved = $save->execute([$catId, date('Y-m-d H:i:s'), $notes]);
 
 if ($saved) {

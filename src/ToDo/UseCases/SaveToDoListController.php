@@ -9,7 +9,8 @@ if (json_decode($toDoList) === null) {
     return;
 }
 
-$saveToDoList = $pdo->prepare('update to_do_list set json = ? where name = ?');
+/** @noinspection SqlWithoutWhere */
+$saveToDoList = pdo()->prepare('update to_do_list set json = ?');
 $toDoListSaved = $saveToDoList->execute([$toDoList, $name]);
 
 if ($toDoListSaved) {

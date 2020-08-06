@@ -2,7 +2,7 @@
 include '../../Shared/Views/View.php';
 
 /** @noinspection SqlWithoutWhere */
-$statement = $pdo->prepare('update coffees set last_cleaning = current');
+$statement = pdo()->prepare('update coffees set last_cleaning = current');
 $updated = $statement->execute([]);
 
 if ($updated) {

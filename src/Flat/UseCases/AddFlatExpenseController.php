@@ -10,7 +10,7 @@ if ($person == null) {
     return;
 }
 
-$saveExpenseStatement = $pdo->prepare('INSERT INTO flat_expense (timestamp, value, name, person) values (?, ?, ?, ?)');
+$saveExpenseStatement = pdo()->prepare('INSERT INTO flat_expense (timestamp, value, name, person) values (?, ?, ?, ?)');
 $expenseSaved = $saveExpenseStatement->execute([date('Y-m-d H:i:s', time()), $value, $name, $person]);
 
 if ($expenseSaved) {

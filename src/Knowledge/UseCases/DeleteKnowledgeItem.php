@@ -3,7 +3,7 @@ include '../../Shared/Views/View.php';
 
 $id = intval($_REQUEST['Id']);
 
-$deleteKnowledgeItemStatement = $pdo->prepare('DELETE FROM knowledge_items where id = ?');
+$deleteKnowledgeItemStatement = pdo()->prepare('DELETE FROM knowledge_items where id = ?');
 $knowledgeItemDeleted = $deleteKnowledgeItemStatement->execute([$id]);
 
 if ($knowledgeItemDeleted) {

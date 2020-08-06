@@ -9,22 +9,22 @@ include __DIR__ . '/ViewUtils.php';
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Dom</title>
     <meta name="theme-color" content="#4285f4">
-    <link rel="shortcut icon" sizes="192x192" href="<?= $baseUrl ?>/src/Shared/Views/Icon/home_192.png">
-    <link rel="icon" href="<?= $baseUrl ?>/favicon.ico" type="image/x-icon">
-    <link rel="manifest" href="<?= $baseUrl ?>/manifest.json" crossorigin="use-credentials">
-    <link rel="stylesheet" href="<?= $baseUrl ?>/src/Shared/Views/jquery-ui.min.css">
-    <link rel="stylesheet" href="<?= $baseUrl ?>/src/Shared/Views/bootstrap.min.css">
-    <link rel="stylesheet" href="<?= $baseUrl ?>/src/Shared/Views/Chart.min.css">
-    <link href="<?= $baseUrl ?>/src/Shared/Views/material-icons.css" rel="stylesheet">
-    <link href="<?= $baseUrl ?>/src/Shared/Views/theme.css" rel="stylesheet">
-    <script src="<?= $baseUrl ?>/src/Shared/Views/jquery-3.4.1.min.js"></script>
-    <script src="<?= $baseUrl ?>/src/Shared/Views/jquery-ui.min.js"></script>
-    <script src="<?= $baseUrl ?>/src/Shared/Views/knockout-min.js"></script>
-    <script src="<?= $baseUrl ?>/src/Shared/Views/knockout.mapping.js"></script>
-    <script src="<?= $baseUrl ?>/src/Shared/Views/knockout-sortable.min.js"></script>
-    <script src="<?= $baseUrl ?>/src/Shared/Views/jquery.ui.touch-punch.min.js"></script>
-    <script src="<?= $baseUrl ?>/src/Shared/Views/remarkable.min.js"></script>
-    <script src="<?= $baseUrl ?>/src/Shared/Views/Chart.bundle.min.js"></script>
+    <link rel="shortcut icon" sizes="192x192" href="<?= baseUrl() ?>/src/Shared/Views/Icon/home_192.png">
+    <link rel="icon" href="<?= baseUrl() ?>/favicon.ico" type="image/x-icon">
+    <link rel="manifest" href="<?= baseUrl() ?>/manifest.json" crossorigin="use-credentials">
+    <link rel="stylesheet" href="<?= baseUrl() ?>/src/Shared/Views/jquery-ui.min.css">
+    <link rel="stylesheet" href="<?= baseUrl() ?>/src/Shared/Views/bootstrap.min.css">
+    <link rel="stylesheet" href="<?= baseUrl() ?>/src/Shared/Views/Chart.min.css">
+    <link href="<?= baseUrl() ?>/src/Shared/Views/material-icons.css" rel="stylesheet">
+    <link href="<?= baseUrl() ?>/src/Shared/Views/theme.css" rel="stylesheet">
+    <script src="<?= baseUrl() ?>/src/Shared/Views/jquery-3.4.1.min.js"></script>
+    <script src="<?= baseUrl() ?>/src/Shared/Views/jquery-ui.min.js"></script>
+    <script src="<?= baseUrl() ?>/src/Shared/Views/knockout-min.js"></script>
+    <script src="<?= baseUrl() ?>/src/Shared/Views/knockout.mapping.js"></script>
+    <script src="<?= baseUrl() ?>/src/Shared/Views/knockout-sortable.min.js"></script>
+    <script src="<?= baseUrl() ?>/src/Shared/Views/jquery.ui.touch-punch.min.js"></script>
+    <script src="<?= baseUrl() ?>/src/Shared/Views/remarkable.min.js"></script>
+    <script src="<?= baseUrl() ?>/src/Shared/Views/Chart.bundle.min.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-expand navbar-light bg-light mb-3">
@@ -40,27 +40,27 @@ include __DIR__ . '/ViewUtils.php';
                             class="material-icons-outlined">arrow_back</i></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" title="Dom" href="<?= $baseUrl ?>/index.php"><i
+                <a class="nav-link" title="Dom" href="<?= baseUrl() ?>/index.php"><i
                             class="material-icons-outlined">home</i></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" title="Szyszka" href="<?= $baseUrl ?>/src/CatFeeding/Views/index.php"><i
+                <a class="nav-link" title="Szyszka" href="<?= baseUrl() ?>/src/CatFeeding/Views/index.php"><i
                             class="material-icons-outlined">pets</i></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" title="Zakupy" href="<?= $baseUrl ?>/src/Shopping/Views/index.php"><i
+                <a class="nav-link" title="Zakupy" href="<?= baseUrl() ?>/src/Shopping/Views/index.php"><i
                             class="material-icons-outlined">local_grocery_store</i></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" title="Kawa" href="<?= $baseUrl ?>/src/Coffee/Views/index.php"><i
+                <a class="nav-link" title="Kawa" href="<?= baseUrl() ?>/src/Coffee/Views/index.php"><i
                             class="material-icons-outlined">local_cafe</i></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" title="Golf" href="<?= $baseUrl ?>/src/CarMaintenance/Views/index.php"><i
+                <a class="nav-link" title="Golf" href="<?= baseUrl() ?>/src/CarMaintenance/Views/index.php"><i
                             class="material-icons-outlined">directions_car</i></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" title="Zadania Łukasz" href="<?= $baseUrl ?>/src/ToDo/Views/edit.php?name=Łukasz"><i
+                <a class="nav-link" title="Zadania Łukasz" href="<?= baseUrl() ?>/src/ToDo/Views/edit.php?name=Łukasz"><i
                             class="material-icons-outlined">playlist_add</i></a>
             </li>
         </ul>

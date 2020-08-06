@@ -22,8 +22,7 @@ function get($query, $params)
 
 function getAll($query, $params)
 {
-    global $pdo;
-    $statement = $pdo->prepare($query);
+    $statement = pdo()->prepare($query);
     $statement->execute($params);
     return $statement->fetchAll();
 }
@@ -90,4 +89,24 @@ function baseUrl()
 {
     global $baseUrl;
     return $baseUrl;
+}
+
+function pdo()
+{
+    global $pdo;
+    return $pdo;
+}
+
+$start = time();
+
+function tooLong()
+{
+    global $start;
+    return time() - $start > 0;
+}
+
+function timeSpent()
+{
+    global $start;
+    return time() - $start;
 }

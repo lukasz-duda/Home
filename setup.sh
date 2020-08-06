@@ -13,30 +13,29 @@ sudo apt install libapache2-mod-php
 
 echo -e "${TITLE_START}Install web page${TITLE_END}"
 APP_DIR=/var/www/html/Home
-if test -d $APP_DIR;
-then
-	echo 'Already installed'
+if test -d $APP_DIR; then
+  echo 'Already installed'
 else
-	sudo ln -s `pwd` $APP_DIR
+  sudo ln -s "$(pwd)" $APP_DIR
 fi
 
 echo -e "${TITLE_START}Seting up MySQL databases${TITLE_END}"
-sudo mysql < src/Shared/Infrastructure/database.sql
+sudo cat src/Shared/Infrastructure/database.sql | sudo mysql
 echo 'Type password: home'
 mysql_config_editor set --login-path=local --host=localhost --user=home --password
 mysql_config_editor print --all
-mysql --login-path=local --database=home_test < src/CarMaintenance/Infrastructure/database.sql
-mysql --login-path=local --database=home_test < src/CatFeeding/Infrastructure/database.sql
-mysql --login-path=local --database=home_test < src/Coffee/Infrastructure/database.sql
-mysql --login-path=local --database=home_test < src/Flat/Infrastructure/database.sql
-mysql --login-path=local --database=home_test < src/Knowledge/Infrastructure/database.sql
-mysql --login-path=local --database=home_test < src/Shopping/Infrastructure/database.sql
-mysql --login-path=local --database=home_test < src/ToDo/Infrastructure/database.sql
+mysql --login-path=local --database=home_test <src/CarMaintenance/Infrastructure/database.sql
+mysql --login-path=local --database=home_test <src/CatFeeding/Infrastructure/database.sql
+mysql --login-path=local --database=home_test <src/Coffee/Infrastructure/database.sql
+mysql --login-path=local --database=home_test <src/Flat/Infrastructure/database.sql
+mysql --login-path=local --database=home_test <src/Knowledge/Infrastructure/database.sql
+mysql --login-path=local --database=home_test <src/Shopping/Infrastructure/database.sql
+mysql --login-path=local --database=home_test <src/ToDo/Infrastructure/database.sql
 
-mysql --login-path=local --database=home < src/CarMaintenance/Infrastructure/database.sql
-mysql --login-path=local --database=home < src/CatFeeding/Infrastructure/database.sql
-mysql --login-path=local --database=home < src/Coffee/Infrastructure/database.sql
-mysql --login-path=local --database=home < src/Flat/Infrastructure/database.sql
-mysql --login-path=local --database=home < src/Knowledge/Infrastructure/database.sql
-mysql --login-path=local --database=home < src/Shopping/Infrastructure/database.sql
-mysql --login-path=local --database=home < src/ToDo/Infrastructure/database.sql
+mysql --login-path=local --database=home <src/CarMaintenance/Infrastructure/database.sql
+mysql --login-path=local --database=home <src/CatFeeding/Infrastructure/database.sql
+mysql --login-path=local --database=home <src/Coffee/Infrastructure/database.sql
+mysql --login-path=local --database=home <src/Flat/Infrastructure/database.sql
+mysql --login-path=local --database=home <src/Knowledge/Infrastructure/database.sql
+mysql --login-path=local --database=home <src/Shopping/Infrastructure/database.sql
+mysql --login-path=local --database=home <src/ToDo/Infrastructure/database.sql

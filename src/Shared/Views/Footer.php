@@ -6,6 +6,10 @@ include_once __DIR__ . '/View.php';
     <script>
         document.title = $('h1').first().text() || 'Dom';
     </script>
+
+    <div class="alert alert-warning" role="alert" style="display: <?= tooLong() ? 'block' : 'none' ?>">
+        Przetwarzanie trwało <?= timeSpent() ?> s.
+    </div>
 <?php
 
 echo '</div>

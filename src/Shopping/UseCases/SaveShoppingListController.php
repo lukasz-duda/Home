@@ -8,7 +8,8 @@ if (json_decode($shoppingList) === null) {
     return;
 }
 
-$saveShoppingList = $pdo->prepare('update shopping_list set json = ?');
+/** @noinspection SqlWithoutWhere */
+$saveShoppingList = pdo()->prepare('update shopping_list set json = ?');
 $shoppingListSaved = $saveShoppingList->execute([$shoppingList]);
 
 if ($shoppingListSaved) {

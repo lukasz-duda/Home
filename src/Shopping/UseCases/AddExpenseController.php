@@ -9,6 +9,7 @@ switch ($refund) {
     case 'NoRefund':
         $value = floatval($_REQUEST['Value']);
         $noRefund = true;
+        $forMe = 0;
         break;
     case 'RefundToMe':
         $value = floatval($_REQUEST['Value']) / 2;
@@ -30,12 +31,16 @@ switch ($refund) {
         $noRefund = false;
         $forMe = 0;
         break;
+    default:
+        showError('Wybrano niepoprawną opcję zwrotu.');
+        include '../../Shared/Views/Footer.php';
+        return;
 }
 
-$saveExpenseStatement = $pdo->prepare('INSERT INTO expenses (timestamp, value, name, category_id) values (?, ?, ?, ?)');
+$saveExpenseStatement = pdo()->prepare('INSERT INTO expenses (timestamp, value, name, category_id) values (?, ?, ?, ?)');
 $expenseSaved = $saveExpenseStatement->execute([date('Y-m-d H:i:s', time()), $value, $name, $categoryId]);
 
-$expenseId = $pdo->lastInsertId();
+$expenseId = pdo()->lastInsertId();
 
 if ($expenseSaved) {
     showInfo('Zakup dodany.');
@@ -45,7 +50,7 @@ if ($expenseSaved) {
         return;
     }
 
-    $refundStatement = $pdo->prepare('INSERT INTO refund_plan (expense_id, for_me) values (?, ?)');
+    $refundStatement = pdo()->prepare('INSERT INTO refund_plan (expense_id, for_me) values (?, ?)');
     $refundSaved = $refundStatement->execute([$expenseId, $forMe]);
 
     if (!$refundSaved) {

@@ -3,7 +3,7 @@ include '../../Shared/Views/View.php';
 
 $coffeesCount = intval($_REQUEST['CoffesCount']);
 
-$statement = $pdo->prepare('update coffees set current = current + ?');
+$statement = pdo()->prepare('update coffees set current = current + ?');
 $updated = $statement->execute([$coffeesCount]);
 
 if ($updated) {

@@ -25,7 +25,7 @@ $toDoList = get("select s.json from to_do_list s where s.name = ?", [$listName])
 
             <div class="list-group" data-bind="foreach: tasks">
                 <div class="list-group-item" data-bind="click: edit">
-                      <div data-bind="visible: !editing(), html: formatted"></div>
+                    <div data-bind="visible: !editing(), html: formatted"></div>
                     <div class="form-group m-0" data-bind="visible: editing">
                             <textarea class="form-control" rows="3" minlength="2" maxlength="4000"
                                       placeholder="Opis zadania" required
@@ -86,7 +86,7 @@ $toDoList = get("select s.json from to_do_list s where s.name = ?", [$listName])
             });
 
             me.sort = function () {
-                window.location = '<?= $baseUrl ?>/src/ToDo/Views/sort.php?name=<?= $listName ?>';
+                window.location = '<?= baseUrl() ?>/src/ToDo/Views/sort.php?name=<?= $listName ?>';
             };
         }
 

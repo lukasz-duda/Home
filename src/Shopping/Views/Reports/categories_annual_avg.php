@@ -33,7 +33,6 @@ $categories = array_unique(array_column($expenses, 'name'));
 
         var color = Chart.helpers.color;
         var borderColors = [colors.red, colors.blue, colors.yellow, colors.green, colors.purple, colors.orange, colors.grey];
-        var backgroundColors = borderColors.map(x => color(x).alpha(0.5).rgbString());
 
         var chartContainer = document.getElementById('Chart').getContext('2d');
 

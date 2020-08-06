@@ -11,14 +11,14 @@ if ($foodId == 0) {
     return;
 }
 
-$saveMeal = $pdo->prepare('INSERT INTO meal (cat_id, food_id, start, start_weight) values (?, ?, ?, ?)');
+$saveMeal = pdo()->prepare('INSERT INTO meal (cat_id, food_id, start, start_weight) values (?, ?, ?, ?)');
 $mealSaved = $saveMeal->execute([$catId, $foodId, date('Y-m-d H:i:s'), $weight]);
 
 if ($mealSaved) {
     showInfo('Posiłek rozpoczęty.');
 
     if ($medicineApplied) {
-        $applyMedicine = $pdo->prepare('insert into medicine (cat_id, date) values (?, ?)');
+        $applyMedicine = pdo()->prepare('insert into medicine (cat_id, date) values (?, ?)');
         $applyMedicineSuccess = $applyMedicine->execute([$catId, date('Y-m-d')]);
 
         if ($applyMedicineSuccess) {

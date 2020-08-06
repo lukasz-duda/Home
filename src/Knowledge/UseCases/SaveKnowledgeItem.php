@@ -8,8 +8,8 @@ $content = $_REQUEST['Content'];
 $keywords = $_REQUEST['Keywords'];
 
 $saveKnowledgeItemStatement = $newItem ?
-    $pdo->prepare('INSERT INTO knowledge_items (header, content, keywords, date) VALUES (?, ?, ?, ?)') :
-    $pdo->prepare('UPDATE knowledge_items SET header = ?, content = ?, keywords = ? where id = ?');
+    pdo()->prepare('INSERT INTO knowledge_items (header, content, keywords, date) VALUES (?, ?, ?, ?)') :
+    pdo()->prepare('UPDATE knowledge_items SET header = ?, content = ?, keywords = ? where id = ?');
 
 $knowledgeItemSaved = $newItem ?
     $saveKnowledgeItemStatement->execute([$header, $content, $keywords, date('Y-m-d')]) :
