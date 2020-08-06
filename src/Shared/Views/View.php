@@ -44,7 +44,7 @@ include __DIR__ . '/ViewUtils.php';
                             class="material-icons-outlined">home</i></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" title="Szyszka" href="<?= baseUrl() ?>/src/CatFeeding/Views/index.php"><i
+                <a class="nav-link" title="Szyszka" href="<?= baseUrl() ?>/src/CatFeeding/Views/cat.php?Id=1"><i
                             class="material-icons-outlined">pets</i></a>
             </li>
             <li class="nav-item">
@@ -60,7 +60,8 @@ include __DIR__ . '/ViewUtils.php';
                             class="material-icons-outlined">directions_car</i></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" title="Zadania Łukasz" href="<?= baseUrl() ?>/src/ToDo/Views/edit.php?name=Łukasz"><i
+                <a class="nav-link" title="Zadania Łukasz"
+                   href="<?= baseUrl() ?>/src/ToDo/Views/edit.php?name=Łukasz"><i
                             class="material-icons-outlined">playlist_add</i></a>
             </li>
         </ul>

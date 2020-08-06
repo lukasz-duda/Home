@@ -49,9 +49,8 @@ $previousMonthEndDate = date("Y-m-t", strtotime($previousMonthStartDate)) . 'T23
             me.items = ko.observableArray([
                 new MenuItem('Samochód', 'src/CarMaintenance/Views/index.php'),
                 new MenuItem('Roczne wydatki na samochód', 'src/CarMaintenance/Views/Reports/car_annual.php'),
-                new MenuItem('Koty', 'src/CatFeeding/Views/index.php'),
-                new Shortcut('Szyszka', 'src/CatFeeding/Views/cat.php?Id=1'),
-                new MenuItem('Mgiełka', 'src/CatFeeding/Views/cat.php?Id=2'),
+                new MenuItem('Szyszka', 'src/CatFeeding/Views/cat.php?Id=1'),
+                new Shortcut('Mgiełka', 'src/CatFeeding/Views/cat.php?Id=2'),
                 new MenuItem('Kawa', 'src/Coffee/Views/index.php'),
                 new Shortcut('Mieszkanie', 'src/Flat/Views/index.php'),
                 new Shortcut('Baza wiedzy', 'src/Knowledge/Views/index.php'),
