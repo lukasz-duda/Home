@@ -97,16 +97,19 @@ function pdo()
     return $pdo;
 }
 
-$start = time();
+$start = microtime(true);
+$duration = 0.0;
 
 function tooLong()
 {
-    global $start;
-    return time() - $start > 0;
+    global $start, $duration;
+    $duration = microtime(true) - $start;
+    $limit = 0.5;
+    return $duration > $limit;
 }
 
 function timeSpent()
 {
-    global $start;
-    return time() - $start;
+    global $duration;
+    return sprintf('%.2f', $duration);
 }
