@@ -15,6 +15,7 @@ $shoppingList = get('select s.json from shopping_list s', []);
             <div data-bind="foreach: shoppingList">
                 <div class="form-group">
                     <div class="input-group">
+                        <!--suppress HtmlFormInputWithoutLabel -->
                         <input type="text" class="form-control" placeholder="Nazwa pozycji listy zakupów" required
                                minlength="2" maxlength="250"
                                data-bind="value: name">

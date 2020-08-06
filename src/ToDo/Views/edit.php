@@ -27,9 +27,10 @@ $toDoList = get("select s.json from to_do_list s where s.name = ?", [$listName])
                 <div class="list-group-item" data-bind="click: edit">
                     <div data-bind="visible: !editing(), html: formatted"></div>
                     <div class="form-group m-0" data-bind="visible: editing">
-                            <textarea class="form-control" rows="3" minlength="2" maxlength="4000"
-                                      placeholder="Opis zadania" required
-                                      data-bind="value: text, hasFocus: editing"></textarea>
+                        <!--suppress HtmlFormInputWithoutLabel -->
+                        <textarea class="form-control" rows="3" minlength="2" maxlength="4000"
+                                  placeholder="Opis zadania" required
+                                  data-bind="value: text, hasFocus: editing"></textarea>
                     </div>
                     <button class="btn btn-outline-secondary mt-3" data-bind="click: $parent.removeTask">Usuń</button>
                 </div>
