@@ -17,8 +17,7 @@ function get($query, $params)
     global $pdo;
     $statement = $pdo->prepare($query);
     $statement->execute($params);
-    $row = $statement->fetch();
-    return $row;
+    return $statement->fetch();
 }
 
 function getAll($query, $params)
@@ -26,8 +25,7 @@ function getAll($query, $params)
     global $pdo;
     $statement = $pdo->prepare($query);
     $statement->execute($params);
-    $rows = $statement->fetchAll();
-    return $rows;
+    return $statement->fetchAll();
 }
 
 function showInfo($text)
@@ -72,4 +70,24 @@ function showDecimal($value, $decimals)
 function showDate($value)
 {
     return date('Y-m-d', $value);
+}
+
+$now = time();
+
+function now()
+{
+    global $now;
+    return date('Y-m-d H:m:s', $now);
+}
+
+function today()
+{
+    global $now;
+    return date('Y-m-d', $now);
+}
+
+function baseUrl()
+{
+    global $baseUrl;
+    return $baseUrl;
 }

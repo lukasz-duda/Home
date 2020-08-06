@@ -45,17 +45,19 @@ from (
          order by m.start desc
      ) meals
 order by meals.start desc', [$catId, date('Y-m-d', strtotime('-2 days'))]);
-$now = time();
-$lastPoop = get('select p.timestamp
+
+$lastPoop = get('select p.timestamp,
+       timestampdiff(day, p.timestamp, ?) >= 3 as warning
 from poop p
 where p.cat_id = ?
 order by p.timestamp desc
-limit 1', [$catId]);
-$lastPee = get('select p.timestamp
+limit 1', [now(), $catId]);
+$lastPee = get('select p.timestamp,
+       timestampdiff(day, p.timestamp, ?) >= 1 as warning
 from pee p
 where p.cat_id = ?
 order by p.timestamp desc
-limit 1', [$catId]);
+limit 1', [now(), $catId]);
 $dailyDemand = get('select sum(meals.meal_weight / meals.daily_demand_weight * 100) as total
 from (
          select m.start_weight,
@@ -73,7 +75,7 @@ from (
                   join food f on m.food_id = f.id
          where m.cat_id = ?
            and datediff(m.start, ?) = 0
-     ) meals', [$catId, date('Y-m-d', $now)]);
+     ) meals', [$catId, today()]);
 $yesterdayDemand = get('select sum(meals.meal_weight / meals.daily_demand_weight * 100) as total
 from (
          select m.start_weight,
@@ -98,7 +100,7 @@ $medicineApplied = get('select exists(
                where cat_id = ?
                  and date = ?
            )
-           as medicine_applied', [$catId, date('Y-m-d', $now)])[0] == 1;
+           as medicine_applied', [$catId, today()])[0] == 1;
 $lastObservation = get('select timestamp, notes
 from observation
 where cat_id = ?
@@ -195,9 +197,11 @@ limit 1', [$catId]);
             <div class="card mb-3">
                 <div class="card-header">Podsumowanie dnia</div>
                 <div class="card-body">
-                    Teraz: <?= date('Y-m-d H:i:s', $now); ?><br/>
-                    Ostatnia kupa: <?= $lastPoop['timestamp'] ?><br/>
-                    Ostatnie siku: <?= $lastPee['timestamp'] ?><br/>
+                    Teraz: <?= now() ?><br/>
+                    Ostatnia kupa:
+                    <span class="<?= $lastPoop['warning'] == 1 ? 'text-danger' : 'text-info' ?>"><?= $lastPoop['timestamp'] ?></span><br/>
+                    Ostatnie siku: <span
+                            class="<?= $lastPee['warning'] == 1 ? 'text-danger' : 'text-info' ?>"><?= $lastPee['timestamp'] ?></span><br/>
                     Zapotrzebowanie dzisiaj: <?= showInt($dailyDemand['total']); ?> %<br/>
                     Zapotrzebowanie wczoraj: <?= showInt($yesterdayDemand['total']); ?> %<br/>
                     <div class="form-check">
