@@ -36,6 +36,10 @@ include __DIR__ . '/ViewUtils.php';
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
+                <a class="nav-link" title="Wstecz" href="<?= $_SERVER['HTTP_REFERER'] ?>"><i
+                            class="material-icons-outlined">arrow_back</i></a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" title="Dom" href="<?= $baseUrl ?>/index.php"><i
                             class="material-icons-outlined">home</i></a>
             </li>
@@ -58,10 +62,6 @@ include __DIR__ . '/ViewUtils.php';
             <li class="nav-item">
                 <a class="nav-link" title="Zadania Łukasz" href="<?= $baseUrl ?>/src/ToDo/Views/edit.php?name=Łukasz"><i
                             class="material-icons-outlined">playlist_add</i></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" title="Zadania Ilona" href="<?= $baseUrl ?>/src/ToDo/Views/edit.php?name=Ilona"><i
-                            class="material-icons-outlined">playlist_add_check</i></a>
             </li>
         </ul>
     </div>
