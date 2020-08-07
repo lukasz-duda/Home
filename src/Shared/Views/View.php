@@ -36,7 +36,8 @@ include __DIR__ . '/ViewUtils.php';
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" title="Wstecz" href="<?= $_SERVER['HTTP_REFERER'] ?>"><i
+                <a class="nav-link" title="Wstecz"
+                   href="<?= isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : baseUrl() ?>"><i
                             class="material-icons-outlined">arrow_back</i></a>
             </li>
             <li class="nav-item">

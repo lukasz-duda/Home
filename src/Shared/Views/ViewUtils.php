@@ -111,5 +111,5 @@ function tooLong()
 function timeSpent()
 {
     global $duration;
-    return sprintf('%.2f', $duration);
+    return sprintf('%.1f', $duration);
 }

@@ -2,6 +2,13 @@
 include "../../Shared/Views/View.php";
 $catId = intval($_REQUEST['Id']);
 $cat = get('SELECT name FROM cats WHERE id = ?', [$catId]);
+
+if (!$cat) {
+    showError('Nie znaleziono wybranego kota.');
+    include '../../Shared/Views/Footer.php';
+    return;
+}
+
 $catName = $cat['name'];
 $foods = getAll('SELECT f.id, f.name, f.description, f.visible,
 (

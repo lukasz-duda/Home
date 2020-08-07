@@ -14,7 +14,7 @@ $previousMonthEndDate = date("Y-m-t", strtotime($previousMonthStartDate)) . 'T23
         <label for="Search">Szukaj w menu</label>
         <div class="input-group mb-3">
             <input type="search" class="form-control" id="Search" data-bind="value: query, hasFocus: true"
-                   aria-describedby="Searchicon">
+                   aria-describedby="SearchIcon">
             <div class="input-group-append">
                 <span class="input-group-text" id="SearchIcon"><i class="material-icons-outlined"
                                                                   style="font-size: inherit">search</i></span>
