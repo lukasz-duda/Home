@@ -76,7 +76,7 @@ $now = time();
 function now()
 {
     global $now;
-    return date('Y-m-d H:m:s', $now);
+    return date('Y-m-d H:i:s', $now);
 }
 
 function today()
