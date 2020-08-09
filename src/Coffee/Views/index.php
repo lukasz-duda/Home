@@ -13,19 +13,19 @@ if ($coffeesUntilCleaning <= 0) {
 
 ?>
 
-    <form action="../UseCases/MakeCoffeeController.php" method="post">
+    <form action="../UseCases/MakeCoffeeUseCase.php" method="post">
         <input type="hidden" name="CoffesCount" value="1">
         <div class="form-group">
             <button class="btn btn-primary" type="submit">Zrób kawę</button>
         </div>
     </form>
-    <form action="../UseCases/MakeCoffeeController.php" method="post">
+    <form action="../UseCases/MakeCoffeeUseCase.php" method="post">
         <input type="hidden" name="CoffesCount" value="2">
         <div class="form-group">
             <button class="btn btn-primary" type="submit">Zrób dwie kawy</button>
         </div>
     </form>
-    <form action="../UseCases/CleanUpController.php" method="post">
+    <form action="../UseCases/CleanUpUseCase.php" method="post">
         <div class="form-group">
             <button class="btn btn-primary" type="submit">Umyj ekspres</button>
         </div>

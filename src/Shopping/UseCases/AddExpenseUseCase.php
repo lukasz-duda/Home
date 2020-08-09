@@ -1,9 +1,17 @@
 <?php
-include '../../Shared/Views/View.php';
+include '../../Shared/UseCases/UseCase.php';
 
-$categoryId = $_REQUEST['CategoryId'] == '-1' ? null : intval($_REQUEST['CategoryId']);
+$categoryId = intval($_REQUEST['CategoryId']);
 $name = $_REQUEST['Name'];
 $refund = $_REQUEST['Refund'];
+
+if (notValidId($categoryId)) {
+    showFinalWarning('Nie wybrano kategorii.');
+}
+
+if (notValidString($name)) {
+    showFinalWarning('Nie podano nazwy.');
+}
 
 switch ($refund) {
     case 'NoRefund':
@@ -32,9 +40,7 @@ switch ($refund) {
         $forMe = 0;
         break;
     default:
-        showError('Wybrano niepoprawną opcję zwrotu.');
-        include '../../Shared/Views/Footer.php';
-        return;
+        showFinalWarning('Wybrano niepoprawną opcję zwrotu.');
 }
 
 $saveExpenseStatement = pdo()->prepare('INSERT INTO expenses (timestamp, value, name, category_id) values (?, ?, ?, ?)');

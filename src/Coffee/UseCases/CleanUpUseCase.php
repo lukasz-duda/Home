@@ -1,5 +1,5 @@
 <?php
-include '../../Shared/Views/View.php';
+include '../../Shared/UseCases/UseCase.php';
 
 /** @noinspection SqlWithoutWhere */
 $statement = pdo()->prepare('update coffees set last_cleaning = current');

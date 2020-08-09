@@ -42,6 +42,12 @@ function showError($text)
     printf('<div class="alert alert-danger" role="alert">%s</div>', $text);
 }
 
+function showFinalWarning($text)
+{
+    showWarning($text);
+    include '../../Shared/Views/Footer.php';
+    exit();
+}
 
 /**
  * @param $statement PDOStatement

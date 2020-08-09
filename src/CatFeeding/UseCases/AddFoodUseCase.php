@@ -1,11 +1,22 @@
 <?php
-
-include '../../Shared/Views/View.php';
+include '../../Shared/UseCases/UseCase.php';
 
 $catId = intval($_REQUEST['CatId']);
 $name = $_REQUEST['FoodName'];
 $description = $_REQUEST['FoodDescription'];
 $weight = intval($_REQUEST['Weight']);
+
+if (notValidId($catId)) {
+    showFinalWarning('Nie wybrano kota.');
+}
+
+if (notValidString($name)) {
+    showFinalWarning('Nie podano nazwy.');
+}
+
+if (notValidValue($weight)) {
+    showFinalWarning('Nie podano wagi.');
+}
 
 $saveFood = pdo()->prepare('INSERT INTO food (name, description, visible) VALUES (?, ?, ?)');
 $foodSaved = $saveFood->execute([$name, $description, 1]);

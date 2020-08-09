@@ -19,7 +19,7 @@ $last = getAll('select timestamp, person, name, value from flat_expense order by
     <div class="card mb-3">
         <div class="card-header">Nowa wpłata</div>
         <div class="card-body">
-            <form action="../UseCases/AddFlatExpenseController.php" method="post">
+            <form action="../UseCases/AddFlatExpenseUseCase.php" method="post">
                 <div class="form-group">
                     <label for="Value">Wartość</label>
                     <input class="form-control" id="Value" name="Value" required type="number" step="0.01" min="5"

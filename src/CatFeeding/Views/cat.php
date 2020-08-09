@@ -3,10 +3,8 @@ include "../../Shared/Views/View.php";
 $catId = intval($_REQUEST['Id']);
 $cat = get('SELECT name FROM cats WHERE id = ?', [$catId]);
 
-if (!$cat) {
-    showError('Nie znaleziono wybranego kota.');
-    include '../../Shared/Views/Footer.php';
-    return;
+if (notValidId($catId)) {
+    showFinalWarning('Nie znaleziono wybranego kota.');
 }
 
 $catName = $cat['name'];
@@ -126,7 +124,7 @@ limit 1', [$catId]);
             <div class="card mb-3">
                 <div class="card-header">Rozpocznij posiłek</div>
                 <div class="card-body">
-                    <form action="../UseCases/StartMealController.php" method="post">
+                    <form action="../UseCases/StartMealUseCase.php" method="post">
                         <input type="hidden" name="CatId" value="<?= $catId ?>">
                         <div class="form-group">
                             <label for="MealFoodId">Pokarm</label>
@@ -156,7 +154,7 @@ limit 1', [$catId]);
                     <div class="list-group">
                         <?php foreach ($meals as $meal) {
                             ?>
-                            <form action="../UseCases/EndMealController.php" method="post">
+                            <form action="../UseCases/EndMealUseCase.php" method="post">
                                 <input type="hidden" name="MealId" value="<?= $meal['id'] ?>"/>
                                 <div class="form-group">
                                     <label for="Meal<?= $meal['id'] ?>Weight">Waga <?= $meal['name'] ?> po
@@ -185,13 +183,13 @@ limit 1', [$catId]);
             <div class="card mb-3">
                 <div class="card-header">Toaleta</div>
                 <div class="card-body">
-                    <form action="../UseCases/AddPoopController.php" method="post">
+                    <form action="../UseCases/AddPoopUseCase.php" method="post">
                         <input type="hidden" name="CatId" value="<?= $catId ?>">
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Kupa</button>
                         </div>
                     </form>
-                    <form action="../UseCases/AddPeeController.php" method="post">
+                    <form action="../UseCases/AddPeeUseCase.php" method="post">
                         <input type="hidden" name="CatId" value="<?= $catId ?>">
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Siku</button>
@@ -239,11 +237,11 @@ limit 1', [$catId]);
     <div class="card mb-3">
         <div class="card-header">Obserwacja</div>
         <div class="card-body">
-            <form action="../UseCases/AddObservationController.php" method="post">
+            <form action="../UseCases/AddObservationUseCase.php" method="post">
                 <input type="hidden" name="CatId" value="<?= $catId ?>">
                 <div class="form-group">
                     <label for="ObservationNotes">Opis</label>
-                    <textarea id="ObservationNotes" name="notes" class="form-control" required minlength="5"
+                    <textarea id="ObservationNotes" name="Notes" class="form-control" required minlength="5"
                               maxlength="250"></textarea>
                 </div>
                 <div class="form-group">
@@ -258,7 +256,7 @@ limit 1', [$catId]);
             <div class="card mb-3">
                 <div class="card-header">Popraw pokarm</div>
                 <div class="card-body">
-                    <form action="../UseCases/CorrectFoodController.php" method="post">
+                    <form action="../UseCases/CorrectFoodUseCase.php" method="post">
                         <input type="hidden" name="CatId" value="<?= $catId ?>">
                         <div class="form-group">
                             <label for="FoodId">Pokarm</label>
@@ -300,7 +298,7 @@ limit 1', [$catId]);
             <div class="card mb-3">
                 <div class="card-header">Dodaj pokarm</div>
                 <div class="card-body">
-                    <form action="../UseCases/AddFoodController.php" method="post">
+                    <form action="../UseCases/AddFoodUseCase.php" method="post">
                         <input type="hidden" name="CatId" value="<?= $catId ?>">
                         <div class="form-group">
                             <label for="NewFoodName">Nazwa</label>

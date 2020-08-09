@@ -8,7 +8,7 @@ $item = $newItem ?
 ?>
 
     <h1 data-bind="visible: !editing(), text: header"></h1>
-    <form method="post" action="../UseCases/SaveKnowledgeItem.php">
+    <form method="post" action="../UseCases/SaveKnowledgeItemUseCase.php">
         <div class="form-group" data-bind="visible: editing">
             <label for="Header">Nagłówek</label>
             <input name="Header" id="Header" class="form-control" minlength="2" required maxlength="250"
@@ -37,7 +37,7 @@ $item = $newItem ?
             <button class="btn btn-secondary" data-bind="visible: editing, click: toggleEdit">Podgląd</button>
         </div>
     </form>
-    <form method="post" action="../UseCases/DeleteKnowledgeItem.php">
+    <form method="post" action="../UseCases/DeleteKnowledgeItemUseCase.php">
         <div class="form-group">
             <input type="hidden" name="Id" value="<?= $itemId ?>"/>
             <button class="btn btn-secondary">Usuń</button>

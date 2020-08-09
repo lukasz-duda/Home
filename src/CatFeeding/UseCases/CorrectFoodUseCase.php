@@ -1,5 +1,5 @@
 <?php
-include '../../Shared/Views/View.php';
+include '../../Shared/UseCases/UseCase.php';
 
 $catId = intval($_REQUEST['CatId']);
 $foodId = intval($_REQUEST['FoodId']);
@@ -7,6 +7,22 @@ $name = $_REQUEST['FoodName'];
 $description = $_REQUEST['FoodDescription'];
 $weight = intval($_REQUEST['Weight']);
 $visible = intval($_REQUEST['Visible']);
+
+if (notValidId($catId)) {
+    showFinalWarning('Nie wybrano kota.');
+}
+
+if (notValidId($foodId)) {
+    showFinalWarning('Nie wybrano pokarmu.');
+}
+
+if (notValidString($name)) {
+    showFinalWarning('Nie podano nazwy pokarmu.');
+}
+
+if (notValidValue($weight)) {
+    showFinalWarning('Nie podano dziennego zapotrzebowania.');
+}
 
 $saveFood = pdo()->prepare('UPDATE food SET name = ?, description = ?, visible = ? where id = ?');
 $foodSaved = $saveFood->execute([$name, $description, $visible, $foodId]);

@@ -1,7 +1,11 @@
 <?php
-include '../../Shared/Views/View.php';
+include '../../Shared/UseCases/UseCase.php';
 
 $id = intval($_REQUEST['Id']);
+
+if (notValidId($id)) {
+    showFinalWarning('Nie wybrano pozycji bazy wiedzy.');
+}
 
 $deleteKnowledgeItemStatement = pdo()->prepare('DELETE FROM knowledge_items where id = ?');
 $knowledgeItemDeleted = $deleteKnowledgeItemStatement->execute([$id]);

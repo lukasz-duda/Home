@@ -1,14 +1,21 @@
 <?php
-include '../../Shared/Views/View.php';
+include '../../Shared/UseCases/UseCase.php';
 
 $catId = intval($_REQUEST['CatId']);
 $foodId = intval($_REQUEST['FoodId']);
 $weight = intval($_REQUEST['Weight']);
 $medicineApplied = $_REQUEST['MedicineApplied'] != null;
 
-if ($foodId == 0) {
-    showInfo('Nie wybrano pokarmu. Spróbuj jeszcze raz.');
-    return;
+if (notValidId($catId)) {
+    showFinalWarning('Nie wybrano kota');
+}
+
+if (notValidId($foodId)) {
+    showFinalWarning('Nie wybrano pokarmu.');
+}
+
+if (notValidValue($weight)) {
+    showFinalWarning('Nie podano wagi.');
 }
 
 $saveMeal = pdo()->prepare('INSERT INTO meal (cat_id, food_id, start, start_weight) values (?, ?, ?, ?)');

@@ -25,7 +25,7 @@ $shoppingList = get('select s.json from shopping_list s', []);
     <div class="card mb-3">
         <div class="card-header">Dodaj</div>
         <div class="card-body">
-            <form action="../UseCases/AddExpenseController.php" method="post">
+            <form action="../UseCases/AddExpenseUseCase.php" method="post">
                 <div class="form-group">
                     <label for="Value">Wartość zakupu</label>
                     <input class="form-control" id="Value" name="Value" type="number" step="0.01" min="1" max="500000"
@@ -87,7 +87,7 @@ $shoppingList = get('select s.json from shopping_list s', []);
                 </div>
                 <div class="form-group">
                     <label for="CategoryId">Kategoria</label>
-                    <select class="form-control" id="CategoryId" name="CategoryId">
+                    <select class="form-control" id="CategoryId" name="CategoryId" required>
                         <?php
                         foreach ($categories as $category) {
                             ?>
@@ -113,7 +113,7 @@ $shoppingList = get('select s.json from shopping_list s', []);
                 Do zwrotu dla Łukasza: <?= showMoney($forMe['value']); ?><br/>
                 Kwota do rozliczenia przez Łukasza: <?= showMoney($forIlona['value'] - $forMe['value']); ?>
             </p>
-            <form action="../UseCases/RefundController.php" method="post">
+            <form action="../UseCases/RefundUseCase.php" method="post">
                 <div class="form-group">
                     <button class="btn btn-primary">Rozlicz</button>
                 </div>

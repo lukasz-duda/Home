@@ -1,7 +1,11 @@
 <?php
-include '../../Shared/Views/View.php';
+include '../../Shared/UseCases/UseCase.php';
 
 $coffeesCount = intval($_REQUEST['CoffesCount']);
+
+if (notValidValue($coffeesCount)) {
+    showFinalWarning('Nie wybrano liczby kaw.');
+}
 
 $statement = pdo()->prepare('update coffees set current = current + ?');
 $updated = $statement->execute([$coffeesCount]);

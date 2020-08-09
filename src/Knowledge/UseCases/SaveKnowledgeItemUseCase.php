@@ -1,11 +1,23 @@
 <?php
-include '../../Shared/Views/View.php';
+include '../../Shared/UseCases/UseCase.php';
 
 $id = intval($_REQUEST['Id']);
 $newItem = $id == 0;
 $header = $_REQUEST['Header'];
 $content = $_REQUEST['Content'];
 $keywords = $_REQUEST['Keywords'];
+
+if (notValidString($header)) {
+    showFinalWarning('Nie podano nagłówka.');
+}
+
+if (notValidString($content)) {
+    showFinalWarning('Nie podano zawartości.');
+}
+
+if (notValidString($keywords)) {
+    showFinalWarning('Nie podano słów kluczowych.');
+}
 
 $saveKnowledgeItemStatement = $newItem ?
     pdo()->prepare('INSERT INTO knowledge_items (header, content, keywords, date) VALUES (?, ?, ?, ?)') :

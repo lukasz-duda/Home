@@ -1,13 +1,20 @@
 <?php
-include '../../Shared/Views/View.php';
+include '../../Shared/UseCases/UseCase.php';
 
 $name = $_REQUEST['Name'];
 $person = $_REQUEST['Person'];
 $value = floatval($_REQUEST['Value']);
 
-if ($person == null) {
-    showInfo('Wybierz osobę.');
-    return;
+if (notValidString($name)) {
+    showFinalWarning('Nie podano nazwy.');
+}
+
+if (notValidString($person)) {
+    showFinalWarning('Nie wybrano osoby.');
+}
+
+if (notValidValue($value)) {
+    showFinalWarning('Podaj dodatnią wartość.');
 }
 
 $saveExpenseStatement = pdo()->prepare('INSERT INTO flat_expense (timestamp, value, name, person) values (?, ?, ?, ?)');

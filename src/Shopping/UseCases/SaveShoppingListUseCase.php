@@ -1,11 +1,10 @@
 <?php
-include '../../Shared/Views/View.php';
+include '../../Shared/UseCases/UseCase.php';
 
 $shoppingList = $_REQUEST['ShoppingList'];
 
-if (json_decode($shoppingList) === null) {
-    showError('Lista zakupów uszkodzona! Prześlij ponownie.');
-    return;
+if (notValidJson($shoppingList)) {
+    showFinalWarning('Lista zakupów uszkodzona! Prześlij ponownie.');
 }
 
 /** @noinspection SqlWithoutWhere */

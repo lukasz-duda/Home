@@ -1,12 +1,15 @@
 <?php
-include '../../Shared/Views/View.php';
+include '../../Shared/UseCases/UseCase.php';
 
 $name = $_REQUEST['Name'];
 $toDoList = $_REQUEST['ToDoList'];
 
-if (json_decode($toDoList) === null) {
-    showError('Lista zakupów uszkodzona! Prześlij ponownie.');
-    return;
+if (notValidString($name)) {
+    showFinalWarning('Nie podano nazwy listy zadań.');
+}
+
+if (notValidJson($toDoList)) {
+    showFinalWarning('Lista zadań uszkodzona! Prześlij ponownie.');
 }
 
 /** @noinspection SqlWithoutWhere */

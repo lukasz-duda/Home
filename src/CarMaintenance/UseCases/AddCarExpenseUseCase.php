@@ -1,5 +1,5 @@
 <?php
-include '../../Shared/Views/View.php';
+include '../../Shared/UseCases/UseCase.php';
 
 $carId = 1;
 $companyId = $_REQUEST['CompanyId'] == '-1' ? null : intval($_REQUEST['CompanyId']);
@@ -8,8 +8,29 @@ $value = floatval($_REQUEST['Value']);
 $fuelQuantity = floatval($_REQUEST['FuelQuantity']);
 $mileage = intval($_REQUEST['Mileage']);
 
-if ($fuelQuantity == 0)
+if (notValidString($name)) {
+    showFinalWarning('Nie podano nazwy.');
+}
+
+if (notValidValue($value)) {
+    showFinalWarning('Niepoprawna wartość.');
+}
+
+if ($name == 'Olej napędowy' && notValidValue($fuelQuantity)) {
+    showFinalWarning('Nie podano ilości oleju napędowego.');
+}
+
+if ($companyId != null && notValidId($companyId)) {
+    showFinalWarning('Identyfikator firmy niepoprawny.');
+}
+
+if (notValidValue($mileage)) {
+    showFinalWarning('Podano niepoprawny przebieg.');
+}
+
+if (notValidValue($fuelQuantity)) {
     $fuelQuantity = null;
+}
 
 $saveCarExpenseStatement = pdo()->prepare('INSERT INTO car_expenses (car_id, name, company_id, value, timestamp, fuel_quantity) values (?, ?, ?, ?, ?, ?) ');
 $carExpenseSaved = $saveCarExpenseStatement->execute([$carId, $name, $companyId, $value, date('Y-m-d H:i:s'), $fuelQuantity]);

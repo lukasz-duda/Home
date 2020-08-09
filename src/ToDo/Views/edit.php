@@ -10,7 +10,7 @@ $toDoList = get("select s.json from to_do_list s where s.name = ?", [$listName])
         <div class="card-body">
 
             <div class="form-group mb-3">
-                <form action="../UseCases/SaveToDoListController.php" method="post">
+                <form action="../UseCases/SaveToDoListUseCase.php" method="post">
                     <div class="form-group">
                         <button class="btn-primary btn mb-1" data-bind="click: addTask">Dodaj</button>
 
