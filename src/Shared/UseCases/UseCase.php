@@ -6,11 +6,6 @@ function notValidString($text)
     return !is_string($text) || trim($text) == '';
 }
 
-function notValidId($id)
-{
-    return $id <= 0;
-}
-
 function notValidValue($value)
 {
     return $value <= 0;

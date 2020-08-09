@@ -27,6 +27,11 @@ function getAll($query, $params)
     return $statement->fetchAll();
 }
 
+function notValidId($id)
+{
+    return $id <= 0;
+}
+
 function showInfo($text)
 {
     printf('<div class="alert alert-info" role="alert">%s</div>', $text);
