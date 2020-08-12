@@ -206,9 +206,10 @@ limit 1', [$catId]);
                 <div class="card-body">
                     Teraz: <?= now() ?><br/>
                     Ostatnia kupa:
-                    <span class="<?= $lastPoop['warning'] == 1 ? 'text-danger' : 'text-info' ?>"><?= $lastPoop['timestamp'] ?> (<?= showDecimal($lastPoop['days'], 1) ?> dni temu)</span><br/>
-                    Ostatnie siku: <span
-                            class="<?= $lastPee['warning'] == 1 ? 'text-danger' : 'text-info' ?>"><?= $lastPee['timestamp'] ?> (<?= showDecimal($lastPee['days'], 1) ?> dni temu)</span><br/>
+                    <?= $lastPoop['timestamp'] ?><br/>
+                    <span class="<?= $lastPoop['warning'] == 1 ? 'text-danger' : 'text-info' ?>">(<?= showDecimal($lastPoop['days'], 1) ?> dni temu)</span><br/>
+                    Ostatnie siku: <?= $lastPee['timestamp'] ?><br/>
+                    <span class="<?= $lastPee['warning'] == 1 ? 'text-danger' : 'text-info' ?>"> (<?= showDecimal($lastPee['days'], 1) ?> dni temu)</span><br/>
                     Zapotrzebowanie dzisiaj: <?= showInt($dailyDemand['total']); ?> %<br/>
                     Zapotrzebowanie wczoraj: <?= showInt($yesterdayDemand['total']); ?> %<br/>
                     <div class="form-check">
