@@ -3,7 +3,7 @@ include "../../Shared/Views/View.php";
 $catId = intval($_REQUEST['Id']);
 $cat = get('SELECT name FROM cats WHERE id = ?', [$catId]);
 
-if (notValidId($catId)) {
+if ($cat === false) {
     showFinalWarning('Nie znaleziono wybranego kota.');
 }
 
@@ -52,17 +52,19 @@ from (
 order by meals.start desc', [$catId, date('Y-m-d', strtotime('-2 days'))]);
 
 $lastPoop = get('select p.timestamp,
-       timestampdiff(day, p.timestamp, ?) >= 3 as warning
+       timestampdiff(day, p.timestamp, ?) >= 3 as warning,
+       timestampdiff(hour, p.timestamp, ?) / 24 as days 
 from poop p
 where p.cat_id = ?
 order by p.timestamp desc
-limit 1', [now(), $catId]);
+limit 1', [now(), now(), $catId]);
 $lastPee = get('select p.timestamp,
-       timestampdiff(day, p.timestamp, ?) >= 1 as warning
+       timestampdiff(day, p.timestamp, ?) >= 1 as warning,
+       timestampdiff(hour, p.timestamp, ?) / 24 as days
 from pee p
 where p.cat_id = ?
 order by p.timestamp desc
-limit 1', [now(), $catId]);
+limit 1', [now(), now(), $catId]);
 $dailyDemand = get('select sum(meals.meal_weight / meals.daily_demand_weight * 100) as total
 from (
          select m.start_weight,
@@ -204,9 +206,9 @@ limit 1', [$catId]);
                 <div class="card-body">
                     Teraz: <?= now() ?><br/>
                     Ostatnia kupa:
-                    <span class="<?= $lastPoop['warning'] == 1 ? 'text-danger' : 'text-info' ?>"><?= $lastPoop['timestamp'] ?></span><br/>
+                    <span class="<?= $lastPoop['warning'] == 1 ? 'text-danger' : 'text-info' ?>"><?= $lastPoop['timestamp'] ?> (<?= showDecimal($lastPoop['days'], 1) ?> dni temu)</span><br/>
                     Ostatnie siku: <span
-                            class="<?= $lastPee['warning'] == 1 ? 'text-danger' : 'text-info' ?>"><?= $lastPee['timestamp'] ?></span><br/>
+                            class="<?= $lastPee['warning'] == 1 ? 'text-danger' : 'text-info' ?>"><?= $lastPee['timestamp'] ?> (<?= showDecimal($lastPee['days'], 1) ?> dni temu)</span><br/>
                     Zapotrzebowanie dzisiaj: <?= showInt($dailyDemand['total']); ?> %<br/>
                     Zapotrzebowanie wczoraj: <?= showInt($yesterdayDemand['total']); ?> %<br/>
                     <div class="form-check">
