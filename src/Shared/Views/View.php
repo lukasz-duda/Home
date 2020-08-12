@@ -49,15 +49,15 @@ include __DIR__ . '/ViewUtils.php';
                             class="material-icons-outlined">pets</i></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" title="Zakupy" href="<?= baseUrl() ?>/src/Shopping/Views/index.php"><i
+                <a class="nav-link" title="Zakupy" href="<?= baseUrl() ?>/src/Shopping/Views/expenses.php"><i
                             class="material-icons-outlined">local_grocery_store</i></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" title="Kawa" href="<?= baseUrl() ?>/src/Coffee/Views/index.php"><i
+                <a class="nav-link" title="Kawa" href="<?= baseUrl() ?>/src/Coffee/Views/coffee.php"><i
                             class="material-icons-outlined">local_cafe</i></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" title="Golf" href="<?= baseUrl() ?>/src/CarMaintenance/Views/index.php"><i
+                <a class="nav-link" title="Golf" href="<?= baseUrl() ?>/src/CarMaintenance/Views/car.php"><i
                             class="material-icons-outlined">directions_car</i></a>
             </li>
             <li class="nav-item">

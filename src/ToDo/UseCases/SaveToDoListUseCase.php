@@ -12,8 +12,7 @@ if (notValidJson($toDoList)) {
     showFinalWarning('Lista zadań uszkodzona! Prześlij ponownie.');
 }
 
-/** @noinspection SqlWithoutWhere */
-$saveToDoList = pdo()->prepare('update to_do_list set json = ?');
+$saveToDoList = pdo()->prepare('update to_do_list set json = ? where name = ?');
 $toDoListSaved = $saveToDoList->execute([$toDoList, $name]);
 
 if ($toDoListSaved) {

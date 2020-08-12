@@ -2,9 +2,9 @@ drop table if exists cars;
 
 create table cars
 (
-    id      int unsigned       not null primary key auto_increment,
-    name    varchar(50)        not null,
-    vin     char(17)           not null
+    id   int unsigned not null primary key auto_increment,
+    name varchar(50)  not null,
+    vin  char(17)     not null
 );
 
 drop table if exists car_expenses;

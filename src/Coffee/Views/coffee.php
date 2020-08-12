@@ -3,6 +3,10 @@ include '../../Shared/Views/View.php';
 
 $coffees = get('select c.current, c.last_cleaning from coffees c', []);
 
+if($coffees === false) {
+    showFinalWarning('Dodaj rekord rejestru kaw.');
+}
+
 $coffeesUntilCleaning = $coffees['last_cleaning'] + 100 - $coffees['current'];
 
 if ($coffeesUntilCleaning <= 0) {

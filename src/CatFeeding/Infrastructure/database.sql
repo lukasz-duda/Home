@@ -80,3 +80,18 @@ create table medicine
     cat_id int unsigned not null,
     date   date         not null
 );
+
+insert into cats (id, name)
+values (1, 'Szyszka');
+insert into cats (id, name)
+values (2, 'Mgiełka');
+
+insert into pee (cat_id, timestamp)
+values (1, DATE_SUB(current_timestamp(), INTERVAL 27 HOUR));
+insert into poop (cat_id, timestamp)
+values (1, DATE_SUB(current_timestamp(), INTERVAL 75 HOUR));
+
+insert into pee (cat_id, timestamp)
+values (2, DATE_SUB(current_timestamp(), INTERVAL 23 HOUR));
+insert into poop (cat_id, timestamp)
+values (2, DATE_SUB(current_timestamp(), INTERVAL 71 HOUR));
