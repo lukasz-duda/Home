@@ -57,7 +57,7 @@ include __DIR__ . '/ViewUtils.php';
                             class="material-icons-outlined">local_cafe</i></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" title="Golf" href="<?= baseUrl() ?>/src/CarMaintenance/Views/car.php"><i
+                <a class="nav-link" title="Golf" href="<?= baseUrl() ?>/src/CarMaintenance/Views/car.php?Id=1"><i
                             class="material-icons-outlined">directions_car</i></a>
             </li>
             <li class="nav-item">

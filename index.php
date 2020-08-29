@@ -47,7 +47,8 @@ $previousMonthEndDate = date("Y-m-t", strtotime($previousMonthStartDate)) . 'T23
             me.showShortcuts = true;
 
             me.items = ko.observableArray([
-                new MenuItem('Samochód', 'src/CarMaintenance/Views/car.php'),
+                new MenuItem('Golf', 'src/CarMaintenance/Views/car.php?Id=1'),
+                new Shortcut('Toyota', 'src/CarMaintenance/Views/car.php?Id=2'),
                 new MenuItem('Roczne wydatki na samochód', 'src/CarMaintenance/Views/Reports/car_annual.php'),
                 new MenuItem('Szyszka', 'src/CatFeeding/Views/cat.php?Id=1'),
                 new Shortcut('Mgiełka', 'src/CatFeeding/Views/cat.php?Id=2'),
@@ -59,7 +60,7 @@ $previousMonthEndDate = date("Y-m-t", strtotime($previousMonthStartDate)) . 'T23
                 new Shortcut('Planowanie zakupów', 'src/Shopping/Views/plan.php'),
                 new MenuItem('Zakupy', 'src/Shopping/Views/expenses.php'),
                 new MenuItem('Raporty zakupów', 'src/Shopping/Views/reports.php'),
-                new MenuItem('Kategorie zakupów w bieżącym miesiącu', 'src/Shopping/Views/Reports/categories.php?StartDate=<?= $currentMonthStartDate ?>&EndDate=<?= $currentMonthEndDate ?>'),
+                new Shortcut('Kategorie zakupów w bieżącym miesiącu', 'src/Shopping/Views/Reports/categories.php?StartDate=<?= $currentMonthStartDate ?>&EndDate=<?= $currentMonthEndDate ?>'),
                 new MenuItem('Zadania - Łukasz', 'src/ToDo/Views/edit.php?name=Łukasz'),
                 new MenuItem('Zadania - Ilona', 'src/ToDo/Views/edit.php?name=Ilona')
             ]);

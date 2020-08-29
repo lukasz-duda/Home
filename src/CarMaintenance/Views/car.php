@@ -1,6 +1,6 @@
 <?php
 include '../../Shared/Views/View.php';
-$carId = 1;
+$carId = intval($_REQUEST['Id']);
 $car = get('SELECT c.name, max(m.mileage) as mileage
 FROM cars c
 join mileage m on m.car_id = c.id
