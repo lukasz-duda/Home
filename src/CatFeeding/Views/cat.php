@@ -138,12 +138,6 @@ limit 1', [$catId]);
                             <input id="MealWeight" name="Weight" class="form-control" type="number" step="1" min="2"
                                    max="500" required/>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="MedicineApplied" name="MedicineApplied">
-                            <label class="form-check-label" for="MedicineApplied">
-                                Dodany lek do posiłku
-                            </label>
-                        </div>
                         <button class="btn btn-primary mt-3">Rozpocznij</button>
                     </form>
                 </div>
