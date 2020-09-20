@@ -202,38 +202,71 @@ limit 1', [$catId]);
         </div>
         <div class="col-md-6">
             <div class="card mb-3">
-                <div class="card-header">Podsumowanie dnia</div>
+                <div class="card-header">Leki</div>
                 <div class="card-body">
-                    Teraz: <?= now() ?><br/>
-                    Ostatnia kupa:
-                    <?= $lastPoop['timestamp'] ?><br/>
-                    <span class="<?= $lastPoop['warning'] == 1 ? 'text-danger' : 'text-info' ?>">(<?= showDecimal($lastPoop['days'], 1) ?> dni temu)</span><br/>
-                    Ostatnie siku: <?= $lastPee['timestamp'] ?><br/>
-                    <span class="<?= $lastPee['warning'] == 1 ? 'text-danger' : 'text-info' ?>"> (<?= showDecimal($lastPee['days'], 1) ?> dni temu)</span><br/>
-                    Zapotrzebowanie dzisiaj: <?= showInt($dailyDemand['total']); ?> %<br/>
-                    Zapotrzebowanie wczoraj: <?= showInt($yesterdayDemand['total']); ?> %<br/>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox"
-                               disabled <?= $medicineApplied ? 'checked' : '' ?> id="MedicineAppliedStatus">
-                        <label class="form-check-label" for="MedicineAppliedStatus">
-                            Lek podany
-                        </label>
-                    </div>
-                    <br/>
-                    <?php
-                    if ($lastWeight) {
-                        $lastWeightDate = $lastWeight['date'];
-                        $lastWeightValue = showDecimal($lastWeight['weight'], 1) . ' kg';
-                        echo "Ostatnia waga $lastWeightValue z dnia $lastWeightDate<br/>";
-                    }
-                    if ($lastObservation) {
-                        $lastObservationTime = $lastObservation['timestamp'];
-                        $lastObservationNotes = $lastObservation['notes'];
-                        echo "Ostatnia obserwacja $lastObservationTime: $lastObservationNotes<br/>";
-                    }
-                    ?>
+                    <form action="../UseCases/ApplyMedicineUseCase.php" method="post">
+                        <input type="hidden" name="CatId" value="<?= $catId ?>">
+                        <button class="btn btn-primary mt-3">Podaj lek</button>
+                    </form>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">Podsumowanie dnia</div>
+        <div class="card-body">
+            Teraz: <?= now() ?><br/>
+            Ostatnia kupa:
+            <?= $lastPoop['timestamp'] ?><br/>
+            <span class="<?= $lastPoop['warning'] == 1 ? 'text-danger' : 'text-info' ?>">(<?= showDecimal($lastPoop['days'], 1) ?> dni temu)</span><br/>
+            Ostatnie siku: <?= $lastPee['timestamp'] ?><br/>
+            <span class="<?= $lastPee['warning'] == 1 ? 'text-danger' : 'text-info' ?>"> (<?= showDecimal($lastPee['days'], 1) ?> dni temu)</span><br/>
+            Zapotrzebowanie dzisiaj: <?= showInt($dailyDemand['total']); ?> %<br/>
+            Zapotrzebowanie wczoraj: <?= showInt($yesterdayDemand['total']); ?> %<br/>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox"
+                       disabled <?= $medicineApplied ? 'checked' : '' ?> id="MedicineAppliedStatus">
+                <label class="form-check-label" for="MedicineAppliedStatus">
+                    Lek podany
+                </label>
+            </div>
+            <br/>
+            <?php
+            if ($lastWeight) {
+                $lastWeightDate = $lastWeight['date'];
+                $lastWeightValue = showDecimal($lastWeight['weight'], 1) . ' kg';
+                echo "Ostatnia waga $lastWeightValue z dnia $lastWeightDate<br/>";
+            }
+            if ($lastObservation) {
+                $lastObservationTime = $lastObservation['timestamp'];
+                $lastObservationNotes = $lastObservation['notes'];
+                echo "Ostatnia obserwacja $lastObservationTime: $lastObservationNotes<br/>";
+            }
+            ?>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">Ostatnie posiłki</div>
+        <div class="list-group list-group-flush">
+            <?php
+            foreach ($lastMeals as $lastMeal) {
+                ?>
+
+                <a href="#" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1"><?= $lastMeal['name'] ?></h5>
+                    </div>
+                    <p class="mb-1"><?= $lastMeal['start_weight'] ?> - <?= $lastMeal['end_weight'] ?>
+                        = <?= showInt($lastMeal['start_weight'] - $lastMeal['end_weight']) ?> g
+                        = <?= showInt($lastMeal['daily_demand_percentage']) ?> %</p>
+                    <small><?= $lastMeal['start'] ?> - <?= $lastMeal['end'] ?></small>
+                </a>
+
+                <?php
+            }
+            ?>
         </div>
     </div>
 
@@ -296,7 +329,6 @@ limit 1', [$catId]);
                 </div>
             </div>
         </div>
-
         <div class="col-md-6">
             <div class="card mb-3">
                 <div class="card-header">Dodaj pokarm</div>
@@ -322,29 +354,6 @@ limit 1', [$catId]);
                     </form>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div class="card mb-3">
-        <div class="card-header">Ostatnie posiłki</div>
-        <div class="list-group list-group-flush">
-            <?php
-            foreach ($lastMeals as $lastMeal) {
-                ?>
-
-                <a href="#" class="list-group-item list-group-item-action">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1"><?= $lastMeal['name'] ?></h5>
-                    </div>
-                    <p class="mb-1"><?= $lastMeal['start_weight'] ?> - <?= $lastMeal['end_weight'] ?>
-                        = <?= showInt($lastMeal['start_weight'] - $lastMeal['end_weight']) ?> g
-                        = <?= showInt($lastMeal['daily_demand_percentage']) ?> %</p>
-                    <small><?= $lastMeal['start'] ?> - <?= $lastMeal['end'] ?></small>
-                </a>
-
-                <?php
-            }
-            ?>
         </div>
     </div>
 
