@@ -1,6 +1,7 @@
 <?php
 include '../../../Shared/Views/View.php';
 
+$carId = intval($_REQUEST['Id']);
 $startDate = date('Y-m', time()) . '-01';
 
 $fuel = getAll("select y.year,
@@ -11,8 +12,8 @@ from car_expenses e
     from car_expenses ie
     order by year(ie.timestamp)
 ) y on y.year = YEAR(e.timestamp)
-where e.name = 'Olej napędowy'
-group by y.year", []);
+where e.car_id = ? and e.name = 'Olej napędowy'
+group by y.year", [$carId]);
 
 $other = getAll("select y.year,
        round(sum(round(e.value, 2))) as sum
@@ -22,8 +23,8 @@ from car_expenses e
     from car_expenses ie
     order by year(ie.timestamp)
 ) y on y.year = YEAR(e.timestamp)
-where e.name not in ('Olej napędowy', 'Samochód')
-group by y.year", []);
+where e.car_id = ? and e.name not in ('Olej napędowy', 'Samochód')
+group by y.year", [$carId]);
 
 $labels = "'" . join("', '", array_column($fuel, 'year')) . "'";
 $fuelValues = join(',', array_column($fuel, 'sum'));

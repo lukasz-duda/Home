@@ -1,12 +1,17 @@
 <?php
 include '../../Shared/UseCases/UseCase.php';
 
-$carId = 1;
+$carId = intval($_REQUEST['CarId']);
 $companyId = $_REQUEST['CompanyId'] == '-1' ? null : intval($_REQUEST['CompanyId']);
 $name = $_REQUEST['Name'];
 $value = floatval($_REQUEST['Value']);
 $fuelQuantity = floatval($_REQUEST['FuelQuantity']);
 $mileage = intval($_REQUEST['Mileage']);
+
+if (notValidId($carId)) {
+    showFinalWarning('Nie wybrano samochodu.');
+    return;
+}
 
 if (notValidString($name)) {
     showFinalWarning('Nie podano nazwy.');

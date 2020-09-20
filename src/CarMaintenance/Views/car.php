@@ -53,7 +53,8 @@ order by e.timestamp desc limit 10", [$carId]);
     <div class="card mb-3">
         <div class="card-header">Wydatki</div>
         <div class="list-group list-group-flush">
-            <a class="list-group-item list-group-item-action" href="Reports/car_annual.php">Roczne wydatki na samochód</a>
+            <a class="list-group-item list-group-item-action" href="Reports/car_annual.php?Id=<?= $carId ?>">Roczne
+                wydatki na samochód</a>
         </div>
         <div class="card-body">
             Wszystkie: <?= showMoney($total); ?><br/>
@@ -90,6 +91,7 @@ order by e.timestamp desc limit 10", [$carId]);
         <div class="card-header">Dodaj zakup</div>
         <div class="card-body">
             <form action="../UseCases/AddCarExpenseUseCase.php" method="post">
+                <input type="hidden" name="CarId" value="<?= $carId ?>">
                 <div class="form-group">
                     <label for="CompanyId">Firma</label>
                     <select class="form-control" id="CompanyId" name="CompanyId">
@@ -125,7 +127,7 @@ order by e.timestamp desc limit 10", [$carId]);
                 </div>
                 <div class="form-group">
                     <label for="Mileage">Przebieg</label>
-                    <input class="form-control" id="Mileage" name="Mileage" type="number" step="1" min="250000"
+                    <input class="form-control" id="Mileage" name="Mileage" type="number" step="1" min="150000"
                            max="999999"
                            value="<?= $carMileage ?>"/>
                 </div>
