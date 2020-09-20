@@ -3,7 +3,7 @@ include '../../Shared/Views/View.php';
 
 $coffees = get('select c.current, c.last_cleaning from coffees c', []);
 
-if($coffees === false) {
+if ($coffees === false) {
     showFinalWarning('Dodaj rekord rejestru kaw.');
 }
 
@@ -35,5 +35,6 @@ if ($coffeesUntilCleaning <= 0) {
         </div>
     </form>
 
+    <p>Kawa przygotowana <?= showInt($coffees['current']) ?> razy.</p>
 <?php
 include '../../Shared/Views/Footer.php';

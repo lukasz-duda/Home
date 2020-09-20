@@ -1,4 +1,3 @@
-Show total coffees
 Correct meal
 Correct expense
 Delete expense
