@@ -1,10 +1,5 @@
-Correct meal
-Correct expense
-Delete expense
-Correct car expense
-Delete car expense
+Remove expense
 Update car task
-Delete car task
 Correct flat expense
 Delete flat expense
 Replace car expense companies with company name

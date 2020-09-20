@@ -248,7 +248,8 @@ limit 1', [$catId]);
             foreach ($lastMeals as $lastMeal) {
                 ?>
 
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="<?= './meal.php?Id=' . $lastMeal['id'] ?>"
+                   class="list-group-item list-group-item-action">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1"><?= $lastMeal['name'] ?></h5>
                     </div>
