@@ -1,0 +1,10 @@
+Show total coffees
+Correct meal
+Correct expense
+Delete expense
+Correct car expense
+Delete car expense
+Update car task
+Delete car task
+Correct flat expense
+Delete flat expense
