@@ -8,10 +8,6 @@ if (notValidId($mealId)) {
     showFinalWarning('Niepoprawny identyfikator posiłku.');
 }
 
-if (notValidValue($endWeight)) {
-    showFinalWarning('Nie podano wagi.');
-}
-
 $meal = get('SELECT m.start_weight FROM meal m WHERE id = ?', [$mealId]);
 $startWeight = $meal['start_weight'];
 
