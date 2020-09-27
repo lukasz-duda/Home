@@ -33,5 +33,8 @@ create table shopping_list
     json varchar(4000) not null
 );
 
+insert into expense_categories (name)
+values ('Jedzenie');
+
 insert into shopping_list (json)
 values ('[]');

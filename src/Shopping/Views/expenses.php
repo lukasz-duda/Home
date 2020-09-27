@@ -12,7 +12,7 @@ $forMe = get('select sum(e.value) as value
            where r.for_me = 1
              and r.transfer_date is null', []);
 $categories = getAll('select id, name from expense_categories order by name', []);
-$lastExpenses = getAll('select e.timestamp, e.name, e.value, c.name as category_name, r.for_me
+$lastExpenses = getAll('select e.id, e.timestamp, e.name, e.value, c.name as category_name, r.for_me
 from expenses e
    left join expense_categories c on c.id = e.category_id
 left join refund_plan r on r.expense_id = e.id
@@ -133,7 +133,7 @@ $shoppingList = get('select s.json from shopping_list s', []);
                 }
                 ?>
 
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="expense.php?Id=<?= $expense['id'] ?>" class="list-group-item list-group-item-action">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1"><?= showMoney($expense['value']); ?></h5>
                         <small><?= $expense['timestamp'] ?></small>
