@@ -9,34 +9,34 @@ $carName = $car['name'];
 $carMileage = $car['mileage'];
 $categories = getAll('SELECT id, name FROM companies order by name', []);
 $today = date('Y-m-d');
-$tasks = getAll('SELECT name
-FROM car_tasks
-WHERE priority <> 0
+$tasks = getAll('SELECT t.name
+FROM car_tasks t
+WHERE t.car_id = ? AND t.priority <> 0
 AND
 (
 	(
-		(last_mileage + mileage_interval) <= 
+		(t.last_mileage + t.mileage_interval) <= 
 		(
 			SELECT max(m.mileage) FROM mileage m WHERE m.car_id = ?
 		)
 		OR
         (
-			last_mileage IS NULL
-            AND mileage_interval IS NOT NULL
+			t.last_mileage IS NULL
+            AND t.mileage_interval IS NOT NULL
 		)
 	)
     OR
     (
 		(
-			DATE_ADD(last_execution_date, INTERVAL execution_interval MONTH) <= ?
+			DATE_ADD(t.last_execution_date, INTERVAL t.execution_interval MONTH) <= ?
 		)
 		OR
         (
-			last_execution_date IS NULL
-            AND execution_interval IS NOT NULL
+			t.last_execution_date IS NULL
+            AND t.execution_interval IS NOT NULL
 		)
 	)
-)', [$carId, $today]);
+)', [$carId, $carId, $today]);
 $total = intval(get('SELECT sum(e.value) as value FROM car_expenses e WHERE car_id = ?', [$carId])['value']);
 $carValue = intval(get('SELECT sum(e.value) as value FROM car_expenses e WHERE car_id = ? and name = ?', [$carId, 'Samochód'])['value']);
 $fuelValue = intval(get('SELECT sum(e.value) as value FROM car_expenses e WHERE car_id = ? and name = ?', [$carId, 'Olej napędowy'])['value']);
