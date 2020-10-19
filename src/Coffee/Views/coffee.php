@@ -17,6 +17,8 @@ if ($coffeesUntilCleaning <= 0) {
 
 ?>
 
+    <h1>Kawa</h1>
+
     <form action="../UseCases/MakeCoffeeUseCase.php" method="post">
         <input type="hidden" name="CoffesCount" value="1">
         <div class="form-group">
