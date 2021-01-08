@@ -3,3 +3,4 @@ Delete flat expense
 Replace car expense companies with company name
 Correct flat expense date
 Correct expense date
+bool to boolean in database.sql - mysql version?
