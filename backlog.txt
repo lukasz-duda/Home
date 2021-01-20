@@ -5,3 +5,4 @@ Correct flat expense date
 Correct expense date
 bool to boolean in database.sql - mysql version?
 InnoDB and foreign keys?
+Expense category color
