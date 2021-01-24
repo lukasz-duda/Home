@@ -1,6 +1,7 @@
 Show hide dose
 InnoDB,foreign keys, indexes, cat id tinyint
 Separate food management views to minimise page size
+Single dat meals history
 Expense category color
 Update car task
 Delete flat expense
