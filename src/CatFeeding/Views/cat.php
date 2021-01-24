@@ -223,7 +223,7 @@ limit 1', [$catId]);
                             ?>
                             <form action="../UseCases/UndoMedicineApplicationUseCase.php" method="post">
                                 <input type="hidden" name="Id" value="<?= $dose['id'] ?>">
-                                <button class="btn btn-primary mb-3">Cofnij <?= $dose['name'] ?></button>
+                                <button class="btn btn-success mb-3">Cofnij <?= $dose['name'] ?></button>
                             </form>
                             <?php
                         }
