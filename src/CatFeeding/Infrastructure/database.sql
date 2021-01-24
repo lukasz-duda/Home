@@ -90,7 +90,7 @@ create table medicine_dose
     name        varchar(30)      not null,
     medicine_id int unsigned     not null,
     dose        decimal(6, 4)    not null,
-    unit        varchar(2)       not null,
+    unit        varchar(6)       not null,
     day_count   tinyint unsigned not null
 );
 
@@ -102,7 +102,7 @@ create table medicine_application
     cat_id      int unsigned      not null,
     timestamp   datetime          not null,
     dose        decimal(6, 4)     not null,
-    unit        varchar(2)        not null
+    unit        varchar(6)        not null
 );
 
 insert into cats (id, name)
