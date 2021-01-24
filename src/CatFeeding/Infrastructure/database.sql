@@ -119,6 +119,3 @@ insert into pee (cat_id, timestamp)
 values (2, DATE_SUB(current_timestamp(), INTERVAL 23 HOUR));
 insert into poop (cat_id, timestamp)
 values (2, DATE_SUB(current_timestamp(), INTERVAL 71 HOUR));
-
-insert into medicine (id, name)
-values (1, 'Nieokreślony');
