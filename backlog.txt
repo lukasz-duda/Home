@@ -1,5 +1,4 @@
 InnoDB,foreign keys, indexes, cat id tinyint
-Single day meals history
 Expense category color
 Update car task
 Delete flat expense

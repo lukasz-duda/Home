@@ -42,7 +42,7 @@ from (
            and m.start >= ?
          order by m.start desc
      ) meals
-order by meals.start desc', [$catId, date('Y-m-d', strtotime('-2 days'))]);
+order by meals.start desc', [$catId, date('Y-m-d', strtotime('-1 day'))]);
 
 $lastPoop = get('select p.timestamp,
        timestampdiff(day, p.timestamp, ?) >= 3 as warning,
@@ -204,6 +204,39 @@ limit 1', [$catId]);
         </div>
         <div class="col-md-6">
             <div class="card mb-3">
+                <div class="card-header">Podsumowanie dnia</div>
+                <div class="card-body">
+                    Teraz: <?= now() ?><br/>
+                    Ostatnia kupa:
+                    <?= $lastPoop['timestamp'] ?><br/>
+                    <span class="<?= $lastPoop['warning'] == 1 ? 'text-danger' : 'text-info' ?>">(<?= showDecimal($lastPoop['days'], 1) ?> dni temu)</span>
+                    <br/>
+                    Ostatnie siku: <?= $lastPee['timestamp'] ?><br/>
+                    <span class="<?= $lastPee['warning'] == 1 ? 'text-danger' : 'text-info' ?>"> (<?= showDecimal($lastPee['days'], 1) ?> dni temu)</span>
+                    <br/>
+                    Zapotrzebowanie dzisiaj: <?= showInt($dailyDemand['total']); ?> %<br/>
+                    Zapotrzebowanie wczoraj: <?= showInt($yesterdayDemand['total']); ?> %<br/>
+                    <br/>
+                    <?php
+                    if ($lastWeight) {
+                        $lastWeightDate = $lastWeight['date'];
+                        $lastWeightValue = showDecimal($lastWeight['weight'], 1) . ' kg';
+                        echo "Ostatnia waga $lastWeightValue z dnia $lastWeightDate<br/>";
+                    }
+                    if ($lastObservation) {
+                        $lastObservationTime = $lastObservation['timestamp'];
+                        $lastObservationNotes = $lastObservation['notes'];
+                        echo "Ostatnia obserwacja $lastObservationTime: $lastObservationNotes<br/>";
+                    }
+                    ?>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-3">
                 <div class="card-header">Leki</div>
                 <div class="card-body">
                     <?php
@@ -232,35 +265,6 @@ limit 1', [$catId]);
                     ?>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div class="card mb-3">
-        <div class="card-header">Podsumowanie dnia</div>
-        <div class="card-body">
-            Teraz: <?= now() ?><br/>
-            Ostatnia kupa:
-            <?= $lastPoop['timestamp'] ?><br/>
-            <span class="<?= $lastPoop['warning'] == 1 ? 'text-danger' : 'text-info' ?>">(<?= showDecimal($lastPoop['days'], 1) ?> dni temu)</span>
-            <br/>
-            Ostatnie siku: <?= $lastPee['timestamp'] ?><br/>
-            <span class="<?= $lastPee['warning'] == 1 ? 'text-danger' : 'text-info' ?>"> (<?= showDecimal($lastPee['days'], 1) ?> dni temu)</span>
-            <br/>
-            Zapotrzebowanie dzisiaj: <?= showInt($dailyDemand['total']); ?> %<br/>
-            Zapotrzebowanie wczoraj: <?= showInt($yesterdayDemand['total']); ?> %<br/>
-            <br/>
-            <?php
-            if ($lastWeight) {
-                $lastWeightDate = $lastWeight['date'];
-                $lastWeightValue = showDecimal($lastWeight['weight'], 1) . ' kg';
-                echo "Ostatnia waga $lastWeightValue z dnia $lastWeightDate<br/>";
-            }
-            if ($lastObservation) {
-                $lastObservationTime = $lastObservation['timestamp'];
-                $lastObservationNotes = $lastObservation['notes'];
-                echo "Ostatnia obserwacja $lastObservationTime: $lastObservationNotes<br/>";
-            }
-            ?>
         </div>
     </div>
 
