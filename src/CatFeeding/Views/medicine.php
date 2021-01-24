@@ -85,7 +85,7 @@ where d.cat_id = ?', [$catId]);
                     <?php
                     foreach ($doses as $dose) {
                         ?>
-                        <li class="list-group-item">
+                        <div class="list-group-item">
                             <div class="mb-3">
                                 <?= $dose['day_count'] ?>
                                 x <?= $dose['dose'] ?> <?= $dose['unit'] ?> <?= $dose['medicine_name'] ?></div>
@@ -113,7 +113,7 @@ where d.cat_id = ?', [$catId]);
                                 <?php
                             }
                             ?>
-                        </li>
+                        </div>
                         <?php
                     }
                     ?>
