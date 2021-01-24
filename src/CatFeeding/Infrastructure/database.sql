@@ -91,7 +91,8 @@ create table medicine_dose
     medicine_id int unsigned     not null,
     dose        decimal(6, 4)    not null,
     unit        varchar(6)       not null,
-    day_count   tinyint unsigned not null
+    day_count   tinyint unsigned not null,
+    visible     boolean          not null
 );
 
 drop table if exists medicine_application;

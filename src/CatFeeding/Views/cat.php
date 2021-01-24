@@ -114,7 +114,8 @@ $medicineDoses = getAll('select d.id,
        m.name as medicine_name
 from medicine_dose d
 join medicine m on d.medicine_id = m.id
-where d.cat_id = ?', [today(), $catId]);
+where d.cat_id = ?
+and d.visible = 1', [today(), $catId]);
 $lastObservation = get('select timestamp, notes
 from observation
 where cat_id = ?

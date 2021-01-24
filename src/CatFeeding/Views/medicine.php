@@ -9,7 +9,7 @@ if ($cat === false) {
 
 $catName = $cat['name'];
 $medicines = getAll('select m.id, m.name from medicine m', []);
-$doses = getAll('select d.id, d.name, d.day_count, d.dose, d.unit, m.name as medicine_name
+$doses = getAll('select d.id, d.name, d.day_count, d.dose, d.unit, m.name as medicine_name, d.visible
 from medicine_dose d
 join medicine m on d.medicine_id = m.id
 where d.cat_id = ?', [$catId]);
@@ -33,8 +33,6 @@ where d.cat_id = ?', [$catId]);
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
         <div class="col-md-6">
             <div class="card mb-3">
                 <div class="card-header">Dodaj dawkę</div>
@@ -78,7 +76,9 @@ where d.cat_id = ?', [$catId]);
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+    </div>
+    <div class="row">
+        <div class="col">
             <div class="card mb-3">
                 <div class="card-header">Dawki</div>
                 <div class="list-group list-group-flush">
@@ -86,15 +86,33 @@ where d.cat_id = ?', [$catId]);
                     foreach ($doses as $dose) {
                         ?>
                         <li class="list-group-item">
-                            <form class="form-inline" action="../UseCases/RemoveDoseUseCase.php" method="post">
-                                <div class="form-group">
-                                    <?= $dose['day_count'] ?>
-                                    x <?= $dose['dose'] ?> <?= $dose['unit'] ?> <?= $dose['medicine_name'] ?>
-                                    <input type="hidden" id="DoseId" name="Id" value="<?= $dose['id'] ?>">
-                                    <button type="submit" class="btn btn-outline-secondary ml-3">
-                                        Usuń <?= $dose['name'] ?></button>
-                                </div>
+                            <div class="mb-3">
+                                <?= $dose['day_count'] ?>
+                                x <?= $dose['dose'] ?> <?= $dose['unit'] ?> <?= $dose['medicine_name'] ?></div>
+                            <form action="../UseCases/RemoveDoseUseCase.php" method="post">
+                                <input type="hidden" name="Id" value="<?= $dose['id'] ?>">
+                                <button type="submit" class="btn btn-outline-danger mb-3">
+                                    Usuń <?= $dose['name'] ?></button>
                             </form>
+                            <?php
+                            if ($dose['visible']) {
+                                ?>
+                                <form action="../UseCases/HideDoseUseCase.php" method="post">
+                                    <input type="hidden" name="Id" value="<?= $dose['id'] ?>">
+                                    <button type="submit" class="btn btn-outline-dark mb-3">
+                                        Ukryj <?= $dose['name'] ?></button>
+                                </form>
+                                <?php
+                            } else {
+                                ?>
+                                <form action="../UseCases/ShowDoseUseCase.php" method="post">
+                                    <input type="hidden" name="Id" value="<?= $dose['id'] ?>">
+                                    <button type="submit" class="btn btn-outline-success mb-3">
+                                        Pokaż <?= $dose['name'] ?></button>
+                                </form>
+                                <?php
+                            }
+                            ?>
                         </li>
                         <?php
                     }

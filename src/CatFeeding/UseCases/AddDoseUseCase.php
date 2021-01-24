@@ -24,8 +24,8 @@ if (notValidValue($dayCount)) {
     showFinalWarning('Nie podano liczby dawek dziennie');
 }
 
-$save = pdo()->prepare('INSERT INTO medicine_dose (cat_id, name, medicine_id, dose, unit, day_count) VALUES (?, ?, ?, ?, ?, ?)');
-$saved = $save->execute([$catId, $name, $medicineId, $dose, $unit, $dayCount]);
+$save = pdo()->prepare('INSERT INTO medicine_dose (cat_id, name, medicine_id, dose, unit, day_count, visible) VALUES (?, ?, ?, ?, ?, ?, ?)');
+$saved = $save->execute([$catId, $name, $medicineId, $dose, $unit, $dayCount, 1]);
 $id = pdo()->lastInsertId();
 
 if ($saved) {
