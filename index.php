@@ -63,7 +63,9 @@ $previousMonthEndDate = date("Y-m-t", strtotime($previousMonthStartDate)) . 'T23
                 new MenuItem('Zakupy', 'src/Shopping/Views/expenses.php'),
                 new MenuItem('Raporty zakupów', 'src/Shopping/Views/reports.php'),
                 new MenuItem('Zadania - Łukasz', 'src/ToDo/Views/edit.php?name=Łukasz'),
-                new MenuItem('Zadania - Ilona', 'src/ToDo/Views/edit.php?name=Ilona')
+                new MenuItem('Zadania - Ilona', 'src/ToDo/Views/edit.php?name=Ilona'),
+                new Shortcut('Leki Szyszka', 'src/CatFeeding/Views/medicine.php?Id=1'),
+                new Shortcut('Leki Mgiełka', 'src/CatFeeding/Views/medicine.php?Id=2')
             ]);
 
             me.query = ko.observable(null);

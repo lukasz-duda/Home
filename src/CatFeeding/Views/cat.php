@@ -101,13 +101,19 @@ from (
          where m.cat_id = ?
            and datediff(m.start, ?) = 0
      ) meals', [$catId, date('Y-m-d', strtotime('-1 days'))]);
-$medicineApplied = get('select exists(
-               select 1
-               from medicine
-               where cat_id = ?
-                 and date = ?
-           )
-           as medicine_applied', [$catId, today()])[0] == 1;
+$medicineDoses = getAll('select d.id,
+       d.name,
+       d.day_count * d.dose as expected,
+       (
+           select sum(ifnull(ma.dose, 0))
+           from medicine_application ma
+           where ma.medicine_id = d.medicine_id
+       ) as applied,
+       d.unit,
+       m.name as medicine_name
+from medicine_dose d
+join medicine m on d.medicine_id = m.id
+where d.cat_id = ?', [$catId]);
 $lastObservation = get('select timestamp, notes
 from observation
 where cat_id = ?
@@ -198,10 +204,30 @@ limit 1', [$catId]);
             <div class="card mb-3">
                 <div class="card-header">Leki</div>
                 <div class="card-body">
-                    <form action="../UseCases/ApplyMedicineUseCase.php" method="post">
-                        <input type="hidden" name="CatId" value="<?= $catId ?>">
-                        <button class="btn btn-primary mt-3">Podaj lek</button>
-                    </form>
+                    <?php
+                    if ($medicineDoses) foreach ($medicineDoses as $dose) {
+                        ?>
+                        <div class="mb-3">Podano <?= $dose['medicine_name'] ?> <?= showDecimal($dose['applied'], 4) ?>
+                            z <?= showDecimal($dose['expected'], 4) ?> <?= $dose['unit'] ?></div>
+                        <?php
+                        if ($dose['expected'] > $dose['applied']) {
+                            ?>
+                            <form action="../UseCases/ApplyMedicineUseCase.php" method="post">
+                                <input type="hidden" name="Id" value="<?= $dose['id'] ?>">
+                                <button class="btn btn-primary mb-3">Podaj <?= $dose['name'] ?></button>
+                            </form>
+                            <?php
+                        }
+                        if ($dose['applied'] > 0) {
+                            ?>
+                            <form action="../UseCases/UndoMedicineApplicationUseCase.php" method="post">
+                                <input type="hidden" name="Id" value="<?= $dose['id'] ?>">
+                                <button class="btn btn-primary mb-3">Cofnij <?= $dose['name'] ?></button>
+                            </form>
+                            <?php
+                        }
+                    }
+                    ?>
                 </div>
             </div>
         </div>
@@ -213,18 +239,13 @@ limit 1', [$catId]);
             Teraz: <?= now() ?><br/>
             Ostatnia kupa:
             <?= $lastPoop['timestamp'] ?><br/>
-            <span class="<?= $lastPoop['warning'] == 1 ? 'text-danger' : 'text-info' ?>">(<?= showDecimal($lastPoop['days'], 1) ?> dni temu)</span><br/>
+            <span class="<?= $lastPoop['warning'] == 1 ? 'text-danger' : 'text-info' ?>">(<?= showDecimal($lastPoop['days'], 1) ?> dni temu)</span>
+            <br/>
             Ostatnie siku: <?= $lastPee['timestamp'] ?><br/>
-            <span class="<?= $lastPee['warning'] == 1 ? 'text-danger' : 'text-info' ?>"> (<?= showDecimal($lastPee['days'], 1) ?> dni temu)</span><br/>
+            <span class="<?= $lastPee['warning'] == 1 ? 'text-danger' : 'text-info' ?>"> (<?= showDecimal($lastPee['days'], 1) ?> dni temu)</span>
+            <br/>
             Zapotrzebowanie dzisiaj: <?= showInt($dailyDemand['total']); ?> %<br/>
             Zapotrzebowanie wczoraj: <?= showInt($yesterdayDemand['total']); ?> %<br/>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox"
-                       disabled <?= $medicineApplied ? 'checked' : '' ?> id="MedicineAppliedStatus">
-                <label class="form-check-label" for="MedicineAppliedStatus">
-                    Lek podany
-                </label>
-            </div>
             <br/>
             <?php
             if ($lastWeight) {

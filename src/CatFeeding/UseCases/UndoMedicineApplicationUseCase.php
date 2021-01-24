@@ -16,7 +16,7 @@ if (!$dose) {
 }
 
 $save = pdo()->prepare('INSERT INTO medicine_application (cat_id, timestamp, medicine_id, dose, unit) VALUES (?, ?, ?, ?, ?)');
-$saved = $save->execute([$dose['cat_id'], now(), $dose['medicine_id'], $dose['dose'], $dose['unit']]);
+$saved = $save->execute([$dose['cat_id'], now(), $dose['medicine_id'], -$dose['dose'], $dose['unit']]);
 
 if ($saved) {
     showInfo('Lek podany.');

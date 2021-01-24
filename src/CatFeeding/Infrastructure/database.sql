@@ -13,7 +13,7 @@ create table food
     id          int unsigned  not null primary key auto_increment,
     name        varchar(30)   not null,
     description varchar(1000) not null,
-    visible     bool          not null
+    visible     boolean       not null
 );
 
 drop table if exists daily_demand;
@@ -77,8 +77,32 @@ drop table if exists medicine;
 
 create table medicine
 (
-    cat_id int unsigned not null,
-    date   date         not null
+    id   smallint unsigned not null primary key auto_increment,
+    name varchar(30)
+);
+
+drop table if exists medicine_dose;
+
+create table medicine_dose
+(
+    id          tinyint unsigned not null primary key auto_increment,
+    cat_id      int unsigned     not null,
+    name        varchar(30)      not null,
+    medicine_id int unsigned     not null,
+    dose        decimal(6, 4)    not null,
+    unit        varchar(2)       not null,
+    day_count   tinyint unsigned not null
+);
+
+drop table if exists medicine_application;
+
+create table medicine_application
+(
+    medicine_id smallint unsigned not null,
+    cat_id      int unsigned      not null,
+    timestamp   datetime          not null,
+    dose        decimal(6, 4)     not null,
+    unit        varchar(2)        not null
 );
 
 insert into cats (id, name)
@@ -95,3 +119,6 @@ insert into pee (cat_id, timestamp)
 values (2, DATE_SUB(current_timestamp(), INTERVAL 23 HOUR));
 insert into poop (cat_id, timestamp)
 values (2, DATE_SUB(current_timestamp(), INTERVAL 71 HOUR));
+
+insert into medicine (id, name)
+values (1, 'Nieokreślony');

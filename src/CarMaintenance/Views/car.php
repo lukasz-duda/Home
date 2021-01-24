@@ -7,7 +7,7 @@ join mileage m on m.car_id = c.id
 WHERE id = ?', [$carId]);
 $carName = $car['name'];
 $carMileage = $car['mileage'];
-$categories = getAll('SELECT id, name FROM companies order by name', []);
+$companies = getAll('SELECT id, name FROM companies order by name', []);
 $today = date('Y-m-d');
 $tasks = getAll('SELECT t.name
 FROM car_tasks t
@@ -97,7 +97,7 @@ order by e.timestamp desc limit 10", [$carId]);
                     <select class="form-control" id="CompanyId" name="CompanyId">
                         <option value="-1">Nieokreślona</option>
                         <?php
-                        foreach ($categories as $company) {
+                        foreach ($companies as $company) {
                             ?>
                             <option value="<?= $company['id'] ?>"><?= $company['name'] ?></option>
                             <?php

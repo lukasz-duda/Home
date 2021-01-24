@@ -1,8 +1,8 @@
+InnoDB,foreign keys, indexes, cat id tinyint
+Separate food management views to minimise page size
+Expense category color
 Update car task
 Delete flat expense
 Replace car expense companies with company name
 Correct flat expense date
 Correct expense date
-bool to boolean in database.sql - mysql version?
-InnoDB and foreign keys?
-Expense category color
