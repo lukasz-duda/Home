@@ -108,12 +108,13 @@ $medicineDoses = getAll('select d.id,
            select sum(ifnull(ma.dose, 0))
            from medicine_application ma
            where ma.medicine_id = d.medicine_id
+           and datediff(ma.timestamp, ?) = 0
        ) as applied,
        d.unit,
        m.name as medicine_name
 from medicine_dose d
 join medicine m on d.medicine_id = m.id
-where d.cat_id = ?', [$catId]);
+where d.cat_id = ?', [today(), $catId]);
 $lastObservation = get('select timestamp, notes
 from observation
 where cat_id = ?
