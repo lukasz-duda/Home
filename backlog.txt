@@ -1,3 +1,4 @@
+Show hide dose
 InnoDB,foreign keys, indexes, cat id tinyint
 Separate food management views to minimise page size
 Expense category color
