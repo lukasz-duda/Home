@@ -12,7 +12,7 @@ $last = getAll('select timestamp, person, name, value from flat_expense order by
         <div class="card-body">
             Łukasz zapłacił: <?= showMoney($lukasz['value']); ?><br/>
             Ilona zapłaciła: <?= showMoney($ilona['value']) ?><br/>
-            Ilona zwróci jeszcze: <?= showMoney(round(($lukasz['value'] - $ilona['value']) / 2, 2)); ?>
+            Ilona zwróci jeszcze: <?= showMoney(round(($lukasz['value'] - $ilona['value']), 2)); ?>
         </div>
     </div>
 
