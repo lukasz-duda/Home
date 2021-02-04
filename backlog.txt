@@ -1,3 +1,4 @@
+Graph another axis for poop, pee count or medicine ml https://www.chartjs.org/samples/latest/charts/line/multi-axis.html
 InnoDB, foreign keys, indexes, cat id tinyint
 Expense category color
 Update car task
