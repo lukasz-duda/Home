@@ -84,6 +84,7 @@ $dailyDemandResult = query('daily_demand');
 $poopResult = query('poop');
 $peeResult = query('pee');
 $megaceResult = query('megace');
+$observationResult = query('observation');
 
 $days = [$start];
 
@@ -101,10 +102,12 @@ $dailyDemandData = [];
 $poopData = [];
 $peeData = [];
 $megaceData = [];
+$observationData = [];
 
 $dates = [];
 $peeCounts = [];
 $poopCounts = [];
+$observations = [];
 
 $dayOfWeekLNames = ['', 'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota', 'Niedziela'];
 
@@ -128,8 +131,11 @@ foreach ($days as $day) {
 
     $megace = floatval(findValue($megaceResult, $day));
     array_push($megaceData, $megace ? $megace : null);
-}
 
+    $observation = findValue($observationResult, $day, 'notes');
+    array_push($observations, $observation);
+    array_push($observationData, $observation ? 30 : null);
+}
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -202,6 +208,8 @@ foreach ($days as $day) {
     urine.src = 'pee.png';
     let syringe = new Image();
     syringe.src = 'syringe.png';
+    let observation = new Image();
+    observation.src = 'observation.png';
 
     Chart.defaults.global.defaultFontSize = 16;
 
@@ -237,6 +245,7 @@ foreach ($days as $day) {
     const dates = <?= json_encode($dates) ?>;
     const peeCounts = <?= json_encode($peeCounts) ?>;
     const poopCounts = <?= json_encode($poopCounts) ?>;
+    const observations = <?= json_encode($observations) ?>;
 
     var chartContainer = chartElement.getContext('2d');
     var chart = new Chart(chartContainer, {
@@ -279,6 +288,15 @@ foreach ($days as $day) {
                     pointRadius: 4,
                     pointHoverRadius: 7,
                     pointStyle: urine
+                }, {
+                    type: 'scatter',
+                    label: 'Obserwacje',
+                    data: <?= json_encode($observationData) ?>,
+                    borderColor: chartColors.blue,
+                    backgroundColor: chartColors.blue,
+                    pointRadius: 4,
+                    pointHoverRadius: 7,
+                    pointStyle: observation
                 }]
             },
 
@@ -289,8 +307,7 @@ foreach ($days as $day) {
                     intersect: false, callbacks: {
                         title: function (tooltipItems) {
                             return dates[tooltipItems[0].index];
-                        }
-                        ,
+                        },
                         label: function (tooltipItem) {
                             switch (tooltipItem.datasetIndex) {
                                 case  0:
@@ -308,6 +325,9 @@ foreach ($days as $day) {
                                 default:
                                     return '';
                             }
+                        },
+                        footer: function (tooltipItems) {
+                            return observations[tooltipItems[0].index];
                         }
                     }
                 }
