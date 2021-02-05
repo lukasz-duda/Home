@@ -246,6 +246,33 @@ foreach ($days as $day) {
     const peeCounts = <?= json_encode($peeCounts) ?>;
     const poopCounts = <?= json_encode($poopCounts) ?>;
     const observations = <?= json_encode($observations) ?>;
+    
+    function wordWrap(str, maxWidth) {
+        var newLineStr = "\n"; done = false; res = '';
+        while (str.length > maxWidth) {
+            found = false;
+            for (i = maxWidth - 1; i >= 0; i--) {
+                if (testWhite(str.charAt(i))) {
+                    res = res + [str.slice(0, i), newLineStr].join('');
+                    str = str.slice(i + 1);
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                res += [str.slice(0, maxWidth), newLineStr].join('');
+                str = str.slice(maxWidth);
+            }
+
+        }
+
+        return res + str;
+    }
+
+    function testWhite(x) {
+        var white = new RegExp(/^\s$/);
+        return white.test(x.charAt(0));
+    }
 
     var chartContainer = chartElement.getContext('2d');
     var chart = new Chart(chartContainer, {
@@ -327,7 +354,8 @@ foreach ($days as $day) {
                             }
                         },
                         footer: function (tooltipItems) {
-                            return observations[tooltipItems[0].index];
+                            let observation = observations[tooltipItems[0].index] || '';
+                            return wordWrap(observation, 40);
                         }
                     }
                 }
