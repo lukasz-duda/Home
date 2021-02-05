@@ -119,22 +119,22 @@ foreach ($days as $day) {
     array_push($dailyDemandData, $dailyDemand);
     array_push($dates, $dayOfWeekLNames[$dayOfWeek] . ' - ' . $day);
 
+    $megace = floatval(findValue($megaceResult, $day));
+    array_push($megaceData, $megace ? 0 : null);
+
     $poop = intval(findValue($poopResult, $day));
-    array_push($poopData, $poop ? 10 : null);
     $poopCount = intval(findValue($poopResult, $day, 'count'));
+    array_push($poopData, $poop ? $poopCount > 1 ? 15 : 10 : null);
     array_push($poopCounts, $poopCount);
 
     $pee = intval(findValue($peeResult, $day));
-    array_push($peeData, $pee ? 20 : null);
     $peeCount = intval(findValue($peeResult, $day, 'count'));
     array_push($peeCounts, $peeCount);
-
-    $megace = floatval(findValue($megaceResult, $day));
-    array_push($megaceData, $megace ? $megace : null);
+    array_push($peeData, $pee ? 25 + $peeCount * 5 : null);
 
     $observation = findValue($observationResult, $day, 'notes');
     array_push($observations, $observation);
-    array_push($observationData, $observation ? 30 : null);
+    array_push($observationData, $observation ? 50 : null);
 }
 ?>
 <!DOCTYPE html>
