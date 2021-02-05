@@ -71,7 +71,7 @@ if ($cat === false) {
 }
 
 $catName = $cat['name'];
-$start = $_REQUEST['Start'] ? $_REQUEST['Start'] : isoDate(strtotime(isoDate(time()) . ' -1 month'));
+$start = isset($_REQUEST['Start']) ? $_REQUEST['Start'] : isoDate(strtotime(isoDate(time()) . ' -1 month'));
 $end = isoDate(strtotime($start . ' +1 month'));
 
 function query($name)
@@ -83,8 +83,32 @@ function query($name)
 $dailyDemandResult = query('daily_demand');
 $poopResult = query('poop');
 $peeResult = query('pee');
-$megaceResult = query('megace');
+$medicineResults = query('medicine');
 $observationResult = query('observation');
+
+function hasMedicine($date)
+{
+    global $medicineResults;
+    foreach ($medicineResults as $medicine) {
+        if ($medicine['date'] == $date) {
+            return true;
+        }
+    }
+    return null;
+}
+
+function dayMedicine($date)
+{
+    global $medicineResults;
+    $dayMedicine = '';
+    foreach ($medicineResults as $medicine) {
+        if ($medicine['date'] == $date) {
+            $unit = $medicine['unit'] == 'kropla' ? 'krople' : $medicine['unit'];
+            $dayMedicine = $dayMedicine . $medicine['name'] . ' ' . floatval($medicine['dose']) . ' ' . $unit . ', ';
+        }
+    }
+    return rtrim($dayMedicine, ', ');
+}
 
 $days = [$start];
 
@@ -101,13 +125,14 @@ $labels = [];
 $dailyDemandData = [];
 $poopData = [];
 $peeData = [];
-$megaceData = [];
+$medicineData = [];
 $observationData = [];
 
 $dates = [];
 $peeCounts = [];
 $poopCounts = [];
 $observations = [];
+$medicines = [];
 
 $dayOfWeekLNames = ['', 'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota', 'Niedziela'];
 
@@ -119,8 +144,8 @@ foreach ($days as $day) {
     array_push($dailyDemandData, $dailyDemand);
     array_push($dates, $dayOfWeekLNames[$dayOfWeek] . ' - ' . $day);
 
-    $megace = floatval(findValue($megaceResult, $day));
-    array_push($megaceData, $megace ? 0 : null);
+    array_push($medicineData, hasMedicine($day));
+    array_push($medicines, dayMedicine($day));
 
     $poop = intval(findValue($poopResult, $day));
     $poopCount = intval(findValue($poopResult, $day, 'count'));
@@ -246,9 +271,12 @@ foreach ($days as $day) {
     const peeCounts = <?= json_encode($peeCounts) ?>;
     const poopCounts = <?= json_encode($poopCounts) ?>;
     const observations = <?= json_encode($observations) ?>;
-    
+    const medicines = <?= json_encode($medicines) ?>;
+
     function wordWrap(str, maxWidth) {
-        var newLineStr = "\n"; done = false; res = '';
+        var newLineStr = "\n";
+        done = false;
+        res = '';
         while (str.length > maxWidth) {
             found = false;
             for (i = maxWidth - 1; i >= 0; i--) {
@@ -290,8 +318,8 @@ foreach ($days as $day) {
                     pointHoverRadius: 7
                 }, {
                     type: 'scatter',
-                    label: 'Megace [ml]',
-                    data: <?= json_encode($megaceData) ?>,
+                    label: 'Leki',
+                    data: <?= json_encode($medicineData) ?>,
                     borderColor: chartColors.green,
                     backgroundColor: chartColors.green,
                     pointRadius: 4,
@@ -340,7 +368,8 @@ foreach ($days as $day) {
                                 case  0:
                                     return 'Zjadła ' + tooltipItem.value + '% zapotrzebowania';
                                 case  1:
-                                    return 'Megace ' + tooltipItem.value.toString().replace('.', ',') + ' ml';
+                                    let dayMedicines = medicines[tooltipItem.index];
+                                    return dayMedicines.split(', ');
                                 case  2:
                                     let poopCount = poopCounts[tooltipItem.index];
                                     let poopCountSuffix = (poopCount === 1) ? 'raz' : 'razy';
