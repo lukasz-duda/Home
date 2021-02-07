@@ -63,7 +63,7 @@ include __DIR__ . '/ViewUtils.php';
             <li class="nav-item">
                 <a class="nav-link" title="Zadania Łukasz"
                    href="<?= baseUrl() ?>/src/ToDo/Views/edit.php?name=Łukasz"><i
-                            class="material-icons-outlined">playlist_add</i></a>
+                            class="material-icons-outlined">playlist_add_check</i></a>
             </li>
         </ul>
     </div>
