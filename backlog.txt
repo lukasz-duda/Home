@@ -1,4 +1,3 @@
-Correct mistaken events panel
 InnoDB, foreign keys, indexes, cat id tinyint
 Expense category color
 Update car task
