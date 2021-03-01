@@ -187,17 +187,29 @@ limit 1', [$catId]);
             <div class="card mb-3">
                 <div class="card-header">Toaleta</div>
                 <div class="card-body">
+                    <form action="../UseCases/AddPeeUseCase.php" method="post">
+                        <input type="hidden" name="CatId" value="<?= $catId ?>">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Siku</button>
+                        </div>
+                    </form>
+                    <form action="../UseCases/RevertPeeUseCase.php" method="post">
+                        <input type="hidden" name="CatId" value="<?= $catId ?>">
+                        <input type="hidden" name="Timestamp" value="<?= $lastPee['timestamp'] ?>">
+                        <button type="submit" class="btn btn-outline-danger mb-3">
+                            Wycofaj siku <?= $lastPee['timestamp'] ?></button>
+                    </form>
                     <form action="../UseCases/AddPoopUseCase.php" method="post">
                         <input type="hidden" name="CatId" value="<?= $catId ?>">
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Kupa</button>
                         </div>
                     </form>
-                    <form action="../UseCases/AddPeeUseCase.php" method="post">
+                    <form action="../UseCases/RevertPoopUseCase.php" method="post">
                         <input type="hidden" name="CatId" value="<?= $catId ?>">
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Siku</button>
-                        </div>
+                        <input type="hidden" name="Timestamp" value="<?= $lastPoop['timestamp'] ?>">
+                        <button type="submit" class="btn btn-outline-danger mb-3">
+                            Wycofaj kupę <?= $lastPoop['timestamp'] ?></button>
                     </form>
                 </div>
             </div>
