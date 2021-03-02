@@ -6,7 +6,7 @@ from expenses e
     join expense_categories c on c.id = e.category_id
     join refund_plan r on r.expense_id = e.id
 where r.transfer_date is null
-and r.for_me = 1
+and r.for_me = 0
 order by e.value desc, e.timestamp desc', []);
 
 $forMe = getAll('select e.timestamp, e.name, e.value, c.name as category_name
@@ -14,7 +14,7 @@ from expenses e
     join expense_categories c on c.id = e.category_id
     join refund_plan r on r.expense_id = e.id
 where r.transfer_date is null
-and r.for_me = 0
+and r.for_me = 1
 order by e.value desc, e.timestamp desc', []);
 ?>
     <h1>Rozliczenie zakupów</h1>
