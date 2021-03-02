@@ -1,7 +1,7 @@
 <?php
 include '../../Shared/Views/View.php';
 
-$forIlona = getAll('select e.timestamp, e.name, e.value, c.name as category_name
+$forIlona = getAll('select e.id, e.timestamp, e.name, e.value, c.name as category_name
 from expenses e
     join expense_categories c on c.id = e.category_id
     join refund_plan r on r.expense_id = e.id
@@ -9,7 +9,7 @@ where r.transfer_date is null
 and r.for_me = 0
 order by e.value desc, e.timestamp desc', []);
 
-$forMe = getAll('select e.timestamp, e.name, e.value, c.name as category_name
+$forMe = getAll('select e.id, e.timestamp, e.name, e.value, c.name as category_name
 from expenses e
     join expense_categories c on c.id = e.category_id
     join refund_plan r on r.expense_id = e.id
