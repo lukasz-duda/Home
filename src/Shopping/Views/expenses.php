@@ -18,7 +18,6 @@ from expenses e
 left join refund_plan r on r.expense_id = e.id
 where e.timestamp >= ?
 order by e.timestamp desc', [date('Y-m-d', strtotime('-21 days'))]);
-$shoppingList = get('select s.json from shopping_list s', []);
 ?>
     <h1>Zakupy</h1>
 
