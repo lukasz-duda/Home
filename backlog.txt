@@ -1,3 +1,4 @@
+Hide medicine icon for encortolon Szyszka
 InnoDB, foreign keys, indexes, cat id tinyint
 Expense category color
 Update car task
