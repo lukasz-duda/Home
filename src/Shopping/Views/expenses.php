@@ -87,6 +87,7 @@ order by e.timestamp desc', [date('Y-m-d', strtotime('-21 days'))]);
                 <div class="form-group">
                     <label for="CategoryId">Kategoria</label>
                     <select class="form-control" id="CategoryId" name="CategoryId" required>
+                        <option value="">Wybierz</option>
                         <?php
                         foreach ($categories as $category) {
                             ?>
