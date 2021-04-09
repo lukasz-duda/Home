@@ -114,6 +114,7 @@ order by e.timestamp desc', [date('Y-m-d', strtotime('-21 days'))]);
             </p>
             <form action="../UseCases/RefundUseCase.php" method="post">
                 <div class="form-group">
+                    <a class="btn btn-primary" href="settlement.php">Podsumowanie</a>
                     <button class="btn btn-primary">Rozlicz</button>
                 </div>
             </form>
