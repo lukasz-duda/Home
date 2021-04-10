@@ -1,8 +1,6 @@
-InnoDB, foreign keys, indexes, cat id tinyint
 Expense category color
 Update car task
 Delete flat expense
 Replace car expense companies with company name
 Correct flat expense date
 Correct expense date
-Link from expenses to settlement

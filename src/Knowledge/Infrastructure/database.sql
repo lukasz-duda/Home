@@ -7,4 +7,4 @@ create table knowledge_items
     content  varchar(4000) not null,
     keywords varchar(250)  not null,
     date     date          not null
-);
+) engine = InnoDB;

@@ -1,110 +1,116 @@
+drop table if exists meal;
+drop table if exists daily_demand;
+drop table if exists food;
+drop table if exists observation;
+drop table if exists weight;
+drop table if exists poop;
+drop table if exists pee;
+drop table if exists medicine_dose;
+drop table if exists medicine_application;
+drop table if exists medicine;
 drop table if exists cats;
 
 create table cats
 (
-    id   int unsigned not null primary key auto_increment,
-    name varchar(50)  not null
-);
-
-drop table if exists food;
+    id   tinyint unsigned not null primary key auto_increment,
+    name varchar(50)      not null
+) engine = InnoDB;
 
 create table food
 (
-    id          int unsigned  not null primary key auto_increment,
-    name        varchar(30)   not null,
-    description varchar(1000) not null,
-    visible     boolean       not null
-);
-
-drop table if exists daily_demand;
+    id          smallint unsigned not null primary key auto_increment,
+    name        varchar(30)       not null,
+    description varchar(1000)     not null,
+    visible     boolean           not null
+) engine = InnoDB;
 
 create table daily_demand
 (
     timestamp datetime          not null,
-    cat_id    int unsigned      not null,
-    food_id   int unsigned      not null,
+    cat_id    tinyint unsigned  not null,
+    foreign key (cat_id) references cats (id),
+    food_id   smallint unsigned not null,
+    foreign key (food_id) references food (id),
     weight    smallint unsigned not null
-);
-
-drop table if exists meal;
+) engine = InnoDB;
 
 create table meal
 (
     id           int unsigned      not null primary key auto_increment,
-    cat_id       int unsigned      not null,
-    food_id      int unsigned      not null,
+    cat_id       tinyint unsigned  not null,
+    foreign key (cat_id) references cats (id),
+    food_id      smallint unsigned not null,
+    foreign key (food_id) references food (id),
     start        datetime          not null,
     start_weight smallint unsigned not null,
     end          datetime          null,
     end_weight   smallint unsigned null
-);
-
-drop table if exists poop;
+) engine = InnoDB;
 
 create table poop
 (
-    cat_id    int unsigned not null,
-    timestamp datetime     not null
-);
+    cat_id    tinyint unsigned not null,
+    foreign key (cat_id) references cats (id),
+    timestamp datetime         not null
+) engine = InnoDB;
 
-drop table if exists pee;
+create index ix_poop on poop (cat_id, timestamp desc);
 
 create table pee
 (
-    cat_id    int unsigned not null,
-    timestamp datetime     not null
-);
+    cat_id    tinyint unsigned not null,
+    foreign key (cat_id) references cats (id),
+    timestamp datetime         not null
+) engine = InnoDB;
 
-drop table if exists observation;
+create index ix_pee on pee (cat_id, timestamp desc);
 
 create table observation
 (
-    cat_id    int unsigned not null,
-    timestamp datetime     not null,
-    notes     varchar(250) not null
-);
-
-drop table if exists weight;
+    cat_id    tinyint unsigned not null,
+    foreign key (cat_id) references cats (id),
+    timestamp datetime         not null,
+    notes     varchar(250)     not null
+) engine = InnoDB;
 
 create table weight
 (
-    cat_id int unsigned  not null,
-    date   date          not null,
-    weight decimal(2, 1) not null
-);
-
-drop table if exists medicine;
+    cat_id tinyint unsigned not null,
+    foreign key (cat_id) references cats (id),
+    date   date             not null,
+    weight decimal(2, 1)    not null
+) engine = InnoDB;
 
 create table medicine
 (
     id   smallint unsigned not null primary key auto_increment,
     name varchar(30)
-);
-
-drop table if exists medicine_dose;
+) engine = InnoDB;
 
 create table medicine_dose
 (
-    id          tinyint unsigned not null primary key auto_increment,
-    cat_id      int unsigned     not null,
-    name        varchar(30)      not null,
-    medicine_id int unsigned     not null,
-    dose        decimal(6, 4)    not null,
-    unit        varchar(6)       not null,
-    day_count   tinyint unsigned not null,
-    visible     boolean          not null
-);
-
-drop table if exists medicine_application;
+    id          smallint unsigned not null primary key auto_increment,
+    cat_id      tinyint unsigned  not null,
+    foreign key (cat_id) references cats (id),
+    name        varchar(30)       not null,
+    medicine_id smallint unsigned not null,
+    foreign key (medicine_id) references medicine (id),
+    dose        decimal(6, 4)     not null,
+    unit        varchar(6)        not null,
+    day_count   tinyint unsigned  not null,
+    visible     boolean           not null
+) engine = InnoDB;
 
 create table medicine_application
 (
     medicine_id smallint unsigned not null,
-    cat_id      int unsigned      not null,
+    foreign key (medicine_id) references medicine (id),
+    cat_id      tinyint unsigned  not null,
+    foreign key (cat_id) references cats (id),
     timestamp   datetime          not null,
     dose        decimal(6, 4)     not null,
     unit        varchar(6)        not null
-);
+) engine = InnoDB;
 
 insert into cats (id, name)
 values (1, 'Szyszka');

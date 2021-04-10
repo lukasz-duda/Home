@@ -6,4 +6,4 @@ create table flat_expense
     name      varchar(80)   not null,
     value     decimal(8, 2) not null,
     person    varchar(10)   not null
-);
+) engine = InnoDB;
