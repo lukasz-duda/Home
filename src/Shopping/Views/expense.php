@@ -14,6 +14,7 @@ if ($expense['for_me'] == null) {
 ?>
 
     <h1>Zakup</h1>
+
     <p><?= showMoney($expense['value']); ?></p>
     <p><?= $expense['timestamp'] ?></p>
     <p><?= $expense['name'] ?> - <?= $expense['category_name'] ?></p>

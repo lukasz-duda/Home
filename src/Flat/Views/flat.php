@@ -3,7 +3,7 @@ include '../../Shared/Views/View.php';
 
 $ilona = get('select sum(e.value) as value from flat_expense e where e.person = ?', ['Ilona']);
 $lukasz = get('select sum(e.value) as value from flat_expense e where e.person = ?', ['Łukasz']);
-$last = getAll('select timestamp, person, name, value from flat_expense order by timestamp desc limit 10', []);
+$last = getAll('select id, timestamp, person, name, value from flat_expense order by timestamp desc limit 10', []);
 ?>
     <h1>Mieszkanie</h1>
 
@@ -60,7 +60,7 @@ $last = getAll('select timestamp, person, name, value from flat_expense order by
             foreach ($last as $expense) {
                 ?>
 
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="flat_expense.php?Id=<?= $expense['id'] ?>" class="list-group-item list-group-item-action">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1"><?= showMoney($expense['value']); ?></h5>
                         <small><?= $expense['timestamp'] ?></small>
