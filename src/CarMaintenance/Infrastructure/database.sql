@@ -13,9 +13,9 @@ create table cars
 
 create table companies
 (
-    id    smallint unsigned not null primary key auto_increment,
-    name  varchar(100)      not null,
-    notes varchar(500)
+    id      smallint unsigned not null primary key auto_increment,
+    name    varchar(100)      not null,
+    visible boolean           not null
 ) engine = InnoDB;
 
 create table car_expenses
@@ -24,11 +24,11 @@ create table car_expenses
     car_id        tinyint unsigned not null,
     foreign key (car_id) references cars (id),
     name          varchar(100)     not null,
-    company_id    smallint unsigned,
-    foreign key (company_id) references companies (id),
     value         float unsigned   not null,
     timestamp     datetime         not null,
-    fuel_quantity float unsigned
+    fuel_quantity float unsigned,
+    company_id    smallint unsigned,
+    foreign key (company_id) references companies (id)
 ) engine = InnoDB;
 
 create table mileage

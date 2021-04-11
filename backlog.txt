@@ -1,3 +1,3 @@
 Update car task
-Replace car expense companies with company name
+Add new company with car expense
 Add time indexes, replace datediff with >=
