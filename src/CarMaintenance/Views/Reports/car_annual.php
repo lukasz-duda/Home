@@ -51,10 +51,9 @@ $otherValues = join(',', array_column($other, 'sum'));
 
 
         const options = {
-            maintainAspectRatio: false,
             elements: {
                 line: {
-                    tension: 0.000001
+                    tension: 0.1
                 }
             }
         };

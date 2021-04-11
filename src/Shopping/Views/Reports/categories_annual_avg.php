@@ -60,9 +60,6 @@ $categories = array_unique(array_column($expenses, 'name'));
                     }
                     ?>
                 ]
-            },
-            options: {
-                maintainAspectRatio: false
             }
         });
     </script>
