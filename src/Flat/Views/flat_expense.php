@@ -10,7 +10,7 @@ if ($expense === false) {
 
 ?>
 
-    <h1>Wpłata na mieszkanie</h1>
+    <h1>Wpłata</h1>
 
     <p class="lead"><?= $expense['name'] ?></p>
 

@@ -5,16 +5,22 @@ $startDate = $_REQUEST['StartDate'];
 $endDate = $_REQUEST['EndDate'];
 
 $expenses = getAll('select c.name,
-       sum(e.value) as sum
+       (
+           select ifnull(sum(e.value), 0)
+           from expenses e
+           where e.category_id = c.id
+             and e.timestamp >= ?
+             and e.timestamp <= ?
+       ) as sum,
+       c.color
 from expense_categories c
-left outer join expenses e on e.category_id = c.id
-where e.timestamp >= ? and e.timestamp <= ?
-group by c.name
-order by sum(e.value) desc  ', [$startDate, $endDate]);
+group by c.id, c.name, c.ordinal, c.color
+order by c.ordinal', [$startDate, $endDate]);
 
 $labels = "'" . join("', '", array_column($expenses, 'name')) . "'";
 $values = join(',', array_column($expenses, 'sum'));
 $total = array_sum(array_column($expenses, 'sum'));
+$colors = "'" . join("', '", array_column($expenses, 'color')) . "'";
 
 $previousMonthStartDate = date('Y-m-d', strtotime($startDate . " -1 month")) . 'T00:00:00';
 $previousMonthEndDate = date('Y-m-t', strtotime($startDate . " -1 month")) . 'T23:59:59';
@@ -44,7 +50,7 @@ $nextMonthEndDate = date('Y-m-t', strtotime($startDate . " +1 month")) . 'T23:59
         };
 
         const color = Chart.helpers.color;
-        const borderColors = [colors.red, colors.blue, colors.yellow, colors.green, colors.purple, colors.orange, colors.grey];
+        const borderColors = [<?= $colors ?>];
         const backgroundColors = borderColors.map(x => color(x).alpha(0.5).rgbString());
 
         const chartContainer = document.getElementById('Chart').getContext('2d');

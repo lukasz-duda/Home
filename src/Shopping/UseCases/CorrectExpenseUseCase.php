@@ -5,7 +5,7 @@ $id = intval($_REQUEST['Id']);
 $date = $_REQUEST['Date'];
 
 if (notValidId($id)) {
-    showFinalWarning('Nie wybrano wpłaty.');
+    showFinalWarning('Nie wybrano zakupu.');
 }
 
 if (notValidString($date)) {
@@ -17,9 +17,9 @@ $update = pdo()->prepare('UPDATE expenses SET timestamp = ? where id = ?');
 $updated = $update->execute([$date, $id]);
 
 if ($updated) {
-    showInfo('Wpłata poprawiona.');
+    showInfo('Zakup poprawiony.');
 } else {
-    showError('Nie udało się poprawić wpłaty!');
+    showError('Nie udało się poprawić zakupu!');
     showStatementError($update);
 }
 

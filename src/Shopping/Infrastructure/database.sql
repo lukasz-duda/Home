@@ -5,8 +5,10 @@ drop table if exists shopping_list;
 
 create table expense_categories
 (
-    id   tinyint unsigned not null primary key auto_increment,
-    name varchar(50)      not null
+    id      tinyint unsigned not null primary key auto_increment,
+    name    varchar(50)      not null,
+    ordinal tinyint unsigned not null default (1),
+    color   varchar(18)      not null default ('rgb(201, 203, 207)')
 ) engine = InnoDB;
 
 create table expenses
