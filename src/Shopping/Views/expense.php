@@ -1,5 +1,6 @@
 <?php
 include '../../Shared/Views/View.php';
+
 $expenseId = intval($_REQUEST['Id']);
 $expense = get('select e.id, e.timestamp, e.name, e.value, c.name as category_name, r.for_me
 from expenses e
@@ -19,6 +20,22 @@ if ($expense['for_me'] == null) {
     <p><?= $expense['timestamp'] ?></p>
     <p><?= $expense['name'] ?> - <?= $expense['category_name'] ?></p>
     <p><?= $person ?></p>
+
+    <form action="../UseCases/CorrectExpenseUseCase.php" method="post">
+        <input type="hidden" name="Id" value="<?= $expenseId ?>">
+        <div class="row mb-3">
+            <div class="col-auto">
+                <label class="col-form-label" for="Date">Data</label>
+            </div>
+            <div class="col-auto">
+                <input id="Date" name="Date" class="form-control" type="date"
+                       value="<?= substr($expense['timestamp'], 0, 10) ?>">
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary">Popraw datę</button>
+            </div>
+        </div>
+    </form>
 
     <form action="../UseCases/RemoveExpenseUseCase.php" method="post">
         <input type="hidden" name="Id" value="<?= $expenseId ?>">

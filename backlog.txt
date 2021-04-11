@@ -1,5 +1,4 @@
 Expense category color
 Update car task
 Replace car expense companies with company name
-Correct expense date
 Add time indexes, replace datediff with >=
