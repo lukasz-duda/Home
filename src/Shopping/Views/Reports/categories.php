@@ -56,6 +56,18 @@ $nextMonthEndDate = date('Y-m-t', strtotime($startDate . " +1 month")) . 'T23:59
                     borderColor: borderColors,
                     borderWidth: 1
                 }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            min: 0,
+                            max: 500,
+                            stepSize: 100,
+                        }
+                    }]
+                }
             }
         });
     </script>
