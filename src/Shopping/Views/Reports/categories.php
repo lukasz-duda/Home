@@ -45,6 +45,17 @@ $nextMonthEndDate = date('Y-m-t', strtotime($startDate . " +1 month")) . 'T23:59
 
         const chartContainer = document.getElementById('Chart').getContext('2d');
 
+        Chart.Tooltip.positioners.custom = function (elements, position) {
+            if (!elements.length) {
+                return false;
+            }
+
+            return {
+                x: position.x,
+                y: position.y
+            }
+        };
+
         const chart = new Chart(chartContainer, {
             type: 'bar',
             data: {
@@ -67,6 +78,9 @@ $nextMonthEndDate = date('Y-m-t', strtotime($startDate . " +1 month")) . 'T23:59
                             stepSize: 100,
                         }
                     }]
+                },
+                tooltips: {
+                    position: 'custom'
                 }
             }
         });

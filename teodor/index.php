@@ -359,7 +359,8 @@ foreach ($days as $day) {
                 responsive: chartResponsive,
                 tooltips: {
                     mode: 'index',
-                    intersect: false, callbacks: {
+                    intersect: false,
+                    callbacks: {
                         title: function (tooltipItems) {
                             return dates[tooltipItems[0].index];
                         },
@@ -387,8 +388,7 @@ foreach ($days as $day) {
                             return wordWrap(observation, 40);
                         }
                     }
-                }
-                ,
+                },
                 scales: {
                     yAxes: [{
                         ticks: {
@@ -396,7 +396,6 @@ foreach ($days as $day) {
                             max: 120
                         }
                     }]
-
                 }
             }
         })
