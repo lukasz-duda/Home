@@ -9,7 +9,7 @@ $carName = $car['name'];
 $carMileage = $car['mileage'];
 $companies = getAll('SELECT id, name FROM companies where visible = 1 order by name', []);
 $today = date('Y-m-d');
-$tasks = getAll('SELECT t.name
+$tasks = getAll('SELECT t.id, t.name
 FROM car_tasks t
 WHERE t.car_id = ? AND t.priority <> 0
 AND
@@ -81,7 +81,8 @@ order by e.timestamp desc limit 10", [$carId]);
         <?php
         foreach ($tasks as $task) {
             ?>
-            <li class="list-group-item"><?= $task['name'] ?></li>
+            <a href="car_task.php?Id=<?= $task['id'] ?>" class="list-group-item list-group-item-action">
+                <?= $task['name'] ?></a>
             <?php
         }
         ?>
