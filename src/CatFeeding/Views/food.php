@@ -92,7 +92,6 @@ order by name', [$catId]);
         </div>
     </div>
 
-    <script src="../../Shared/Views/knockout-min.js"></script>
     <script>
         function ViewModel() {
             const me = this;
@@ -100,7 +99,7 @@ order by name', [$catId]);
             me.foodDescription = ko.observable(null);
             me.weight = ko.observable(null);
             me.visible = ko.observable(null);
-            me.foods = <?= json_encode($foods);  ?>;
+            me.foods = <?= json_encode($foods)  ?>;
             me.foodId = ko.observable(null);
             me.foodId.subscribe(function () {
                 const selectedFood = ko.utils.arrayFirst(me.foods, function (food) {
