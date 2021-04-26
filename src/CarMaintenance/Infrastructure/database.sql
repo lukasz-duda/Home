@@ -1,6 +1,7 @@
 drop table if exists car_expenses;
 drop table if exists companies;
 drop table if exists mileage;
+drop table if exists car_task_executed;
 drop table if exists car_tasks;
 drop table if exists cars;
 
@@ -51,4 +52,14 @@ create table car_tasks
     last_mileage        mediumint unsigned,
     mileage_interval    mediumint unsigned,
     notes               varchar(500)
+) engine = InnoDB;
+
+create table car_task_executed
+(
+    id          smallint unsigned  not null primary key auto_increment,
+    car_task_id smallint unsigned  not null,
+    foreign key (car_task_id) references car_tasks (id),
+    date        date               not null,
+    mileage     mediumint unsigned not null,
+    notes       varchar(500)
 ) engine = InnoDB;

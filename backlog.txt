@@ -1,2 +1,1 @@
-Update car task
 Add time indexes, replace datediff with >=
