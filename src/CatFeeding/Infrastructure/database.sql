@@ -47,6 +47,10 @@ create table meal
     end_weight   smallint unsigned null
 ) engine = InnoDB;
 
+create index ix_meal_end on meal (cat_id, end);
+
+create index ix_meal_start on meal (cat_id, start);
+
 create table poop
 (
     cat_id    tinyint unsigned not null,
