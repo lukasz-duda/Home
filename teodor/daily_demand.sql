@@ -1,9 +1,8 @@
-select meals.start_date                                                                      as date,
-       sum(round((meals.start_weight - meals.end_weight) / meals.daily_demand_weight * 100)) as value
+select meals.start_date                                                as date,
+       round(sum(meals.meal_weight / meals.daily_demand_weight * 100)) as value
 from (
-         select date(m.start)  as start_date,
-                m.start_weight as start_weight,
-                m.end_weight   as end_weight,
+         select date(m.start)                 as start_date,
+                m.start_weight - m.end_weight as meal_weight,
                 (
                     select d.weight
                     from daily_demand d
@@ -12,11 +11,10 @@ from (
                       and date(d.timestamp) <= date(m.start)
                     order by d.timestamp desc
                     limit 1
-                )              as daily_demand_weight
+                )                             as daily_demand_weight
          from meal m
-                  join food f on f.id = m.food_id
          where m.cat_id = ?
-           and date(m.start) >= ?
-           and date(m.start) <= ?
+           and m.start >= ?
+           and m.start < ?
      ) meals
 group by start_date;

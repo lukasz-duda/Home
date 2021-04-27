@@ -5,5 +5,5 @@ select date(a.timestamp) as date,
 from medicine_application a
          join medicine m on a.medicine_id = m.id
 where a.cat_id = ?
-  and date(a.timestamp) >= ?
-  and date(a.timestamp) <= ?
+  and a.timestamp >= ?
+  and a.timestamp < ?

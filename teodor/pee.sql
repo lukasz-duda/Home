@@ -3,6 +3,6 @@ select date(p.timestamp)  as date,
        count(p.timestamp) as count
 from pee p
 where p.cat_id = ?
-  and date(p.timestamp) >= ?
-  and date(p.timestamp) <= ?
+  and p.timestamp >= ?
+  and p.timestamp < ?
 group by date(p.timestamp)

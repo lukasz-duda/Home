@@ -71,8 +71,8 @@ if ($cat === false) {
 }
 
 $catName = $cat['name'];
-$start = isset($_REQUEST['Start']) ? $_REQUEST['Start'] : isoDate(strtotime(isoDate(time()) . ' -1 month'));
-$end = isoDate(strtotime($start . ' +1 month'));
+$start = $_REQUEST['Start'] ?? isoDate(strtotime(isoDate(time()) . ' - 1 month'));
+$end = isoDate(strtotime($start . ' + 1 month + 1 day'));
 
 function query($name)
 {
