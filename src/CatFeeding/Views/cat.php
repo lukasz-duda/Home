@@ -18,6 +18,7 @@ from meal m
 where m.end is null
   and m.cat_id = ?', [$catId]);
 
+$yesterday = showDate(strtotime(today() . ' -1 day'));
 $lastMeals = getAll('select meals.*,
        (meals.start_weight - meals.end_weight) / meals.daily_demand_weight * 100 as daily_demand_percentage
 from (
@@ -42,7 +43,7 @@ from (
            and m.start >= ?
          order by m.start desc
      ) meals
-order by meals.start desc', [$catId, date('Y-m-d', strtotime('-1 day'))]);
+order by meals.start desc', [$catId, $yesterday]);
 
 $lastPoop = get('select p.timestamp,
        timestampdiff(day, p.timestamp, ?) >= 3 as warning,
@@ -76,7 +77,6 @@ from (
          where m.cat_id = ?
            and m.start >= ? and m.start < ?
      ) meals', [$catId, today(), $tomorrow]);
-$yesterday = showDate(strtotime(today() . ' -1 day'));
 $yesterdayDemand = get('select sum(meals.meal_weight / meals.daily_demand_weight * 100) as total
 from (
          select m.start_weight,
