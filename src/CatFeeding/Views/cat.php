@@ -58,6 +58,7 @@ from pee p
 where p.cat_id = ?
 order by p.timestamp desc
 limit 1', [now(), now(), $catId]);
+$tomorrow = showDate(strtotime(today() . ' +1 day'));
 $dailyDemand = get('select sum(meals.meal_weight / meals.daily_demand_weight * 100) as total
 from (
          select m.start_weight,
@@ -72,10 +73,10 @@ from (
                     limit 1
                 )                             as daily_demand_weight
          from meal m
-                  join food f on m.food_id = f.id
          where m.cat_id = ?
-           and datediff(m.start, ?) = 0
-     ) meals', [$catId, today()]);
+           and m.start >= ? and m.start < ?
+     ) meals', [$catId, today(), $tomorrow]);
+$yesterday = showDate(strtotime(today() . ' -1 day'));
 $yesterdayDemand = get('select sum(meals.meal_weight / meals.daily_demand_weight * 100) as total
 from (
          select m.start_weight,
@@ -90,10 +91,9 @@ from (
                     limit 1
                 )                             as daily_demand_weight
          from meal m
-                  join food f on m.food_id = f.id
          where m.cat_id = ?
-           and datediff(m.start, ?) = 0
-     ) meals', [$catId, date('Y-m-d', strtotime('-1 days'))]);
+           and m.start >= ? and m.start < ?
+     ) meals', [$catId, $yesterday, today()]);
 $medicineDoses = getAll('select d.id,
        d.name,
        d.day_count * d.dose as expected,
