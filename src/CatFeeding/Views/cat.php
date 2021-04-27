@@ -147,7 +147,10 @@ limit 1', [$catId]);
                             <input id="MealWeight" name="Weight" class="form-control" type="number" step="1" min="2"
                                    max="500" required/>
                         </div>
-                        <button class="btn btn-primary mt-3">Rozpocznij</button>
+                        <div class="form-group">
+                            <button class="btn btn-primary">Rozpocznij</button>
+                            <a class="btn btn-secondary" href="food.php?Id=<?= $catId ?>">Pokarm</a>
+                        </div>
                     </form>
                 </div>
             </div>

@@ -20,7 +20,7 @@ $foods = getAll('SELECT f.id, f.name, f.description, f.visible,
 FROM food f
 order by name', [$catId]);
 ?>
-    <h1>Karmy <?= $catName ?></h1>
+    <h1>Pokarm <?= $catName ?></h1>
 
     <div class="row">
         <div class="col-md-6">
@@ -59,7 +59,15 @@ order by name', [$catId]);
                                 </label>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Zapisz</button>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Zapisz</button>
+                        </div>
+                    </form>
+                    <form action="../UseCases/HideUnusedFoods.php" method="post">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-secondary">Ukryj nieużywane
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>
