@@ -42,7 +42,7 @@ $carValue = intval(get('SELECT sum(e.value) as value FROM car_expenses e WHERE c
 $fuelValue = intval(get('SELECT sum(e.value) as value FROM car_expenses e WHERE car_id = ? and name = ?', [$carId, 'Olej napędowy'])['value']);
 $otherValue = intval($total - $carValue - $fuelValue);
 $days = intval(get('select DATEDIFF(max(e.timestamp), min(e.timestamp)) as days from car_expenses e where car_id = ?', [$carId])['days']);
-$lastExpenses = getAll("select concat(e.name, ifnull(concat(' - ', c.name), '')) as name, e.value, e.timestamp, e.fuel_quantity
+$lastExpenses = getAll("select e.id, concat(e.name, ifnull(concat(' - ', c.name), '')) as name, e.value, e.timestamp, e.fuel_quantity
 from car_expenses e
 left outer join companies c on c.id = e.company_id
 where e.car_id = ?
@@ -148,7 +148,7 @@ order by e.timestamp desc limit 10", [$carId]);
                 '';
             ?>
 
-            <a href="#" class="list-group-item list-group-item-action">
+            <a href="car_expense.php?Id=<?= $expense['id'] ?>" class="list-group-item list-group-item-action">
                 <div class="d-flex w-100 justify-content-between">
                     <h5 class="mb-1"><?= showMoney($expense['value']); ?></h5>
                     <small><?= $expense['timestamp'] ?></small>
