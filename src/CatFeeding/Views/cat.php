@@ -102,14 +102,14 @@ $medicineDoses = getAll('select d.id,
            from medicine_application ma
            where ma.medicine_id = d.medicine_id
              and ma.cat_id = ?
-             and datediff(ma.timestamp, ?) = 0
+             and ma.timestamp >= ? and ma.timestamp < ?
        ) as applied,
        d.unit,
        m.name as medicine_name
 from medicine_dose d
 join medicine m on d.medicine_id = m.id
 where d.cat_id = ?
-and d.visible = 1', [$catId, today(), $catId]);
+and d.visible = 1', [$catId, today(), $tomorrow, $catId]);
 $lastObservation = get('select timestamp, notes
 from observation
 where cat_id = ?
