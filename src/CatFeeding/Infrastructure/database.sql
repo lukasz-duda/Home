@@ -118,6 +118,8 @@ create table medicine_application
     unit        varchar(6)        not null
 ) engine = InnoDB;
 
+create index ix_medicine_application on medicine_application (cat_id, timestamp, medicine_id);
+
 insert into cats (id, name)
 values (1, 'Szyszka');
 insert into cats (id, name)
