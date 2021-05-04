@@ -267,6 +267,9 @@ limit 1', [$catId]);
                         }
                     }
                     ?>
+                    <div class="form-group">
+                        <a href="medicine.php?Id=<?= $catId ?>" class="btn btn-secondary">Leki</a>
+                    </div>
                 </div>
             </div>
         </div>

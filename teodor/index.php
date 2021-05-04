@@ -112,8 +112,11 @@ function dayMedicine($date)
 
 $days = [$start];
 
-for ($i = 0; $i < 31; $i++) {
-    $day = isoDate(strtotime($days[$i] . ' +1 day'));
+$dateDiff = strtotime($end) - strtotime($start);
+$daysCount = round($dateDiff / 60 / 60 / 24) - 1;
+
+for ($i = 0; $i < $daysCount; $i++) {
+    $day = isoDate(strtotime($days[$i] . ' + 1 day'));
     array_push($days, $day);
     if ($day == $end) {
         break;
