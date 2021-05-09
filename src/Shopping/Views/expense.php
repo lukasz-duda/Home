@@ -2,15 +2,19 @@
 include '../../Shared/Views/View.php';
 
 $expenseId = intval($_REQUEST['Id']);
-$expense = get('select e.id, e.timestamp, e.name, e.value, c.name as category_name, r.for_me
+$expense = get('select e.id, e.timestamp, e.name, e.value, c.name as category_name, r.for_me, r.transfer_date
 from expenses e
    left join expense_categories c on c.id = e.category_id
 left join refund_plan r on r.expense_id = e.id
 where e.id = ?', [$expenseId]);
 if ($expense['for_me'] == null) {
-    $person = '';
+    $refund = '';
 } else {
-    $person = ($expense['for_me']) ? 'Łukasz' : 'Ilona';
+    $person = $expense['for_me'] ? 'Łukasz' : 'Ilona';
+    $transferDate = $expense['transfer_date'];
+    $refund = $transferDate == null ?
+        "Zaplanowany zwrot dla $person" :
+        "Zwrot dla $person wykonany $transferDate";
 }
 ?>
 
@@ -19,7 +23,7 @@ if ($expense['for_me'] == null) {
     <p><?= showMoney($expense['value']); ?></p>
     <p><?= $expense['timestamp'] ?></p>
     <p><?= $expense['name'] ?> - <?= $expense['category_name'] ?></p>
-    <p><?= $person ?></p>
+    <p><?= $refund ?></p>
 
     <form action="../UseCases/CorrectExpenseUseCase.php" method="post">
         <input type="hidden" name="Id" value="<?= $expenseId ?>">
