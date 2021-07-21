@@ -1,2 +1,4 @@
 Sort settlement by amount or date
 Link to previous settlement from expense
+Add id to every table
+Remove selected medicine application by id
