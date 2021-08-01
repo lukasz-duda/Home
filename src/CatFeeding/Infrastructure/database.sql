@@ -26,6 +26,7 @@ create table food
 
 create table daily_demand
 (
+    id        smallint unsigned not null primary key auto_increment,
     timestamp datetime          not null,
     cat_id    tinyint unsigned  not null,
     foreign key (cat_id) references cats (id),
@@ -55,36 +56,40 @@ create index ix_meal_start on meal (start);
 
 create table poop
 (
-    cat_id    tinyint unsigned not null,
+    id        smallint unsigned not null primary key auto_increment,
+    cat_id    tinyint unsigned  not null,
     foreign key (cat_id) references cats (id),
-    timestamp datetime         not null
+    timestamp datetime          not null
 ) engine = InnoDB;
 
 create index ix_poop on poop (cat_id, timestamp desc);
 
 create table pee
 (
-    cat_id    tinyint unsigned not null,
+    id        smallint unsigned not null primary key auto_increment,
+    cat_id    tinyint unsigned  not null,
     foreign key (cat_id) references cats (id),
-    timestamp datetime         not null
+    timestamp datetime          not null
 ) engine = InnoDB;
 
 create index ix_pee on pee (cat_id, timestamp desc);
 
 create table observation
 (
-    cat_id    tinyint unsigned not null,
+    id        smallint unsigned not null primary key auto_increment,
+    cat_id    tinyint unsigned  not null,
     foreign key (cat_id) references cats (id),
-    timestamp datetime         not null,
-    notes     varchar(250)     not null
+    timestamp datetime          not null,
+    notes     varchar(250)      not null
 ) engine = InnoDB;
 
 create table weight
 (
-    cat_id tinyint unsigned not null,
+    id     smallint unsigned not null primary key auto_increment,
+    cat_id tinyint unsigned  not null,
     foreign key (cat_id) references cats (id),
-    date   date             not null,
-    weight decimal(2, 1)    not null
+    date   date              not null,
+    weight decimal(2, 1)     not null
 ) engine = InnoDB;
 
 create table medicine
@@ -109,6 +114,7 @@ create table medicine_dose
 
 create table medicine_application
 (
+    id          smallint unsigned not null primary key auto_increment,
     medicine_id smallint unsigned not null,
     foreign key (medicine_id) references medicine (id),
     cat_id      tinyint unsigned  not null,

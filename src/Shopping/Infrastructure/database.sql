@@ -25,16 +25,18 @@ create index ix_expenses on expenses (timestamp desc);
 
 create table refund_plan
 (
-    expense_id    int unsigned not null,
+    id            smallint unsigned not null primary key auto_increment,
+    expense_id    int unsigned      not null,
     foreign key (expense_id) references expenses (id),
-    for_me        bool         not null,
-    transfer_date datetime     null
+    for_me        bool              not null,
+    transfer_date datetime          null
 ) engine = InnoDB;
 
 create index ix_refund_plan on refund_plan (transfer_date);
 
 create table shopping_list
 (
+    id   boolean       not null primary key auto_increment,
     json varchar(4000) not null
 ) engine = InnoDB;
 

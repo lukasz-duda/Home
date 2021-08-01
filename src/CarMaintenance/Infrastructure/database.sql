@@ -34,6 +34,7 @@ create table car_expenses
 
 create table mileage
 (
+    id      smallint unsigned  not null primary key auto_increment,
     car_id  tinyint unsigned   not null,
     foreign key (car_id) references cars (id),
     date    date               not null,
