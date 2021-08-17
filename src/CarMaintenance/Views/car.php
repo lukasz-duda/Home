@@ -4,7 +4,7 @@ $carId = intval($_REQUEST['Id']);
 $car = get('SELECT c.name, max(m.mileage) as mileage
 FROM cars c
 join mileage m on m.car_id = c.id
-WHERE id = ?', [$carId]);
+WHERE c.id = ?', [$carId]);
 $carName = $car['name'];
 $carMileage = $car['mileage'];
 $companies = getAll('SELECT id, name FROM companies where visible = 1 order by name', []);
