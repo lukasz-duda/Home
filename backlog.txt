@@ -1,3 +1,5 @@
+New expense date
+Remove started meal
 Remove selected medicine application by id
 Sort settlement by amount or date
 Link to previous settlement from expense
