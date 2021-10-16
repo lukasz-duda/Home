@@ -4,6 +4,7 @@ include '../../Shared/UseCases/UseCase.php';
 $categoryId = intval($_REQUEST['CategoryId']);
 $name = $_REQUEST['Name'];
 $refund = $_REQUEST['Refund'];
+$timestamp = notValidDate($_REQUEST['Date']) ? date('Y-m-d H:i:s', time()) : $_REQUEST['Date'];
 
 if (notValidId($categoryId)) {
     showFinalWarning('Nie wybrano kategorii.');
@@ -44,7 +45,7 @@ switch ($refund) {
 }
 
 $saveExpenseStatement = pdo()->prepare('INSERT INTO expenses (timestamp, value, name, category_id) values (?, ?, ?, ?)');
-$expenseSaved = $saveExpenseStatement->execute([date('Y-m-d H:i:s', time()), $value, $name, $categoryId]);
+$expenseSaved = $saveExpenseStatement->execute([$timestamp, $value, $name, $categoryId]);
 
 $expenseId = pdo()->lastInsertId();
 

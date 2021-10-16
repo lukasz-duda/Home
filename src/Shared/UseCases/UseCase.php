@@ -16,6 +16,15 @@ function notValidJson($text)
     return json_decode($text) === null;
 }
 
+function notValidDate($text)
+{
+    if (notValidString($text)) {
+        return true;
+    }
+
+    return DateTime::createFromFormat('Y-m-d', $text) === false;
+}
+
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     showFinalWarning('Wykonaj polecenie ponownie na formularzu.');
 }

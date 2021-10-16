@@ -79,10 +79,8 @@ order by e.timestamp desc', [date('Y-m-d', strtotime('-21 days'))]);
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="form-group">
-                        <label for="Name">Nazwa</label>
-                        <input class="form-control" id="Name" name="Name" minlength="2" maxlength="50" required/>
-                    </div>
+                    <label for="Name">Nazwa</label>
+                    <input class="form-control" id="Name" name="Name" minlength="2" maxlength="50" required/>
                 </div>
                 <div class="form-group">
                     <label for="CategoryId">Kategoria</label>
@@ -97,6 +95,10 @@ order by e.timestamp desc', [date('Y-m-d', strtotime('-21 days'))]);
                         }
                         ?>
                     </select>
+                </div>
+                <div class="form-group">
+                    <label for="Date">Data</label>
+                    <input class="form-control" id="Date" type="date" name="Date"/>
                 </div>
                 <div class="form-group">
                     <button class="btn btn-primary">Zapisz</button>
