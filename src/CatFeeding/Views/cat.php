@@ -177,6 +177,12 @@ limit 1', [$catId]);
                                     <button type="submit" class="btn btn-primary">Zakończ</button>
                                 </div>
                             </form>
+                            <form action="../UseCases/RemoveMealUseCase.php" method="post">
+                                <input type="hidden" name="Id" value="<?= $meal['id'] ?>"/>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-outline-danger">Usuń</button>
+                                </div>
+                            </form>
                             <?php
                         }
                         ?>
