@@ -49,15 +49,15 @@ if ($transferDate) {
            href="past_settlement.php?transfer-date=<?= showDate(strtotime($transferDate)) ?>">Rozliczenie</a>
     </div>
     <?php
-}
-?>
+} else {
+    ?>
 
     <form action="../UseCases/RemoveExpenseUseCase.php" method="post">
         <input type="hidden" name="Id" value="<?= $expenseId ?>">
         <div class="form-group">
-            <button type="submit" class="btn btn-primary">Usuń</button>
+            <button type="submit" class="btn btn-outline-danger">Usuń</button>
         </div>
     </form>
-
-<?php
+    <?php
+}
 include '../../Shared/Views/Footer.php';
