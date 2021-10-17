@@ -1,28 +1,21 @@
 <?php
 include '../../Shared/UseCases/UseCase.php';
 
-$doseId = intval($_REQUEST['Id']);
+$medicineApplicationId = intval($_REQUEST['Id']);
 
-if (notValidId($doseId)) {
-    showFinalWarning('Nie wybrano dawki.');
+if (notValidId($medicineApplicationId)) {
+    showFinalWarning('Nie wybrano identyfikator podanego leku.');
     return;
 }
 
-$dose = get('SELECT d.cat_id, d.medicine_id, d.dose, d.unit FROM medicine_dose d WHERE d.id = ?', [$doseId]);
+$delete = pdo()->prepare('DELETE FROM medicine_application WHERE id = ?');
+$deleted = $delete->execute([$medicineApplicationId]);
 
-if (!$dose) {
-    showFinalWarning('Nie znaleziono dawki.');
-    return;
-}
-
-$save = pdo()->prepare('INSERT INTO medicine_application (cat_id, timestamp, medicine_id, dose, unit) VALUES (?, ?, ?, ?, ?)');
-$saved = $save->execute([$dose['cat_id'], now(), $dose['medicine_id'], -$dose['dose'], $dose['unit']]);
-
-if ($saved) {
-    showInfo('Lek podany.');
+if ($deleted) {
+    showInfo('Wycofano podany lek.');
 } else {
-    showError('Nie udało się podać leku!');
-    showStatementError($save);
+    showError('Nie udało się wycofać podanego leku!');
+    showStatementError($delete);
 }
 
 

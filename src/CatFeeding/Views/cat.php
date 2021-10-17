@@ -105,11 +105,20 @@ $medicineDoses = getAll('select d.id,
              and ma.timestamp >= ? and ma.timestamp < ?
        ) as applied,
        d.unit,
-       m.name as medicine_name
+       m.name as medicine_name,
+       (
+           select ma2.id
+           from medicine_application ma2
+           where ma2.medicine_id = d.medicine_id
+             and ma2.cat_id = ?
+             and ma2.timestamp >= ? and ma2.timestamp < ?
+           order by ma2.timestamp desc
+           limit 1
+       ) as last_medicine_application_id
 from medicine_dose d
 join medicine m on d.medicine_id = m.id
 where d.cat_id = ?
-and d.visible = 1', [$catId, today(), $tomorrow, $catId]);
+and d.visible = 1', [$catId, today(), $tomorrow, $catId, today(), $tomorrow, $catId]);
 $lastObservation = get('select timestamp, notes
 from observation
 where cat_id = ?
@@ -266,7 +275,7 @@ limit 1', [$catId]);
                         if ($dose['applied'] > 0) {
                             ?>
                             <form action="../UseCases/UndoMedicineApplicationUseCase.php" method="post">
-                                <input type="hidden" name="Id" value="<?= $dose['id'] ?>">
+                                <input type="hidden" name="Id" value="<?= $dose['last_medicine_application_id'] ?>">
                                 <button class="btn btn-success mb-3">Cofnij <?= $dose['name'] ?></button>
                             </form>
                             <?php
