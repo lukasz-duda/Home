@@ -41,6 +41,17 @@ if ($expense['for_me'] == null) {
         </div>
     </form>
 
+<?php
+if ($transferDate) {
+    ?>
+    <div class="form-group">
+        <a class="btn btn-primary"
+           href="past_settlement.php?transfer-date=<?= showDate(strtotime($transferDate)) ?>">Rozliczenie</a>
+    </div>
+    <?php
+}
+?>
+
     <form action="../UseCases/RemoveExpenseUseCase.php" method="post">
         <input type="hidden" name="Id" value="<?= $expenseId ?>">
         <div class="form-group">

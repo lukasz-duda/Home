@@ -1,2 +1,0 @@
-Sort settlement by amount or date
-Link to previous settlement from expense
