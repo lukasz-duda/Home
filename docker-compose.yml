@@ -1,0 +1,21 @@
+version: "3.3"
+services:
+  web:
+    image: php:7.3.27-apache
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/var/www/html
+  sql:
+    image: mariadb:10.4.17
+    environment:
+        MYSQL_ROOT_PASSWORD: 'home'
+        MYSQL_USER: 'home'
+        MYSQL_PASSWORD: 'home'
+        MYSQL_DATABASE: 'home'
+    volumes:
+        - sqldata:/var/lib/mysql
+    ports:
+        - 3306:3306
+volumes:
+  sqldata: {}
