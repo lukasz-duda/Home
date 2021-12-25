@@ -3,22 +3,28 @@ services:
   web:
     image: php:7.3.27-apache
     build:
-        context: .
-        dockerfile: web.Dockerfile
+      context: .
+      dockerfile: Dockerfile.web
     ports:
       - "80:80"
     volumes:
       - ./:/var/www/html
-  sql:
+  db:
     image: mariadb:10.4.17
     environment:
-        MYSQL_ROOT_PASSWORD: 'home'
-        MYSQL_USER: 'home'
-        MYSQL_PASSWORD: 'home'
-        MYSQL_DATABASE: 'home'
-    volumes:
-        - sqldata:/var/lib/mysql
+      LANG: C.UTF-8
+      MYSQL_ROOT_PASSWORD: 'home'
+      MYSQL_USER: 'home'
+      MYSQL_PASSWORD: 'home'
+      MYSQL_DATABASE: 'home'
+    command: --character-set-server=utf8 --collation-server=utf8_unicode_ci
     ports:
-        - 3306:3306
-volumes:
-  sqldata: {}
+      - "3306:3306"
+    volumes:
+      - ./src/CarMaintenance/Infrastructure/database.sql:/docker-entrypoint-initdb.d/01.sql
+      - ./src/CatFeeding/Infrastructure/database.sql:/docker-entrypoint-initdb.d/02.sql
+      - ./src/Coffee/Infrastructure/database.sql:/docker-entrypoint-initdb.d/03.sql
+      - ./src/Flat/Infrastructure/database.sql:/docker-entrypoint-initdb.d/04.sql
+      - ./src/Knowledge/Infrastructure/database.sql:/docker-entrypoint-initdb.d/05.sql
+      - ./src/Shopping/Infrastructure/database.sql:/docker-entrypoint-initdb.d/06.sql
+      - ./src/ToDo/Infrastructure/database.sql:/docker-entrypoint-initdb.d/07.sql

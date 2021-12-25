@@ -64,3 +64,7 @@ create table car_task_executed
     mileage     mediumint unsigned not null,
     notes       varchar(500)
 ) engine = InnoDB;
+
+INSERT INTO cars (id, name, vin) VALUES
+(1, 'Golf', 'WVWZZZ1JZ4W148968'),
+(2, 'Toyota', 'SB1ZS3JEX0E214790');

@@ -68,10 +68,10 @@ order by e.timestamp desc limit 10", [$carId]);
 <div class="card mb-3">
     <div class="card-header">Wydatki miesięczne</div>
     <div class="card-body">
-        Wszystkie: <?= showMoney($total / $days * 30); ?><br/>
-        Samochód: <?= showMoney($carValue / $days * 30); ?><br/>
-        Paliwo: <?= showMoney(($total - $carValue - $otherValue) / $days * 30); ?><br/>
-        Eksploatacja: <?= showMoney(($total - $carValue - $fuelValue) / $days * 30); ?>
+        Wszystkie: <?= $days ? showMoney($total / $days * 30) : ''; ?><br/>
+        Samochód: <?= $days ? showMoney($carValue / $days * 30) : ''; ?><br/>
+        Paliwo: <?= $days ? showMoney(($total - $carValue - $otherValue) / $days * 30) : ''; ?><br/>
+        Eksploatacja: <?= $days ? showMoney(($total - $carValue - $fuelValue) / $days * 30) : ''; ?>
     </div>
 </div>
 
