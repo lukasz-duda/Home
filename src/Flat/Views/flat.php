@@ -47,6 +47,11 @@ $last = getAll('select id, timestamp, person, name, value from flat_expense orde
                     </div>
                 </div>
                 <div class="form-group">
+                    <label for="Name">Data</label>
+                    <input id="Date" name="Date" class="form-control" type="date"
+                        value="<?= substr($expense['timestamp'], 0, 10) ?>">
+                </div>
+                <div class="form-group">
                     <button class="btn btn-primary">Dodaj</button>
                 </div>
             </form>
