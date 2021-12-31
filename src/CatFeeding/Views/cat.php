@@ -18,7 +18,9 @@ from meal m
 where m.end is null
   and m.cat_id = ?', [$catId]);
 
-$yesterday = showDate(strtotime(today() . ' -1 day'));
+$yesterdayStart = showDateTime(strtotime(today() . '- 1 day + 4 hours'));
+$todayStart = showDateTime(strtotime(today() . '+ 4 hours'));
+$tomorrowStart = showDateTime(strtotime(today() . ' + 1 day + 4 hours'));
 $lastMeals = getAll('select meals.*,
        (meals.start_weight - meals.end_weight) / meals.daily_demand_weight * 100 as daily_demand_percentage
 from (
@@ -43,7 +45,7 @@ from (
            and m.start >= ?
          order by m.start desc
      ) meals
-order by meals.start desc', [$catId, $yesterday]);
+order by meals.start desc', [$catId, $yesterdayStart]);
 
 $lastPoop = get('select p.timestamp,
        timestampdiff(day, p.timestamp, ?) >= 3 as warning,
@@ -59,7 +61,6 @@ from pee p
 where p.cat_id = ?
 order by p.timestamp desc
 limit 1', [now(), now(), $catId]);
-$tomorrow = showDate(strtotime(today() . ' +1 day'));
 $dailyDemand = get('select sum(meals.meal_weight / meals.daily_demand_weight * 100) as total
 from (
          select m.start_weight,
@@ -76,7 +77,7 @@ from (
          from meal m
          where m.cat_id = ?
            and m.start >= ? and m.start < ?
-     ) meals', [$catId, today(), $tomorrow]);
+     ) meals', [$catId, $todayStart, $tomorrowStart]);
 $yesterdayDemand = get('select sum(meals.meal_weight / meals.daily_demand_weight * 100) as total
 from (
          select m.start_weight,
@@ -93,7 +94,7 @@ from (
          from meal m
          where m.cat_id = ?
            and m.start >= ? and m.start < ?
-     ) meals', [$catId, $yesterday, today()]);
+     ) meals', [$catId, $yesterdayStart, $todayStart]);
 $medicineDoses = getAll('select d.id,
        d.name,
        d.day_count * d.dose as expected,
@@ -118,7 +119,7 @@ $medicineDoses = getAll('select d.id,
 from medicine_dose d
 join medicine m on d.medicine_id = m.id
 where d.cat_id = ?
-and d.visible = 1', [$catId, today(), $tomorrow, $catId, today(), $tomorrow, $catId]);
+and d.visible = 1', [$catId, $todayStart, $tomorrowStart, $catId, $todayStart, $tomorrowStart, $catId]);
 $lastObservation = get('select timestamp, notes
 from observation
 where cat_id = ?

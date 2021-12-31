@@ -82,18 +82,23 @@ function showDate($value)
     return date('Y-m-d', $value);
 }
 
+function showDateTime($value)
+{
+    return date('Y-m-d H:i:s', $value);
+}
+
 $now = time();
 
 function now()
 {
     global $now;
-    return date('Y-m-d H:i:s', $now);
+    return showDateTime($now);
 }
 
 function today()
 {
     global $now;
-    return date('Y-m-d', $now);
+    return showDate($now);
 }
 
 function baseUrl()
