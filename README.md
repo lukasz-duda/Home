@@ -1,3 +1,16 @@
 # Home
 
-An attempt to support home domains.
+- Car maintenance
+- Cat care
+- Shopping and expenses
+- Tasks
+
+## Available commands
+
+### `docker-compose up`
+
+Creates and start containers. Application URL: http://localhost.
+
+## More information
+
+[Docker](https://docs.docker.com/)
