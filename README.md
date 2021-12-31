@@ -9,7 +9,7 @@
 
 ### `docker-compose up`
 
-Creates and start containers. Application URL: http://localhost.
+Create and start containers. Application URL: http://localhost.
 
 ## More information
 
