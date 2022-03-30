@@ -18,6 +18,11 @@ if (notValidValue($weight)) {
     showFinalWarning('Nie podano wagi.');
 }
 
+$foodExists = get('SELECT id FROM food WHERE name = ?', [$name]) !== false;
+if($foodExists) {
+    showFinalWarning('Pokarm o podanej nazwie istnieje.');
+}
+
 $saveFood = pdo()->prepare('INSERT INTO food (name, description, visible) VALUES (?, ?, ?)');
 $foodSaved = $saveFood->execute([$name, $description, 1]);
 $foodId = pdo()->lastInsertId();
