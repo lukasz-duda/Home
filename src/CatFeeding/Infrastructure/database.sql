@@ -120,7 +120,7 @@ create table medicine_application
     cat_id      tinyint unsigned  not null,
     foreign key (cat_id) references cats (id),
     timestamp   datetime          not null,
-    dose        decimal(6, 4)     not null,
+    dose        decimal(7, 4)     not null,
     unit        varchar(6)        not null
 ) engine = InnoDB;
 
