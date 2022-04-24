@@ -107,7 +107,7 @@ create table medicine_dose
     medicine_id smallint unsigned not null,
     foreign key (medicine_id) references medicine (id),
     dose        decimal(7, 4)     not null,
-    unit        varchar(6)        not null,
+    unit        varchar(10)        not null,
     day_count   tinyint unsigned  not null,
     visible     boolean           not null
 ) engine = InnoDB;
@@ -121,7 +121,7 @@ create table medicine_application
     foreign key (cat_id) references cats (id),
     timestamp   datetime          not null,
     dose        decimal(7, 4)     not null,
-    unit        varchar(6)        not null
+    unit        varchar(10)        not null
 ) engine = InnoDB;
 
 create index ix_medicine_application on medicine_application (cat_id, timestamp, medicine_id);
