@@ -89,7 +89,7 @@ create table weight
     cat_id tinyint unsigned  not null,
     foreign key (cat_id) references cats (id),
     date   date              not null,
-    weight decimal(2, 1)     not null
+    weight decimal(3, 2)     not null
 ) engine = InnoDB;
 
 create table medicine

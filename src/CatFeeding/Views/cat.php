@@ -240,7 +240,7 @@ limit 1', [$catId]);
                     <?php
                     if ($lastWeight) {
                         $lastWeightDate = $lastWeight['date'];
-                        $lastWeightValue = showDecimal($lastWeight['weight'], 1) . ' kg';
+                        $lastWeightValue = showDecimal($lastWeight['weight'], 2) . ' kg';
                         echo "Ostatnia waga $lastWeightValue z dnia $lastWeightDate<br/>";
                     }
                     if ($lastObservation) {
@@ -347,6 +347,22 @@ limit 1', [$catId]);
                     <label for="ObservationNotes">Opis</label>
                     <textarea id="ObservationNotes" name="Notes" class="form-control" required minlength="5"
                               maxlength="250"></textarea>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Dodaj</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">Waga kota</div>
+        <div class="card-body">
+            <form action="../UseCases/WeighCatUseCase.php" method="post">
+                <input type="hidden" name="CatId" value="<?= $catId ?>">
+                <div class="form-group">
+                    <label for="Weight">Waga</label>
+                    <input id="CatWeight" type="number" name="Weight" class="form-control" required min="2" step="0.01" max="5"></textarea>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Dodaj</button>
