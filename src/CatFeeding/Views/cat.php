@@ -154,7 +154,7 @@ limit 1', [$catId]);
                         </div>
                         <div class="form-group">
                             <label for="MealWeight">Waga przed posiłkiem [g]</label>
-                            <input id="MealWeight" name="Weight" class="form-control" type="number" step="1" min="2"
+                            <input id="MealWeight" name="Weight" class="form-control" type="number" step="1" min="1"
                                    max="500" required/>
                         </div>
                         <div class="form-group">
