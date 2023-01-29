@@ -63,7 +63,7 @@ where d.cat_id = ?', [$catId]);
                         </div>
                         <div class="form-group">
                             <label for="Unit">Jednostka</label>
-                            <input class="form-control" id="Unit" name="Unit" required minlength="2" maxlength="6"
+                            <input class="form-control" id="Unit" name="Unit" required minlength="2" maxlength="10"
                                    value="mg"/>
                         </div>
                         <div class="form-group">
