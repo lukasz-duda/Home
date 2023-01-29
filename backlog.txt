@@ -1,4 +1,2 @@
-Task management view, separate by importance and urgency.
 Move Teodor report to cat views.
 Search medicine doses.
-Add default focus.

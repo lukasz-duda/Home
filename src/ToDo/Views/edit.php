@@ -16,6 +16,8 @@ $toDoList = get("select s.json from to_do_list s where s.name = ?", [$listName])
 
                         <button class="btn-primary btn mb-1" data-bind="click: sort">Sortuj</button>
 
+                        <a href="priorities.php?name=<?= $listName ?>" class="btn-secondary btn mb-1">Priorytety</a>
+
                         <input type="hidden" name="Name" value="<?= $listName ?>"/>
                         <input type="hidden" name="ToDoList" data-bind="value: jsonToDoList"/>
                         <button class="btn-primary btn mb-1">Zapisz</button>
@@ -41,10 +43,14 @@ $toDoList = get("select s.json from to_do_list s where s.name = ?", [$listName])
     <script>
         const remarkable = new Remarkable();
 
-        function Task(initialText) {
+        function Task(initialText, urgent = false, important = false) {
             const me = this;
 
             me.text = ko.observable(initialText);
+
+            me.urgent = urgent;
+            
+            me.important = important;
 
             me.formatted = ko.computed(function () {
                 return remarkable.render(me.text());
@@ -61,7 +67,7 @@ $toDoList = get("select s.json from to_do_list s where s.name = ?", [$listName])
             const me = this;
             me.initialTasksData = JSON.parse(<?= json_encode($toDoList['json']);?>);
             me.initialTasks = jQuery.map(me.initialTasksData, function (task) {
-                return new Task(task.text);
+                return new Task(task.text, task.urgent, task.important);
             });
             me.tasks = ko.observableArray(me.initialTasks);
 
@@ -81,7 +87,7 @@ $toDoList = get("select s.json from to_do_list s where s.name = ?", [$listName])
             me.jsonToDoList = ko.computed(function () {
                 const tasks = ko.toJS(me.tasks);
                 const tasksData = jQuery.map(tasks, function (task) {
-                    return {text: task.text};
+                    return { text: task.text, urgent: task.urgent, important: task.important };
                 });
                 return ko.toJSON(tasksData);
             });

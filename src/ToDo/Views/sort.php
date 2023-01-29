@@ -30,10 +30,14 @@ $toDoList = get("select s.json from to_do_list s where s.name = ?", [$listName])
     <script>
         const remarkable = new Remarkable();
 
-        function Task(initialText) {
+        function Task(initialText, urgent = false, important = false) {
             const me = this;
 
             me.text = ko.observable(initialText);
+
+            me.urgent = urgent;
+
+            me.important = important;
 
             me.formatted = ko.computed(function () {
                 return remarkable.render(me.text());
@@ -44,14 +48,14 @@ $toDoList = get("select s.json from to_do_list s where s.name = ?", [$listName])
             const me = this;
             me.initialTasksData = JSON.parse(<?= json_encode($toDoList['json']);?>);
             me.initialTasks = jQuery.map(me.initialTasksData, function (task) {
-                return new Task(task.text);
+                return new Task(task.text, task.urgent, task.important);
             });
             me.tasks = ko.observableArray(me.initialTasks);
 
             me.jsonToDoList = ko.computed(function () {
                 const tasks = ko.toJS(me.tasks);
                 const tasksData = jQuery.map(tasks, function (task) {
-                    return {text: task.text};
+                    return { text: task.text, urgent: task.urgent, important: task.important };
                 });
                 return ko.toJSON(tasksData);
             });

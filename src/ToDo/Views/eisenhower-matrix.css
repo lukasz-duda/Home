@@ -1,0 +1,25 @@
+.em-matrix {
+    width: 100%;
+    height: 80vh;
+}
+
+.em-box {
+    width: 39%;
+    height: 45%;
+    padding: 5px;
+    vertical-align: top;
+    border: dashed 2px #4285f4;
+}
+
+.em-task {
+    width: fit-content;
+    margin: 5px;
+    padding: 7px 10px 5px 10px;
+    border-radius: 4px;
+    color: white;
+    background-color: #4285f4;
+}
+
+.em-drag-over {
+    border-style: solid;
+}
