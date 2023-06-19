@@ -6,6 +6,22 @@
     color: white !important;
 }
 
-.nav-link:hover, .nav-link.active {
+.cat-1 {
+    color: #5c4931;
+    text-shadow: 2px 2px 2px #201202;
+}
+
+.cat-2 {
+    color: #d6b194;
+    text-shadow: 2px 2px 2px #4c382d;
+}
+
+.nav-link.active,
+.nav-link:hover,
+.nav-link:hover .cat-1,
+.nav-link.active .cat-1,
+.nav-link:hover .cat-2,
+.nav-link.active .cat-2 {
     color: #004085 !important;
+    text-shadow: none;
 }

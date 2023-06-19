@@ -1,5 +1,0 @@
-Move Mgiełka to the top menu.
-Move Teodor report to cat views.
-Search medicine doses.
-Payment link.
-Remove or extend coffee counter.
