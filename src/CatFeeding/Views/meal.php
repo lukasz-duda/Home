@@ -27,17 +27,31 @@ if ($meal === false) {
     showFinalWarning('Nie znaleziono posiłku.');
 }
 ?>
-    <h1>Posiłek</h1>
-    <p><?= $meal['name'] ?></p>
-    <p><?= $meal['start_weight'] ?> - <?= $meal['end_weight'] ?>
-        = <?= showInt($meal['start_weight'] - $meal['end_weight']) ?> g
-        = <?= showInt($meal['daily_demand_percentage']) ?> %</p>
-    <p><?= $meal['start'] ?> - <?= $meal['end'] ?></p>
-    <form action="../UseCases/RemoveMealUseCase.php" method="post">
-        <input type="hidden" name="Id" value="<?= $mealId ?>">
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary">Usuń</button>
+<h1>Posiłek</h1>
+<p><?= $meal['name'] ?></p>
+<p><?= $meal['start_weight'] ?> - <?= $meal['end_weight'] ?>
+    = <?= showInt($meal['start_weight'] - $meal['end_weight']) ?> g
+    = <?= showInt($meal['daily_demand_percentage']) ?> %</p>
+<p><?= $meal['start'] ?> - <?= $meal['end'] ?></p>
+<form action="../UseCases/CorrectMealUseCase.php" method="post">
+    <input type="hidden" name="MealId" value="<?= $mealId ?>">
+    <div class="row mb-3">
+        <div class="col-auto">
+            <label class="col-form-label" for="NewEndWeight">Waga po posiłku</label>
         </div>
-    </form>
+        <div class="col-auto">
+            <input id="NewEndWeight" name="NewEndWeight" class="form-control" type="number" step="1" min="0" max="500" required value="<?= $meal['end_weight'] ?>" />
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary">Popraw</button>
+        </div>
+    </div>
+</form>
+<form action="../UseCases/RemoveMealUseCase.php" method="post">
+    <input type="hidden" name="Id" value="<?= $mealId ?>">
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Usuń</button>
+    </div>
+</form>
 <?php
 include '../../Shared/Views/Footer.php';
