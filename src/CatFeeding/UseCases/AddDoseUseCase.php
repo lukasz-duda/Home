@@ -12,6 +12,10 @@ if (notValidId($catId)) {
     showFinalWarning('Nie wybrano kota.');
 }
 
+if (notValidId($medicineId)) {
+    showFinalWarning('Nie wybrano leku.');
+}
+
 if (notValidString($name)) {
     showFinalWarning('Nie podano nazwy.');
 }

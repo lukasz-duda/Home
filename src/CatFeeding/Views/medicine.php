@@ -59,7 +59,7 @@ where d.cat_id = ?', [$catId]);
                         <div class="form-group">
                             <label for="Dose">Dawka</label>
                             <input id="Dose" name="Dose" class="form-control" type="number" step="0.0001" min="0.0001"
-                                   max="99.9999" required/>
+                                   max="250" required/>
                         </div>
                         <div class="form-group">
                             <label for="Unit">Jednostka</label>
