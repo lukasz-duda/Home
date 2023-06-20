@@ -2,7 +2,13 @@
     background-color: #4285f4 !important;
 }
 
-.nav-link {
+.nav-button {
+    background: none !important;
+    border: none !important;
+}
+
+.nav-link,
+.nav-button {
     color: white !important;
 }
 
@@ -18,6 +24,7 @@
 
 .nav-link.active,
 .nav-link:hover,
+.nav-button:hover,
 .nav-link:hover .cat-1,
 .nav-link.active .cat-1,
 .nav-link:hover .cat-2,

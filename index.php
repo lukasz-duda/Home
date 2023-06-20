@@ -47,7 +47,7 @@ $previousMonthEndDate = date("Y-m-t", strtotime($previousMonthStartDate)) . 'T23
             me.showShortcuts = true;
 
             me.items = ko.observableArray([
-                new Shortcut('Mgiełka', 'src/CatFeeding/Views/cat.php?Id=2'),
+                new MenuItem('Mgiełka', 'src/CatFeeding/Views/cat.php?Id=2'),
                 new Shortcut('Planowanie zakupów', 'src/Shopping/Views/plan.php'),
                 new Shortcut('Kategorie zakupów w bieżącym miesiącu', 'src/Shopping/Views/Reports/categories.php?StartDate=<?= $currentMonthStartDate ?>&EndDate=<?= $currentMonthEndDate ?>'),
                 new MenuItem('Golf', 'src/CarMaintenance/Views/car.php?Id=1'),
@@ -68,7 +68,6 @@ $previousMonthEndDate = date("Y-m-t", strtotime($previousMonthStartDate)) . 'T23
                 new MenuItem('Leki Mgiełka', 'src/CatFeeding/Views/medicine.php?Id=2'),
                 new MenuItem('Pokarm Szyszka', 'src/CatFeeding/Views/food.php?Id=1'),
                 new MenuItem('Pokarm Mgiełka', 'src/CatFeeding/Views/food.php?Id=2'),
-                new Shortcut('Teodor', 'teodor'),
                 new MenuItem('Rozliczenie zakupów', 'src/Shopping/Views/settlement.php'),
                 new MenuItem('Firmy', 'src/CarMaintenance/Views/companies.php')
             ]);

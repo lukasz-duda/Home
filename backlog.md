@@ -1,4 +1,3 @@
-- Move Teodor report to cat views.
 - Search medicine doses.
 - Remove or extend coffee counter.
 - Payment link.
