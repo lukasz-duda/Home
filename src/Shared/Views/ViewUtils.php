@@ -24,7 +24,7 @@ function getAll($query, $params)
 {
     $statement = pdo()->prepare($query);
     $statement->execute($params);
-    return $statement->fetchAll();
+    return $statement->fetchAll(PDO::FETCH_ASSOC);
 }
 
 function notValidId($id)
