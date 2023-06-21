@@ -132,7 +132,7 @@ where d.cat_id = ?', [$catId]);
 <script>
     function Dose(src) {
         const me = this;
-        me.id = ko.observable(src.id);
+        me.id = ko.observable(parseInt(src.id));
         me.name = ko.observable(src.name);
         me.medicineName = ko.observable(src.medicine_name);
         me.unit = ko.observable(src.unit);
