@@ -1,3 +1,2 @@
-- Search for companies.
 - Remove or extend coffee counter.
 - Payment link.
