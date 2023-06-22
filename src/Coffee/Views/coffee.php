@@ -21,7 +21,9 @@ $nextLubricating = showDate(strtotime($lastLubricated . ' + 4 months'));
 $lubricateVisible = today() >= $nextLubricating;
 ?>
 
-<h1>Konserwacja ekspresu</h1>
+<h1>Ekspres EP5441/50</h1>
+
+<h2>Czyszczenie i konserwacja</h2>
 
 <table class="table table-bordered">
     <thead>
