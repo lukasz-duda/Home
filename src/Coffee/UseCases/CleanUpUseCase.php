@@ -1,14 +1,22 @@
 <?php
 include '../../Shared/UseCases/UseCase.php';
 
-/** @noinspection SqlWithoutWhere */
-$statement = pdo()->prepare('update coffees set last_cleaning = current');
-$updated = $statement->execute([]);
+$event = $_REQUEST['EventName'];
+
+$events = array('cleaned', 'degreased', 'lubricated');
+
+if (!in_array($event, $events)) {
+    showFinalWarning("Nieobsługiwane zdarzenie $event");
+    return;
+}
+
+$statement = pdo()->prepare("update coffee_machine set last_$event = ?");
+$updated = $statement->execute([today()]);
 
 if ($updated) {
-    showInfo('Ekspres umyty.');
+    showInfo('Czynność wykonana.');
 } else {
-    showError('Nie udało się umyć ekspresu.');
+    showError('Nie udało się wykonać czynności.');
     showStatementError($statement);
 }
 

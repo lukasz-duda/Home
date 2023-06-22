@@ -55,7 +55,7 @@ $previousMonthEndDate = date("Y-m-t", strtotime($previousMonthStartDate)) . 'T23
             new MenuItem('Roczne wydatki na Golfa', 'src/CarMaintenance/Views/Reports/car_annual.php?Id=1'),
             new MenuItem('Roczne wydatki na Toyotę', 'src/CarMaintenance/Views/Reports/car_annual.php?Id=2'),
             new MenuItem('Szyszka', 'src/CatFeeding/Views/cat.php?Id=1'),
-            new MenuItem('Kawa', 'src/Coffee/Views/coffee.php'),
+            new Shortcut('Kawa', 'src/Coffee/Views/coffee.php'),
             new Shortcut('Mieszkanie', 'src/Flat/Views/flat.php'),
             new Shortcut('Baza wiedzy', 'src/Knowledge/Views/knowledge_search.php'),
             new MenuItem('Ślub', 'src/Knowledge/Views/knowledge_search.php?query=ślub'),

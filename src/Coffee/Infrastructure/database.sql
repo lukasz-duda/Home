@@ -1,11 +1,12 @@
-drop table if exists coffees;
+drop table if exists coffee_machine;
 
-create table coffees
+create table coffee_machine
 (
     id            boolean           not null primary key auto_increment,
-    current       smallint unsigned not null,
-    last_cleaning smallint unsigned not null
+    last_cleaned date not null,
+    last_degreased date not null,
+    last_lubricated date not null
 ) engine = InnoDB;
 
-insert into coffees (current, last_cleaning)
-values (0, 0);
+insert into coffee_machine (last_cleaned, last_degreased, last_lubricated)
+values ('2001-02-03', '2001-02-03', '2001-02-03');
