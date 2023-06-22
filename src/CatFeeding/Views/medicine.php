@@ -116,7 +116,7 @@ where d.cat_id = ?', [$catId]);
                             <span data-bind="text: name"></span>
                         </button>
                     </form>
-                    <form action="../UseCases/ShowDoseUseCase.php" method="post" data-bind="visible: !visible()">
+                    <form action="../UseCases/ShowDoseUseCase.php" method="post" data-bind="visible: !visible">
                         <input type="hidden" name="Id" data-bind="value: id">
                         <button type="submit" class="btn btn-outline-success mb-3">
                             Pokaż
@@ -132,13 +132,13 @@ where d.cat_id = ?', [$catId]);
 <script>
     function Dose(src) {
         const me = this;
-        me.id = ko.observable(parseInt(src.id));
-        me.name = ko.observable(src.name);
-        me.medicineName = ko.observable(src.medicine_name);
-        me.unit = ko.observable(src.unit);
-        me.dose = ko.observable(parseFloat(src.dose));
-        me.dayCount = ko.observable(parseInt(src.day_count));
-        me.visible = ko.observable(Boolean(parseInt(src.visible)));
+        me.id = parseInt(src.id);
+        me.name = src.name;
+        me.medicineName = src.medicine_name;
+        me.unit = src.unit;
+        me.dose = parseFloat(src.dose);
+        me.dayCount = parseInt(src.day_count);
+        me.visible = Boolean(parseInt(src.visible));
     }
 
     const dosesSource = JSON.parse('<?= json_encode($doses) ?>');
@@ -148,7 +148,7 @@ where d.cat_id = ?', [$catId]);
         const me = this;
         me.query = ko.observable('');
         me.matchingDoses = ko.computed(() => {
-            return doses.filter(dose => dose.name().toLowerCase().includes(me.query().toLowerCase()));
+            return doses.filter(dose => dose.name.toLowerCase().includes(me.query().toLowerCase()));
         });
     }
 

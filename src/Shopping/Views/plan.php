@@ -41,7 +41,7 @@ $shoppingList = get('select s.json from shopping_list s', []);
         me.shoppingList = ko.mapping.fromJSON(<?= json_encode($shoppingList['json']); ?>);
         me.addShoppingItem = function () {
             const current = me.shoppingList();
-            const newShoppingList = [{ name: ko.observable(null) }].concat(current);
+            const newShoppingList = [{ name: ko.observable(null) }, ...current];
             me.shoppingList(newShoppingList);
         };
 
@@ -49,9 +49,7 @@ $shoppingList = get('select s.json from shopping_list s', []);
             me.shoppingList.remove(item);
         };
 
-        me.jsonShoppingList = ko.computed(function () {
-            return ko.toJSON(me.shoppingList);
-        });
+        me.jsonShoppingList = ko.computed(() => ko.toJSON(me.shoppingList));
     }
 
     const viewModel = new ViewModel();

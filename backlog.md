@@ -1,2 +1,3 @@
 - Remove or extend coffee counter.
+- Use unified chart version https://www.chartjs.org/docs/2.9.4.
 - Payment link.

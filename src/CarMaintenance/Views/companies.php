@@ -48,7 +48,7 @@ $companies = getAll('select c.id, c.name, c.visible from companies c', []);
                             <span data-bind="text: name"></span>
                         </button>
                     </form>
-                    <form action="../UseCases/ShowCompanyUseCase.php" method="post" data-bind="visible: !visible()">
+                    <form action="../UseCases/ShowCompanyUseCase.php" method="post" data-bind="visible: !visible">
                         <input type="hidden" name="Id" data-bind="value: id">
                         <button type="submit" class="btn btn-outline-success mb-3">
                             Pokaż
@@ -64,9 +64,9 @@ $companies = getAll('select c.id, c.name, c.visible from companies c', []);
 <script>
     function Company(src) {
         const me = this;
-        me.id = ko.observable(src.id);
-        me.name = ko.observable(src.name);
-        me.visible = ko.observable(Boolean(parseInt(src.visible)));
+        me.id = src.id;
+        me.name = src.name;
+        me.visible = Boolean(parseInt(src.visible));
     }
 
     const companiesSource = JSON.parse('<?= json_encode($companies) ?>');
@@ -76,7 +76,7 @@ $companies = getAll('select c.id, c.name, c.visible from companies c', []);
         const me = this;
         me.query = ko.observable('');
         me.matchingCompanies = ko.computed(() => {
-            return companies.filter(company => company.name().toLowerCase().includes(me.query().toLowerCase()));
+            return companies.filter(company => company.name.toLowerCase().includes(me.query().toLowerCase()));
         });
     }
 
