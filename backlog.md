@@ -1,2 +1,1 @@
-- Correct the bootstrap 5 menu color and expanded.
 - Use unified chart version https://www.chartjs.org/docs/2.9.4.

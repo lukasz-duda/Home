@@ -138,39 +138,49 @@ foreach ($days as $day) {
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-sm navbar-light bg-light mb-4">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="<?= baseUrl() ?>/src/CatFeeding/Views/cat.php?Id=<?= $catId ?>"><i
-                    class="material-icons-outlined cat-<?= $catId ?>">pets</i></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" title="Wstecz"
-                            href="timeline.php?CatId=<?= $catId ?>&Start=<?= showDate(strtotime($start . ' -1 month')) ?>"><i
-                                class="material-icons-outlined">arrow_back</i></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" title="Naprzód"
-                            href="timeline.php?CatId=<?= $catId ?>&Start=<?= showDate(strtotime($start . ' +1 month')) ?>"><i
-                                class="material-icons-outlined">arrow_forward</i></a>
-                    </li>
-                </ul>
-                <form class="d-flex">
-                    <input name="CatId" type="hidden" value="<?= $catId ?>">
-                    <input class="form-control me-2" type="date" name="Start" value="<?= $start ?>">
-                    <button class="nav-button" type="submit"><i class="material-icons-outlined">search</i></button>
-                </form>
-            </div>
+    <nav class="navbar navbar-expand navbar-light bg-light mb-3">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= baseUrl() ?>/src/CatFeeding/Views/cat.php?Id=<?= $catId ?>"><i
+                            class="material-icons-outlined cat-<?= $catId ?>">pets</i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" title="Wstecz"
+                        href="timeline.php?CatId=<?= $catId ?>&Start=<?= showDate(strtotime($start . ' -1 month')) ?>"><i
+                            class="material-icons-outlined">arrow_back</i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" title="Naprzód"
+                        href="timeline.php?CatId=<?= $catId ?>&Start=<?= showDate(strtotime($start . ' +1 month')) ?>"><i
+                            class="material-icons-outlined">arrow_forward</i></a>
+                </li>
+                <li class="nav-item">
+                    <form class="nav-link">
+                        <div class="input-group">
+                            <input name="CatId" type="hidden" value="<?= $catId ?>">
+                            <input class="form-control" id="Search" type="date" name="Start" value="<?= $start ?>"
+                                aria-describedby="SearchIcon">
+                            <div class="input-group-append">
+                                <button type="submit" class="input-group-text" id="SearchIcon"><i
+                                        class="material-icons-outlined" style="font-size: inherit">search</i></button>
+                            </div>
+                        </div>
+                    </form>
+                </li>
+            </ul>
         </div>
     </nav>
+
     <div class="container" id="ChartContainer">
         <canvas id="Chart"></canvas>
     </div>
+
     <script src="Chart.min.js"></script>
     <script>
         let poop = new Image();
@@ -347,7 +357,6 @@ foreach ($days as $day) {
         })
             ;
     </script>
-    <script src="<?= baseUrl() ?>/src/CatFeeding/Views/Reports/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

@@ -7,8 +7,7 @@
     border: none !important;
 }
 
-.nav-link,
-.nav-button {
+.nav-link {
     color: white !important;
 }
 
@@ -23,12 +22,15 @@
 }
 
 .nav-link.active,
-.nav-link:hover,
-.nav-button:hover,
+.nav-link:hover {
+    color: #004085 !important;
+    text-shadow: none;
+}
+
+
 .nav-link:hover .cat-1,
 .nav-link.active .cat-1,
 .nav-link:hover .cat-2,
 .nav-link.active .cat-2 {
-    color: #004085 !important;
-    text-shadow: none;
+    text-shadow: 2px 2px 2px white;
 }
