@@ -129,6 +129,7 @@ foreach ($days as $day) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>
+        Oś czasu
         <?= $catName ?>
     </title>
     <link rel="shortcut icon" sizes="192x192" href="pets.png">
@@ -181,7 +182,6 @@ foreach ($days as $day) {
         <canvas id="Chart"></canvas>
     </div>
 
-    <script src="Chart.min.js"></script>
     <script>
         let poop = new Image();
         poop.src = 'poop.png';

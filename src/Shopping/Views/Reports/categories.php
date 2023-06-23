@@ -28,72 +28,73 @@ $nextMonthStartDate = date('Y-m-d', strtotime($startDate . " +1 month")) . 'T00:
 $nextMonthEndDate = date('Y-m-t', strtotime($startDate . " +1 month")) . 'T23:59:59';
 ?>
 
-    <h1 hidden>Kategorie zakupów</h1>
-    <h4>Kategorie zakupów</h4>
-    <p>
-        <?php
-        echo 'Razem: ' . showMoney($total);
-        echo '<br />od ' . showDate(strtotime($startDate)) . ' do ' . showDate(strtotime($endDate)) . '<br />';
-        ?>
-    </p>
+<h1 hidden>Kategorie zakupów</h1>
+<h4>Kategorie zakupów</h4>
+<p>
+    <?php
+    echo 'Razem: ' . showMoney($total);
+    echo '<br />od ' . showDate(strtotime($startDate)) . ' do ' . showDate(strtotime($endDate)) . '<br />';
+    ?>
+</p>
 
-    <canvas id="Chart" height="200"></canvas>
-    <script>
-        const color = Chart.helpers.color;
-        const borderColors = [<?= $colors ?>];
-        const backgroundColors = borderColors.map(x => color(x).alpha(0.5).rgbString());
+<canvas id="Chart" height="200"></canvas>
 
-        const chartContainer = document.getElementById('Chart').getContext('2d');
+<script>
+    const color = Chart.helpers.color;
+    const borderColors = [<?= $colors ?>];
+    const backgroundColors = borderColors.map(x => color(x).alpha(0.5).rgbString());
 
-        Chart.Tooltip.positioners.custom = function (elements, position) {
-            if (!elements.length) {
-                return false;
-            }
+    const chartContainer = document.getElementById('Chart').getContext('2d');
 
-            return {
-                x: position.x,
-                y: position.y
-            }
-        };
+    Chart.Tooltip.positioners.custom = function (elements, position) {
+        if (!elements.length) {
+            return false;
+        }
 
-        const chart = new Chart(chartContainer, {
-            type: 'bar',
-            data: {
-                labels: [<?= $labels ?>],
-                datasets: [{
-                    label: 'Suma zł',
-                    data: [<?= $values ?>],
-                    backgroundColor: backgroundColors,
-                    borderColor: borderColors,
-                    borderWidth: 1
+        return {
+            x: position.x,
+            y: position.y
+        }
+    };
+
+    const chart = new Chart(chartContainer, {
+        type: 'bar',
+        data: {
+            labels: [<?= $labels ?>],
+            datasets: [{
+                label: 'Suma zł',
+                data: [<?= $values ?>],
+                backgroundColor: backgroundColors,
+                borderColor: borderColors,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        min: 0,
+                        max: 500,
+                        stepSize: 100,
+                    }
                 }]
             },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true,
-                            min: 0,
-                            max: 500,
-                            stepSize: 100,
-                        }
-                    }]
-                },
-                tooltips: {
-                    position: 'custom'
-                }
+            tooltips: {
+                position: 'custom'
             }
-        });
-    </script>
+        }
+    });
+</script>
 
-    <div class="btn-group">
-        <a class="btn btn-primary"
-           href="categories.php?StartDate=<?= $previousMonthStartDate ?>&EndDate=<?= $previousMonthEndDate ?>">Miesiąc
-            wcześniej</a>
-        <a class="btn btn-primary"
-           href="categories.php?StartDate=<?= $nextMonthStartDate ?>&EndDate=<?= $nextMonthEndDate ?>">Miesiąc
-            później</a>
-    </div>
+<div class="btn-group">
+    <a class="btn btn-primary"
+        href="categories.php?StartDate=<?= $previousMonthStartDate ?>&EndDate=<?= $previousMonthEndDate ?>">Miesiąc
+        wcześniej</a>
+    <a class="btn btn-primary"
+        href="categories.php?StartDate=<?= $nextMonthStartDate ?>&EndDate=<?= $nextMonthEndDate ?>">Miesiąc
+        później</a>
+</div>
 
 <?php
 include '../../../Shared/Views/Footer.php';

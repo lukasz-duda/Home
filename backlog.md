@@ -1,1 +1,0 @@
-- Use unified chart version https://www.chartjs.org/docs/2.9.4.
