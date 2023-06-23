@@ -25,6 +25,7 @@ include __DIR__ . '/ViewUtils.php';
     <script src="<?= baseUrl() ?>/src/Shared/Views/knockout-sortable.min.js"></script>
     <script src="<?= baseUrl() ?>/src/Shared/Views/jquery.ui.touch-punch.min.js"></script>
     <script src="<?= baseUrl() ?>/src/Shared/Views/remarkable.min.js"></script>
+    <script src="<?= baseUrl() ?>/src/Shared/Views/Chart.min.js"></script>
 </head>
 
 <body>

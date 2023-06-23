@@ -182,6 +182,8 @@ foreach ($days as $day) {
         <canvas id="Chart"></canvas>
     </div>
 
+    <script src="<?= baseUrl() ?>/src/Shared/Views/Chart.min.js"></script>
+
     <script>
         let poop = new Image();
         poop.src = 'poop.png';
