@@ -130,6 +130,19 @@ from weight
 where cat_id = ?
 order by date desc
 limit 1', [$catId]);
+
+function getLastApplication($medicineName) {
+    $lastApplication = get('select a.timestamp, timestampdiff(day, a.timestamp, ?) as days
+    from medicine_application a
+    join medicine m on m.id = a.medicine_id
+    where m.name = ?
+    order by a.timestamp desc
+    limit 1', [now(), $medicineName]);
+
+    return $lastApplication;
+}
+
+$lastMegace = getLastApplication('Megace');
 ?>
 <h1>
     <?= $catName ?>
@@ -242,6 +255,11 @@ limit 1', [$catId]);
                 <?= showInt($yesterdayDemand['total']); ?> %<br />
                 <br />
                 <?php
+                if ($lastMegace) {
+                    $lastMegaceTime = $lastMegace['timestamp'];
+                    $lastMegaceDays = $lastMegace['days'];
+                    echo "Ostatnie Megace: $lastMegaceTime<br />($lastMegaceDays dni temu)<br />";
+                }
                 if ($lastWeight) {
                     $lastWeightDate = $lastWeight['date'];
                     $lastWeightValue = showDecimal($lastWeight['weight'], 2) . ' kg';
