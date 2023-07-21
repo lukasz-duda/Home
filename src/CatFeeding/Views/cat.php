@@ -104,6 +104,7 @@ $medicineDoses = getAll('select d.id,
            where ma.medicine_id = d.medicine_id
              and ma.cat_id = ?
              and ma.timestamp >= ? and ma.timestamp < ?
+             and d.unit = ma.unit
        ) as applied,
        d.unit,
        m.name as medicine_name,
@@ -113,6 +114,7 @@ $medicineDoses = getAll('select d.id,
            where ma2.medicine_id = d.medicine_id
              and ma2.cat_id = ?
              and ma2.timestamp >= ? and ma2.timestamp < ?
+             and d.unit = ma2.unit
            order by ma2.timestamp desc
            limit 1
        ) as last_medicine_application_id
