@@ -131,18 +131,19 @@ where cat_id = ?
 order by date desc
 limit 1', [$catId]);
 
-function getLastApplication($medicineName) {
+function getLastApplication($medicineName, $catId) {
     $lastApplication = get('select a.timestamp, timestampdiff(day, a.timestamp, ?) as days
     from medicine_application a
     join medicine m on m.id = a.medicine_id
     where m.name = ?
+    and a.cat_id = ?
     order by a.timestamp desc
-    limit 1', [now(), $medicineName]);
+    limit 1', [now(), $medicineName, $catId]);
 
     return $lastApplication;
 }
 
-$lastMegace = getLastApplication('Megace');
+$lastMegace = getLastApplication('Megace', $catId);
 ?>
 <h1>
     <?= $catName ?>
