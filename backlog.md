@@ -1,3 +1,3 @@
-Separate poop count, pee count charts
-Weight chart
-Food deduplication
+- Separate poop count, pee count charts
+- Weight chart
+- Food deduplication
