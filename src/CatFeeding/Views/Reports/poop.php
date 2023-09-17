@@ -34,7 +34,7 @@ function findCount($list, $date)
             return $item['count'];
         }
     }
-    return null;
+    return 0;
 }
 
 for ($i = 0; $i < 7; $i++) {
