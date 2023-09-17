@@ -1,4 +1,4 @@
-- Separate poop count, pee count charts
 - Weight chart
 - Food deduplication
+- Apply medicine from medicine doses list
 - Shortcut to first input

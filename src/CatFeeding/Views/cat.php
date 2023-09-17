@@ -227,12 +227,14 @@ $lastMegace = getLastApplication('Megace', $catId);
                     <input type="hidden" name="CatId" value="<?= $catId ?>">
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">Siku</button>
+                        <a class="btn btn-secondary" href="<?= baseUrl() ?>/src/CatFeeding/Views/Reports/pee.php?CatId=<?= $catId ?>">Ostatni tydzień</a>
                     </div>
                 </form>
                 <form action="../UseCases/AddPoopUseCase.php" method="post">
                     <input type="hidden" name="CatId" value="<?= $catId ?>">
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">Kupa</button>
+                        <a class="btn btn-secondary" href="<?= baseUrl() ?>/src/CatFeeding/Views/Reports/poop.php?CatId=<?= $catId ?>">Ostatni tydzień</a>
                     </div>
                 </form>
             </div>
