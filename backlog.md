@@ -1,4 +1,5 @@
 - Weight chart
 - Food deduplication
 - Apply medicine from medicine doses list
+- Start meal from food list
 - Shortcut to first input
