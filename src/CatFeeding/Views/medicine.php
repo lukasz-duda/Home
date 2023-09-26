@@ -102,27 +102,36 @@ where d.cat_id = ?', [$catId]);
                         <span data-bind="text: unit"></span>
                         <span data-bind="text: medicineName"></span>
                     </div>
-                    <form action="../UseCases/RemoveDoseUseCase.php" method="post">
-                        <input type="hidden" name="Id" data-bind="value: id">
-                        <button type="submit" class="btn btn-outline-danger mb-3">
-                            Usuń
-                            <span data-bind="text: name"></span>
-                        </button>
-                    </form>
-                    <form action="../UseCases/HideDoseUseCase.php" method="post" data-bind="visible: visible">
-                        <input type="hidden" name="Id" data-bind="value: id">
-                        <button type="submit" class="btn btn-outline-dark mb-3">
-                            Ukryj
-                            <span data-bind="text: name"></span>
-                        </button>
-                    </form>
-                    <form action="../UseCases/ShowDoseUseCase.php" method="post" data-bind="visible: !visible">
-                        <input type="hidden" name="Id" data-bind="value: id">
-                        <button type="submit" class="btn btn-outline-success mb-3">
-                            Pokaż
-                            <span data-bind="text: name"></span>
-                        </button>
-                    </form>
+                    <div class="form-inline">
+                        <form action="../UseCases/ApplyMedicineUseCase.php" method="post" class="mr-2">
+                            <input type="hidden" name="Id" data-bind="value: id">
+                            <button class="btn btn-primary mb-3">
+                                Podaj
+                                <span data-bind="text: name"></span>
+                            </button>
+                        </form>
+                        <form action="../UseCases/RemoveDoseUseCase.php" method="post" class="mr-2">
+                            <input type="hidden" name="Id" data-bind="value: id">
+                            <button type="submit" class="btn btn-outline-danger mb-3">
+                                Usuń
+                                <span data-bind="text: name"></span>
+                            </button>
+                        </form>
+                        <form action="../UseCases/HideDoseUseCase.php" method="post" data-bind="visible: visible" class="mr-2">
+                            <input type="hidden" name="Id" data-bind="value: id">
+                            <button type="submit" class="btn btn-outline-dark mb-3">
+                                Ukryj
+                                <span data-bind="text: name"></span>
+                            </button>
+                        </form>
+                        <form action="../UseCases/ShowDoseUseCase.php" method="post" data-bind="visible: !visible">
+                            <input type="hidden" name="Id" data-bind="value: id">
+                            <button type="submit" class="btn btn-outline-success mb-3">
+                                Pokaż
+                                <span data-bind="text: name"></span>
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
