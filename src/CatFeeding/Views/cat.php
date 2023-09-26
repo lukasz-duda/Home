@@ -160,7 +160,7 @@ $lastMegace = getLastApplication('Megace', $catId);
                     <input type="hidden" name="CatId" value="<?= $catId ?>">
                     <div class="form-group">
                         <label for="MealFoodId">Pokarm</label>
-                        <select class="form-control" id="MealFoodId" name="FoodId">
+                        <select class="form-control" id="MealFoodId" name="FoodId" accesskey="i">
                             <?php
                             foreach ($foods as $food) {
                                 ?>

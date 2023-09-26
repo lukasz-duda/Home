@@ -28,7 +28,7 @@ order by e.timestamp desc', [date('Y-m-d', strtotime('-21 days'))]);
                 <div class="form-group">
                     <label for="Value">Wartość zakupu</label>
                     <input class="form-control" id="Value" name="Value" type="number" step="0.01" min="1" max="500000"
-                           required data-bind="value: expenseValue"/>
+                           required data-bind="value: expenseValue" accesskey="i"/>
                 </div>
                 <div class="form-group">
                     <label for="Calculation">Oblicz wartość zakupu</label>
