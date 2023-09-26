@@ -42,7 +42,7 @@ where d.cat_id = ?', [$catId]);
                 <form action="../UseCases/AddDoseUseCase.php" method="post">
                     <input type="hidden" name="CatId" value="<?= $catId ?>">
                     <div class="form-group">
-                        <label for="Name">Dawka</label>
+                        <label for="Name">Nazwa dawki</label>
                         <input class="form-control" id="Name" name="Name" required minlength="3" maxlength="30" />
                     </div>
                     <div class="form-group">
@@ -58,7 +58,7 @@ where d.cat_id = ?', [$catId]);
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="Dose">Dawka</label>
+                        <label for="Dose">Ilość jednostek</label>
                         <input id="Dose" name="Dose" class="form-control" type="number" step="0.0001" min="0.0001"
                             max="250" required />
                     </div>
