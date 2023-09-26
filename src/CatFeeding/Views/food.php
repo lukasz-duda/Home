@@ -71,6 +71,18 @@ order by name', [$catId]);
                         </button>
                     </div>
                 </form>
+                <form action="../UseCases/StartMealUseCase.php" method="post" class="form-inline">
+                    <div class="form-group">
+                        <button class="btn btn-primary mr-2">Rozpocznij posiłek</button>
+                    </div>
+                    <input type="hidden" name="CatId" value="<?= $catId ?>">
+                    <input type="hidden" name="FoodId" data-bind="value: foodId">
+                    <div class="form-group">
+                        <label for="MealWeight" class="mr-2">Waga przed posiłkiem [g]</label>
+                        <input id="MealWeight" name="Weight" class="form-control" type="number" step="1" min="1"
+                            max="500" required />
+                    </div>
+                </form>
             </div>
         </div>
     </div>
