@@ -96,7 +96,7 @@ order by e.timestamp desc limit 10", [$carId]);
             <input type="hidden" name="CarId" value="<?= $carId ?>">
             <div class="form-group"><label for="Name">Nazwa</label>
                 <input class="form-control" id="Name" name="Name" value="Olej napędowy" required minlength="5"
-                       maxlength="100"/>
+                       maxlength="100" accesskey="i"/>
             </div>
             <div class="form-group">
                 <label for="Value">Wartość</label>
