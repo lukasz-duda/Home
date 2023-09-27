@@ -422,6 +422,8 @@ $lastMegace = getLastApplication('Megace', $catId);
                 <button type="submit" class="btn btn-primary">Dodaj</button>
             </div>
         </form>
+        <a class="btn btn-secondary"
+            href="<?= baseUrl() ?>/src/CatFeeding/Views/Reports/weight.php?CatId=<?= $catId ?>">Ostatni rok</a>
     </div>
 </div>
 <?php

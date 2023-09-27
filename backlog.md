@@ -1,3 +1,1 @@
-- Weight chart
 - Food deduplication
-- Start meal from food list

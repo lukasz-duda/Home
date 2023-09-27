@@ -39,7 +39,7 @@ function findCount($list, $date)
 }
 
 for ($i = 0; $i < 7; $i++) {
-    $day = showDate(strtotime($graphStart . ' + ' . $i . ' days'));;
+    $day = showDate(strtotime($graphStart . ' + ' . $i . ' days'));
     array_push($days, $day);
 
     $dayOfWeekIndex = date('N', strtotime($day)) - 1;
