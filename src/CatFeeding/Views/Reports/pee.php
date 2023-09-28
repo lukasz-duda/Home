@@ -11,8 +11,11 @@ if ($cat === false) {
 
 $catName = $cat['name'];
 
-$graphEnd = showDate(strtotime(today() . ' + 1 day'));
+$graphEnd = $_REQUEST['End'] ?? showDate(strtotime(today() . ' + 1 day'));
 $graphStart = showDate(strtotime($graphEnd . ' - 1 week'));
+
+$previous = date('Y-m-d', strtotime($graphEnd . ' - 1 week'));
+$next = date('Y-m-d', strtotime($graphEnd . ' + 1 week'));
 
 $results = getAll('select date(p.timestamp) as date,
 count(p.timestamp) as count
@@ -92,6 +95,11 @@ for ($i = 0; $i < 7; $i++) {
         }
     });
 </script>
+
+<div class="btn-group">
+    <a class="btn btn-primary" href="pee.php?CatId=<?= $catId ?>&End=<?= $previous ?>">Tydzień wcześniej</a>
+    <a class="btn btn-primary" href="pee.php?CatId=<?= $catId ?>&End=<?= $next ?>">Tydzień później</a>
+</div>
 
 <?php
 include '../../../Shared/Views/Footer.php';

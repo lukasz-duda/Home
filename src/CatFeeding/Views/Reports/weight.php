@@ -1,5 +1,6 @@
 <?php
 include '../../../Shared/Views/View.php';
+
 $catId = intval($_REQUEST['CatId']);
 
 $cat = get('SELECT name FROM cats WHERE id = ?', [$catId]);
@@ -10,8 +11,11 @@ if ($cat === false) {
 
 $catName = $cat['name'];
 
-$graphStart = date('Y-m-01', strtotime(today() . ' - 1 year'));
-$queryStart = date('Y-m-01', strtotime(today() . ' - 2 year'));
+$graphStart = $_REQUEST['Start'] ?? date('Y-m-01', strtotime(today() . ' - 1 year'));
+$queryStart = date('Y-m-01', strtotime($graphStart . ' - 1 year'));
+
+$previous = date('Y-m-01', strtotime($graphStart . ' - 1 year'));
+$next = date('Y-m-01', strtotime($graphStart . ' + 1 year'));
 
 $results = getAll("select date_format(w.date, '%Y-%m') as date,
     avg(w.weight) as weight
@@ -91,6 +95,11 @@ for ($i = 0; $i <= 12; $i++) {
         }
     });
 </script>
+
+<div class="btn-group">
+    <a class="btn btn-primary" href="weight.php?CatId=<?= $catId ?>&Start=<?= $previous ?>">Rok wcześniej</a>
+    <a class="btn btn-primary" href="weight.php?CatId=<?= $catId ?>&Start=<?= $next ?>">Rok później</a>
+</div>
 
 <?php
 include '../../../Shared/Views/Footer.php';
