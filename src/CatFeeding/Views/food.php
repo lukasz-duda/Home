@@ -19,6 +19,8 @@ $foods = getAll('SELECT f.id, f.name, f.description, f.visible,
 ) as weight
 FROM food f
 order by name', [$catId]);
+
+$foodId = $_REQUEST['FoodId'] ? intval($_REQUEST['FoodId']) : 'null';
 ?>
 <h1>Pokarm
     <?= $catName ?>
@@ -39,8 +41,9 @@ order by name', [$catId]);
                     </div>
                     <div class="form-group">
                         <label for="FoodName">Nowa nazwa</label>
-                        <input class="form-control" id="FoodName" name="FoodName" data-bind="value: foodName" required
-                            minlength="2" maxlength="30" />
+                        <input class="form-control" id="FoodName" name="FoodName" data-bind="textInput: foodName" required
+                            minlength="2" maxlength="30" aria-describedby="FoodNameHelp" />
+                        <small id="FoodNameHelp" class="form-text text-muted">Nabardziej podobna nazwa <a data-bind="attr: { href: similarFoodUrl }, text: similarFoodName"></a></small>
                     </div>
                     <div class="form-group">
                         <label for="FoodDescription">Nowy opis</label>
@@ -95,7 +98,8 @@ order by name', [$catId]);
                     <div class="form-group">
                         <label for="NewFoodName">Nazwa</label>
                         <input class="form-control" id="NewFoodName" name="FoodName" required minlength="2"
-                            maxlength="30" />
+                            maxlength="30" aria-describedby="NewFoodNameHelp" data-bind="textInput: newFoodName" />
+                        <small id="NewFoodNameHelp" class="form-text text-muted">Nabardziej podobna nazwa <a data-bind="attr: { href: similarNewFoodUrl }, text: similarNewFoodName"></a></small>
                     </div>
                     <div class="form-group">
                         <label for="NewFoodDescription">Opis</label>
@@ -114,14 +118,37 @@ order by name', [$catId]);
     </div>
 </div>
 
+<script src="<?= baseUrl() ?>/src/Shared/Views/string-similarity.min.js"></script>
 <script>
     function ViewModel() {
         const me = this;
-        me.foodName = ko.observable(null);
+        me.foodName = ko.observable('');
+        me.foods = <?= json_encode($foods) ?>;
+        me.newFoodName = ko.observable('');
+        me.allNames = me.foods.map(x => x.name);
+        me.similarFoodName = ko.computed(() => {
+            const result = stringSimilarity.findBestMatch(me.foodName(), me.allNames);
+            return result.bestMatch.target;
+        });
+        me.similarFoodId = ko.computed(() => {
+            return me.foods.find(x => x.name === me.similarFoodName()).id;
+        });
+        me.similarFoodUrl = ko.computed(() => {
+            return `food.php?Id=<?= $catId ?>&FoodId=${me.similarFoodId()}`;
+        });
+        me.similarNewFoodName = ko.computed(() => {
+            const result = stringSimilarity.findBestMatch(me.newFoodName(), me.allNames);
+            return result.bestMatch.target;
+        });
+        me.similarNewFoodId = ko.computed(() => {
+            return me.foods.find(x => x.name === me.similarNewFoodName()).id;
+        });
+        me.similarNewFoodUrl = ko.computed(() => {
+            return `food.php?Id=<?= $catId ?>&FoodId=${me.similarNewFoodId()}`;
+        });
         me.foodDescription = ko.observable(null);
         me.weight = ko.observable(null);
         me.visible = ko.observable(null);
-        me.foods = <?= json_encode($foods) ?>;
         me.foodId = ko.observable(null);
         me.foodId.subscribe(function () {
             const selectedFood = me.foods.find(food => food.id === me.foodId());
@@ -135,6 +162,8 @@ order by name', [$catId]);
             me.weight(parseInt(selectedFood.weight));
             me.visible(Boolean(parseInt(selectedFood.visible)));
         });
+
+        me.foodId(<?= $foodId ?>);
     }
 
     const viewModel = new ViewModel();
