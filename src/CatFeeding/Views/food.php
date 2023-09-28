@@ -43,7 +43,7 @@ $foodId = $_REQUEST['FoodId'] ? intval($_REQUEST['FoodId']) : 'null';
                         <label for="FoodName">Nowa nazwa</label>
                         <input class="form-control" id="FoodName" name="FoodName" data-bind="textInput: foodName" required
                             minlength="2" maxlength="30" aria-describedby="FoodNameHelp" />
-                        <small id="FoodNameHelp" class="form-text text-muted">Nabardziej podobna nazwa <a data-bind="attr: { href: similarFoodUrl }, text: similarFoodName"></a></small>
+                        <small id="FoodNameHelp" class="form-text text-muted" data-bind="visible: similarFoodName">Nabardziej podobna nazwa <a data-bind="attr: { href: similarFoodUrl }, text: similarFoodName"></a></small>
                     </div>
                     <div class="form-group">
                         <label for="FoodDescription">Nowy opis</label>
@@ -99,7 +99,7 @@ $foodId = $_REQUEST['FoodId'] ? intval($_REQUEST['FoodId']) : 'null';
                         <label for="NewFoodName">Nazwa</label>
                         <input class="form-control" id="NewFoodName" name="FoodName" required minlength="2"
                             maxlength="30" aria-describedby="NewFoodNameHelp" data-bind="textInput: newFoodName" />
-                        <small id="NewFoodNameHelp" class="form-text text-muted">Nabardziej podobna nazwa <a data-bind="attr: { href: similarNewFoodUrl }, text: similarNewFoodName"></a></small>
+                        <small id="NewFoodNameHelp" class="form-text text-muted" data-bind="visible: similarNewFoodName">Nabardziej podobna nazwa <a data-bind="attr: { href: similarNewFoodUrl }, text: similarNewFoodName"></a></small>
                     </div>
                     <div class="form-group">
                         <label for="NewFoodDescription">Opis</label>
@@ -124,28 +124,52 @@ $foodId = $_REQUEST['FoodId'] ? intval($_REQUEST['FoodId']) : 'null';
         const me = this;
         me.foodName = ko.observable('');
         me.foods = <?= json_encode($foods) ?>;
+        me.noFood = me.foods.length === 0;
         me.newFoodName = ko.observable('');
         me.allNames = me.foods.map(x => x.name);
+        
         me.similarFoodName = ko.computed(() => {
+            if (me.noFood) {
+                return '';
+            }
+            
             const result = stringSimilarity.findBestMatch(me.foodName(), me.allNames);
             return result.bestMatch.target;
         });
+        
         me.similarFoodId = ko.computed(() => {
+            if (!me.similarFoodName()) {
+                return '';
+            }
+            
             return me.foods.find(x => x.name === me.similarFoodName()).id;
         });
+        
         me.similarFoodUrl = ko.computed(() => {
             return `food.php?Id=<?= $catId ?>&FoodId=${me.similarFoodId()}`;
         });
+        
         me.similarNewFoodName = ko.computed(() => {
+            if (me.noFood) {
+                return '';
+            }
+            
             const result = stringSimilarity.findBestMatch(me.newFoodName(), me.allNames);
             return result.bestMatch.target;
         });
+        
         me.similarNewFoodId = ko.computed(() => {
+            if (!me.similarNewFoodName()) {
+                return '';
+            }
+            
             return me.foods.find(x => x.name === me.similarNewFoodName()).id;
         });
+        
         me.similarNewFoodUrl = ko.computed(() => {
             return `food.php?Id=<?= $catId ?>&FoodId=${me.similarNewFoodId()}`;
         });
+        
         me.foodDescription = ko.observable(null);
         me.weight = ko.observable(null);
         me.visible = ko.observable(null);
