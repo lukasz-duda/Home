@@ -134,7 +134,7 @@ order by date desc
 limit 1', [$catId]);
 
 function getLastApplication($medicineName, $catId) {
-    $searchLimitDate = strtotime(today() . ' - 3 months');
+    $searchStartDate = showDate(strtotime(today() . ' - 3 months'));
 
     $lastApplication = get('select a.timestamp, timestampdiff(day, a.timestamp, ?) as days
     from medicine_application a
@@ -143,7 +143,7 @@ function getLastApplication($medicineName, $catId) {
     and a.cat_id = ?
     and a.timestamp >= ?
     order by a.timestamp desc
-    limit 1', [now(), $medicineName, $catId, $searchLimitDate]);
+    limit 1', [now(), $medicineName, $catId, $searchStartDate]);
 
     return $lastApplication;
 }
