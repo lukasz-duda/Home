@@ -18,9 +18,9 @@ from meal m
 where m.end is null
   and m.cat_id = ?', [$catId]);
 
-$yesterdayStart = showDateTime(strtotime(today() . '- 1 day + 4 hours'));
-$todayStart = showDateTime(strtotime(today() . '+ 4 hours'));
-$tomorrowStart = showDateTime(strtotime(today() . ' + 1 day + 4 hours'));
+$yesterdayStart = showDateTime(strtotime(today() . '- 1 day'));
+$todayStart = today();
+$tomorrowStart = showDateTime(strtotime(today() . ' + 1 day'));
 $lastMeals = getAll('select meals.*,
        (meals.start_weight - meals.end_weight) / meals.daily_demand_weight * 100 as daily_demand_percentage
 from (
@@ -134,18 +134,22 @@ order by date desc
 limit 1', [$catId]);
 
 function getLastApplication($medicineName, $catId) {
+    $searchLimitDate = strtotime(today() . ' - 3 months');
+
     $lastApplication = get('select a.timestamp, timestampdiff(day, a.timestamp, ?) as days
     from medicine_application a
     join medicine m on m.id = a.medicine_id
     where m.name = ?
     and a.cat_id = ?
+    and a.timestamp >= ?
     order by a.timestamp desc
-    limit 1', [now(), $medicineName, $catId]);
+    limit 1', [now(), $medicineName, $catId, $searchLimitDate]);
 
     return $lastApplication;
 }
 
 $lastMegace = getLastApplication('Megace', $catId);
+$lastSolensia = getLastApplication('Solensia', $catId);
 ?>
 <h1>
     <?= $catName ?>
@@ -264,6 +268,11 @@ $lastMegace = getLastApplication('Megace', $catId);
                     $lastMegaceTime = $lastMegace['timestamp'];
                     $lastMegaceDays = $lastMegace['days'];
                     echo "Ostatnie Megace: $lastMegaceTime<br />($lastMegaceDays dni temu)<br />";
+                }
+                if ($lastSolensia) {
+                    $lastSolensiaTime = $lastSolensia['timestamp'];
+                    $lastSolensiaDays = $lastSolensia['days'];
+                    echo "Ostatnia Solensia: $lastSolensiaTime<br />($lastSolensiaDays dni temu)<br />";
                 }
                 if ($lastWeight) {
                     $lastWeightDate = $lastWeight['date'];
