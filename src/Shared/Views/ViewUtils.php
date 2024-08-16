@@ -8,7 +8,6 @@ function newPdo()
     global $dsn, $user, $password;
     $pdo = new PDO($dsn, $user, $password);
     $pdo->query('SET NAMES utf8');
-    $pdo->query('SET CHARACTER_SET utf8_unicode_ci');
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     return $pdo;
 }
@@ -129,4 +128,3 @@ function timeSpent()
 {
     global $duration;
     return sprintf('%.1f', $duration);
-}
