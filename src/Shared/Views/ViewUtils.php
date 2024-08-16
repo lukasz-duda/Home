@@ -128,3 +128,4 @@ function timeSpent()
 {
     global $duration;
     return sprintf('%.1f', $duration);
+}
