@@ -11,7 +11,7 @@ $catName = $cat['name'];
 $foods = getAll('SELECT f.id, f.name
 from food f
 where f.visible = 1
-order by name', [$catId]);
+order by name', []);
 $meals = getAll('select m.id, f.name, m.start, m.start_weight
 from meal m
     join food f on f.id = m.food_id
