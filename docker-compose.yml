@@ -1,5 +1,3 @@
-version: "3.3"
-
 services:
 
   web:
@@ -12,7 +10,7 @@ services:
       - ./:/var/www/html
       
   db:
-    image: mariadb:10.4.17
+    image: mariadb:10.4.34
     environment:
       LANG: C.UTF-8
       MYSQL_ROOT_PASSWORD: 'home'
