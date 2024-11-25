@@ -21,12 +21,12 @@ switch ($refund) {
         $forMe = 0;
         break;
     case 'RefundToMe':
-        $value = floatval($_REQUEST['Value']) / 2;
+        $value = floatval($_REQUEST['Value']) / 3;
         $noRefund = false;
         $forMe = 1;
         break;
     case 'RefundToIlona':
-        $value = floatval($_REQUEST['Value']) / 2;
+        $value = floatval($_REQUEST['Value']) * 2 / 3;
         $noRefund = false;
         $forMe = 0;
         break;
