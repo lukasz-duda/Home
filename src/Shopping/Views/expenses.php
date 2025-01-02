@@ -53,14 +53,14 @@ order by e.timestamp desc', [date('Y-m-d', strtotime('-21 days'))]);
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="Refund" id="RefundToMe" value="RefundToMe">
                         <label class="form-check-label" for="RefundToMe">
-                            Zwróć 1/3 Łukaszowi
+                            Zwróć połowę Łukaszowi
                         </label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="Refund" id="RefundToIlona"
                                value="RefundToIlona">
                         <label class="form-check-label" for="RefundToIlona">
-                            Zwróć 2/3 Ilonie
+                            Zwróć połowę Ilonie
                         </label>
                     </div>
                     <div class="form-check">
