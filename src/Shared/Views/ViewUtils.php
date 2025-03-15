@@ -7,7 +7,7 @@ function newPdo()
 {
     global $dsn, $user, $password;
     $pdo = new PDO($dsn, $user, $password);
-    $pdo->query('SET NAMES utf8');
+    $pdo->query('SET NAMES utf8mb4');
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     return $pdo;
 }
