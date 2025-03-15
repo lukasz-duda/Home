@@ -47,10 +47,6 @@ include __DIR__ . '/ViewUtils.php';
                             class="material-icons-outlined">home</i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" title="Szyszka" href="<?= baseUrl() ?>/src/CatFeeding/Views/cat.php?Id=1"><i
-                            class="material-icons-outlined cat-1">pets</i></a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" title="Mgiełka" href="<?= baseUrl() ?>/src/CatFeeding/Views/cat.php?Id=2"><i
                             class="material-icons-outlined cat-2">pets</i></a>
                 </li>
