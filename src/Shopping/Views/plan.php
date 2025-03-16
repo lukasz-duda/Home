@@ -12,7 +12,7 @@ $shoppingList = get('select s.json from shopping_list s', []);
     </div>
     <div class="card-body">
         <button class="btn-primary btn mb-3" data-bind="click: addShoppingItem">Dodaj</button>
-        <div data-bind="foreach: shoppingList">
+        <div data-bind="foreach: items">
             <div class="form-group">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Nazwa pozycji listy zakupów" required
@@ -35,21 +35,28 @@ $shoppingList = get('select s.json from shopping_list s', []);
 </div>
 
 <script>
+    const previous = ko.mapping.fromJSON(<?= json_encode($shoppingList['json']); ?>);
+    
+    function ShoppingList(previousVersion, items) {
+        const me = this;
+        me.previousVersion = previousVersion ?? crypto.randomUUID();
+        me.items = items;
+    }
+
     function ViewModel() {
         const me = this;
 
-        me.shoppingList = ko.mapping.fromJSON(<?= json_encode($shoppingList['json']); ?>);
+        me.items = ko.observableArray(previous.items());
+
         me.addShoppingItem = function () {
-            const current = me.shoppingList();
-            const newShoppingList = [{ name: ko.observable(null) }, ...current];
-            me.shoppingList(newShoppingList);
+            me.items([{ name: ko.observable(null) }, ...me.items()]);
         };
 
         me.remove = function (item) {
-            me.shoppingList.remove(item);
+            me.items.remove(item);
         };
 
-        me.jsonShoppingList = ko.computed(() => ko.toJSON(me.shoppingList));
+        me.jsonShoppingList = ko.computed(() => ko.toJSON(new ShoppingList(previous.previousVersion, me.items())));
     }
 
     const viewModel = new ViewModel();
