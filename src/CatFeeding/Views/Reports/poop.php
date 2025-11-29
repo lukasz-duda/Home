@@ -91,8 +91,8 @@ for ($i = 0; $i < 7; $i++) {
 </script>
 
 <div class="btn-group">
-    <a class="btn btn-primary" href="pee.php?CatId=<?= $catId ?>&End=<?= $previous ?>">Tydzień wcześniej</a>
-    <a class="btn btn-primary" href="pee.php?CatId=<?= $catId ?>&End=<?= $next ?>">Tydzień później</a>
+    <a class="btn btn-primary" href="poop.php?CatId=<?= $catId ?>&End=<?= $previous ?>">Tydzień wcześniej</a>
+    <a class="btn btn-primary" href="poop.php?CatId=<?= $catId ?>&End=<?= $next ?>">Tydzień później</a>
 </div>
 
 <?php
