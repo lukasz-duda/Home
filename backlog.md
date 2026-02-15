@@ -1,1 +1,2 @@
+- correctly save priorities from task list
 - diesel/gas distinction
